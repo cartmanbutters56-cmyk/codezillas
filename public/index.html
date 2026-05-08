@@ -1065,8 +1065,7 @@ function checkKickStatus(){
   fetch(url,{headers:{'Accept':'application/json'}}).then(function(r){if(!r.ok)throw new Error('err');return r.json();}).then(function(data){
     var live=!!(data.livestream);var viewers=live?(data.livestream.viewer_count||0):0;
     document.getElementById('hero-checking-embed').style.display='none';
-    document.getElementById('hero-stream-pill').style.cssText='font-size:.68rem;font-weight:800;letter-spacing:1.5px;padding:3px 10px;border-radius:20px;';
-    document.getElementById('hero-stream-pill').textContent=live?'LIVE':'OFFLINE';
+    document.getElementById('hero-stream-pill').style.display='none';
     document.getElementById('hero-live-embed').style.display=live?'block':'none';
     document.getElementById('hero-offline-embed').style.display=live?'none':'flex';
     document.getElementById('hero-viewer-row').style.display=live?'flex':'none';
@@ -1079,7 +1078,7 @@ function checkKickStatus(){
   document.getElementById('hero-checking-embed').style.display='none';
   document.getElementById('hero-live-embed').style.display='block';
   document.getElementById('hero-offline-embed').style.display='none';
-  document.getElementById('hero-stream-pill').textContent='LIVE';
+  document.getElementById('hero-stream-pill').style.display='none';
   document.getElementById('hero-stream-pill').style.background='rgba(83,252,24,.12)';
   document.getElementById('hero-stream-pill').style.border='1px solid rgba(83,252,24,.35)';
   document.getElementById('hero-stream-pill').style.color='#53fc18';
