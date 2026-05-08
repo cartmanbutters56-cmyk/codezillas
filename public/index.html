@@ -324,6 +324,89 @@
       margin-bottom: 3rem;
     }
 
+    /* ── COUNTDOWN TIMER ── */
+    .countdown-bar {
+      background: linear-gradient(90deg, rgba(26,111,255,0.08) 0%, rgba(26,111,255,0.04) 100%);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .countdown-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .countdown-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--blue-bright);
+    }
+
+    .countdown-blocks {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .countdown-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .countdown-num {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      background: var(--bg-card);
+      border: 1px solid var(--border-bright);
+      border-radius: 8px;
+      padding: 6px 16px;
+      min-width: 64px;
+      text-align: center;
+      line-height: 1;
+    }
+
+    .countdown-unit {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .countdown-sep {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--blue-mid);
+      margin-bottom: 16px;
+    }
+
+    .countdown-next-stream {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    .countdown-next-stream span {
+      color: var(--accent-gold);
+      font-weight: 700;
+    }
+
     /* ── LIVE SECTION ── */
     .live-section {
       background: linear-gradient(180deg, transparent 0%, rgba(26,111,255,0.04) 50%, transparent 100%);
@@ -398,6 +481,15 @@
     .stream-embed { position: relative; width: 100%; aspect-ratio: 16/9; background: var(--bg-deep); }
     .stream-embed iframe { width: 100%; height: 100%; border: none; display: block; }
 
+    /* Chat embed */
+    .chat-embed {
+      width: 100%;
+      height: 400px;
+      border: none;
+      display: block;
+      background: var(--bg-deep);
+    }
+
     .offline-screen {
       width: 100%;
       aspect-ratio: 16/9;
@@ -467,8 +559,10 @@
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 1.25rem;
+      overflow: hidden;
     }
+
+    .side-card-inner { padding: 1.25rem; }
 
     .side-card-title {
       font-family: 'Rajdhani', sans-serif;
@@ -478,19 +572,56 @@
       letter-spacing: 1px;
       margin-bottom: 1rem;
       color: var(--text-secondary);
+      padding: 1.25rem 1.25rem 0;
     }
 
     .schedule-item {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 8px 0;
+      padding: 8px 1.25rem;
       border-bottom: 1px solid rgba(26,45,90,0.5);
       font-size: 0.85rem;
     }
     .schedule-item:last-child { border-bottom: none; }
     .schedule-day { color: var(--text-secondary); font-weight: 600; }
     .schedule-time { color: var(--blue-bright); font-weight: 700; font-size: 0.8rem; }
+
+    /* ── CHAT EMBED CARD ── */
+    .chat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .chat-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: var(--bg-card2);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .chat-card-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .chat-live-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--kick-green);
+      animation: pulse-green 1.2s infinite;
+    }
 
     /* ── FLOATING KICK LIVE WIDGET ── */
     .kick-float {
@@ -571,7 +702,270 @@
       color: #53fc18;
     }
 
-    .kick-float-status.is-offline {
+    .kick-float-status.is-offline { color: var(--text-muted); }
+
+    /* ── GIVEAWAY SECTION ── */
+    .giveaway-section {
+      position: relative;
+      z-index: 1;
+      padding: 5rem 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(240,180,41,0.03) 50%, transparent 100%);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .giveaway-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .giveaway-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .giveaway-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.75rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+
+    .giveaway-card:hover { border-color: var(--border-bright); transform: translateY(-3px); }
+
+    .giveaway-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+    }
+
+    .giveaway-card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+    }
+
+    .giveaway-prize {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      margin-bottom: 0.25rem;
+    }
+
+    .giveaway-desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-bottom: 1.25rem;
+    }
+
+    .giveaway-status-badge {
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .badge-active {
+      background: rgba(83,252,24,0.12);
+      border: 1px solid rgba(83,252,24,0.3);
+      color: var(--kick-green);
+    }
+
+    .badge-upcoming {
+      background: rgba(240,180,41,0.12);
+      border: 1px solid rgba(240,180,41,0.3);
+      color: var(--accent-gold);
+    }
+
+    .badge-ended {
+      background: rgba(61,80,128,0.2);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+
+    .giveaway-requirements {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .req-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      background: rgba(26,111,255,0.08);
+      border: 1px solid rgba(26,111,255,0.2);
+      color: var(--blue-bright);
+    }
+
+    .giveaway-enter-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--blue-bright), var(--blue-mid));
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 11px;
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .giveaway-enter-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+    .giveaway-enter-btn:disabled, .giveaway-enter-btn.ended { background: var(--bg-card2); color: var(--text-muted); cursor: not-allowed; transform: none; }
+
+    /* ── LEADERBOARD ── */
+    .leaderboard-section {
+      position: relative;
+      z-index: 1;
+      padding: 5rem 0;
+    }
+
+    .leaderboard-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .leaderboard-table {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-top: 2rem;
+    }
+
+    .leaderboard-header-row {
+      display: grid;
+      grid-template-columns: 60px 1fr 140px 140px 120px;
+      padding: 12px 20px;
+      background: var(--bg-card2);
+      border-bottom: 1px solid var(--border);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .leaderboard-row {
+      display: grid;
+      grid-template-columns: 60px 1fr 140px 140px 120px;
+      padding: 14px 20px;
+      border-bottom: 1px solid rgba(26,45,90,0.4);
+      align-items: center;
+      transition: background 0.2s;
+    }
+
+    .leaderboard-row:last-child { border-bottom: none; }
+    .leaderboard-row:hover { background: rgba(26,111,255,0.04); }
+
+    .leaderboard-row.top-1 { background: rgba(240,180,41,0.05); }
+    .leaderboard-row.top-2 { background: rgba(192,192,192,0.04); }
+    .leaderboard-row.top-3 { background: rgba(205,127,50,0.04); }
+
+    .rank-num {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .rank-1 { color: var(--accent-gold); }
+    .rank-2 { color: #c0c0c0; }
+    .rank-3 { color: #cd7f32; }
+
+    .lb-user {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .lb-avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      border: 2px solid transparent;
+    }
+
+    .top-1 .lb-avatar { border-color: var(--accent-gold); }
+    .top-2 .lb-avatar { border-color: #c0c0c0; }
+    .top-3 .lb-avatar { border-color: #cd7f32; }
+
+    .lb-username { font-weight: 700; font-size: 0.9rem; }
+    .lb-tag { font-size: 0.7rem; color: var(--text-muted); }
+
+    .lb-wager {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .lb-earned {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--green);
+    }
+
+    .lb-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .lb-badge.vip { background: rgba(192,132,252,0.12); color: #c084fc; border: 1px solid rgba(192,132,252,0.25); }
+    .lb-badge.pro { background: rgba(26,111,255,0.12); color: var(--blue-bright); border: 1px solid rgba(26,111,255,0.25); }
+    .lb-badge.member { background: rgba(61,80,128,0.2); color: var(--text-secondary); border: 1px solid var(--border); }
+
+    .leaderboard-footer {
+      padding: 14px 20px;
+      background: var(--bg-card2);
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.78rem;
       color: var(--text-muted);
     }
 
@@ -583,10 +977,7 @@
       text-align: center;
     }
 
-    .rewards-hero-inner {
-      max-width: 700px;
-      margin: 0 auto;
-    }
+    .rewards-hero-inner { max-width: 700px; margin: 0 auto; }
 
     .rewards-hero h1 {
       font-family: 'Rajdhani', sans-serif;
@@ -600,13 +991,8 @@
     .rewards-hero h1 span { color: var(--blue-bright); }
     .rewards-hero p { color: var(--text-secondary); font-size: 1rem; line-height: 1.7; }
 
-    .rewards-main {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 3rem 2rem;
-    }
+    .rewards-main { max-width: 1200px; margin: 0 auto; padding: 3rem 2rem; }
 
-    /* Big promo box */
     .promo-big-box {
       background: linear-gradient(135deg, #0d1d45 0%, #0a1230 50%, #0e1d42 100%);
       border: 1.5px solid var(--border-bright);
@@ -662,12 +1048,7 @@
       margin-bottom: 0.4rem;
     }
 
-    .promo-big-box p {
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-      line-height: 1.6;
-      max-width: 400px;
-    }
+    .promo-big-box p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; max-width: 400px; }
 
     .promo-code-area {
       display: flex;
@@ -733,21 +1114,16 @@
       cursor: pointer;
       transition: all 0.2s;
       width: 100%;
-      text-align: center;
     }
     .play-link:hover { background: rgba(26,111,255,0.1); }
 
-    /* 4-box benefit grid */
     .benefits-heading {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1.5rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 1.25rem;
-      color: var(--text-secondary);
       font-size: 0.72rem;
+      font-weight: 700;
       letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 1.25rem;
     }
 
     .benefit-grid {
@@ -780,17 +1156,12 @@
 
     .benefit-box:hover { transform: translateY(-5px); border-color: var(--border-bright); }
     .benefit-box:hover::before { opacity: 1; }
-
     .benefit-box.gold::before { background: linear-gradient(90deg, transparent, var(--accent-gold), transparent); }
     .benefit-box.blue::before { background: linear-gradient(90deg, transparent, var(--blue-bright), transparent); }
     .benefit-box.green::before { background: linear-gradient(90deg, transparent, var(--green), transparent); }
     .benefit-box.red::before { background: linear-gradient(90deg, transparent, #c084fc, transparent); }
 
-    .benefit-icon {
-      font-size: 2.25rem;
-      margin-bottom: 1rem;
-      display: block;
-    }
+    .benefit-icon { font-size: 2.25rem; margin-bottom: 1rem; display: block; }
 
     .benefit-box h3 {
       font-family: 'Rajdhani', sans-serif;
@@ -801,11 +1172,7 @@
       margin-bottom: 0.5rem;
     }
 
-    .benefit-box p {
-      font-size: 0.82rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
+    .benefit-box p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6; }
 
     .benefit-tag {
       display: inline-block;
@@ -823,7 +1190,6 @@
     .tag-green { background: rgba(0,230,118,0.1); color: var(--green); border: 1px solid rgba(0,230,118,0.25); }
     .tag-purple { background: rgba(192,132,252,0.1); color: #c084fc; border: 1px solid rgba(192,132,252,0.25); }
 
-    /* Refer box */
     .refer-box {
       background: linear-gradient(135deg, var(--bg-card2) 0%, var(--bg-card) 100%);
       border: 1px solid var(--border-bright);
@@ -847,26 +1213,10 @@
     .refer-box p { color: var(--text-secondary); font-size: 0.9rem; }
 
     /* ── FAQ PAGE ── */
-    .faq-page-wrap {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 5rem 2rem;
-      text-align: center;
-    }
-
-    .faq-page-wrap .section-label,
-    .faq-page-wrap .section-title,
-    .faq-page-wrap .section-sub {
-      text-align: center;
-    }
-
-    .faq-page-wrap .section-sub {
-      margin-left: auto;
-      margin-right: auto;
-    }
-
+    .faq-page-wrap { max-width: 760px; margin: 0 auto; padding: 5rem 2rem; text-align: center; }
+    .faq-page-wrap .section-label, .faq-page-wrap .section-title, .faq-page-wrap .section-sub { text-align: center; }
+    .faq-page-wrap .section-sub { margin-left: auto; margin-right: auto; }
     .faq-list { text-align: left; }
-
     .faq-item { border-bottom: 1px solid var(--border); }
 
     .faq-question {
@@ -881,12 +1231,7 @@
     }
     .faq-question:hover { color: var(--blue-bright); }
 
-    .faq-chevron {
-      width: 20px; height: 20px;
-      transition: transform 0.3s;
-      flex-shrink: 0;
-    }
-
+    .faq-chevron { width: 20px; height: 20px; transition: transform 0.3s; flex-shrink: 0; }
     .faq-item.open .faq-chevron { transform: rotate(180deg); }
 
     .faq-answer {
@@ -906,7 +1251,6 @@
       from { opacity: 0; transform: translateY(16px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
     .page.active { animation: pageIn 0.35s ease both; }
 
     @keyframes fadeUp {
@@ -1038,6 +1382,8 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 1024px) {
       .benefit-grid { grid-template-columns: repeat(2, 1fr); }
+      .leaderboard-header-row, .leaderboard-row { grid-template-columns: 50px 1fr 120px 100px; }
+      .leaderboard-header-row span:last-child, .leaderboard-row > *:last-child { display: none; }
     }
 
     @media (max-width: 960px) {
@@ -1046,6 +1392,7 @@
       .promo-big-box { grid-template-columns: 1fr; text-align: center; }
       .promo-code-area { width: 100%; max-width: 300px; margin: 0 auto; }
       .promo-big-box p { max-width: 100%; }
+      .giveaway-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 640px) {
@@ -1057,24 +1404,13 @@
       .kick-float { bottom: 1rem; right: 1rem; }
       .kick-float-btn { padding: 8px 12px 8px 10px; }
       .kick-float-info { display: none; }
+      .leaderboard-header-row, .leaderboard-row { grid-template-columns: 44px 1fr 100px; }
+      .leaderboard-header-row span:nth-child(4), .leaderboard-row > *:nth-child(4),
+      .leaderboard-header-row span:last-child, .leaderboard-row > *:last-child { display: none; }
     }
 
     @media (max-width: 400px) {
       .benefit-grid { grid-template-columns: 1fr; }
-    }
-
-    /* ── STREAM STATUS NOTE ── */
-    .stream-test-note {
-      background: rgba(240,180,41,0.08);
-      border: 1px solid rgba(240,180,41,0.25);
-      border-radius: 8px;
-      padding: 8px 14px;
-      font-size: 0.75rem;
-      color: var(--accent-gold);
-      margin-bottom: 1rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
     }
   </style>
 </head>
@@ -1108,6 +1444,8 @@
 
   <ul class="nav-links">
     <li><a onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
+    <li><a onclick="showPage('giveaways')" id="nav-giveaways">Giveaways</a></li>
+    <li><a onclick="showPage('leaderboard')" id="nav-leaderboard">Leaderboard</a></li>
     <li><a onclick="showPage('rewards')" id="nav-rewards">Rewards</a></li>
     <li><a onclick="showPage('faq')" id="nav-faq">FAQ</a></li>
   </ul>
@@ -1133,10 +1471,42 @@
     </h1>
     <p class="hero-sub">Use our exclusive codes on Stake.us. Earn rewards and watch us go live on Kick.</p>
     <div class="hero-actions">
+      <button onclick="showPage('rewards')" class="btn-primary">
+        🎁 Get Code
+      </button>
       <a href="https://kick.com/zillas" target="_blank" class="btn-outline">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16"/></svg>
         Watch Live
       </a>
+    </div>
+  </div>
+
+  <!-- COUNTDOWN TIMER -->
+  <div class="countdown-bar">
+    <div class="countdown-inner">
+      <span class="countdown-label">⏱ Next Stream In</span>
+      <div class="countdown-blocks">
+        <div class="countdown-block">
+          <div class="countdown-num" id="cd-days">00</div>
+          <div class="countdown-unit">Days</div>
+        </div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-block">
+          <div class="countdown-num" id="cd-hours">00</div>
+          <div class="countdown-unit">Hours</div>
+        </div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-block">
+          <div class="countdown-num" id="cd-mins">00</div>
+          <div class="countdown-unit">Mins</div>
+        </div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-block">
+          <div class="countdown-num" id="cd-secs">00</div>
+          <div class="countdown-unit">Secs</div>
+        </div>
+      </div>
+      <span class="countdown-next-stream" id="cd-label">Next: <span>Loading…</span></span>
     </div>
   </div>
 
@@ -1145,58 +1515,72 @@
     <div class="inner">
       <p class="section-label">🔴 Live on Kick</p>
       <h2 class="section-title" style="margin-bottom:0.75rem;">Watch Live</h2>
-      <!-- TEST MODE NOTICE — remove this when switching back to zillas -->
-      <p class="stream-test-note">⚠️ Test mode: currently showing trainwreckstv stream. Swap channel back to "zillas" when ready.</p>
 
       <div class="live-grid">
-        <div class="stream-box">
-          <div class="stream-header">
-            <div class="stream-title-row">
-              <div class="kick-icon">K</div>
-              <!-- channel name shown here is updated by JS -->
-              <span class="stream-name" id="stream-channel-name">trainwreckstv</span>
+        <div>
+          <div class="stream-box">
+            <div class="stream-header">
+              <div class="stream-title-row">
+                <div class="kick-icon">K</div>
+                <span class="stream-name">zillas</span>
+              </div>
+              <span id="stream-status-pill" class="offline-pill">CHECKING…</span>
             </div>
-            <span id="stream-status-pill" class="offline-pill">CHECKING…</span>
+
+            <div id="live-embed" style="display:none;">
+              <div class="stream-embed">
+                <iframe
+                  id="kick-iframe"
+                  src="https://player.kick.com/zillas?autoplay=true&muted=true"
+                  allowfullscreen
+                  allow="autoplay; fullscreen">
+                </iframe>
+              </div>
+            </div>
+
+            <div id="offline-embed" class="offline-screen" style="display:none;">
+              <div class="offline-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1a6fff" stroke-width="1.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+              </div>
+              <h3>Currently Offline</h3>
+              <p>Follow on Kick to get notified when we go live!</p>
+              <a href="https://kick.com/zillas" target="_blank" class="kick-follow-btn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17 1H7C5.9 1 5 1.9 5 3v18l7-3 7 3V3c0-1.1-.9-2-2-2z"/></svg>
+                Follow on Kick
+              </a>
+            </div>
+
+            <div id="checking-embed" class="offline-screen">
+              <div class="offline-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1a6fff" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              </div>
+              <h3>Checking Stream…</h3>
+              <p>Fetching live status from Kick</p>
+            </div>
+
+            <div class="stream-footer">
+              <a href="https://kick.com/zillas" target="_blank" style="color:var(--blue-bright); text-decoration:none; font-weight:700; font-size:0.8rem; letter-spacing:0.5px;">kick.com/zillas →</a>
+              <div class="viewer-count" id="viewer-row" style="display:none;">
+                <span class="viewer-dot"></span>
+                <span id="viewer-count">0 viewers</span>
+              </div>
+            </div>
           </div>
 
-          <div id="live-embed" style="display:none;">
-            <div class="stream-embed">
-              <iframe
-                id="kick-iframe"
-                src="https://player.kick.com/trainwreckstv?autoplay=true&muted=true"
-                allowfullscreen
-                allow="autoplay; fullscreen">
-              </iframe>
+          <!-- CHAT EMBED below stream -->
+          <div class="chat-card" style="margin-top:1rem;">
+            <div class="chat-card-header">
+              <div class="chat-card-title">
+                <span class="chat-live-dot" id="chat-live-dot" style="display:none;"></span>
+                💬 Live Chat
+              </div>
+              <a href="https://kick.com/zillas" target="_blank" style="font-size:0.75rem; color:var(--blue-bright); text-decoration:none; font-weight:700;">Open on Kick →</a>
             </div>
-          </div>
-
-          <div id="offline-embed" class="offline-screen" style="display:none;">
-            <div class="offline-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1a6fff" stroke-width="1.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
-            </div>
-            <h3>Currently Offline</h3>
-            <p>Follow on Kick to get notified when we go live!</p>
-            <a href="https://kick.com/zillas" target="_blank" class="kick-follow-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17 1H7C5.9 1 5 1.9 5 3v18l7-3 7 3V3c0-1.1-.9-2-2-2z"/></svg>
-              Follow on Kick
-            </a>
-          </div>
-
-          <!-- Loading state shown first -->
-          <div id="checking-embed" class="offline-screen">
-            <div class="offline-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1a6fff" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            </div>
-            <h3>Checking Stream…</h3>
-            <p>Fetching live status from Kick</p>
-          </div>
-
-          <div class="stream-footer">
-            <a href="https://kick.com/zillas" target="_blank" style="color:var(--blue-bright); text-decoration:none; font-weight:700; font-size:0.8rem; letter-spacing:0.5px;">kick.com/zillas →</a>
-            <div class="viewer-count" id="viewer-row" style="display:none;">
-              <span class="viewer-dot"></span>
-              <span id="viewer-count">0 viewers</span>
-            </div>
+            <iframe
+              src="https://kick.com/zillas/chatroom"
+              class="chat-embed"
+              allowfullscreen>
+            </iframe>
           </div>
         </div>
 
@@ -1220,7 +1604,7 @@
               <span class="schedule-day">Saturday</span>
               <span class="schedule-time">7 PM PHT</span>
             </div>
-            <div class="schedule-item" style="border:none;">
+            <div class="schedule-item" style="border:none; padding-bottom:1.25rem;">
               <span class="schedule-day">Sunday</span>
               <span class="schedule-time">6 PM PHT</span>
             </div>
@@ -1228,7 +1612,7 @@
 
           <div class="side-card">
             <div class="side-card-title">💬 Join the Community</div>
-            <div style="display:flex; flex-direction:column; gap:0.5rem;">
+            <div style="display:flex; flex-direction:column; gap:0.5rem; padding: 0 1.25rem 1.25rem;">
               <a href="https://discord.gg/Rx7rc4bTa" target="_blank" style="display:flex; align-items:center; gap:10px; padding:10px 12px; background:rgba(88,101,242,0.1); border:1px solid rgba(88,101,242,0.25); border-radius:8px; text-decoration:none; color:var(--text-primary); font-size:0.875rem; font-weight:600; transition:all 0.2s;" onmouseover="this.style.background='rgba(88,101,242,0.2)'" onmouseout="this.style.background='rgba(88,101,242,0.1)'">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="#5865f2"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.1 18.08.11 18.1.128 18.114a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
                 Discord Community
@@ -1251,9 +1635,229 @@
 </div><!-- /page-home -->
 
 
+<!-- ═══════════════════════════ GIVEAWAYS PAGE ═══════════════════════════ -->
+<div class="page" id="page-giveaways">
+  <div class="giveaway-section" style="border:none; padding-top:3rem;">
+    <div class="giveaway-inner">
+      <p class="section-label">🎉 Active & Upcoming</p>
+      <h2 class="section-title">Giveaways</h2>
+      <p class="section-sub">Enter our active giveaways for a chance to win exclusive prizes. New giveaways every stream!</p>
+
+      <div class="giveaway-grid">
+
+        <div class="giveaway-card">
+          <div class="giveaway-card-header">
+            <div>
+              <div class="giveaway-prize">$50 Stake.us Credit</div>
+              <div style="font-size:0.78rem; color:var(--text-muted);">Ends after stream · May 10</div>
+            </div>
+            <span class="giveaway-status-badge badge-active">● Active</span>
+          </div>
+          <p class="giveaway-desc">Enter for a chance to win $50 in Stake.us credits. Winner announced live at the end of the stream!</p>
+          <div class="giveaway-requirements">
+            <span class="req-tag">✓ Follow on Kick</span>
+            <span class="req-tag">✓ Join Discord</span>
+            <span class="req-tag">✓ Use Code ZILLAS</span>
+          </div>
+          <a href="https://kick.com/zillas" target="_blank" class="giveaway-enter-btn">🎁 Enter Giveaway</a>
+        </div>
+
+        <div class="giveaway-card">
+          <div class="giveaway-card-header">
+            <div>
+              <div class="giveaway-prize">VIP Discord Role</div>
+              <div style="font-size:0.78rem; color:var(--text-muted);">Ongoing · Monthly draw</div>
+            </div>
+            <span class="giveaway-status-badge badge-active">● Active</span>
+          </div>
+          <p class="giveaway-desc">Top active members in our Discord get a chance to be promoted to VIP — with exclusive channels and private giveaways.</p>
+          <div class="giveaway-requirements">
+            <span class="req-tag">✓ Join Discord</span>
+            <span class="req-tag">✓ Be Active in Chat</span>
+          </div>
+          <a href="https://discord.gg/Rx7rc4bTa" target="_blank" class="giveaway-enter-btn">💬 Join Discord</a>
+        </div>
+
+        <div class="giveaway-card">
+          <div class="giveaway-card-header">
+            <div>
+              <div class="giveaway-prize">$100 Cash Drop</div>
+              <div style="font-size:0.78rem; color:var(--text-muted);">Starts · May 15 stream</div>
+            </div>
+            <span class="giveaway-status-badge badge-upcoming">⏳ Upcoming</span>
+          </div>
+          <p class="giveaway-desc">Our biggest giveaway yet — $100 cash drop happening live on stream. Must be present in chat to win!</p>
+          <div class="giveaway-requirements">
+            <span class="req-tag">✓ Follow on Kick</span>
+            <span class="req-tag">✓ Present in Chat</span>
+            <span class="req-tag">✓ Use Code ZILLAS</span>
+          </div>
+          <button class="giveaway-enter-btn" style="opacity:0.6; cursor:not-allowed;">🔒 Not Yet Open</button>
+        </div>
+
+        <div class="giveaway-card">
+          <div class="giveaway-card-header">
+            <div>
+              <div class="giveaway-prize">$25 Bonus Code</div>
+              <div style="font-size:0.78rem; color:var(--text-muted);">Ended · May 5</div>
+            </div>
+            <span class="giveaway-status-badge badge-ended">Ended</span>
+          </div>
+          <p class="giveaway-desc">This giveaway has ended. Congratulations to the winner! Stay tuned for more giveaways every stream.</p>
+          <div class="giveaway-requirements">
+            <span class="req-tag" style="opacity:0.5;">✓ Follow on Kick</span>
+            <span class="req-tag" style="opacity:0.5;">✓ Use Code ZILLAS</span>
+          </div>
+          <button class="giveaway-enter-btn ended" disabled>✓ Giveaway Ended</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div><!-- /page-giveaways -->
+
+
+<!-- ═══════════════════════════ LEADERBOARD PAGE ═══════════════════════════ -->
+<div class="page" id="page-leaderboard">
+  <div class="leaderboard-section">
+    <div class="leaderboard-inner">
+      <p class="section-label">🏆 Top Community Members</p>
+      <h2 class="section-title">Leaderboard</h2>
+      <p class="section-sub">Rankings are based on total wager volume on Stake.us using code ZILLAS. Updated weekly every Monday.</p>
+
+      <div class="leaderboard-table">
+        <div class="leaderboard-header-row">
+          <span>#</span>
+          <span>Player</span>
+          <span>Total Wagered</span>
+          <span>Earned Back</span>
+          <span>Rank</span>
+        </div>
+
+        <div class="leaderboard-row top-1">
+          <div class="rank-num rank-1">🥇</div>
+          <div class="lb-user">
+            <div class="lb-avatar" style="background: rgba(240,180,41,0.15);">ZK</div>
+            <div>
+              <div class="lb-username">ZillaKing</div>
+              <div class="lb-tag">Joined 4 months ago</div>
+            </div>
+          </div>
+          <div class="lb-wager">$48,250</div>
+          <div class="lb-earned">+$7,237</div>
+          <span class="lb-badge vip">👑 VIP</span>
+        </div>
+
+        <div class="leaderboard-row top-2">
+          <div class="rank-num rank-2">🥈</div>
+          <div class="lb-user">
+            <div class="lb-avatar" style="background: rgba(192,192,192,0.1);">SX</div>
+            <div>
+              <div class="lb-username">StakeXcel</div>
+              <div class="lb-tag">Joined 3 months ago</div>
+            </div>
+          </div>
+          <div class="lb-wager">$31,800</div>
+          <div class="lb-earned">+$4,770</div>
+          <span class="lb-badge vip">👑 VIP</span>
+        </div>
+
+        <div class="leaderboard-row top-3">
+          <div class="rank-num rank-3">🥉</div>
+          <div class="lb-user">
+            <div class="lb-avatar" style="background: rgba(205,127,50,0.1);">LG</div>
+            <div>
+              <div class="lb-username">LuckyGrind</div>
+              <div class="lb-tag">Joined 2 months ago</div>
+            </div>
+          </div>
+          <div class="lb-wager">$19,500</div>
+          <div class="lb-earned">+$2,925</div>
+          <span class="lb-badge pro">⚡ Pro</span>
+        </div>
+
+        <div class="leaderboard-row">
+          <div class="rank-num">4</div>
+          <div class="lb-user">
+            <div class="lb-avatar" style="background: rgba(26,111,255,0.1);">NB</div>
+            <div>
+              <div class="lb-username">NightBets</div>
+              <div class="lb-tag">Joined 5 months ago</div>
+            </div>
+          </div>
+          <div class="lb-wager">$12,100</div>
+          <div class="lb-earned">+$1,815</div>
+          <span class="lb-badge pro">⚡ Pro</span>
+        </div>
+
+        <div class="leaderboard-row">
+          <div class="rank-num">5</div>
+          <div class="lb-user">
+            <div class="lb-avatar" style="background: rgba(26,111,255,0.08);">CR</div>
+            <div>
+              <div class="lb-username">CryptoRoller</div>
+              <div class="lb-tag">Joined 1 month ago</div>
+            </div>
+          </div>
+          <div class="lb-wager">$8,750</div>
+          <div class="lb-earned">+$1,312</div>
+          <span class="lb-badge member">Member</span>
+        </div>
+
+        <div class="leaderboard-row">
+          <div class="rank-num">6</div>
+          <div class="lb-user">
+            <div class="lb-avatar" style="background: rgba(26,111,255,0.08);">WW</div>
+            <div>
+              <div class="lb-username">WildWager</div>
+              <div class="lb-tag">Joined 2 months ago</div>
+            </div>
+          </div>
+          <div class="lb-wager">$6,300</div>
+          <div class="lb-earned">+$945</div>
+          <span class="lb-badge member">Member</span>
+        </div>
+
+        <div class="leaderboard-row">
+          <div class="rank-num">7</div>
+          <div class="lb-user">
+            <div class="lb-avatar" style="background: rgba(26,111,255,0.08);">SP</div>
+            <div>
+              <div class="lb-username">SlotPro99</div>
+              <div class="lb-tag">Joined 3 weeks ago</div>
+            </div>
+          </div>
+          <div class="lb-wager">$4,200</div>
+          <div class="lb-earned">+$630</div>
+          <span class="lb-badge member">Member</span>
+        </div>
+
+        <div class="leaderboard-row">
+          <div class="rank-num">8</div>
+          <div class="lb-user">
+            <div class="lb-avatar" style="background: rgba(26,111,255,0.08);">BH</div>
+            <div>
+              <div class="lb-username">BigHitter</div>
+              <div class="lb-tag">Joined 1 month ago</div>
+            </div>
+          </div>
+          <div class="lb-wager">$2,950</div>
+          <div class="lb-earned">+$442</div>
+          <span class="lb-badge member">Member</span>
+        </div>
+
+        <div class="leaderboard-footer">
+          <span>🔄 Updated every Monday · Use code <strong style="color:var(--blue-bright);">ZILLAS</strong> to appear on the leaderboard</span>
+          <span>Showing top 8 of 200+ players</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /page-leaderboard -->
+
+
 <!-- ═══════════════════════════ REWARDS PAGE ═══════════════════════════ -->
 <div class="page" id="page-rewards">
-
   <div class="rewards-hero">
     <div class="rewards-hero-inner">
       <p class="section-label" style="text-align:center;">🏆 Exclusive Perks</p>
@@ -1263,8 +1867,6 @@
   </div>
 
   <div class="rewards-main">
-
-    <!-- Big Promo Box -->
     <div class="promo-big-box">
       <div>
         <div class="promo-badge">⭐ Stake.us Partner</div>
@@ -1276,14 +1878,11 @@
           <div class="big-code-label">Use Code</div>
           <div class="big-code-value">ZILLAS</div>
         </div>
-        <button class="copy-code-btn" id="big-copy-btn" onclick="copyCodeBig('ZILLAS')">
-          Copy Code
-        </button>
+        <button class="copy-code-btn" id="big-copy-btn" onclick="copyCodeBig('ZILLAS')">Copy Code</button>
         <a href="https://stake.us/?c=ZILLAS" target="_blank" class="play-link">Play at Stake.us →</a>
       </div>
     </div>
 
-    <!-- Benefits Grid -->
     <p class="benefits-heading">✨ WHAT YOU GET</p>
     <div class="benefit-grid">
       <div class="benefit-box gold">
@@ -1312,7 +1911,6 @@
       </div>
     </div>
 
-    <!-- Refer Box -->
     <div class="refer-box">
       <div>
         <h3>Refer a Friend</h3>
@@ -1351,7 +1949,7 @@
           When does Code Zillas go live on Kick?
           <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
-        <div class="faq-answer"><p>We stream Monday, Wednesday, Friday at 8–9 PM PHT and on weekends. Follow us at kick.com/zillas and join the Discord to get notified whenever we go live — we also run giveaways during streams!</p></div>
+        <div class="faq-answer"><p>We stream Monday, Wednesday, Friday at 8–9 PM PHT and on weekends. Follow us at kick.com/zillas and join the Discord to get notified whenever we go live!</p></div>
       </div>
       <div class="faq-item">
         <div class="faq-question" onclick="toggleFaq(this)">
@@ -1359,6 +1957,13 @@
           <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
         <div class="faq-answer"><p>Sign up on Stake.us using code <strong>ZILLAS</strong>, then start playing. Cashback and rakeback are calculated automatically on your wager volume. Bonus drops happen during live streams — stay active in chat to qualify.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          How do I appear on the leaderboard?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-answer"><p>Use code <strong>ZILLAS</strong> on Stake.us and your wager volume will be tracked. Leaderboards are updated every Monday. Contact us on Discord to claim your spot and rewards!</p></div>
       </div>
       <div class="faq-item">
         <div class="faq-question" onclick="toggleFaq(this)">
@@ -1372,7 +1977,7 @@
           What is the minimum age to participate?
           <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
-        <div class="faq-answer"><p>You must be 18 years or older (21 in some jurisdictions) to participate. Please ensure gaming is legal in your region. We promote responsible gambling and provide resources for those who need support.</p></div>
+        <div class="faq-answer"><p>You must be 18 years or older (21 in some jurisdictions) to participate. Please ensure gaming is legal in your region.</p></div>
       </div>
       <div class="faq-item" style="border:none;">
         <div class="faq-question" onclick="toggleFaq(this)">
@@ -1410,6 +2015,8 @@
         <h4>Navigate</h4>
         <ul>
           <li><a onclick="showPage('home')">Home</a></li>
+          <li><a onclick="showPage('giveaways')">Giveaways</a></li>
+          <li><a onclick="showPage('leaderboard')">Leaderboard</a></li>
           <li><a onclick="showPage('rewards')">Rewards & Codes</a></li>
           <li><a onclick="showPage('faq')">FAQ</a></li>
           <li><a href="https://kick.com/zillas" target="_blank">Live Stream</a></li>
@@ -1488,29 +2095,85 @@
     el.parentElement.classList.toggle('open');
   }
 
-  /* ── KICK STREAM STATUS ──
-   * Kick's public API endpoint: https://kick.com/api/v1/channels/{slug}
-   * The `livestream` key is null when offline, or an object with viewer_count when live.
-   * Note: Kick may block direct browser fetches due to CORS/Cloudflare protection.
-   * If the fetch fails, we fall back to showing the player embed (assumes live).
-   * For production, proxy this request through your own backend.
+  /* ── COUNTDOWN TIMER ──
+   * Schedule (PHT = UTC+8):
+   * Mon 20:00, Wed 21:00, Fri 20:00, Sat 19:00, Sun 18:00
    */
-  const KICK_CHANNEL = 'trainwreckstv'; // ← change back to 'zillas' when done testing
+  const SCHEDULE = [
+    { day: 1, hour: 20, label: 'Monday 8PM PHT' },
+    { day: 3, hour: 21, label: 'Wednesday 9PM PHT' },
+    { day: 5, hour: 20, label: 'Friday 8PM PHT' },
+    { day: 6, hour: 19, label: 'Saturday 7PM PHT' },
+    { day: 0, hour: 18, label: 'Sunday 6PM PHT' },
+  ];
+
+  function getNextStream() {
+    const nowUTC = new Date();
+    const nowPHT = new Date(nowUTC.getTime() + 8 * 60 * 60 * 1000);
+    let soonest = null;
+    let soonestLabel = '';
+
+    for (let i = 0; i < 14; i++) {
+      const candidate = new Date(nowPHT);
+      candidate.setDate(candidate.getDate() + i);
+      for (const s of SCHEDULE) {
+        if (candidate.getDay() === s.day) {
+          candidate.setHours(s.hour, 0, 0, 0);
+          if (candidate > nowPHT) {
+            if (!soonest || candidate < soonest) {
+              soonest = candidate;
+              soonestLabel = s.label;
+            }
+          }
+        }
+      }
+      if (soonest) break;
+    }
+    return { target: soonest, label: soonestLabel };
+  }
+
+  function updateCountdown() {
+    const { target, label } = getNextStream();
+    if (!target) return;
+
+    const nowUTC = new Date();
+    const nowPHT = new Date(nowUTC.getTime() + 8 * 60 * 60 * 1000);
+    const diff = target - nowPHT;
+
+    if (diff <= 0) { updateCountdown(); return; }
+
+    const days  = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const mins  = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const secs  = Math.floor((diff % (1000 * 60)) / 1000);
+
+    document.getElementById('cd-days').textContent  = String(days).padStart(2, '0');
+    document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+    document.getElementById('cd-mins').textContent  = String(mins).padStart(2, '0');
+    document.getElementById('cd-secs').textContent  = String(secs).padStart(2, '0');
+    document.getElementById('cd-label').innerHTML   = `Next: <span>${label}</span>`;
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  /* ── KICK STREAM STATUS ── */
+  const KICK_CHANNEL = 'zillas';
 
   async function checkKickStatus() {
-    const badge       = document.getElementById('stream-badge');
-    const dot         = document.getElementById('nav-dot');
-    const badgeText   = document.getElementById('badge-text');
-    const pill        = document.getElementById('stream-status-pill');
-    const liveEmbed   = document.getElementById('live-embed');
-    const offlineEmbed= document.getElementById('offline-embed');
-    const checkEmbed  = document.getElementById('checking-embed');
-    const viewerRow   = document.getElementById('viewer-row');
-    const floatDot    = document.getElementById('kick-float-dot');
-    const floatStatus = document.getElementById('kick-float-status');
+    const badge        = document.getElementById('stream-badge');
+    const dot          = document.getElementById('nav-dot');
+    const badgeText    = document.getElementById('badge-text');
+    const pill         = document.getElementById('stream-status-pill');
+    const liveEmbed    = document.getElementById('live-embed');
+    const offlineEmbed = document.getElementById('offline-embed');
+    const checkEmbed   = document.getElementById('checking-embed');
+    const viewerRow    = document.getElementById('viewer-row');
+    const floatDot     = document.getElementById('kick-float-dot');
+    const floatStatus  = document.getElementById('kick-float-status');
+    const chatDot      = document.getElementById('chat-live-dot');
 
     try {
-      // Use a CORS proxy so the browser can reach the Kick API
       const proxyUrl = `https://corsproxy.io/?url=${encodeURIComponent('https://kick.com/api/v1/channels/' + KICK_CHANNEL)}`;
       const res = await fetch(proxyUrl, { headers: { 'Accept': 'application/json' } });
       if (!res.ok) throw new Error('API error ' + res.status);
@@ -1534,6 +2197,7 @@
         floatDot.className = 'kick-float-live-dot';
         floatStatus.textContent = 'LIVE';
         floatStatus.className = 'kick-float-status';
+        if (chatDot) chatDot.style.display = 'inline-block';
       } else {
         badge.className = 'offline-badge';
         dot.style.display = 'none';
@@ -1546,15 +2210,14 @@
         floatDot.className = 'kick-float-offline-dot';
         floatStatus.textContent = 'Offline';
         floatStatus.className = 'kick-float-status is-offline';
+        if (chatDot) chatDot.style.display = 'none';
       }
     } catch (e) {
-      // API unreachable — show the embed anyway as a fallback so visitors
-      // can at least try to watch. Pill shows "CHECK FAILED".
       console.warn('Kick API check failed:', e);
       checkEmbed.style.display = 'none';
       pill.className = 'offline-pill';
       pill.textContent = 'STATUS UNKNOWN';
-      liveEmbed.style.display = 'block'; // show player embed as fallback
+      liveEmbed.style.display = 'block';
       offlineEmbed.style.display = 'none';
       badge.className = 'offline-badge';
       badgeText.textContent = '● Kick';
@@ -1562,7 +2225,7 @@
   }
 
   checkKickStatus();
-  setInterval(checkKickStatus, 60000); // re-check every minute
+  setInterval(checkKickStatus, 60000);
 </script>
 </body>
 </html>
