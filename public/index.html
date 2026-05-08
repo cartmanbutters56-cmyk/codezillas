@@ -646,7 +646,7 @@
         </a>
       </div>
     </div>
-    <div class="hero-stream-box">
+    <div class="hero-stream-box" onclick="window.open('https://kick.com/zillas','_blank')" style="cursor:none;">
       <div class="hero-stream-header">
         <div class="hero-stream-title-row">
           <div class="kick-icon-sm">K</div>
@@ -1074,11 +1074,16 @@ function checkKickStatus(){
     document.getElementById('kick-float-dot').className=live?'kick-float-live-dot':'kick-float-offline-dot';
     document.getElementById('kick-float-status').textContent=live?'LIVE':'Offline';
     document.getElementById('kick-float-status').className=live?'kick-float-status':'kick-float-status is-offline';
-  }).catch(function(){
-    document.getElementById('hero-checking-embed').style.display='none';
-    document.getElementById('hero-live-embed').style.display='block';
-    document.getElementById('hero-stream-pill').textContent='UNKNOWN';
-  });
+  })
+.catch(function(){
+  document.getElementById('hero-checking-embed').style.display='none';
+  document.getElementById('hero-live-embed').style.display='block';
+  document.getElementById('hero-offline-embed').style.display='none';
+  document.getElementById('hero-stream-pill').textContent='LIVE';
+  document.getElementById('hero-stream-pill').style.background='rgba(83,252,24,.12)';
+  document.getElementById('hero-stream-pill').style.border='1px solid rgba(83,252,24,.35)';
+  document.getElementById('hero-stream-pill').style.color='#53fc18';
+});
 }
 checkKickStatus();setInterval(checkKickStatus,60000);
 
