@@ -11,6 +11,9 @@
     :root{--bg-void:#03050f;--bg-deep:#060b1a;--bg-dark:#0a1128;--bg-card:#0e1835;--bg-card2:#111e42;--blue-bright:#1a6fff;--blue-mid:#1254cc;--blue-glow:#2e8fff;--accent-gold:#f0b429;--text-primary:#e8eeff;--text-secondary:#7a90c4;--text-muted:#3d5080;--border:#1a2d5a;--border-bright:#2a4080;--green:#00e676;--kick-green:#53fc18;--red:#ff4444}
     html{scroll-behavior:smooth}
 
+    /* ─── STARFIELD CANVAS ─── */
+    #starfield{position:fixed;inset:0;z-index:0;pointer-events:none;}
+
     /* ─── CUSTOM CURSOR ─── */
     *{cursor:none!important}
     #cursor{position:fixed;pointer-events:none;z-index:99999;mix-blend-mode:difference;}
@@ -19,9 +22,7 @@
     body.cursor-hover #cursor-dot{width:12px;height:12px;background:var(--accent-gold);}
     body.cursor-hover #cursor-ring{width:52px;height:52px;border-color:rgba(240,180,41,.5);}
 
-    body{font-family:'Exo 2',sans-serif;background:var(--bg-void);color:var(--text-primary);min-height:100vh;overflow-x:hidden}
-    body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 40% at 20% 10%,rgba(26,111,255,.07) 0%,transparent 60%),radial-gradient(ellipse 60% 60% at 80% 80%,rgba(18,84,204,.05) 0%,transparent 60%);pointer-events:none;z-index:0}
-    body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(26,111,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(26,111,255,.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0}
+    body{font-family:'Exo 2',sans-serif;background:#03050f;color:var(--text-primary);min-height:100vh;overflow-x:hidden}
 
     /* NAV */
     nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(3,5,15,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:70px}
@@ -75,8 +76,8 @@
     /* ─── SCROLLING SOCIALS TICKER ─── */
     .social-ticker{position:relative;overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:rgba(6,11,26,.8);padding:1.2rem 0;z-index:1;}
     .social-ticker::before,.social-ticker::after{content:'';position:absolute;top:0;bottom:0;width:120px;z-index:2;pointer-events:none;}
-    .social-ticker::before{left:0;background:linear-gradient(90deg,var(--bg-void),transparent);}
-    .social-ticker::after{right:0;background:linear-gradient(-90deg,var(--bg-void),transparent);}
+    .social-ticker::before{left:0;background:linear-gradient(90deg,rgba(3,5,15,.95),transparent);}
+    .social-ticker::after{right:0;background:linear-gradient(-90deg,rgba(3,5,15,.95),transparent);}
     .ticker-track{display:flex;gap:0;width:max-content;animation:tickerScroll 30s linear infinite;}
     .ticker-track:hover{animation-play-state:paused;}
     @keyframes tickerScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
@@ -260,6 +261,9 @@
 </head>
 <body>
 
+<!-- STARFIELD CANVAS -->
+<canvas id="starfield"></canvas>
+
 <!-- CUSTOM CURSOR -->
 <div id="cursor">
   <div id="cursor-ring"></div>
@@ -294,7 +298,7 @@
       <span id="nav-dot" style="display:none;width:7px;height:7px;border-radius:50%;background:#53fc18;"></span>
       <span id="badge-text">● Offline</span>
     </a>
-    <button onclick="showPage('rewards')" class="btn-primary" style="padding:8px 20px;font-size:.85rem;border:none;">Get Code</button>
+    <button onclick="showPage('rewards')" class="btn-primary" style="padding:8px 20px;font-size:.85rem;border:none;">Use Code</button>
   </div>
 </nav>
 
@@ -305,7 +309,7 @@
   <a href="#" id="mob-faq" onclick="showPage('faq');closeMobileMenu();return false;">❓ FAQ</a>
   <div class="mobile-menu-divider"></div>
   <a href="https://kick.com/zillas" target="_blank" onclick="closeMobileMenu()">📺 Watch on Kick</a>
-  <a href="#" onclick="showPage('rewards');closeMobileMenu();return false;" class="mobile-get-code">🎁 Get Code — ZILLAS</a>
+  <a href="#" onclick="showPage('rewards');closeMobileMenu();return false;" class="mobile-get-code">Use Code — ZILLAS</a>
 </div>
 
 <!-- HOME PAGE -->
@@ -318,7 +322,7 @@
       <h1 class="hero-title">UGLY PIGGY<br><span class="line2">Zillas</span></h1>
       <p class="hero-sub">Use code <strong style="color:var(--blue-bright);">ZILLAS</strong> on Stake.us. Earn rewards, cashback, and watch us go live on Kick every week.</p>
       <div class="hero-actions">
-        <button onclick="showPage('rewards')" class="btn-primary">🎁 Get Code</button>
+        <button onclick="showPage('rewards')" class="btn-primary">Use Code</button>
         <a href="https://kick.com/zillas" target="_blank" class="btn-outline">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16"/></svg>
           Watch Live
@@ -412,7 +416,7 @@
           </div>
           <p class="giveaway-desc">Enter for a chance to win $50 in Stake.us credits. Winner announced live at the end of the stream!</p>
           <div class="giveaway-requirements"><span class="req-tag">✓ Follow on Kick</span><span class="req-tag">✓ Join Discord</span><span class="req-tag">✓ Use Code ZILLAS</span></div>
-          <a href="https://kick.com/zillas" target="_blank" class="giveaway-enter-btn">🎁 Enter Giveaway</a>
+          <a href="https://kick.com/zillas" target="_blank" class="giveaway-enter-btn">Enter Giveaway</a>
         </div>
         <div class="giveaway-card">
           <div class="giveaway-card-header">
@@ -548,6 +552,104 @@
 <div class="toast" id="toast"><span class="toast-icon">✓</span><span id="toast-msg">Code copied!</span></div>
 
 <script>
+// ─── STARFIELD ───
+(function(){
+  var canvas = document.getElementById('starfield');
+  var ctx = canvas.getContext('2d');
+  var stars = [];
+  var W, H;
+
+  function resize(){
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Generate stars matching the reference image:
+  // Deep navy/black background, cyan-blue glowing stars of varying sizes
+  function initStars(){
+    stars = [];
+    var count = Math.floor((W * H) / 6000); // density
+    for(var i = 0; i < count; i++){
+      var size = Math.random();
+      var isBright = size > 0.92;
+      var isMid = size > 0.75 && !isBright;
+      stars.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: isBright ? (1.5 + Math.random() * 2.5) : (isMid ? (0.8 + Math.random() * 1.2) : (0.2 + Math.random() * 0.6)),
+        alpha: isBright ? (0.7 + Math.random() * 0.3) : (isMid ? (0.35 + Math.random() * 0.45) : (0.1 + Math.random() * 0.35)),
+        // Cyan-blue tones matching image
+        hue: 185 + Math.random() * 40, // 185-225 range (cyan to blue)
+        twinkleSpeed: 0.003 + Math.random() * 0.012,
+        twinkleOffset: Math.random() * Math.PI * 2,
+        glow: isBright,
+        cluster: Math.random() > 0.85 // some stars cluster at bottom like in image
+      });
+    }
+    // Add extra cluster stars at bottom half (matches image)
+    for(var j = 0; j < Math.floor(count * 0.4); j++){
+      stars.push({
+        x: Math.random() * W,
+        y: H * 0.5 + Math.random() * H * 0.5,
+        r: 0.2 + Math.random() * 0.8,
+        alpha: 0.08 + Math.random() * 0.3,
+        hue: 185 + Math.random() * 50,
+        twinkleSpeed: 0.002 + Math.random() * 0.008,
+        twinkleOffset: Math.random() * Math.PI * 2,
+        glow: false,
+        cluster: true
+      });
+    }
+  }
+  initStars();
+  window.addEventListener('resize', initStars);
+
+  var t = 0;
+  function draw(){
+    // Deep dark navy background matching image
+    ctx.fillStyle = '#030810';
+    ctx.fillRect(0, 0, W, H);
+
+    // Subtle dark blue vignette at edges (lighter center like image)
+    var vignette = ctx.createRadialGradient(W*0.5, H*0.45, H*0.1, W*0.5, H*0.45, H*0.85);
+    vignette.addColorStop(0, 'rgba(4,8,22,0)');
+    vignette.addColorStop(1, 'rgba(1,2,8,0.6)');
+    ctx.fillStyle = vignette;
+    ctx.fillRect(0, 0, W, H);
+
+    t += 0.016;
+
+    for(var i = 0; i < stars.length; i++){
+      var s = stars[i];
+      var twinkle = 0.7 + 0.3 * Math.sin(t * s.twinkleSpeed * 60 + s.twinkleOffset);
+      var a = s.alpha * twinkle;
+
+      if(s.glow){
+        // Bright stars with glow halo
+        var grd = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r * 5);
+        grd.addColorStop(0, 'hsla('+s.hue+',90%,80%,'+a+')');
+        grd.addColorStop(0.3, 'hsla('+s.hue+',80%,65%,'+(a*0.5)+')');
+        grd.addColorStop(1, 'hsla('+s.hue+',70%,50%,0)');
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r * 5, 0, Math.PI*2);
+        ctx.fillStyle = grd;
+        ctx.fill();
+      }
+
+      // Star core
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+      ctx.fillStyle = 'hsla('+s.hue+',85%,'+(s.glow?90:70)+'%,'+a+')';
+      ctx.fill();
+    }
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
 // ─── CURSOR ───
 var cursor = document.getElementById('cursor');
 var cursorDot = document.getElementById('cursor-dot');
@@ -583,7 +685,6 @@ var tickerItems = [
   {cls:'ticker-x', href:'https://x.com/zill4s?s=20', icon:'<svg width="14" height="14" viewBox="0 0 24 24" fill="#e8eeff"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>', label:'Latest Updates'},
 ];
 var track = document.getElementById('ticker-track');
-// Render twice for seamless loop
 [0,1].forEach(function(){
   tickerItems.forEach(function(item){
     var div = document.createElement('div');
@@ -655,7 +756,6 @@ function checkKickStatus(){
     .then(function(data){
       var live=!!(data.livestream);
       var viewers=live?(data.livestream.viewer_count||0):0;
-      // Hero
       document.getElementById('hero-checking-embed').style.display='none';
       document.getElementById('hero-stream-pill').className=live?'live-pill':'offline-pill';
       document.getElementById('hero-stream-pill').style.cssText='font-size:.68rem;font-weight:800;letter-spacing:1.5px;padding:3px 10px;border-radius:20px;';
@@ -664,11 +764,9 @@ function checkKickStatus(){
       document.getElementById('hero-offline-embed').style.display=live?'none':'flex';
       document.getElementById('hero-viewer-row').style.display=live?'flex':'none';
       if(live)document.getElementById('hero-viewer-count').textContent=viewers.toLocaleString()+' viewers';
-      // Nav
       document.getElementById('stream-badge').className=live?'live-badge':'offline-badge';
       document.getElementById('nav-dot').style.display=live?'inline-block':'none';
       document.getElementById('badge-text').textContent=live?'LIVE':'● Offline';
-      // Float
       document.getElementById('kick-float-dot').className=live?'kick-float-live-dot':'kick-float-offline-dot';
       document.getElementById('kick-float-status').textContent=live?'LIVE':'Offline';
       document.getElementById('kick-float-status').className=live?'kick-float-status':'kick-float-status is-offline';
@@ -712,7 +810,6 @@ function toggleFaq(el){el.parentElement.classList.toggle('open');}
 function toggleMobileMenu(){document.getElementById('mobile-menu').classList.toggle('open');document.getElementById('hamburger').classList.toggle('open');}
 function closeMobileMenu(){document.getElementById('mobile-menu').classList.remove('open');document.getElementById('hamburger').classList.remove('open');}
 
-// Cursor hover on dynamically added elements
 setTimeout(function(){
   document.querySelectorAll('a,button,[onclick]').forEach(function(el){
     el.addEventListener('mouseenter',function(){document.body.classList.add('cursor-hover');});
