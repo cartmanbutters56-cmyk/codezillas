@@ -842,132 +842,6 @@
     .giveaway-enter-btn:hover { opacity: 0.85; transform: translateY(-1px); }
     .giveaway-enter-btn:disabled, .giveaway-enter-btn.ended { background: var(--bg-card2); color: var(--text-muted); cursor: not-allowed; transform: none; }
 
-    /* ── LEADERBOARD ── */
-    .leaderboard-section {
-      position: relative;
-      z-index: 1;
-      padding: 5rem 0;
-    }
-
-    .leaderboard-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    .leaderboard-table {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      overflow: hidden;
-      margin-top: 2rem;
-    }
-
-    .leaderboard-header-row {
-      display: grid;
-      grid-template-columns: 60px 1fr 140px 140px 120px;
-      padding: 12px 20px;
-      background: var(--bg-card2);
-      border-bottom: 1px solid var(--border);
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-
-    .leaderboard-row {
-      display: grid;
-      grid-template-columns: 60px 1fr 140px 140px 120px;
-      padding: 14px 20px;
-      border-bottom: 1px solid rgba(26,45,90,0.4);
-      align-items: center;
-      transition: background 0.2s;
-    }
-
-    .leaderboard-row:last-child { border-bottom: none; }
-    .leaderboard-row:hover { background: rgba(26,111,255,0.04); }
-
-    .leaderboard-row.top-1 { background: rgba(240,180,41,0.05); }
-    .leaderboard-row.top-2 { background: rgba(192,192,192,0.04); }
-    .leaderboard-row.top-3 { background: rgba(205,127,50,0.04); }
-
-    .rank-num {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--text-muted);
-    }
-
-    .rank-1 { color: var(--accent-gold); }
-    .rank-2 { color: #c0c0c0; }
-    .rank-3 { color: #cd7f32; }
-
-    .lb-user {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .lb-avatar {
-      width: 36px; height: 36px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1rem;
-      font-weight: 700;
-      flex-shrink: 0;
-      border: 2px solid transparent;
-    }
-
-    .top-1 .lb-avatar { border-color: var(--accent-gold); }
-    .top-2 .lb-avatar { border-color: #c0c0c0; }
-    .top-3 .lb-avatar { border-color: #cd7f32; }
-
-    .lb-username { font-weight: 700; font-size: 0.9rem; }
-    .lb-tag { font-size: 0.7rem; color: var(--text-muted); }
-
-    .lb-wager {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--text-primary);
-    }
-
-    .lb-earned {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--green);
-    }
-
-    .lb-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      padding: 3px 10px;
-      border-radius: 20px;
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
-
-    .lb-badge.vip { background: rgba(192,132,252,0.12); color: #c084fc; border: 1px solid rgba(192,132,252,0.25); }
-    .lb-badge.pro { background: rgba(26,111,255,0.12); color: var(--blue-bright); border: 1px solid rgba(26,111,255,0.25); }
-    .lb-badge.member { background: rgba(61,80,128,0.2); color: var(--text-secondary); border: 1px solid var(--border); }
-
-    .leaderboard-footer {
-      padding: 14px 20px;
-      background: var(--bg-card2);
-      border-top: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-    }
 
     /* ── REWARDS PAGE – BOX LAYOUT ── */
     .rewards-hero {
@@ -1382,8 +1256,6 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 1024px) {
       .benefit-grid { grid-template-columns: repeat(2, 1fr); }
-      .leaderboard-header-row, .leaderboard-row { grid-template-columns: 50px 1fr 120px 100px; }
-      .leaderboard-header-row span:last-child, .leaderboard-row > *:last-child { display: none; }
     }
 
     @media (max-width: 960px) {
@@ -1404,9 +1276,6 @@
       .kick-float { bottom: 1rem; right: 1rem; }
       .kick-float-btn { padding: 8px 12px 8px 10px; }
       .kick-float-info { display: none; }
-      .leaderboard-header-row, .leaderboard-row { grid-template-columns: 44px 1fr 100px; }
-      .leaderboard-header-row span:nth-child(4), .leaderboard-row > *:nth-child(4),
-      .leaderboard-header-row span:last-child, .leaderboard-row > *:last-child { display: none; }
     }
 
     @media (max-width: 400px) {
@@ -1445,7 +1314,6 @@
   <ul class="nav-links">
     <li><a onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
     <li><a onclick="showPage('giveaways')" id="nav-giveaways">Giveaways</a></li>
-    <li><a onclick="showPage('leaderboard')" id="nav-leaderboard">Leaderboard</a></li>
     <li><a onclick="showPage('rewards')" id="nav-rewards">Rewards</a></li>
     <li><a onclick="showPage('faq')" id="nav-faq">FAQ</a></li>
   </ul>
@@ -1717,143 +1585,6 @@
 </div><!-- /page-giveaways -->
 
 
-<!-- ═══════════════════════════ LEADERBOARD PAGE ═══════════════════════════ -->
-<div class="page" id="page-leaderboard">
-  <div class="leaderboard-section">
-    <div class="leaderboard-inner">
-      <p class="section-label">🏆 Top Community Members</p>
-      <h2 class="section-title">Leaderboard</h2>
-      <p class="section-sub">Rankings are based on total wager volume on Stake.us using code ZILLAS. Updated weekly every Monday.</p>
-
-      <div class="leaderboard-table">
-        <div class="leaderboard-header-row">
-          <span>#</span>
-          <span>Player</span>
-          <span>Total Wagered</span>
-          <span>Earned Back</span>
-          <span>Rank</span>
-        </div>
-
-        <div class="leaderboard-row top-1">
-          <div class="rank-num rank-1">🥇</div>
-          <div class="lb-user">
-            <div class="lb-avatar" style="background: rgba(240,180,41,0.15);">ZK</div>
-            <div>
-              <div class="lb-username">ZillaKing</div>
-              <div class="lb-tag">Joined 4 months ago</div>
-            </div>
-          </div>
-          <div class="lb-wager">$48,250</div>
-          <div class="lb-earned">+$7,237</div>
-          <span class="lb-badge vip">👑 VIP</span>
-        </div>
-
-        <div class="leaderboard-row top-2">
-          <div class="rank-num rank-2">🥈</div>
-          <div class="lb-user">
-            <div class="lb-avatar" style="background: rgba(192,192,192,0.1);">SX</div>
-            <div>
-              <div class="lb-username">StakeXcel</div>
-              <div class="lb-tag">Joined 3 months ago</div>
-            </div>
-          </div>
-          <div class="lb-wager">$31,800</div>
-          <div class="lb-earned">+$4,770</div>
-          <span class="lb-badge vip">👑 VIP</span>
-        </div>
-
-        <div class="leaderboard-row top-3">
-          <div class="rank-num rank-3">🥉</div>
-          <div class="lb-user">
-            <div class="lb-avatar" style="background: rgba(205,127,50,0.1);">LG</div>
-            <div>
-              <div class="lb-username">LuckyGrind</div>
-              <div class="lb-tag">Joined 2 months ago</div>
-            </div>
-          </div>
-          <div class="lb-wager">$19,500</div>
-          <div class="lb-earned">+$2,925</div>
-          <span class="lb-badge pro">⚡ Pro</span>
-        </div>
-
-        <div class="leaderboard-row">
-          <div class="rank-num">4</div>
-          <div class="lb-user">
-            <div class="lb-avatar" style="background: rgba(26,111,255,0.1);">NB</div>
-            <div>
-              <div class="lb-username">NightBets</div>
-              <div class="lb-tag">Joined 5 months ago</div>
-            </div>
-          </div>
-          <div class="lb-wager">$12,100</div>
-          <div class="lb-earned">+$1,815</div>
-          <span class="lb-badge pro">⚡ Pro</span>
-        </div>
-
-        <div class="leaderboard-row">
-          <div class="rank-num">5</div>
-          <div class="lb-user">
-            <div class="lb-avatar" style="background: rgba(26,111,255,0.08);">CR</div>
-            <div>
-              <div class="lb-username">CryptoRoller</div>
-              <div class="lb-tag">Joined 1 month ago</div>
-            </div>
-          </div>
-          <div class="lb-wager">$8,750</div>
-          <div class="lb-earned">+$1,312</div>
-          <span class="lb-badge member">Member</span>
-        </div>
-
-        <div class="leaderboard-row">
-          <div class="rank-num">6</div>
-          <div class="lb-user">
-            <div class="lb-avatar" style="background: rgba(26,111,255,0.08);">WW</div>
-            <div>
-              <div class="lb-username">WildWager</div>
-              <div class="lb-tag">Joined 2 months ago</div>
-            </div>
-          </div>
-          <div class="lb-wager">$6,300</div>
-          <div class="lb-earned">+$945</div>
-          <span class="lb-badge member">Member</span>
-        </div>
-
-        <div class="leaderboard-row">
-          <div class="rank-num">7</div>
-          <div class="lb-user">
-            <div class="lb-avatar" style="background: rgba(26,111,255,0.08);">SP</div>
-            <div>
-              <div class="lb-username">SlotPro99</div>
-              <div class="lb-tag">Joined 3 weeks ago</div>
-            </div>
-          </div>
-          <div class="lb-wager">$4,200</div>
-          <div class="lb-earned">+$630</div>
-          <span class="lb-badge member">Member</span>
-        </div>
-
-        <div class="leaderboard-row">
-          <div class="rank-num">8</div>
-          <div class="lb-user">
-            <div class="lb-avatar" style="background: rgba(26,111,255,0.08);">BH</div>
-            <div>
-              <div class="lb-username">BigHitter</div>
-              <div class="lb-tag">Joined 1 month ago</div>
-            </div>
-          </div>
-          <div class="lb-wager">$2,950</div>
-          <div class="lb-earned">+$442</div>
-          <span class="lb-badge member">Member</span>
-        </div>
-
-        <div class="leaderboard-footer">
-          <span>🔄 Updated every Monday · Use code <strong style="color:var(--blue-bright);">ZILLAS</strong> to appear on the leaderboard</span>
-          <span>Showing top 8 of 200+ players</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div><!-- /page-leaderboard -->
 
 
 <!-- ═══════════════════════════ REWARDS PAGE ═══════════════════════════ -->
@@ -1960,13 +1691,6 @@
       </div>
       <div class="faq-item">
         <div class="faq-question" onclick="toggleFaq(this)">
-          How do I appear on the leaderboard?
-          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-        <div class="faq-answer"><p>Use code <strong>ZILLAS</strong> on Stake.us and your wager volume will be tracked. Leaderboards are updated every Monday. Contact us on Discord to claim your spot and rewards!</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
           Is Stake.us safe and legitimate?
           <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
@@ -2016,7 +1740,6 @@
         <ul>
           <li><a onclick="showPage('home')">Home</a></li>
           <li><a onclick="showPage('giveaways')">Giveaways</a></li>
-          <li><a onclick="showPage('leaderboard')">Leaderboard</a></li>
           <li><a onclick="showPage('rewards')">Rewards & Codes</a></li>
           <li><a onclick="showPage('faq')">FAQ</a></li>
           <li><a href="https://kick.com/zillas" target="_blank">Live Stream</a></li>
