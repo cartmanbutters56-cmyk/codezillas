@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Code Zillas – Gamble & Win</title>
+  <meta name="description" content="Code Zillas – Exclusive codes, rewards, and live streams on Stake.us & Kick." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg-void: #03050f; --bg-deep: #060b1a; --bg-dark: #0a1128;
+      --bg-card: #0e1835; --bg-card2: #111e42;
+      --blue-bright: #1a6fff; --blue-mid: #1254cc; --blue-glow: #2e8fff;
+      --accent-gold: #f0b429; --text-primary: #e8eeff;
+      --text-secondary: #7a90c4; --text-muted: #3d5080;
+      --border: #1a2d5a; --border-bright: #2a4080;
+      --green: #00e676; --kick-green: #53fc18; --red: #ff4444;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Exo 2', sans-serif; background: var(--bg-void); color: var(--text-primary); min-height: 100vh; overflow-x: hidden; }
+    body::before { content: ''; position: fixed; inset: 0; background: radial-gradient(ellipse 80% 40% at 20% 10%, rgba(26,111,255,0.07) 0%, transparent 60%), radial-gradient(ellipse 60% 60% at 80% 80%, rgba(18,84,204,0.05) 0%, transparent 60%); pointer-events: none; z-index: 0; }
+    body::after { content: ''; position: fixed; inset: 0; background-image: linear-gradient(rgba(26,111,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(26,111,255,0.03) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; z-index: 0; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(3,5,15,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; height: 70px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; cursor: pointer; }
+    .nav-logo-icon { width: 38px; height: 38px; }
+    .nav-logo-text { font-family: 'Rajdhani', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--text-primary); letter-spacing: 2px; text-transform: uppercase; }
+    .nav-logo-text span { color: var(--blue-bright); }
+    .nav-links { display: flex; align-items: center; gap: 0.25rem; list-style: none; }
+    .nav-links a { display: flex; align-items: center; gap: 6px; padding: 6px 16px; border-radius: 6px; text-decoration: none; color: var(--text-secondary); font-size: 0.875rem; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; transition: all 0.2s; cursor: pointer; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text-primary); background: rgba(26,111,255,0.12); }
+    .nav-links a.active { color: var(--blue-bright); }
+    .nav-right { display: flex; align-items: center; gap: 1rem; }
+    .live-badge { display: flex; align-items: center; gap: 6px; background: rgba(83,252,24,0.12); border: 1px solid rgba(83,252,24,0.35); border-radius: 20px; padding: 4px 12px; font-size: 0.75rem; font-weight: 700; color: var(--kick-green); letter-spacing: 1px; cursor: pointer; transition: all 0.2s; text-decoration: none; }
+    .live-badge:hover { background: rgba(83,252,24,0.2); }
+    .offline-badge { display: flex; align-items: center; gap: 6px; background: rgba(122,144,196,0.08); border: 1px solid rgba(122,144,196,0.2); border-radius: 20px; padding: 4px 12px; font-size: 0.75rem; font-weight: 700; color: var(--text-secondary); letter-spacing: 1px; cursor: pointer; text-decoration: none; transition: all 0.2s; }
+    .offline-badge:hover { background: rgba(122,144,196,0.14); }
+    @keyframes pulse-green { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+
+    .page { display: none; position: relative; z-index: 1; padding-top: 70px; }
+    .page.active { display: block; }
+    @keyframes pageIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    .page.active { animation: pageIn 0.35s ease both; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+    .hero { min-height: 85vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 4rem 2rem; position: relative; }
+    .hero-eyebrow { font-size: 0.75rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--blue-bright); margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.6s 0.1s ease both; }
+    .hero-title { font-family: 'Rajdhani', sans-serif; font-size: clamp(3rem, 9vw, 7rem); font-weight: 700; line-height: 1; letter-spacing: -1px; text-transform: uppercase; margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.7s 0.2s ease both; }
+    .hero-title .line2 { color: var(--blue-bright); display: block; }
+    .hero-sub { font-size: 1.1rem; color: var(--text-secondary); max-width: 520px; line-height: 1.7; margin-bottom: 2.5rem; opacity: 0; animation: fadeUp 0.7s 0.3s ease both; }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; opacity: 0; animation: fadeUp 0.7s 0.4s ease both; }
+    .btn-primary { background: var(--blue-bright); color: white; border: none; border-radius: 10px; padding: 14px 32px; font-family: 'Exo 2', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s; }
+    .btn-primary:hover { background: var(--blue-glow); transform: translateY(-2px); }
+    .btn-outline { background: transparent; color: var(--text-primary); border: 1px solid var(--border-bright); border-radius: 10px; padding: 14px 32px; font-family: 'Exo 2', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s; }
+    .btn-outline:hover { border-color: var(--blue-bright); color: var(--blue-bright); transform: translateY(-2px); }
+
+    .live-section { background: linear-gradient(180deg, transparent 0%, rgba(26,111,255,0.04) 50%, transparent 100%); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 5rem 0; }
+    .live-section > .inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--blue-bright); margin-bottom: 0.75rem; }
+    .section-title { font-family: 'Rajdhani', sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; text-transform: uppercase; margin-bottom: 1rem; }
+    .live-grid { display: grid; grid-template-columns: 1fr 360px; gap: 2rem; align-items: start; }
+    .stream-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+    .stream-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid var(--border); background: var(--bg-card2); }
+    .stream-title-row { display: flex; align-items: center; gap: 10px; }
+    .kick-icon { width: 22px; height: 22px; background: #53fc18; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 900; color: #000; }
+    .stream-name { font-weight: 700; font-size: 0.9rem; letter-spacing: 0.5px; }
+    .live-pill { background: rgba(83,252,24,0.15); border: 1px solid rgba(83,252,24,0.4); color: #53fc18; font-size: 0.7rem; font-weight: 800; letter-spacing: 1.5px; padding: 3px 10px; border-radius: 20px; }
+    .offline-pill { background: rgba(122,144,196,0.08); border: 1px solid rgba(122,144,196,0.2); color: var(--text-muted); font-size: 0.7rem; font-weight: 800; letter-spacing: 1.5px; padding: 3px 10px; border-radius: 20px; }
+    .stream-embed { position: relative; width: 100%; aspect-ratio: 16/9; background: var(--bg-deep); }
+    .stream-embed iframe { width: 100%; height: 100%; border: none; display: block; }
+    .offline-screen { width: 100%; aspect-ratio: 16/9; background: linear-gradient(135deg, #06091a 0%, #0a1228 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; }
+    .offline-icon { width: 60px; height: 60px; background: rgba(26,111,255,0.1); border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    .offline-screen h3 { font-family: 'Rajdhani', sans-serif; font-size: 1.25rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
+    .offline-screen p { font-size: 0.85rem; color: var(--text-muted); }
+    .kick-follow-btn { background: #53fc18; color: #000; border: none; border-radius: 8px; padding: 10px 22px; font-family: 'Exo 2', sans-serif; font-size: 0.85rem; font-weight: 800; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; }
+    .kick-follow-btn:hover { background: #6afd30; transform: translateY(-1px); }
+    .stream-footer { padding: 12px 18px; background: var(--bg-card2); display: flex; align-items: center; justify-content: space-between; font-size: 0.8rem; color: var(--text-secondary); }
+    .viewer-count { display: flex; align-items: center; gap: 6px; }
+    .viewer-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--red); }
+
+    .stream-sidebar { display: flex; flex-direction: column; gap: 1.25rem; }
+    .side-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; }
+    .side-card-title { font-family: 'Rajdhani', sans-serif; font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem; color: var(--text-secondary); }
+    .schedule-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(26,45,90,0.5); font-size: 0.85rem; }
+    .schedule-item:last-child { border-bottom: none; }
+    .schedule-day { color: var(--text-secondary); font-weight: 600; }
+    .schedule-time { color: var(--blue-bright); font-weight: 700; font-size: 0.8rem; }
+
+    .kick-float { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 900; pointer-events: none; }
+    .kick-float-btn { pointer-events: all; display: flex; align-items: center; gap: 8px; background: #1a1f2e; border: 1.5px solid rgba(83,252,24,0.5); border-radius: 50px; padding: 10px 18px 10px 12px; text-decoration: none; color: var(--text-primary); font-family: 'Exo 2', sans-serif; font-size: 0.82rem; font-weight: 700; cursor: pointer; box-shadow: 0 4px 20px rgba(83,252,24,0.15); transition: all 0.25s; }
+    .kick-float-btn:hover { background: rgba(83,252,24,0.12); border-color: #53fc18; transform: translateY(-2px); }
+    .kick-float-icon { width: 28px; height: 28px; background: #53fc18; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 900; color: #000; flex-shrink: 0; }
+    .kick-float-info { display: flex; flex-direction: column; }
+    .kick-float-label { font-size: 0.68rem; color: var(--text-muted); line-height: 1; margin-bottom: 1px; }
+    .kick-float-name { font-size: 0.85rem; font-weight: 700; color: var(--text-primary); }
+    .kick-float-live-dot { width: 8px; height: 8px; border-radius: 50%; background: #53fc18; animation: pulse-green 1.2s infinite; flex-shrink: 0; }
+    .kick-float-offline-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--text-muted); flex-shrink: 0; }
+    .kick-float-status { font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #53fc18; }
+    .kick-float-status.is-offline { color: var(--text-muted); }
+
+    .rewards-hero { background: linear-gradient(135deg, var(--bg-card2) 0%, #0c1530 100%); border-bottom: 1px solid var(--border); padding: 3.5rem 2rem; text-align: center; }
+    .rewards-hero-inner { max-width: 700px; margin: 0 auto; }
+    .rewards-hero h1 { font-family: 'Rajdhani', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; text-transform: uppercase; letter-spacing: -0.5px; margin-bottom: 0.75rem; }
+    .rewards-hero h1 span { color: var(--blue-bright); }
+    .rewards-hero p { color: var(--text-secondary); font-size: 1rem; line-height: 1.7; }
+    .rewards-main { max-width: 1200px; margin: 0 auto; padding: 3rem 2rem; }
+    .promo-big-box { background: linear-gradient(135deg, #0d1d45 0%, #0a1230 50%, #0e1d42 100%); border: 1.5px solid var(--border-bright); border-radius: 20px; padding: 2.5rem; margin-bottom: 2rem; position: relative; overflow: hidden; display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center; }
+    .promo-big-box::before { content: ''; position: absolute; top: -60px; right: -60px; width: 280px; height: 280px; background: radial-gradient(circle, rgba(26,111,255,0.12) 0%, transparent 70%); }
+    .promo-big-box::after { content: ''; position: absolute; bottom: -40px; left: -40px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(240,180,41,0.05) 0%, transparent 70%); }
+    .promo-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(240,180,41,0.12); border: 1px solid rgba(240,180,41,0.3); color: var(--accent-gold); font-size: 0.7rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; padding: 4px 12px; border-radius: 20px; margin-bottom: 1rem; }
+    .promo-big-box h2 { font-family: 'Rajdhani', sans-serif; font-size: 2rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.4rem; }
+    .promo-big-box p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; max-width: 400px; }
+    .promo-code-area { display: flex; flex-direction: column; gap: 0.75rem; align-items: center; z-index: 1; position: relative; }
+    .big-code-display { background: rgba(26,111,255,0.08); border: 2px dashed var(--blue-mid); border-radius: 14px; padding: 1.2rem 2rem; text-align: center; cursor: pointer; transition: all 0.2s; min-width: 230px; }
+    .big-code-display:hover { border-color: var(--blue-bright); background: rgba(26,111,255,0.14); }
+    .big-code-label { font-size: 0.65rem; color: var(--text-muted); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
+    .big-code-value { font-family: 'Rajdhani', sans-serif; font-size: 2rem; font-weight: 700; color: var(--blue-bright); letter-spacing: 4px; }
+    .copy-code-btn { background: var(--blue-bright); color: white; border: none; border-radius: 10px; padding: 10px 28px; font-family: 'Exo 2', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.2s; width: 100%; }
+    .copy-code-btn:hover { background: var(--blue-glow); }
+    .play-link { display: block; text-align: center; background: transparent; color: var(--blue-bright); border: 1px solid var(--blue-mid); border-radius: 10px; padding: 9px 28px; font-family: 'Exo 2', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; cursor: pointer; transition: all 0.2s; width: 100%; }
+    .play-link:hover { background: rgba(26,111,255,0.1); }
+    .benefits-heading { font-size: 0.72rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 1.25rem; }
+    .benefit-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem; }
+    .benefit-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 1.75rem 1.4rem; text-align: center; transition: all 0.3s; position: relative; overflow: hidden; }
+    .benefit-box::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 16px 16px 0 0; opacity: 0; transition: opacity 0.3s; }
+    .benefit-box:hover { transform: translateY(-5px); border-color: var(--border-bright); }
+    .benefit-box:hover::before { opacity: 1; }
+    .benefit-box.gold::before { background: linear-gradient(90deg, transparent, var(--accent-gold), transparent); }
+    .benefit-box.blue::before { background: linear-gradient(90deg, transparent, var(--blue-bright), transparent); }
+    .benefit-box.green::before { background: linear-gradient(90deg, transparent, var(--green), transparent); }
+    .benefit-box.red::before { background: linear-gradient(90deg, transparent, #c084fc, transparent); }
+    .benefit-icon { font-size: 2.25rem; margin-bottom: 1rem; display: block; }
+    .benefit-box h3 { font-family: 'Rajdhani', sans-serif; font-size: 1.1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem; }
+    .benefit-box p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6; }
+    .benefit-tag { display: inline-block; margin-top: 0.75rem; padding: 3px 10px; border-radius: 20px; font-size: 0.68rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+    .tag-gold { background: rgba(240,180,41,0.12); color: var(--accent-gold); border: 1px solid rgba(240,180,41,0.25); }
+    .tag-blue { background: rgba(26,111,255,0.12); color: var(--blue-bright); border: 1px solid rgba(26,111,255,0.25); }
+    .tag-green { background: rgba(0,230,118,0.1); color: var(--green); border: 1px solid rgba(0,230,118,0.25); }
+    .tag-purple { background: rgba(192,132,252,0.1); color: #c084fc; border: 1px solid rgba(192,132,252,0.25); }
+    .refer-box { background: linear-gradient(135deg, var(--bg-card2) 0%, var(--bg-card) 100%); border: 1px solid var(--border-bright); border-radius: 16px; padding: 2rem 2.5rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+    .refer-box h3 { font-family: 'Rajdhani', sans-serif; font-size: 1.4rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.4rem; }
+    .refer-box p { color: var(--text-secondary); font-size: 0.9rem; }
+
+    .faq-page-wrap { max-width: 760px; margin: 0 auto; padding: 5rem 2rem; }
+    .faq-page-wrap .section-label, .faq-page-wrap .section-title, .faq-page-wrap .section-sub { text-align: center; }
+    .faq-page-wrap .section-sub { margin-left: auto; margin-right: auto; max-width: 500px; color: var(--text-secondary); font-size: 1rem; line-height: 1.7; margin-bottom: 3rem; }
+    .faq-list { text-align: left; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-question { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 0; cursor: pointer; font-weight: 600; font-size: 1rem; transition: color 0.2s; }
+    .faq-question:hover { color: var(--blue-bright); }
+    .faq-chevron { width: 20px; height: 20px; transition: transform 0.3s; flex-shrink: 0; }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7; }
+    .faq-item.open .faq-answer { max-height: 200px; }
+    .faq-answer p { padding-bottom: 1.25rem; }
+
+    .toast { position: fixed; bottom: 5rem; left: 50%; transform: translateX(-50%) translateY(80px); background: var(--bg-card2); border: 1px solid var(--blue-mid); border-radius: 10px; padding: 12px 20px; font-size: 0.875rem; font-weight: 600; color: var(--text-primary); z-index: 9999; display: flex; align-items: center; gap: 8px; opacity: 0; transition: all 0.3s; white-space: nowrap; }
+    .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+    .toast-icon { color: var(--green); font-size: 1.1rem; }
+
+    footer { position: relative; z-index: 1; background: var(--bg-deep); border-top: 1px solid var(--border); padding: 3rem 2rem 2rem; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; padding-bottom: 2.5rem; border-bottom: 1px solid var(--border); margin-bottom: 2rem; }
+    .footer-logo-text { font-family: 'Rajdhani', sans-serif; font-size: 1.4rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text-primary); margin-bottom: 0.75rem; }
+    .footer-logo-text span { color: var(--blue-bright); }
+    .footer-tagline { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.25rem; }
+    .social-links { display: flex; gap: 0.75rem; }
+    .social-btn { width: 38px; height: 38px; border-radius: 8px; background: var(--bg-card); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; text-decoration: none; color: var(--text-secondary); transition: all 0.2s; }
+    .social-btn.discord:hover { border-color: #5865f2; color: #5865f2; background: rgba(88,101,242,0.08); }
+    .social-btn.twitter:hover { border-color: #1d9bf0; color: #1d9bf0; background: rgba(29,155,240,0.08); }
+    .social-btn.kick:hover { border-color: #53fc18; color: #53fc18; background: rgba(83,252,24,0.08); }
+    .footer-col h4 { font-family: 'Rajdhani', sans-serif; font-size: 0.95rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-primary); margin-bottom: 1rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.5rem; }
+    .footer-col ul a { font-size: 0.875rem; color: var(--text-secondary); text-decoration: none; transition: color 0.2s; cursor: pointer; }
+    .footer-col ul a:hover { color: var(--blue-bright); }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .footer-legal { font-size: 0.78rem; color: var(--text-muted); }
+    .age-badge { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 6px; border: 1px solid var(--text-muted); font-size: 0.7rem; font-weight: 800; color: var(--text-muted); }
+    .footer-disclaimer { font-size: 0.72rem; color: var(--text-muted); max-width: 500px; line-height: 1.5; }
+
+    @media (max-width: 1024px) { .benefit-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 960px) { .live-grid { grid-template-columns: 1fr; } .footer-top { grid-template-columns: 1fr 1fr; } .promo-big-box { grid-template-columns: 1fr; text-align: center; } .promo-code-area { width: 100%; max-width: 300px; margin: 0 auto; } .promo-big-box p { max-width: 100%; } }
+    @media (max-width: 640px) { nav { padding: 0 1rem; } .nav-links { display: none; } .footer-top { grid-template-columns: 1fr; } .refer-box { flex-direction: column; text-align: center; } .benefit-grid { grid-template-columns: 1fr 1fr; gap: 0.75rem; } .kick-float { bottom: 1rem; right: 1rem; } .kick-float-info { display: none; } }
+    @media (max-width: 400px) { .benefit-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<!-- FLOATING KICK WIDGET -->
+<div class="kick-float">
+  <a href="https://kick.com/zillas" target="_blank" class="kick-float-btn">
+    <div class="kick-float-icon">K</div>
+    <div class="kick-float-info">
+      <span class="kick-float-label">Watch on Kick</span>
+      <span class="kick-float-name">zillas</span>
+    </div>
+    <span class="kick-float-offline-dot" id="kick-float-dot"></span>
+    <span class="kick-float-status is-offline" id="kick-float-status">Offline</span>
+  </a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" onclick="showPage('home')">
+    <svg class="nav-logo-icon" viewBox="0 0 38 38" fill="none">
+      <rect width="38" height="38" rx="9" fill="#0a1640"/>
+      <path d="M8 19C8 13 13 8 19 8C23 8 26.5 10 28 13.5" stroke="#1a6fff" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M30 19C30 25 25 30 19 30C15 30 11.5 28 10 24.5" stroke="#1a6fff" stroke-width="2.5" stroke-linecap="round"/>
+      <circle cx="19" cy="19" r="4" fill="#1a6fff"/>
+      <path d="M14 19L19 14L24 19L19 24L14 19Z" fill="none" stroke="#2e8fff" stroke-width="1.5"/>
+    </svg>
+    <span class="nav-logo-text">Code<span>Zillas</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
+    <li><a onclick="showPage('rewards')" id="nav-rewards">Rewards</a></li>
+    <li><a onclick="showPage('faq')" id="nav-faq">FAQ</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="https://kick.com/zillas" target="_blank" id="stream-badge" class="offline-badge">
+      <span id="nav-dot" style="display:none; width:7px; height:7px; border-radius:50%; background:#53fc18; animation:pulse-green 1.4s infinite;"></span>
+      <span id="badge-text">● Offline</span>
+    </a>
+    <button onclick="showPage('rewards')" class="btn-primary" style="padding:8px 20px; font-size:0.85rem; border:none;">Get Code</button>
+  </div>
+</nav>
+
+<!-- HOME PAGE -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <p class="hero-eyebrow">⚡ Exclusive Gambling Codes & Rewards</p>
+    <h1 class="hero-title">Gamble Smarter<br><span class="line2">With Code Zillas</span></h1>
+    <p class="hero-sub">Use our exclusive codes on Stake.us. Earn rewards and watch us go live on Kick.</p>
+    <div class="hero-actions">
+      <a href="https://kick.com/zillas" target="_blank" class="btn-outline">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16"/></svg>
+        Watch Live
+      </a>
+    </div>
+  </div>
+
+  <div class="live-section" id="live">
+    <div class="inner">
+      <p class="section-label">🔴 Live on Kick</p>
+      <h2 class="section-title" style="margin-bottom:2rem;">Watch Live</h2>
+      <div class="live-grid">
+        <div class="stream-box">
+          <div class="stream-header">
+            <div class="stream-title-row">
+              <div class="kick-icon">K</div>
+              <span class="stream-name">zillas</span>
+            </div>
+            <span id="stream-status-pill" class="offline-pill">CHECKING…</span>
+          </div>
+
+          <div id="live-embed" style="display:none;">
+            <div class="stream-embed">
+              <iframe id="kick-iframe" src="https://player.kick.com/zillas?autoplay=true&muted=true" allowfullscreen allow="autoplay; fullscreen"></iframe>
+            </div>
+          </div>
+
+          <div id="offline-embed" class="offline-screen">
+            <div class="offline-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1a6fff" stroke-width="1.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+            </div>
+            <h3>Currently Offline</h3>
+            <p>Follow on Kick to get notified when we go live!</p>
+            <a href="https://kick.com/zillas" target="_blank" class="kick-follow-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17 1H7C5.9 1 5 1.9 5 3v18l7-3 7 3V3c0-1.1-.9-2-2-2z"/></svg>
+              Follow on Kick
+            </a>
+          </div>
+
+          <div class="stream-footer">
+            <a href="https://kick.com/zillas" target="_blank" style="color:var(--blue-bright); text-decoration:none; font-weight:700; font-size:0.8rem;">kick.com/zillas →</a>
+            <div class="viewer-count" id="viewer-row" style="display:none;">
+              <span class="viewer-dot"></span>
+              <span id="viewer-count">0 viewers</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SIDEBAR -->
+        <div class="stream-sidebar">
+          <div class="side-card">
+            <div class="side-card-title">Stream Schedule</div>
+            <div class="schedule-item"><span class="schedule-day">Monday</span><span class="schedule-time">8 PM PHT</span></div>
+            <div class="schedule-item"><span class="schedule-day">Wednesday</span><span class="schedule-time">9 PM PHT</span></div>
+            <div class="schedule-item"><span class="schedule-day">Friday</span><span class="schedule-time">8 PM PHT</span></div>
+            <div class="schedule-item"><span class="schedule-day">Saturday</span><span class="schedule-time">7 PM PHT</span></div>
+            <div class="schedule-item" style="border:none;"><span class="schedule-day">Sunday</span><span class="schedule-time">6 PM PHT</span></div>
+          </div>
+          <div class="side-card">
+            <div class="side-card-title">💬 Join the Community</div>
+            <div style="display:flex; flex-direction:column; gap:0.5rem;">
+              <a href="https://discord.gg/Rx7rc4bTa" target="_blank" style="display:flex; align-items:center; gap:10px; padding:10px 12px; background:rgba(88,101,242,0.1); border:1px solid rgba(88,101,242,0.25); border-radius:8px; text-decoration:none; color:var(--text-primary); font-size:0.875rem; font-weight:600; transition:all 0.2s;" onmouseover="this.style.background='rgba(88,101,242,0.2)'" onmouseout="this.style.background='rgba(88,101,242,0.1)'">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="#5865f2"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.1 18.08.11 18.1.128 18.114a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+                Discord Community
+              </a>
+              <a href="https://x.com/zill4s?s=20" target="_blank" style="display:flex; align-items:center; gap:10px; padding:10px 12px; background:rgba(29,155,240,0.08); border:1px solid rgba(29,155,240,0.2); border-radius:8px; text-decoration:none; color:var(--text-primary); font-size:0.875rem; font-weight:600; transition:all 0.2s;" onmouseover="this.style.background='rgba(29,155,240,0.15)'" onmouseout="this.style.background='rgba(29,155,240,0.08)'">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="#1d9bf0"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                Follow on X
+              </a>
+              <a href="https://kick.com/zillas" target="_blank" style="display:flex; align-items:center; gap:10px; padding:10px 12px; background:rgba(83,252,24,0.07); border:1px solid rgba(83,252,24,0.2); border-radius:8px; text-decoration:none; color:var(--text-primary); font-size:0.875rem; font-weight:600; transition:all 0.2s;" onmouseover="this.style.background='rgba(83,252,24,0.14)'" onmouseout="this.style.background='rgba(83,252,24,0.07)'">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="#53fc18"><rect x="2" y="2" width="20" height="20" rx="4"/><text x="6" y="16" font-size="11" font-weight="900" fill="#000">K</text></svg>
+                Watch on Kick
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- REWARDS PAGE -->
+<div class="page" id="page-rewards">
+  <div class="rewards-hero">
+    <div class="rewards-hero-inner">
+      <p class="section-label" style="text-align:center;">🏆 Exclusive Perks</p>
+      <h1>Rewards <span>Program</span></h1>
+      <p>Sign up on Stake.us using our exclusive code and unlock bonuses, cashback, and more.</p>
+    </div>
+  </div>
+  <div class="rewards-main">
+    <div class="promo-big-box">
+      <div>
+        <div class="promo-badge">⭐ Stake.us Partner</div>
+        <h2>Exclusive Promo Code</h2>
+        <p>Enter at sign-up or deposit on Stake.us to unlock your exclusive welcome bonus and ongoing perks.</p>
+      </div>
+      <div class="promo-code-area">
+        <div class="big-code-display" onclick="copyCode('ZILLAS')">
+          <div class="big-code-label">Use Code</div>
+          <div class="big-code-value">ZILLAS</div>
+        </div>
+        <button class="copy-code-btn" id="big-copy-btn" onclick="copyCode('ZILLAS')">Copy Code</button>
+        <a href="https://stake.us/?c=ZILLAS" target="_blank" class="play-link">Play at Stake.us →</a>
+      </div>
+    </div>
+    <p class="benefits-heading">✨ WHAT YOU GET</p>
+    <div class="benefit-grid">
+      <div class="benefit-box gold"><span class="benefit-icon">💰</span><h3>Cashback Rewards</h3><p>Earn up to 15% weekly cashback on your wagers when you use our exclusive codes.</p><span class="benefit-tag tag-gold">Up to 15% Weekly</span></div>
+      <div class="benefit-box blue"><span class="benefit-icon">🎁</span><h3>Bonus Drops</h3><p>Random bonus drops during live streams. Stay active in chat to qualify for instant giveaways.</p><span class="benefit-tag tag-blue">Stream Exclusive</span></div>
+      <div class="benefit-box green"><span class="benefit-icon">📈</span><h3>Rakeback</h3><p>Automatic rakeback sent to your account weekly. The more you play, the more you earn back.</p><span class="benefit-tag tag-green">Auto Weekly</span></div>
+      <div class="benefit-box red"><span class="benefit-icon">👑</span><h3>VIP Access</h3><p>Top community members get invited to our VIP group with exclusive codes and private giveaways.</p><span class="benefit-tag tag-purple">Invite Only</span></div>
+    </div>
+    <div class="refer-box">
+      <div><h3>Refer a Friend</h3><p>Earn $25 for every friend that signs up and deposits using my code.</p></div>
+      <a href="https://kick.com/zillas" target="_blank" class="btn-primary">Join the Community</a>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ PAGE -->
+<div class="page" id="page-faq">
+  <div class="faq-page-wrap">
+    <p class="section-label" style="text-align:center;">❓ Questions</p>
+    <h2 class="section-title">FAQ</h2>
+    <p class="section-sub">Everything you need to know about Code Zillas, our code, and Stake.us.</p>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">How do I use the Code Zillas promo code?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="faq-answer"><p>Go to Stake.us, create an account or log in, navigate to the promotions or deposit section, and enter <strong>ZILLAS</strong> in the promo code field before depositing.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">What is Stake.us?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="faq-answer"><p>Stake.us is a social casino platform available in the United States. It offers a wide variety of casino-style games using virtual currency, with opportunities to earn real prizes through sweepstakes mechanics.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">When does Code Zillas go live on Kick?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="faq-answer"><p>We stream Monday, Wednesday, Friday at 8–9 PM PHT and on weekends. Follow us at kick.com/zillas and join the Discord to get notified whenever we go live!</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">How do I earn rewards?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="faq-answer"><p>Sign up on Stake.us using code <strong>ZILLAS</strong>, then start playing. Cashback and rakeback are calculated automatically. Bonus drops happen during live streams — stay active in chat to qualify.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">Is Stake.us safe and legitimate?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="faq-answer"><p>Stake.us is a licensed social casino with a strong reputation. It is provably fair and has processed millions in transactions. Always gamble responsibly and only play within your means.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">What is the minimum age to participate?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="faq-answer"><p>You must be 18 years or older (21 in some jurisdictions) to participate. Please ensure gaming is legal in your region.</p></div>
+      </div>
+      <div class="faq-item" style="border:none;">
+        <div class="faq-question" onclick="toggleFaq(this)">How do I contact Code Zillas?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="faq-answer"><p>The best way to reach us is through our Discord server or by catching us live on Kick at kick.com/zillas.</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo-text">Code<span>Zillas</span></div>
+        <p class="footer-tagline">Your go-to source for exclusive Stake.us codes, rewards, and live gambling content on Kick.</p>
+        <div class="social-links">
+          <a href="https://discord.gg/Rx7rc4bTa" target="_blank" class="social-btn discord" title="Discord"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.1 18.08.11 18.1.128 18.114a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg></a>
+          <a href="https://x.com/zill4s?s=20" target="_blank" class="social-btn twitter" title="X / Twitter"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="https://kick.com/zillas" target="_blank" class="social-btn kick" title="Kick"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="2" width="20" height="20" rx="4"/><text x="6" y="16" font-size="11" font-weight="900" fill="#000">K</text></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a onclick="showPage('home')">Home</a></li>
+          <li><a onclick="showPage('rewards')">Rewards & Codes</a></li>
+          <li><a onclick="showPage('faq')">FAQ</a></li>
+          <li><a href="https://kick.com/zillas" target="_blank">Live Stream</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Responsible Gambling</a></li>
+          <li><a href="#">Affiliate Disclosure</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div style="display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap;">
+        <span class="age-badge">18+</span>
+        <span class="footer-legal">© 2025 Code Zillas · All rights reserved.</span>
+      </div>
+      <p class="footer-disclaimer">Gambling can be addictive. Play responsibly. This site contains affiliate links — we may earn a commission when you use our codes at no extra cost to you. Must be 18+ to participate.</p>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"><span class="toast-icon">✓</span><span id="toast-msg">Code copied!</span></div>
+
+<script>
+  // ── CHANNEL CONFIG ──
+  const KICK_CHANNEL = 'zillas'; // your channel
+
+  // ── NAV ──
+  function showPage(name) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById('page-' + name).classList.add('active');
+    const el = document.getElementById('nav-' + name);
+    if (el) el.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ── COPY CODE ──
+  function copyCode(code) {
+    navigator.clipboard.writeText(code).then(() => {
+      const btn = document.getElementById('big-copy-btn');
+      if (btn) { btn.textContent = '✓ Copied!'; btn.style.background = '#00e676'; btn.style.color = '#000'; setTimeout(() => { btn.textContent = 'Copy Code'; btn.style.background = ''; btn.style.color = ''; }, 2000); }
+      showToast('Code ' + code + ' copied!');
+    }).catch(() => showToast('Copy manually: ' + code));
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    document.getElementById('toast-msg').textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+
+  // ── FAQ ──
+  function toggleFaq(el) { el.parentElement.classList.toggle('open'); }
+
+  // ── KICK STATUS — calls our own Vercel API backend ──
+  async function checkKickStatus() {
+    const badge       = document.getElementById('stream-badge');
+    const dot         = document.getElementById('nav-dot');
+    const badgeText   = document.getElementById('badge-text');
+    const pill        = document.getElementById('stream-status-pill');
+    const liveEmbed   = document.getElementById('live-embed');
+    const offlineEmbed= document.getElementById('offline-embed');
+    const viewerRow   = document.getElementById('viewer-row');
+    const floatDot    = document.getElementById('kick-float-dot');
+    const floatStatus = document.getElementById('kick-float-status');
+
+    try {
+      const res  = await fetch(`/api/kick-status?channel=${KICK_CHANNEL}`);
+      const data = await res.json();
+      const isLive  = data.is_live;
+      const viewers = data.viewer_count || 0;
+
+      if (isLive) {
+        badge.className = 'live-badge';
+        dot.style.display = 'inline-block';
+        badgeText.textContent = 'LIVE';
+        pill.className = 'live-pill'; pill.textContent = 'LIVE';
+        liveEmbed.style.display = 'block';
+        offlineEmbed.style.display = 'none';
+        viewerRow.style.display = 'flex';
+        document.getElementById('viewer-count').textContent = viewers.toLocaleString() + ' viewers';
+        floatDot.className = 'kick-float-live-dot';
+        floatStatus.textContent = 'LIVE'; floatStatus.className = 'kick-float-status';
+      } else {
+        badge.className = 'offline-badge';
+        dot.style.display = 'none';
+        badgeText.textContent = '● Offline';
+        pill.className = 'offline-pill'; pill.textContent = 'OFFLINE';
+        liveEmbed.style.display = 'none';
+        offlineEmbed.style.display = 'flex';
+        viewerRow.style.display = 'none';
+        floatDot.className = 'kick-float-offline-dot';
+        floatStatus.textContent = 'Offline'; floatStatus.className = 'kick-float-status is-offline';
+      }
+    } catch (e) {
+      // fallback — just show offline screen quietly
+      pill.className = 'offline-pill'; pill.textContent = 'OFFLINE';
+      liveEmbed.style.display = 'none';
+      offlineEmbed.style.display = 'flex';
+    }
+  }
+
+  checkKickStatus();
+  setInterval(checkKickStatus, 60000);
+</script>
+</body>
+</html>
