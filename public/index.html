@@ -655,7 +655,7 @@
         <span id="hero-stream-pill" style="font-size:.68rem;font-weight:800;letter-spacing:1.5px;padding:3px 10px;border-radius:20px;">CHECKING…</span>
       </div>
       <div id="hero-live-embed" style="display:none;">
-        <div class="stream-embed-hero"><iframe src="https://player.kick.com/zillas" allowfullscreen allow="autoplay; fullscreen"></iframe></div>
+        <div class="stream-embed-hero"><iframe src="https://player.kick.com/zillas?autoplay=true&muted=true" allowfullscreen allow="autoplay; fullscreen"></iframe></div>
       </div>
       <div id="hero-offline-embed" class="offline-screen-hero" style="display:none;">
         <div style="width:50px;height:50px;background:rgba(26,111,255,.1);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;">
@@ -1076,8 +1076,7 @@ function checkKickStatus(){
     document.getElementById('kick-float-status').className=live?'kick-float-status':'kick-float-status is-offline';
   }).catch(function(){
     document.getElementById('hero-checking-embed').style.display='none';
-    document.getElementById('hero-live-embed').style.display='none';
-    document.getElementById('hero-offline-embed').style.display='flex';
+    document.getElementById('hero-live-embed').style.display='block';
     document.getElementById('hero-stream-pill').textContent='UNKNOWN';
   });
 }
