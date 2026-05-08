@@ -25,19 +25,20 @@
     body{font-family:'Exo 2',sans-serif;background:#03050f;color:var(--text-primary);min-height:100vh;overflow-x:hidden}
 
     /* NAV */
-    nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(3,5,15,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 2rem;height:70px}
-    .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;cursor:none;justify-self:start}
+    nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(3,5,15,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:center;padding:0;height:70px}
+    .nav-inner{width:100%;max-width:1100px;margin:0 auto;padding:0 1.5rem;display:flex;align-items:center;gap:0}
+    .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;cursor:none;flex-shrink:0;margin-right:1.5rem}
     .nav-logo-text{font-family:'Rajdhani',sans-serif;font-size:1.5rem;font-weight:700;color:var(--text-primary);letter-spacing:2px;text-transform:uppercase}
     .nav-logo-text span{color:var(--blue-bright)}
     /* Centered nav links */
-    .nav-links{display:flex;align-items:center;gap:.25rem;list-style:none;justify-self:center}
+    .nav-links{display:flex;align-items:center;gap:.1rem;list-style:none;flex:1;justify-content:center}
     .nav-links a{display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:6px;text-decoration:none;color:var(--text-secondary);font-size:.875rem;font-weight:600;letter-spacing:.5px;text-transform:uppercase;transition:all .2s;cursor:none;background:none;border:none;font-family:'Exo 2',sans-serif}
     .nav-links a:hover,.nav-links a.active{color:var(--text-primary);background:rgba(255,255,255,.06)}
     .nav-links a.active{color:var(--text-primary)}
     .nav-links a svg{opacity:.7;flex-shrink:0}
     .nav-links a:hover svg,.nav-links a.active svg{opacity:1}
     /* Right side: social icons */
-    .nav-right{display:flex;align-items:center;gap:.5rem;justify-self:end}
+    .nav-right{display:flex;align-items:center;gap:.4rem;flex-shrink:0;margin-left:1.5rem}
     .nav-social-btn{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;text-decoration:none;color:var(--text-secondary);transition:all .2s;cursor:none;flex-shrink:0}
     .nav-social-btn:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);color:var(--text-primary);transform:translateY(-1px)}
     .nav-social-btn.kick:hover{border-color:rgba(83,252,24,.4);color:#53fc18;background:rgba(83,252,24,.08)}
@@ -291,6 +292,7 @@
 </div>
 
 <nav>
+  <div class="nav-inner">
   <a class="nav-logo" href="#" onclick="showPage('home');return false;">
     <span class="nav-logo-text"><span>Zillas</span></span>
   </a>
@@ -305,6 +307,7 @@
     <a href="https://kick.com/zillas" target="_blank" class="nav-social-btn kick" title="Watch on Kick"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="2" width="20" height="20" rx="4"/><text x="6" y="16" font-size="11" font-weight="900" fill="#000">K</text></svg></a>
     <a href="https://discord.gg/Rx7rc4bTa" target="_blank" class="nav-social-btn discord" title="Join Discord"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.1 18.08.11 18.1.128 18.114a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg></a>
     <a href="https://x.com/zill4s?s=20" target="_blank" class="nav-social-btn twitter" title="Follow on X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+  </div>
   </div>
 </nav>
 
