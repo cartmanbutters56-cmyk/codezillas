@@ -1281,6 +1281,97 @@
     @media (max-width: 400px) {
       .benefit-grid { grid-template-columns: 1fr; }
     }
+
+    /* ── HAMBURGER MENU ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 40px;
+      height: 40px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      padding: 8px;
+      z-index: 1100;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: var(--text-primary);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 70px;
+      left: 0; right: 0;
+      background: rgba(3,5,15,0.98);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      z-index: 999;
+      flex-direction: column;
+      padding: 1rem;
+      gap: 0.25rem;
+    }
+
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu a {
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .mobile-menu a:hover, .mobile-menu a.active {
+      color: var(--blue-bright);
+      background: rgba(26,111,255,0.08);
+      border-color: rgba(26,111,255,0.2);
+    }
+
+    .mobile-menu-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 0.5rem 0;
+    }
+
+    .mobile-get-code {
+      background: var(--blue-bright) !important;
+      color: white !important;
+      border-color: transparent !important;
+      justify-content: center;
+      margin-top: 0.25rem;
+      font-weight: 700 !important;
+    }
+
+    .mobile-get-code:hover { background: var(--blue-glow) !important; }
+
+    @media (max-width: 640px) {
+      .hamburger { display: flex; }
+      .nav-links { display: none !important; }
+      .nav-right .live-badge, .nav-right .offline-badge { display: none; }
+      .nav-right .btn-primary { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -1308,7 +1399,7 @@
       <circle cx="19" cy="19" r="4" fill="#1a6fff"/>
       <path d="M14 19L19 14L24 19L19 24L14 19Z" fill="none" stroke="#2e8fff" stroke-width="1.5"/>
     </svg>
-    <span class="nav-logo-text">Code<span>Zillas</span></span>
+    <span class="nav-logo-text"><span>Code</span>Zillas</span>
   </a>
 
   <ul class="nav-links">
@@ -1318,6 +1409,7 @@
     <li><a onclick="showPage('faq')" id="nav-faq">FAQ</a></li>
   </ul>
 
+  <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
   <div class="nav-right">
     <a href="https://kick.com/zillas" target="_blank" id="stream-badge" class="offline-badge">
       <span id="nav-dot" style="display:none; width:7px; height:7px; border-radius:50%; background:#53fc18; animation: pulse-green 1.4s infinite;"></span>
@@ -1326,6 +1418,18 @@
     <button onclick="showPage('rewards')" class="btn-primary" style="padding: 8px 20px; font-size: 0.85rem; border:none;">Get Code</button>
   </div>
 </nav>
+
+<!-- ── MOBILE MENU ── -->
+<div class="mobile-menu" id="mobile-menu">
+  <a onclick="showPage('home'); closeMobileMenu()" id="mob-home" class="active">🏠 Home</a>
+  <a onclick="showPage('giveaways'); closeMobileMenu()" id="mob-giveaways">🎉 Giveaways</a>
+  <a onclick="showPage('rewards'); closeMobileMenu()" id="mob-rewards">🏆 Rewards</a>
+  <a onclick="showPage('faq'); closeMobileMenu()" id="mob-faq">❓ FAQ</a>
+  <div class="mobile-menu-divider"></div>
+  <a href="https://kick.com/zillas" target="_blank" onclick="closeMobileMenu()" style="color:#53fc18;">📺 Watch on Kick</a>
+  <a onclick="showPage('rewards'); closeMobileMenu()" class="mobile-get-code">🎁 Get Code — ZILLAS</a>
+</div>
+
 
 <!-- ═══════════════════════════ HOME PAGE ═══════════════════════════ -->
 <div class="page active" id="page-home">
@@ -1720,7 +1824,7 @@
   <div class="footer-inner">
     <div class="footer-top">
       <div>
-        <div class="footer-logo-text">Code<span>Zillas</span></div>
+        <div class="footer-logo-text"><span>Code</span>Zillas</div>
         <p class="footer-tagline">Your go-to source for exclusive Stake.us codes, rewards, and live gambling content on Kick.</p>
         <div class="social-links">
           <a href="https://discord.gg/Rx7rc4bTa" target="_blank" class="social-btn discord" title="Discord">
@@ -1949,6 +2053,29 @@
 
   checkKickStatus();
   setInterval(checkKickStatus, 60000);
+
+  /* ── MOBILE MENU ── */
+  function toggleMobileMenu() {
+    const menu = document.getElementById('mobile-menu');
+    const btn  = document.getElementById('hamburger');
+    menu.classList.toggle('open');
+    btn.classList.toggle('open');
+  }
+
+  function closeMobileMenu() {
+    document.getElementById('mobile-menu').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
+  }
+
+  // Update mobile active states when page changes
+  const _origShowPage = showPage;
+  function showPage(name) {
+    _origShowPage(name);
+    document.querySelectorAll('.mobile-menu a').forEach(a => a.classList.remove('active'));
+    const mobEl = document.getElementById('mob-' + name);
+    if (mobEl) mobEl.classList.add('active');
+  }
+
 </script>
 </body>
 </html>
