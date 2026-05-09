@@ -770,6 +770,10 @@ footer{position:relative;z-index:1;background:var(--deep);border-top:1px solid v
                 <div class="admin-field-label">Bet ($)</div>
                 <input class="admin-input" type="number" id="admin-slot-bet" placeholder="5.00" step="0.01"/>
               </div>
+              <div class="admin-field" style="flex:0 0 130px;">
+                <div class="admin-field-label">Called By</div>
+                <input class="admin-input" type="text" id="admin-slot-called-by" placeholder="e.g. John"/>
+              </div>
               <div class="admin-field admin-field-add">
                 <div class="admin-field-label">&nbsp;</div>
                 <button class="btn btn-primary btn-sm" onclick="adminAddSlot()" style="height:38px;white-space:nowrap;padding:0 20px;">+ Add Slot</button>
@@ -1088,8 +1092,8 @@ async function fetchActiveHunt() {
     guessesOpen: data.guesses_open,
     startedAt: data.started_at,
     slots: (slots || []).map(function(s) {
-      return { name: s.name, provider: s.provider, bet: s.bet, win: s.win, opened: s.opened, dbId: s.id };
-    })
+  return { name: s.name, provider: s.provider, bet: s.bet, win: s.win, opened: s.opened, calledBy: s.called_by, dbId: s.id };
+})
   };
 
   var { data: guesses } = await _supabase
@@ -1107,7 +1111,40 @@ async function fetchArchive() {
     .select('*')
     .not('ended_at', 'is', null)
     .order('id', { ascending: false });
-  appState.huntArchive = data || [];
+
+  if (!data) { appState.huntArchive = []; return; }
+
+  // Fetch slots and guesses for each archived hunt
+  var enriched = await Promise.all(data.map(async function(hunt) {
+    var { data: slots } = await _supabase
+      .from('slots')
+      .select('*')
+      .eq('hunt_id', hunt.id)
+      .order('position', { ascending: true });
+
+    var { data: guesses } = await _supabase
+      .from('guesses')
+      .select('*')
+      .eq('hunt_id', hunt.id);
+
+    appState.guesses[hunt.id] = (guesses || []).map(function(g) {
+      return { userId: g.user_id, username: g.username, avatar: g.avatar, amount: g.amount };
+    });
+
+    return {
+      id: hunt.id,
+      startBal: hunt.start_bal,
+      endBal: hunt.end_bal,
+      guessesOpen: hunt.guesses_open,
+      startedAt: hunt.started_at,
+      endedAt: hunt.ended_at,
+      slots: (slots || []).map(function(s) {
+        return { name: s.name, provider: s.provider, bet: s.bet, win: s.win, opened: s.opened, calledBy: s.called_by, dbId: s.id };
+      })
+    };
+  }));
+
+  appState.huntArchive = enriched;
 }
 // ════════════════════════════════════════════════════════
 // REAL-TIME SYNC
@@ -1242,6 +1279,7 @@ function buildSlotCard(slot,idx,isAdmin){
     +'</div>'
     +'<div class="slot-card-body">'
       +'<div class="slot-card-name" title="'+escHtml(slot.name)+'">'+escHtml(slot.name)+'</div>'
++(slot.calledBy ? '<div style="font-size:.62rem;color:var(--text3);font-weight:600;margin-bottom:.35rem;">📣 Called by <strong style="color:var(--text2);">'+escHtml(slot.calledBy)+'</strong></div>' : '')
       +'<div class="slot-card-meta">'
         +'<span class="slot-meta-pill smp-num">#'+(idx+1)+'</span>'
         +'<span class="slot-meta-pill smp-bet">'+fmt(slot.bet||0)+' bet</span>'
@@ -1255,14 +1293,39 @@ function buildSlotCard(slot,idx,isAdmin){
 // ════════════════════════════════════════════════════════
 // HUNT LIVE RENDER
 // ════════════════════════════════════════════════════════
-function calcStats(hunt){
-  var slots=hunt.slots||[];
-  var opened=slots.filter(function(s){return s.opened;});
-  var totalWin=opened.reduce(function(a,s){return a+(s.win||0);},0);
-  var totalBet=slots.reduce(function(a,s){return a+(s.bet||0);},0);
-  var avgMulti=opened.length>0?opened.reduce(function(a,s){return a+(s.win&&s.bet?(s.win/s.bet):0);},0)/opened.length:0;
-  var reqMulti=totalBet>0?hunt.startBal/totalBet:0;
-  return{opened:opened.length,total:slots.length,totalWin:totalWin,currentBal:(hunt.endBal!=null)?hunt.endBal:totalWin,avgMulti:avgMulti,reqMulti:reqMulti,totalBet:totalBet};
+function calcStats(hunt) {
+  var slots = hunt.slots || [];
+  var opened = slots.filter(function(s) { return s.opened; });
+  var pending = slots.filter(function(s) { return !s.opened; });
+
+  var totalWin = opened.reduce(function(a, s) { return a + (s.win || 0); }, 0);
+  var totalBet = slots.reduce(function(a, s) { return a + (s.bet || 0); }, 0);
+  var openedBet = opened.reduce(function(a, s) { return a + (s.bet || 0); }, 0);
+  var pendingBet = pending.reduce(function(a, s) { return a + (s.bet || 0); }, 0);
+
+  var avgMulti = opened.length > 0
+    ? opened.reduce(function(a, s) { return a + (s.win && s.bet ? (s.win / s.bet) : 0); }, 0) / opened.length
+    : 0;
+
+  // Required multi = what you need on remaining slots to break even
+  var reqMulti = pendingBet > 0
+    ? Math.max(0, (hunt.startBal - totalWin)) / pendingBet
+    : 0;
+
+  // Current balance = start - total bet spent + total wins so far
+  var currentBal = hunt.endBal != null
+    ? hunt.endBal
+    : (hunt.startBal - totalBet + totalWin);
+
+  return {
+    opened: opened.length,
+    total: slots.length,
+    totalWin: totalWin,
+    totalBet: totalBet,
+    currentBal: currentBal,
+    avgMulti: avgMulti,
+    reqMulti: reqMulti
+  };
 }
 function fmt(n){return'$'+parseFloat(n||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
 function fmtM(n){return parseFloat(n).toFixed(2)+'x';}
@@ -1426,14 +1489,19 @@ async function adminAddSlot() {
   var detected = detectProvider(name);
   var position = appState.activeHunt.slots.length;
 
-  await _supabase.from('slots').insert({
-    hunt_id: appState.activeHunt.id,
-    name: detected.slot || name,
-    provider: detected.provider,
-    bet: bet,
-    opened: false,
-    position: position
-  });
+  var calledBy = document.getElementById('admin-slot-called-by').value.trim();
+
+await _supabase.from('slots').insert({
+  hunt_id: appState.activeHunt.id,
+  name: detected.slot || name,
+  provider: detected.provider,
+  bet: bet,
+  opened: false,
+  position: position,
+  called_by: calledBy || null
+});
+
+document.getElementById('admin-slot-called-by').value = '';
 
   document.getElementById('admin-slot-name').value = '';
   document.getElementById('admin-slot-prov').value = '';
@@ -1518,6 +1586,10 @@ function findWinner(hunt,guesses){
 
 function renderGuessPanel(){
   var hunt=appState.activeHunt;
+  if (!hunt || hunt.endBal == null) {
+  var lastArchived = appState.huntArchive[0];
+  if (lastArchived) hunt = lastArchived;
+}
   var huntId=hunt?hunt.id:null;
   var guessesOpen=!!(hunt&&hunt.guessesOpen);
   var guesses=huntId&&appState.guesses[huntId]?appState.guesses[huntId]:[];
