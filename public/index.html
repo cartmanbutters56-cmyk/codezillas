@@ -7,9 +7,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,700&display=swap" rel="stylesheet"/>
 <style>
-/* ═══════════════════════════════════════════════
-   DARK BLUE + NEON YELLOW-GREEN CYBER/GAMING THEME
-═══════════════════════════════════════════════ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --void:#020a14;--deep:#040e1c;--dark:#071524;--card:#0a1e30;--card2:#0d2440;
@@ -25,19 +22,14 @@
   --purple:#c4a8ff;--pink:#f9a8d4;--cyan:#67e8f9;
 }
 html{scroll-behavior:smooth}
-
-/* ── CUSTOM CURSOR (touch-friendly ring only shows on pointer devices) ── */
 #cur{position:fixed;pointer-events:none;z-index:99999;mix-blend-mode:normal;display:none}
 @media(pointer:fine){#cur{display:block}*{cursor:none!important}}
 #cur-dot{width:6px;height:6px;background:var(--neon);border-radius:50%;position:absolute;transform:translate(-50%,-50%);box-shadow:0 0 8px var(--neon),0 0 16px var(--neon);transition:width .15s,height .15s}
 #cur-ring{width:30px;height:30px;border:1.5px solid rgba(200,255,0,.6);border-radius:50%;position:absolute;transform:translate(-50%,-50%);transition:width .3s cubic-bezier(.23,1,.32,1),height .3s cubic-bezier(.23,1,.32,1)}
 body.ch #cur-dot{width:10px;height:10px;background:var(--blue)}
 body.ch #cur-ring{width:48px;height:48px;border-color:rgba(0,212,255,.5)}
-
 body{font-family:'Exo 2',sans-serif;background:var(--void);color:var(--text);min-height:100vh;overflow-x:hidden}
 canvas#sf{position:fixed;inset:0;z-index:0;pointer-events:none}
-
-/* ── NAV ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(2,10,20,.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border2);height:68px;display:flex;align-items:center}
 .nav-inner{width:100%;max-width:1200px;margin:0 auto;padding:0 1.5rem;display:flex;align-items:center}
 .nav-logo{display:flex;align-items:center;gap:9px;text-decoration:none;margin-right:1.5rem;flex-shrink:0}
@@ -68,8 +60,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(2,10,20,.97
 .mob-menu.open{display:flex}
 .mob-menu a{padding:11px 14px;border-radius:7px;text-decoration:none;color:var(--text2);font-size:.95rem;font-weight:600;letter-spacing:.5px;text-transform:uppercase;transition:all .2s;border:1px solid transparent}
 .mob-menu a:hover,.mob-menu a.active{color:var(--neon);background:rgba(200,255,0,.07);border-color:rgba(200,255,0,.2)}
-
-/* ── PAGES ── */
 .page{display:none;position:relative;z-index:1;padding-top:68px}
 .page.active{display:block}
 @keyframes pgIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
@@ -85,8 +75,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(2,10,20,.97
 @keyframes neonFlicker{0%,100%{opacity:1}92%{opacity:1}94%{opacity:.4}96%{opacity:1}98%{opacity:.6}}
 @keyframes scanline{0%{transform:translateY(-100%)}100%{transform:translateY(100%)}}
 @keyframes cyberGlow{0%,100%{box-shadow:0 0 5px rgba(200,255,0,.2)}50%{box-shadow:0 0 20px rgba(200,255,0,.5),0 0 40px rgba(200,255,0,.2)}}
-
-/* ── HERO ── */
 .hero{min-height:90vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:3rem;padding:6rem 3rem 4rem;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 0% 50%,rgba(200,255,0,.07),transparent 70%);pointer-events:none}
 .hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 40% 60% at 100% 50%,rgba(0,212,255,.05),transparent 70%);pointer-events:none}
@@ -103,8 +91,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(2,10,20,.97
 .stream-embed iframe{width:100%;height:100%;border:none;display:block}
 .stream-ftr{padding:9px 15px;background:var(--card2);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;font-size:.75rem;color:var(--text2)}
 .offline-screen{width:100%;aspect-ratio:16/9;background:linear-gradient(135deg,#020e1c,#04162a);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.65rem}
-
-/* ── BUTTONS ── */
 .btn{display:inline-flex;align-items:center;gap:7px;border-radius:10px;padding:13px 28px;font-family:'Exo 2',sans-serif;font-size:.95rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;text-decoration:none;border:none;transition:all .22s}
 .btn-primary{background:linear-gradient(135deg,var(--neon),var(--neon2));color:#000;font-weight:800}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(200,255,0,.4),0 0 40px rgba(200,255,0,.2)}
@@ -119,8 +105,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(2,10,20,.97
 .btn-ghost:hover{background:rgba(200,255,0,.1);color:var(--text)}
 .btn-sm{padding:8px 14px;font-size:.75rem}
 .btn-xs{padding:6px 11px;font-size:.68rem}
-
-/* ── SOCIAL STRIP ── */
 .social-strip{position:relative;overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:rgba(4,14,28,.7);padding:1.8rem 0;z-index:1}
 .social-strip::before,.social-strip::after{content:'';position:absolute;top:0;bottom:0;width:160px;z-index:2;pointer-events:none}
 .social-strip::before{left:0;background:linear-gradient(90deg,var(--void),transparent)}
@@ -131,8 +115,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(2,10,20,.97
 .spill:hover{transform:translateY(-2px);color:var(--text);border-color:rgba(200,255,0,.3);box-shadow:0 4px 16px rgba(200,255,0,.1)}
 .spill-ico{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .spill-live{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse-g 1.2s infinite;box-shadow:0 0 6px var(--green)}
-
-/* ── SCHEDULE ── */
 .sched-section{position:relative;z-index:1;padding:5rem 2rem;border-bottom:1px solid var(--border);overflow:hidden}
 .sched-inner{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:3.5rem}
 .section-eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:.67rem;font-weight:800;letter-spacing:5px;text-transform:uppercase;color:var(--neon);margin-bottom:.8rem;text-shadow:0 0 8px rgba(200,255,0,.4)}
@@ -157,8 +139,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(2,10,20,.97
 .sched-card.today .sched-time{color:var(--neon)}
 .sched-tz{font-size:.56rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text3)}
 .sched-today-badge{display:inline-flex;align-items:center;gap:4px;background:rgba(200,255,0,.15);border:1px solid rgba(200,255,0,.35);color:var(--neon);font-size:.53rem;font-weight:800;letter-spacing:1.5px;padding:2px 7px;border-radius:18px;margin-top:.45rem}
-
-/* ── CLIPS ── */
 .clips-section{position:relative;z-index:1;padding:4rem 0;border-bottom:1px solid var(--border)}
 .clips-inner{max-width:1100px;margin:0 auto;padding:0 2rem}
 .clip-modal-wrap{display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.9);backdrop-filter:blur(14px);align-items:center;justify-content:center;padding:2rem}
@@ -193,8 +173,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(2,10,20,.97
 .clip-card-ftr{padding:9px 11px;background:var(--card2);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
 .clip-num{font-family:'Rajdhani',sans-serif;font-size:.77rem;font-weight:700;color:var(--text3);letter-spacing:1px}
 .kick-link{font-size:.7rem;font-weight:700;color:var(--neon);text-decoration:none;transition:color .2s}
-
-/* ── HUNT PAGE ── */
 .hunt-page{background:var(--void)}
 .hunt-hero{position:relative;padding:4rem 2rem 2.5rem;text-align:center;overflow:hidden;border-bottom:1px solid var(--border)}
 .hunt-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 65% 50% at 50% 0%,rgba(0,212,255,.08),rgba(200,255,0,.03) 40%,transparent 70%);pointer-events:none}
@@ -202,19 +180,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(2,10,20,.97
 .hunt-eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:.62rem;font-weight:800;letter-spacing:5px;text-transform:uppercase;color:var(--neon);background:rgba(200,255,0,.08);border:1px solid rgba(200,255,0,.22);border-radius:28px;padding:5px 15px;margin-bottom:1.1rem}
 .hunt-title{font-family:'Rajdhani',sans-serif;font-size:clamp(2.5rem,5vw,4.8rem);font-weight:700;text-transform:uppercase;letter-spacing:-1px;line-height:.92;margin-bottom:.6rem}
 .hunt-title span{color:var(--neon);text-shadow:0 0 30px rgba(200,255,0,.5)}
-
-/* ── TABS ── */
 .hunt-tabs{display:flex;align-items:center;gap:.45rem;padding:1.4rem 2rem 0;max-width:1200px;margin:0 auto;border-bottom:1px solid var(--border)}
 .h-tab{padding:9px 20px;border-radius:8px 8px 0 0;border:1px solid transparent;border-bottom:none;font-family:'Exo 2',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);background:transparent;transition:all .2s;margin-bottom:-1px}
 .h-tab.active{color:var(--neon);background:var(--card);border-color:var(--border);border-bottom-color:var(--card);text-shadow:0 0 8px rgba(200,255,0,.3)}
 .h-tab:hover:not(.active){color:var(--text2);background:rgba(200,255,0,.04)}
 .hunt-main{max-width:1200px;margin:0 auto;padding:2rem 2rem 4rem}
-
-/* ── HUNT LAYOUT: side by side ── */
 .hunt-split{display:grid;grid-template-columns:1fr 380px;gap:1.5rem;align-items:start}
 @media(max-width:960px){.hunt-split{grid-template-columns:1fr}}
-
-/* ── STATS BAR ── */
 .hunt-header-bar{display:grid;grid-template-columns:repeat(6,1fr);gap:.75rem;margin-bottom:1.5rem}
 .hunt-stat-card{border-radius:13px;padding:1.1rem .9rem;text-align:center;position:relative;overflow:hidden;transition:all .3s;border:1px solid}
 .hsc-neon{background:rgba(200,255,0,.07);border-color:rgba(200,255,0,.25)}
@@ -228,16 +200,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(2,10,20,.97
 .hsc-val{font-family:'Rajdhani',sans-serif;font-size:1.5rem;font-weight:700;line-height:1;margin-bottom:.15rem}
 .hsc-label{font-size:.53rem;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--text3)}
 .c-neon{color:var(--neon)}.c-blue{color:var(--blue)}.c-gold{color:var(--gold)}.c-green{color:var(--green)}.c-red{color:var(--red)}.c-purple{color:var(--purple)}.c-cyan{color:var(--cyan)}.c-pink{color:var(--pink)}
-
-/* ── PROGRESS ── */
 .h-progress{margin-bottom:1.5rem;background:rgba(200,255,0,.03);border:1px solid var(--border);border-radius:12px;padding:1rem 1.25rem}
 .h-prog-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem}
 .h-prog-title{font-size:.6rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--text3)}
 .h-prog-count{font-family:'Rajdhani',sans-serif;font-size:.9rem;font-weight:700;color:var(--neon)}
 .h-prog-bar{width:100%;height:8px;background:rgba(200,255,0,.08);border-radius:10px;overflow:hidden}
 .h-prog-fill{height:100%;border-radius:10px;background:linear-gradient(90deg,var(--neon),var(--blue));transition:width .6s ease;box-shadow:0 0 10px rgba(200,255,0,.4)}
-
-/* ── LIVE FEED TABLE ── */
 .live-feed-wrap{margin-bottom:1.5rem;border-radius:14px;overflow:hidden;border:1px solid var(--border)}
 .live-feed-header{display:flex;align-items:center;gap:9px;padding:14px 18px;background:rgba(7,21,36,.9);border-bottom:1px solid var(--border)}
 .live-dot{width:9px;height:9px;border-radius:50%;background:var(--green);animation:pulse-g 1.2s infinite;box-shadow:0 0 8px var(--green)}
@@ -266,18 +234,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(2,10,20,.97
 .ptag-nl{background:rgba(255,224,0,.1);border:1px solid rgba(255,224,0,.22);color:var(--gold)}
 .ptag-ot{background:rgba(122,144,196,.1);border:1px solid rgba(122,144,196,.22);color:#a0b0d0}
 .lft-empty{padding:2.5rem;text-align:center;color:var(--text3);font-size:.85rem;border:1px dashed rgba(13,48,80,.5);border-radius:8px;margin:1rem}
-
-/* No Hunt */
 .no-hunt{text-align:center;padding:5rem 2rem;border:1px dashed rgba(13,48,80,.6);border-radius:16px;background:rgba(7,21,36,.4);margin-bottom:1.5rem}
-
-/* WINNER BANNER */
 .winner-banner{display:flex;align-items:center;gap:12px;padding:12px 18px;background:linear-gradient(135deg,rgba(255,224,0,.1),rgba(200,255,0,.05));border:1px solid rgba(255,224,0,.3);border-radius:12px;margin-bottom:1rem;animation:slideInSlot .4s ease}
 .winner-banner-trophy{font-size:1.5rem}
 .winner-banner-text{font-size:.83rem;color:var(--text2)}
 .winner-banner-text strong{color:var(--gold)}
 .winner-banner-amount{font-family:'Rajdhani',sans-serif;font-size:1.1rem;font-weight:700;color:var(--gold);margin-left:auto;text-shadow:0 0 12px rgba(255,224,0,.4)}
-
-/* GUESS PANEL */
 .guess-panel{background:rgba(4,14,28,.8);border:1px solid var(--border);border-radius:16px;overflow:hidden;backdrop-filter:blur(10px)}
 .guess-panel-hdr{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.4rem;background:rgba(7,21,36,.8);border-bottom:1px solid var(--border)}
 .guess-panel-title{font-family:'Rajdhani',sans-serif;font-size:1.05rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;display:flex;align-items:center;gap:7px}
@@ -305,8 +267,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(2,10,20,.97
 .guess-ava img{width:100%;height:100%;object-fit:cover}
 .guess-amount{font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;color:var(--gold)}
 .guess-winner-badge{font-size:.6rem;font-weight:800;letter-spacing:1px;color:var(--gold);background:rgba(255,224,0,.1);border:1px solid rgba(255,224,0,.28);padding:2px 7px;border-radius:8px}
-
-/* ── TOP 3 MULTIPLIERS ── */
 .top3-section{border-radius:14px;overflow:hidden;border:1px solid var(--border);margin-bottom:1.5rem}
 .top3-header{display:flex;align-items:center;gap:9px;padding:12px 16px;background:rgba(7,21,36,.9);border-bottom:1px solid var(--border)}
 .top3-title{font-family:'Rajdhani',sans-serif;font-size:.85rem;font-weight:700;letter-spacing:3px;text-transform:uppercase}
@@ -325,6 +285,51 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(2,10,20,.97
 .top3-win{font-size:.72rem;color:var(--text3);text-align:right}
 .no-top3{padding:1.5rem;text-align:center;color:var(--text3);font-size:.82rem}
 
+/* ══════════════════════════════════════════════════════
+   REDESIGNED STATS & WINNERS PANEL
+══════════════════════════════════════════════════════ */
+.stats-panel-wrap{max-width:900px;margin:0 auto}
+.stats-hunt-card{background:linear-gradient(135deg,rgba(10,30,48,.95),rgba(13,36,64,.95));border:1px solid var(--border2);border-radius:20px;overflow:hidden;margin-bottom:1.5rem;position:relative;transition:all .35s}
+.stats-hunt-card:hover{border-color:rgba(200,255,0,.25);box-shadow:0 8px 32px rgba(0,212,255,.07)}
+.stats-hunt-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--neon),transparent);opacity:.4}
+.shc-header{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.4rem;border-bottom:1px solid rgba(13,48,80,.5);background:rgba(2,10,20,.4)}
+.shc-hunt-id{font-family:'Rajdhani',sans-serif;font-size:1.15rem;font-weight:700;color:var(--neon);text-shadow:0 0 10px rgba(200,255,0,.3);display:flex;align-items:center;gap:8px}
+.shc-date{font-size:.63rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text3)}
+.shc-meta{display:flex;align-items:center;gap:.5rem}
+.shc-profit-badge{display:inline-flex;align-items:center;gap:4px;font-family:'Rajdhani',sans-serif;font-size:.8rem;font-weight:700;padding:3px 10px;border-radius:8px}
+.shc-profit-badge.win{background:rgba(57,255,20,.08);border:1px solid rgba(57,255,20,.2);color:var(--green)}
+.shc-profit-badge.loss{background:rgba(255,51,85,.08);border:1px solid rgba(255,51,85,.2);color:var(--red)}
+.shc-body{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.shc-left{padding:1.2rem 1.4rem;border-right:1px solid rgba(13,48,80,.4)}
+.shc-right{padding:1.2rem 1.4rem}
+.shc-section-label{font-size:.56rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--text3);margin-bottom:.85rem;display:flex;align-items:center;gap:6px}
+.shc-section-label::after{content:'';flex:1;height:1px;background:rgba(13,48,80,.6)}
+/* Top 3 multipliers inside card */
+.shc-top3-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(13,48,80,.25)}
+.shc-top3-row:last-child{border-bottom:none}
+.shc-medal{font-size:1.1rem;min-width:26px}
+.shc-slot-name{flex:1;font-size:.83rem;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.shc-multi-val{font-family:'Rajdhani',sans-serif;font-size:1.1rem;font-weight:700}
+.shc-multi-val.m1{color:var(--gold);text-shadow:0 0 8px rgba(255,224,0,.3)}
+.shc-multi-val.m2{color:#c0c0c0}
+.shc-multi-val.m3{color:#cd7f32}
+.shc-win-small{font-size:.62rem;color:var(--text3)}
+/* Guess winner inside card */
+.shc-winner-block{display:flex;flex-direction:column;gap:.55rem}
+.shc-winner-row{display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(255,224,0,.04);border:1px solid rgba(255,224,0,.15);border-radius:10px}
+.shc-winner-trophy{font-size:1.3rem}
+.shc-winner-info{flex:1;min-width:0}
+.shc-winner-name{font-size:.88rem;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.shc-winner-guess{font-size:.65rem;color:var(--text3)}
+.shc-winner-badge{display:inline-flex;align-items:center;gap:3px;font-family:'Rajdhani',sans-serif;font-size:.75rem;font-weight:700;color:var(--gold);text-align:right;white-space:nowrap}
+.shc-no-winner{display:flex;align-items:center;gap:8px;padding:10px 12px;background:rgba(13,48,80,.15);border:1px dashed rgba(13,48,80,.5);border-radius:10px;color:var(--text3);font-size:.8rem}
+.shc-balances{display:flex;gap:.65rem;margin-top:.75rem}
+.shc-bal-item{flex:1;background:rgba(2,10,20,.5);border:1px solid rgba(13,48,80,.4);border-radius:8px;padding:.7rem .9rem;text-align:center}
+.shc-bal-val{font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;color:var(--text);line-height:1}
+.shc-bal-label{font-size:.5rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-top:3px}
+.shc-no-data{padding:1.4rem;text-align:center;color:var(--text3);font-size:.8rem}
+.shc-empty-top3{font-size:.78rem;color:var(--text3);padding:.65rem 0}
+
 /* ACTIVITY FEED */
 .activity-feed{background:rgba(2,10,20,.6);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.5rem;max-height:200px;overflow-y:auto}
 .activity-feed::-webkit-scrollbar{width:3px}
@@ -334,8 +339,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(2,10,20,.97
 .activity-time{font-size:.65rem;color:var(--text3);white-space:nowrap;min-width:45px}
 .activity-icon{font-size:.9rem;flex-shrink:0}
 .activity-msg strong{color:var(--text)}
-
-/* ADMIN PANEL */
 .admin-panel{border-radius:18px;overflow:hidden;margin-bottom:1.75rem;background:rgba(2,10,20,.9);border:1px solid rgba(200,255,0,.18)}
 .admin-panel-hdr{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.4rem;border-bottom:1px solid rgba(200,255,0,.1);background:linear-gradient(135deg,rgba(200,255,0,.08),rgba(200,255,0,.02))}
 .admin-panel-title{display:flex;align-items:center;gap:8px;font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--neon)}
@@ -390,38 +393,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(2,10,20,.97
 .guess-open-btn:hover{background:rgba(57,255,20,.16)}
 .guess-closed-btn{background:rgba(255,51,85,.07);border-color:rgba(255,51,85,.28);color:var(--red)}
 .guess-closed-btn:hover{background:rgba(255,51,85,.16)}
-
-/* ── PUBLIC HUNT STATS (visible to all) ── */
-.public-stats-section{margin-bottom:1.5rem}
-.public-top3-card{background:var(--card);border:1px solid var(--border);border-radius:15px;overflow:hidden;margin-bottom:1rem}
-.pts-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--card2);border-bottom:1px solid var(--border)}
-.pts-title{font-family:'Rajdhani',sans-serif;font-size:.88rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;display:flex;align-items:center;gap:7px}
-.pts-body{padding:1rem}
-.pts-medal-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(13,48,80,.3)}
-.pts-medal-row:last-child{border-bottom:none}
-.pts-medal{font-size:1.3rem;min-width:28px}
-.pts-slot-info{flex:1;min-width:0}
-.pts-slot-name{font-size:.88rem;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pts-slot-bet{font-size:.62rem;color:var(--text3)}
-.pts-multi-val{font-family:'Rajdhani',sans-serif;font-size:1.3rem;font-weight:700}
-.pts-win-val{font-size:.7rem;color:var(--text3);text-align:right}
-.pts-empty{padding:1.2rem;text-align:center;color:var(--text3);font-size:.82rem}
-
-/* ── GUESS WINNER HISTORY ── */
-.guess-history-card{background:var(--card);border:1px solid var(--border);border-radius:15px;overflow:hidden;margin-bottom:1rem}
-.gh-row{display:flex;align-items:center;gap:10px;padding:10px 16px;border-bottom:1px solid rgba(13,48,80,.25)}
-.gh-row:last-child{border-bottom:none}
-.gh-hunt-id{font-family:'Rajdhani',sans-serif;font-size:.78rem;font-weight:700;color:var(--neon);min-width:55px}
-.gh-user{display:flex;align-items:center;gap:6px;flex:1}
-.gh-ava{width:22px;height:22px;border-radius:50%;background:var(--discord);display:flex;align-items:center;justify-content:center;font-size:.58rem;font-weight:800;color:#fff;overflow:hidden;flex-shrink:0}
-.gh-ava img{width:100%;height:100%;object-fit:cover}
-.gh-username{font-size:.8rem;font-weight:700;color:var(--text)}
-.gh-guess{font-size:.72rem;color:var(--text3)}
-.gh-win-amt{font-family:'Rajdhani',sans-serif;font-size:.9rem;font-weight:700;color:var(--gold);text-align:right}
-.gh-trophy{font-size:.9rem}
-.gh-empty{padding:1.2rem;text-align:center;color:var(--text3);font-size:.82rem}
-
-/* ARCHIVE */
 .archive-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1rem}
 .archive-card{background:var(--card);border:1px solid var(--border);border-radius:15px;padding:1.4rem;transition:all .3s;position:relative;overflow:hidden}
 .archive-card:hover{border-color:var(--border2);transform:translateY(-4px);box-shadow:0 8px 28px rgba(0,212,255,.07)}
@@ -440,8 +411,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(2,10,20,.97
 .am-title{font-family:'Rajdhani',sans-serif;font-size:1.15rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--neon)}
 .am-close{width:32px;height:32px;border-radius:7px;background:rgba(200,255,0,.04);border:1px solid var(--border);color:var(--text2);font-size:1.2rem;display:flex;align-items:center;justify-content:center;transition:all .2s}
 .am-close:hover{background:rgba(255,0,0,.12);color:var(--red)}
-
-/* REWARDS */
 .rewards-hero{position:relative;padding:4.5rem 2rem 3rem;text-align:center;overflow:hidden;border-bottom:1px solid var(--border)}
 .rewards-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 65% 50% at 50% 0%,rgba(200,255,0,.1),transparent 60%);pointer-events:none}
 .rewards-hero-inner{position:relative;z-index:1;max-width:680px;margin:0 auto}
@@ -455,8 +424,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(2,10,20,.97
 .perks-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.9rem;margin-bottom:2rem}
 .perk{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.3rem;display:flex;flex-direction:column;gap:.45rem;transition:all .3s}
 .perk:hover{border-color:var(--border2);transform:translateY(-3px)}
-
-/* FAQ */
 .faq-wrap{max-width:760px;margin:0 auto;padding:5rem 2rem;text-align:center}
 .faq-item{border-bottom:1px solid var(--border)}
 .faq-q{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 0;font-weight:600;font-size:.97rem;transition:color .2s}
@@ -466,14 +433,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(2,10,20,.97
 .faq-ans{max-height:0;overflow:hidden;transition:max-height .35s ease;color:var(--text2);font-size:.88rem;line-height:1.7}
 .faq-item.open .faq-ans{max-height:200px}
 .faq-ans p{padding-bottom:1.2rem}
-
-/* FOOTER */
 footer{position:relative;z-index:1;background:var(--deep);border-top:1px solid var(--border);padding:3rem 2rem 2rem}
 .footer-inner{max-width:1200px;margin:0 auto}
 .footer-top{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border);margin-bottom:2rem}
 .footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
-
-/* MODALS */
 .dsc-modal{display:none;position:fixed;inset:0;z-index:9500;background:rgba(0,0,0,.88);backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:2rem}
 .dsc-modal.open{display:flex}
 .dsc-modal-inner{background:var(--card2);border:1px solid rgba(88,101,242,.28);border-radius:18px;padding:2.3rem;max-width:380px;width:100%;text-align:center;animation:mIn .3s ease both}
@@ -492,17 +455,11 @@ footer{position:relative;z-index:1;background:var(--deep);border-top:1px solid v
 .conf-yes:hover{background:rgba(255,51,85,.22)}
 .conf-no{background:rgba(200,255,0,.05);color:var(--text);border-color:var(--border)!important}
 .conf-no:hover{background:rgba(200,255,0,.1)}
-
-/* Sync badge */
 .sync-badge{position:fixed;top:80px;right:1.2rem;z-index:900;display:none;align-items:center;gap:5px;background:rgba(4,14,28,.92);border:1px solid rgba(200,255,0,.3);border-radius:20px;padding:5px 12px;font-size:.62rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--neon);backdrop-filter:blur(8px)}
 .sync-badge.show{display:flex}
 .sync-dot{width:5px;height:5px;border-radius:50%;background:var(--neon);animation:pulse-g 1.2s infinite}
-
-/* Toast */
 .toast{position:fixed;bottom:5rem;left:50%;transform:translateX(-50%) translateY(80px);background:var(--card2);border:1px solid var(--border2);border-radius:9px;padding:11px 18px;font-size:.84rem;font-weight:600;color:var(--text);z-index:9999;display:flex;align-items:center;gap:7px;opacity:0;transition:all .3s;white-space:nowrap}
 .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
-
-/* Kick float */
 .kick-float{position:fixed;bottom:1.4rem;right:1.4rem;z-index:900;pointer-events:none}
 .kick-float-btn{pointer-events:all;display:flex;align-items:center;gap:7px;background:#020e1c;border:1.5px solid rgba(200,255,0,.4);border-radius:50px;padding:9px 16px 9px 11px;text-decoration:none;color:var(--text);font-family:'Exo 2',sans-serif;font-size:.79rem;font-weight:700;letter-spacing:.5px;transition:all .25s;box-shadow:0 0 20px rgba(200,255,0,.08)}
 .kick-float-btn:hover{box-shadow:0 0 30px rgba(200,255,0,.2);border-color:var(--neon)}
@@ -511,10 +468,11 @@ footer{position:relative;z-index:1;background:var(--deep);border-top:1px solid v
 .kf-off{width:7px;height:7px;border-radius:50%;background:var(--text3);flex-shrink:0}
 .kf-status{font-size:.67rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--green)}
 .kf-status.offline{color:var(--text3)}
-
-/* Responsive */
+/* Admin reset btn */
+.reset-data-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:9px;font-family:'Exo 2',sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.5px;border:1px solid rgba(255,51,85,.3);background:rgba(255,51,85,.08);color:var(--red);transition:all .2s;text-transform:uppercase}
+.reset-data-btn:hover{background:rgba(255,51,85,.18)}
 @media(max-width:1024px){.perks-grid{grid-template-columns:repeat(2,1fr)}.hunt-header-bar{grid-template-columns:repeat(3,1fr)}.archive-grid{grid-template-columns:1fr 1fr}.sched-grid{grid-template-columns:repeat(4,1fr)}}
-@media(max-width:960px){.hero{grid-template-columns:1fr;min-height:auto;padding:3rem 2rem}.hero-stream{order:-1}.footer-top{grid-template-columns:1fr 1fr}.rewards-code-hero{grid-template-columns:1fr;text-align:center;padding:2rem 1.5rem}.rewards-cards{grid-template-columns:1fr}.lft-head,.lft-row{grid-template-columns:36px 1fr 120px 80px 100px 90px}}
+@media(max-width:960px){.hero{grid-template-columns:1fr;min-height:auto;padding:3rem 2rem}.hero-stream{order:-1}.footer-top{grid-template-columns:1fr 1fr}.rewards-code-hero{grid-template-columns:1fr;text-align:center;padding:2rem 1.5rem}.rewards-cards{grid-template-columns:1fr}.lft-head,.lft-row{grid-template-columns:36px 1fr 120px 80px 100px 90px}.shc-body{grid-template-columns:1fr}}
 @media(max-width:768px){.archive-grid{grid-template-columns:1fr}.sched-grid{grid-template-columns:repeat(3,1fr)}.lft-head,.lft-row{grid-template-columns:36px 1fr 80px 80px 90px;}.lft-head-cell:nth-child(3),.lft-row>div:nth-child(3){display:none}}
 @media(max-width:640px){.footer-top{grid-template-columns:1fr}.perks-grid{grid-template-columns:1fr 1fr}.hamburger{display:flex}.nav-links{display:none!important}.hunt-header-bar{grid-template-columns:repeat(2,1fr)}.sched-grid{grid-template-columns:repeat(2,1fr)}.admin-add-slot-row{flex-direction:column}.admin-add-slot-row .admin-field,.admin-add-slot-row .admin-field-bet,.admin-add-slot-row .admin-field-called{min-width:unset;width:100%;flex:unset}.admin-result-row{grid-template-columns:1fr auto auto auto auto auto}.lft-head,.lft-row{grid-template-columns:28px 1fr 70px 85px;font-size:.8rem}.lft-head-cell:nth-child(3),.lft-row>div:nth-child(3),.lft-head-cell:nth-child(4),.lft-row>div:nth-child(4){display:none}.hunt-split{grid-template-columns:1fr}}
 </style>
@@ -568,6 +526,14 @@ footer{position:relative;z-index:1;background:var(--deep);border-top:1px solid v
     <div style="font-family:'Rajdhani',sans-serif;font-size:1.35rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:.45rem;">Remove Slot?</div>
     <p style="font-size:.85rem;color:var(--text2);line-height:1.55;" id="delete-slot-name-text">This will remove the slot from the hunt.</p>
     <div class="confirm-btns"><button class="conf-no" onclick="closeDeleteSlotModal()">Cancel</button><button class="conf-yes" onclick="confirmedDeleteSlot()">Remove</button></div>
+  </div>
+</div>
+<div class="confirm-modal" id="confirm-reset-data">
+  <div class="confirm-inner">
+    <div style="font-size:1.9rem;margin-bottom:.65rem;">⚠️</div>
+    <div style="font-family:'Rajdhani',sans-serif;font-size:1.35rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:.45rem;color:var(--red);">Reset All Data?</div>
+    <p style="font-size:.85rem;color:var(--text2);line-height:1.55;">This will permanently delete ALL hunts, slots, and guesses, and reset the hunt ID counter back to #1. This cannot be undone.</p>
+    <div class="confirm-btns"><button class="conf-no" onclick="closeResetModal()">Cancel</button><button class="conf-yes" onclick="confirmedResetAllData()">Yes, Reset Everything</button></div>
   </div>
 </div>
 <div class="arch-modal" id="arch-modal" onclick="closeArchModal(event)">
@@ -625,7 +591,8 @@ footer{position:relative;z-index:1;background:var(--deep);border-top:1px solid v
   <div class="hero">
     <div class="hero-left">
       <p class="hero-eyebrow">🍣 Yama Thicc Gaming</p>
-      <h1 class="hero-h1">LIVE<br><span>YAMA</span></h1>
+      <!-- CHANGED: removed "LIVE" text, kept design intact -->
+      <h1 class="hero-h1"><span>YAMA</span></h1>
       <p class="hero-p">Use code <strong style="color:var(--neon);text-shadow:0 0 8px rgba(200,255,0,.4);">YAMA</strong> on Spartans.com. Get 33% CashRake — the first instant rakeback + cashback — and watch live on Kick every night at 10 AM EST.</p>
       <div class="hero-btns">
         <button onclick="showPage('rewards')" class="btn btn-primary">Use Code</button>
@@ -716,7 +683,7 @@ footer{position:relative;z-index:1;background:var(--deep);border-top:1px solid v
   </div>
   <div class="hunt-main">
 
-    <!-- LIVE PANEL: side-by-side layout -->
+    <!-- LIVE PANEL -->
     <div id="panel-live">
       <div class="activity-feed" id="activity-feed" style="display:none;"><div style="font-size:.58rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--text3);margin-bottom:.5rem;">📡 LIVE ACTIVITY</div><div id="activity-items"></div></div>
       <div class="hunt-header-bar" id="hunt-header-bar" style="display:none;">
@@ -733,7 +700,6 @@ footer{position:relative;z-index:1;background:var(--deep);border-top:1px solid v
       </div>
       <div id="winner-banner-wrap"></div>
 
-      <!-- SIDE BY SIDE: Live feed LEFT, Guess panel RIGHT -->
       <div class="hunt-split">
         <div>
           <div class="live-feed-wrap" id="live-feed-wrap" style="display:none;">
@@ -757,7 +723,7 @@ footer{position:relative;z-index:1;background:var(--deep);border-top:1px solid v
             <p style="font-size:.83rem;color:var(--text3);" id="no-hunt-sub">Check back during a live stream when a bonus hunt is running!</p>
           </div>
         </div>
-        <!-- RIGHT COLUMN: Guess + Top 3 -->
+        <!-- RIGHT COLUMN -->
         <div>
           <div class="guess-panel" style="margin-bottom:1.2rem;">
             <div class="guess-panel-hdr"><div class="guess-panel-title">🎯 Guess the Balance</div><span id="guess-badge" class="g-closed-badge">⬤ Closed</span></div>
@@ -778,7 +744,7 @@ footer{position:relative;z-index:1;background:var(--deep);border-top:1px solid v
               <div class="guess-list" id="guess-list"><div style="text-align:center;padding:1.4rem;color:var(--text3);font-size:.83rem;">No guesses yet — be the first!</div></div>
             </div>
           </div>
-          <!-- Top 3 Multipliers (live, visible to all) -->
+          <!-- Top 3 Multipliers -->
           <div class="top3-section" id="top3-live-wrap">
             <div class="top3-header">
               <span style="font-size:1.1rem;">🏅</span>
@@ -790,30 +756,21 @@ footer{position:relative;z-index:1;background:var(--deep);border-top:1px solid v
       </div>
     </div>
 
-    <!-- STATS & WINNERS panel (public) -->
+    <!-- STATS & WINNERS PANEL — Redesigned -->
     <div id="panel-stats" style="display:none;">
-      <div style="margin-bottom:1.5rem;">
-        <div style="font-size:.65rem;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--neon);margin-bottom:.3rem;">Community Records</div>
-        <div style="font-family:'Rajdhani',sans-serif;font-size:1.7rem;font-weight:700;text-transform:uppercase;">Hunt Stats &amp; Winners</div>
+      <div style="margin-bottom:1.75rem;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:.75rem;">
+        <div>
+          <div style="font-size:.65rem;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--neon);margin-bottom:.3rem;">Community Records</div>
+          <div style="font-family:'Rajdhani',sans-serif;font-size:1.7rem;font-weight:700;text-transform:uppercase;">Hunt Stats &amp; Winners</div>
+          <div style="font-size:.78rem;color:var(--text3);margin-top:.25rem;">Each card shows the top 3 multipliers + guess winner for that hunt</div>
+        </div>
       </div>
-
-      <!-- Guess Winner History (all hunts) -->
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem;" id="stats-grid">
-        <div>
-          <div style="font-size:.6rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--text3);margin-bottom:.7rem;">🏆 Guess Winner History</div>
-          <div class="guess-history-card" id="guess-winner-history">
-            <div class="gh-empty">Loading…</div>
-          </div>
-        </div>
-        <div>
-          <div style="font-size:.6rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--text3);margin-bottom:.7rem;">🎰 Hunt Top 3 Multipliers — Per Hunt</div>
-          <div id="hunt-top3-history">
-            <div style="text-align:center;padding:2rem;color:var(--text3);font-size:.83rem;">No archived hunts yet.</div>
-          </div>
-        </div>
+      <div class="stats-panel-wrap" id="stats-panel-content">
+        <div style="text-align:center;padding:3rem;color:var(--text3);font-size:.88rem;">Loading…</div>
       </div>
     </div>
 
+    <!-- ADMIN PANEL -->
     <div id="panel-admin" style="display:none;">
       <div class="admin-panel">
         <div class="admin-panel-hdr"><div class="admin-panel-title">⚙ Admin Control Panel</div><span class="admin-pill">👑 ADMIN</span></div>
@@ -868,6 +825,7 @@ footer{position:relative;z-index:1;background:var(--deep);border-top:1px solid v
           </div>
           <div class="admin-actions-row" id="admin-actions-row" style="display:none;">
             <button class="guess-toggle-btn guess-open-btn" id="guess-toggle-btn" onclick="adminToggleGuess()">✓ Guesses Open</button>
+            <button class="reset-data-btn" onclick="openResetModal()">🗑 Reset All Data</button>
           </div>
         </div>
       </div>
@@ -1057,20 +1015,18 @@ function onSlotInput(input){
 }
 document.addEventListener('click',function(e){var l=document.getElementById('autocomplete-list');if(l)l.style.display='none';});
 
-// ════ STARFIELD (blue/cyan themed) ════
+// ════ STARFIELD ════
 (function(){
   var canvas=document.getElementById('sf'),ctx=canvas.getContext('2d'),stars=[],W,H;
   function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
   resize();window.addEventListener('resize',resize);
-  function initStars(){stars=[];var count=Math.floor((W*H)/5500);for(var i=0;i<count;i++){var size=Math.random();var bright=size>0.93,mid=size>0.77&&!bright;var hue=180+Math.random()*60;// cyan-blue-white range
-  stars.push({x:Math.random()*W,y:Math.random()*H,r:bright?(1.4+Math.random()*2):(mid?(0.7+Math.random()*.9):(0.15+Math.random()*.5)),alpha:bright?(0.65+Math.random()*0.35):(mid?(0.3+Math.random()*.4):(0.08+Math.random()*.22)),hue:hue,ts:0.003+Math.random()*.01,to:Math.random()*Math.PI*2,glow:bright});}}
+  function initStars(){stars=[];var count=Math.floor((W*H)/5500);for(var i=0;i<count;i++){var size=Math.random();var bright=size>0.93,mid=size>0.77&&!bright;var hue=180+Math.random()*60;stars.push({x:Math.random()*W,y:Math.random()*H,r:bright?(1.4+Math.random()*2):(mid?(0.7+Math.random()*.9):(0.15+Math.random()*.5)),alpha:bright?(0.65+Math.random()*0.35):(mid?(0.3+Math.random()*.4):(0.08+Math.random()*.22)),hue:hue,ts:0.003+Math.random()*.01,to:Math.random()*Math.PI*2,glow:bright});}}
   initStars();window.addEventListener('resize',initStars);
   var t=0;
   function draw(){ctx.fillStyle='#020a14';ctx.fillRect(0,0,W,H);t+=0.016;for(var i=0;i<stars.length;i++){var s=stars[i];var tw=0.7+0.3*Math.sin(t*s.ts*60+s.to);var a=s.alpha*tw;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle='hsla('+s.hue+',80%,'+(s.glow?98:75)+'%,'+a+')';ctx.fill();}requestAnimationFrame(draw);}
   draw();
 })();
 
-// CURSOR (desktop only via CSS media query)
 var cx=0,cy=0,rx=0,ry=0;
 document.addEventListener('mousemove',function(e){cx=e.clientX;cy=e.clientY;document.getElementById('cur-dot').style.left=cx+'px';document.getElementById('cur-dot').style.top=cy+'px';});
 (function anim(){rx+=(cx-rx)*.14;ry+=(cy-ry)*.14;document.getElementById('cur-ring').style.left=rx+'px';document.getElementById('cur-ring').style.top=ry+'px';requestAnimationFrame(anim);})();
@@ -1232,7 +1188,7 @@ function renderAll(){
   if(currentHuntTab==='stats')renderStatsPanel();
 }
 
-// ════ STATS CALCULATION ════
+// ════ STATS ════
 function calcStats(hunt) {
   var slots = hunt.slots || [];
   var opened = slots.filter(function(s) { return s.opened; });
@@ -1372,6 +1328,43 @@ async function confirmedDeleteSlot() {
   await _supabase.from('slots').delete().eq('id',slot.dbId);
   closeDeleteSlotModal();
   showToast('Removed: '+slot.name);
+}
+
+// ════ RESET ALL DATA ════
+function openResetModal(){
+  if(!appState.isAdmin)return;
+  document.getElementById('confirm-reset-data').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeResetModal(){
+  document.getElementById('confirm-reset-data').classList.remove('open');
+  document.body.style.overflow='';
+}
+async function confirmedResetAllData() {
+  if(!appState.isAdmin)return;
+  try {
+    // Delete all guesses, slots, hunts — order matters for FK constraints
+    await _supabase.from('guesses').delete().gt('id', 0);
+    await _supabase.from('slots').delete().gt('id', 0);
+    await _supabase.from('hunts').delete().gt('id', 0);
+    // Reset the hunt ID sequence back to 1 in Supabase (PostgreSQL)
+    // This uses a raw RPC call if available; otherwise just delete resets the state
+    try {
+      await _supabase.rpc('reset_hunt_sequence');
+    } catch(e) {
+      // If RPC not set up, sequence reset must be done manually in Supabase SQL editor:
+      // ALTER SEQUENCE hunts_id_seq RESTART WITH 1;
+    }
+    appState.activeHunt = null;
+    appState.huntArchive = [];
+    appState.guesses = {};
+    closeResetModal();
+    renderAll();
+    showToast('✓ All data reset. Next hunt will be #1.');
+  } catch(err) {
+    closeResetModal();
+    showToast('❌ Reset failed: ' + err.message);
+  }
 }
 
 // ════ ADMIN ════
@@ -1560,63 +1553,127 @@ async function submitGuess() {
   showToast('Guess of '+fmt(amt)+' submitted! 🎯');
 }
 
-// ════ PUBLIC STATS PANEL ════
+// ════ REDESIGNED STATS & WINNERS PANEL ════
 async function renderStatsPanel(){
   await fetchArchive();
+  var container = document.getElementById('stats-panel-content');
+  if (!container) return;
 
-  // Guess winner history
-  var gwh=document.getElementById('guess-winner-history');
-  if(gwh){
-    var winners=appState.huntArchive.filter(function(h){return h.endBal!=null;}).map(function(h){
-      var gs=appState.guesses[h.id]||[];
-      var w=findWinner(h,gs);
-      return w?{huntId:h.id,winner:w,endBal:h.endBal,date:h.endedAt}:null;
-    }).filter(Boolean);
-    if(winners.length===0){gwh.innerHTML='<div class="gh-empty">No completed hunts yet.</div>';}
-    else{
-      gwh.innerHTML='';
-      winners.forEach(function(item){
-        var row=document.createElement('div');row.className='gh-row';
-        var ava=item.winner.avatar?'<img src="'+item.winner.avatar+'" alt="">':escHtml(item.winner.username.substring(0,2).toUpperCase());
-        var diff=Math.abs(item.winner.amount-item.endBal);
-        row.innerHTML='<span class="gh-hunt-id">#'+item.huntId+'</span>'
-          +'<div class="gh-user"><div class="gh-ava">'+ava+'</div><div>'
-          +'<div class="gh-username">'+escHtml(item.winner.username)+'</div>'
-          +'<div class="gh-guess">Guessed '+fmt(item.winner.amount)+' · off by '+fmt(diff)+'</div>'
-          +'</div></div>'
-          +'<div style="text-align:right;"><div class="gh-win-amt">🏆 Winner</div><div style="font-size:.62rem;color:var(--text3);">Final: '+fmt(item.endBal)+'</div></div>';
-        gwh.appendChild(row);
-      });
-    }
+  var completedHunts = appState.huntArchive.filter(function(h){ return h.endBal != null; });
+
+  if (completedHunts.length === 0) {
+    container.innerHTML = '<div style="text-align:center;padding:4rem 2rem;color:var(--text3);font-size:.88rem;border:1px dashed rgba(13,48,80,.5);border-radius:16px;"><div style="font-size:2rem;margin-bottom:.75rem;">🎰</div><div style="font-family:\'Rajdhani\',sans-serif;font-size:1.2rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:.35rem;">No Completed Hunts Yet</div><p>Completed hunt records will appear here after the first hunt ends.</p></div>';
+    return;
   }
 
-  // Per-hunt top 3 multipliers
-  var ht3=document.getElementById('hunt-top3-history');
-  if(ht3){
-    if(appState.huntArchive.length===0){ht3.innerHTML='<div style="text-align:center;padding:2rem;color:var(--text3);font-size:.83rem;">No archived hunts yet.</div>';}
-    else{
-      ht3.innerHTML='';
-      appState.huntArchive.forEach(function(hunt){
-        var top3=getTop3(hunt.slots);
-        var dateStr=hunt.endedAt?new Date(hunt.endedAt).toLocaleDateString('en-US',{month:'short',day:'numeric'}):'–';
-        var card=document.createElement('div');
-        card.style.cssText='background:var(--card);border:1px solid var(--border);border-radius:13px;overflow:hidden;margin-bottom:.75rem;';
-        var medals=['🥇','🥈','🥉'];
-        var rows=top3.length>0?top3.map(function(s,i){
-          return '<div style="display:flex;align-items:center;gap:8px;padding:8px 14px;border-top:1px solid rgba(13,48,80,.25);">'
-            +'<span style="font-size:1rem;">'+medals[i]+'</span>'
-            +'<span style="flex:1;font-size:.82rem;font-weight:700;color:var(--text);">'+escHtml(s.name)+'</span>'
-            +'<span style="font-family:\'Rajdhani\',sans-serif;font-size:1rem;font-weight:700;color:var(--neon);">'+fmtM(s.multi)+'</span>'
-            +'</div>';
-        }).join(''):'<div style="padding:10px 14px;color:var(--text3);font-size:.78rem;border-top:1px solid rgba(13,48,80,.25);">No opened slots</div>';
-        card.innerHTML='<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--card2);">'
-          +'<span style="font-family:\'Rajdhani\',sans-serif;font-size:.88rem;font-weight:700;color:var(--neon);">Hunt #'+hunt.id+'</span>'
-          +'<span style="font-size:.65rem;color:var(--text3);">'+dateStr+' · '+hunt.slots.length+' slots</span>'
-          +'</div>'+rows;
-        ht3.appendChild(card);
-      });
+  container.innerHTML = '';
+
+  completedHunts.forEach(function(hunt, idx) {
+    var stats = calcStats(hunt);
+    var top3 = getTop3(hunt.slots);
+    var guesses = appState.guesses[hunt.id] || [];
+    var winner = findWinner(hunt, guesses);
+    var profit = hunt.endBal - hunt.startBal;
+    var dateStr = hunt.endedAt ? new Date(hunt.endedAt).toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'}) : '–';
+    var medals = ['🥇','🥈','🥉'];
+    var multiClasses = ['m1','m2','m3'];
+
+    var card = document.createElement('div');
+    card.className = 'stats-hunt-card';
+    card.style.animationDelay = (idx * 0.06) + 's';
+    card.style.animation = 'slideInSlot .4s ease both';
+
+    // Header
+    var headerHtml = '<div class="shc-header">'
+      + '<div class="shc-hunt-id"><span style="font-size:.9rem;">🎰</span>Hunt #' + hunt.id + '</div>'
+      + '<div class="shc-meta">'
+      + (profit >= 0
+          ? '<span class="shc-profit-badge win">▲ ' + fmt(Math.abs(profit)) + '</span>'
+          : '<span class="shc-profit-badge loss">▼ ' + fmt(Math.abs(profit)) + '</span>')
+      + '<span class="shc-date">' + dateStr + '</span>'
+      + '</div></div>';
+
+    // Balances row
+    var balHtml = '<div class="shc-balances">'
+      + '<div class="shc-bal-item"><div class="shc-bal-val">' + fmt(hunt.startBal) + '</div><div class="shc-bal-label">Start</div></div>'
+      + '<div class="shc-bal-item"><div class="shc-bal-val" style="color:' + (profit >= 0 ? 'var(--green)' : 'var(--red)') + '">' + fmt(hunt.endBal) + '</div><div class="shc-bal-label">Final</div></div>'
+      + '<div class="shc-bal-item"><div class="shc-bal-val">' + fmtM(stats.avgMulti) + '</div><div class="shc-bal-label">Avg Multi</div></div>'
+      + '<div class="shc-bal-item"><div class="shc-bal-val">' + hunt.slots.length + '</div><div class="shc-bal-label">Bonuses</div></div>'
+      + '</div>';
+
+    // Top 3
+    var top3Html = '';
+    if (top3.length > 0) {
+      top3Html = top3.map(function(s, i) {
+        return '<div class="shc-top3-row">'
+          + '<span class="shc-medal">' + medals[i] + '</span>'
+          + '<span class="shc-slot-name">' + escHtml(s.name) + '</span>'
+          + '<div style="text-align:right;flex-shrink:0;">'
+          + '<div class="shc-multi-val ' + multiClasses[i] + '">' + fmtM(s.multi) + '</div>'
+          + '<div class="shc-win-small">' + fmt(s.win) + '</div>'
+          + '</div></div>';
+      }).join('');
+    } else {
+      top3Html = '<div class="shc-empty-top3">No opened slots recorded</div>';
     }
-  }
+
+    // Guess winner
+    var winnerHtml = '';
+    if (winner) {
+      var diff = Math.abs(winner.amount - hunt.endBal);
+      var ava = winner.avatar
+        ? '<img src="' + winner.avatar + '" alt="" style="width:100%;height:100%;object-fit:cover;">'
+        : escHtml(winner.username.substring(0, 2).toUpperCase());
+      winnerHtml = '<div class="shc-winner-block">'
+        + '<div class="shc-winner-row">'
+        + '<span class="shc-winner-trophy">🏆</span>'
+        + '<div style="width:28px;height:28px;border-radius:50%;background:var(--discord);display:flex;align-items:center;justify-content:center;font-size:.62rem;font-weight:800;color:#fff;overflow:hidden;flex-shrink:0;">' + ava + '</div>'
+        + '<div class="shc-winner-info">'
+        + '<div class="shc-winner-name">' + escHtml(winner.username) + '</div>'
+        + '<div class="shc-winner-guess">Guessed ' + fmt(winner.amount) + ' · off by ' + fmt(diff) + '</div>'
+        + '</div>'
+        + '<div class="shc-winner-badge">Winner</div>'
+        + '</div>'
+        + '</div>';
+    } else if (guesses.length > 0) {
+      winnerHtml = '<div class="shc-no-winner"><span>🤔</span><span>' + guesses.length + ' guess' + (guesses.length !== 1 ? 'es' : '') + ' submitted</span></div>';
+    } else {
+      winnerHtml = '<div class="shc-no-winner"><span>💬</span><span>No guesses were submitted</span></div>';
+    }
+
+    card.innerHTML = headerHtml
+      + '<div class="shc-body">'
+      + '<div class="shc-left">'
+      + '<div class="shc-section-label c-gold">🏅 Top 3 Multipliers</div>'
+      + top3Html
+      + balHtml
+      + '</div>'
+      + '<div class="shc-right">'
+      + '<div class="shc-section-label c-neon">🎯 Guess Winner</div>'
+      + winnerHtml
+      + (guesses.length > 0 ? '<div style="margin-top:.85rem;">'
+        + '<div style="font-size:.57rem;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--text3);margin-bottom:.5rem;">All Guesses (' + guesses.length + ')</div>'
+        + '<div style="display:flex;flex-direction:column;gap:.3rem;max-height:160px;overflow-y:auto;">'
+        + [].concat(guesses).sort(function(a,b){return a.amount-b.amount;}).map(function(g){
+            var isW = winner && g.userId === winner.userId;
+            var gAva = g.avatar ? '<img src="' + g.avatar + '" alt="" style="width:100%;height:100%;object-fit:cover;">' : escHtml(g.username.substring(0,2).toUpperCase());
+            return '<div style="display:flex;align-items:center;justify-content:space-between;padding:5px 8px;background:' + (isW ? 'rgba(255,224,0,.06)' : 'rgba(200,255,0,.02)') + ';border:1px solid ' + (isW ? 'rgba(255,224,0,.25)' : 'rgba(13,48,80,.3)') + ';border-radius:6px;">'
+              + '<div style="display:flex;align-items:center;gap:6px;">'
+              + '<div style="width:18px;height:18px;border-radius:50%;background:var(--discord);display:flex;align-items:center;justify-content:center;font-size:.5rem;font-weight:800;color:#fff;overflow:hidden;flex-shrink:0;">' + gAva + '</div>'
+              + '<span style="font-size:.75rem;font-weight:700;color:var(--text2);">' + escHtml(g.username) + '</span>'
+              + (isW ? '<span style="font-size:.55rem;color:var(--gold);">🏆</span>' : '')
+              + '</div>'
+              + '<span style="font-family:\'Rajdhani\',sans-serif;font-size:.88rem;font-weight:700;color:var(--gold);">' + fmt(g.amount) + '</span>'
+              + '</div>';
+          }).join('')
+        + '</div></div>'
+        : '')
+      + '</div>'
+      + '</div>';
+
+    container.appendChild(card);
+  });
+  refreshCursor();
 }
 
 // ════ ARCHIVE ════
@@ -1695,10 +1752,7 @@ var SOCIALS=[
 var track=document.getElementById('strip-track');
 [0,1].forEach(function(){SOCIALS.forEach(function(s){var a=document.createElement('a');a.href=s.href;a.target='_blank';a.className='spill';a.innerHTML='<div class="spill-ico" style="background:rgba(200,255,0,.05);border:1px solid rgba(200,255,0,.12);">'+s.icon+'</div><div><span style="display:block;line-height:1.2;font-size:.77rem;font-weight:700;">'+s.label+'</span><span style="font-size:.64rem;color:var(--text3);display:block;margin-top:1px;">'+s.sub+'</span></div>'+(s.live?'<span class="spill-live"></span>':'');track.appendChild(a);});});
 
-// ════════════════════════════════════════════════════════════
-// SCHEDULE + COUNTDOWN — Corrected ET timezone (10 AM ET)
-// Uses Intl API to get accurate New York local time
-// ════════════════════════════════════════════════════════════
+// ════ SCHEDULE ════
 var SCHED_DAYS=[
   {day:0,label:'Sunday'},{day:1,label:'Monday'},{day:2,label:'Tuesday'},
   {day:3,label:'Wednesday'},{day:4,label:'Thursday'},{day:5,label:'Friday'},{day:6,label:'Saturday'}
@@ -1720,14 +1774,11 @@ function getNYComponents(utcDate) {
   };
 }
 
-// Build UTC Date for 10:00 AM on a specific NY calendar date
 function buildNYStreamTime(nyYear, nyMonth, nyDay) {
-  // Find offset: create a probe UTC time, extract its NY parts, compute offset
   var probeUTC = new Date(Date.UTC(nyYear, nyMonth, nyDay, 17, 0, 0));
   var probeNY = getNYComponents(probeUTC);
   var probeNYasUTC = new Date(Date.UTC(probeNY.year, probeNY.month, probeNY.day, probeNY.hour, probeNY.minute, probeNY.second));
   var offsetMs = probeUTC.getTime() - probeNYasUTC.getTime();
-  // 10:00 AM NY = treat as UTC then add offset
   var targetNYasUTC = new Date(Date.UTC(nyYear, nyMonth, nyDay, 10, 0, 0));
   return new Date(targetNYasUTC.getTime() + offsetMs);
 }
@@ -1737,7 +1788,6 @@ function buildNYStreamTime(nyYear, nyMonth, nyDay) {
   var nyNow = getNYComponents(now);
   var nyDateStr = nyNow.year + '-' + String(nyNow.month+1).padStart(2,'0') + '-' + String(nyNow.day).padStart(2,'0');
   var todayDayOfWeek = new Date(nyDateStr + 'T12:00:00').getDay();
-
   var grid = document.getElementById('sched-grid');
   SCHED_DAYS.forEach(function(s) {
     var isToday = s.day === todayDayOfWeek;
@@ -1756,7 +1806,6 @@ function getNextStream() {
   var nyNow = getNYComponents(now);
   var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
   for (var i = 0; i < 8; i++) {
-    // Candidate NY date = nyNow.day + i
     var candDate = new Date(Date.UTC(nyNow.year, nyNow.month, nyNow.day + i));
     var candNY = getNYComponents(candDate);
     var streamUTC = buildNYStreamTime(candNY.year, candNY.month, candNY.day);
@@ -1783,7 +1832,7 @@ function updateCountdown() {
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
-// ════ KICK STATUS CHECK ════
+// ════ KICK STATUS ════
 function applyKickState(live, viewers) {
   document.getElementById('hero-checking').style.display = 'none';
   var pill = document.getElementById('hero-pill');
@@ -1828,7 +1877,7 @@ setInterval(checkKickStatus, 60000);
 function openClip(f,t,k){var v=document.getElementById('clip-m-video');document.getElementById('clip-m-title').textContent=t;document.getElementById('clip-m-kick-link').href=k;v.src=f;v.play();document.getElementById('clip-modal').classList.add('open');document.body.style.overflow='hidden';}
 function closeClipModal(e){if(e.target===document.getElementById('clip-modal'))closeClipModalDirect();}
 function closeClipModalDirect(){var v=document.getElementById('clip-m-video');document.getElementById('clip-modal').classList.remove('open');v.pause();v.src='';document.body.style.overflow='';}
-document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeClipModalDirect();closeDscModal();closeArchModal();closeConfirmSignout();closeDeleteSlotModal();}});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeClipModalDirect();closeDscModal();closeArchModal();closeConfirmSignout();closeDeleteSlotModal();closeResetModal();}});
 
 // NAV + PAGES
 function showPage(name){
