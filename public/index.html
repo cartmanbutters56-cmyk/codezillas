@@ -903,17 +903,36 @@ footer{position:relative;z-index:1;background:var(--deep);border-top:1px solid v
 
 <div class="toast" id="toast"><span style="color:var(--green);font-size:1rem;">✓</span><span id="toast-msg">Done!</span></div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-// ════════════════════════════════════════════════════════
-// CONFIG
-// ════════════════════════════════════════════════════════
-var DISCORD_CONFIG={
-  ADMIN_ID:'1060456493348044820',
-  CLIENT_ID:'1502559344389001216',
-  REDIRECT_URI:window.location.origin+window.location.pathname,
-  SCOPE:'identify'
+// ══════════════════════════════
+// SUPABASE CONFIG
+// ══════════════════════════════
+var SUPABASE_URL = 'https://vbepohpyyrlnbygxrhbo.supabase.co';
+var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZiZXBvaHB5eXJsbmJ5Z3hyaGJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgzMTUxNjUsImV4cCI6MjA5Mzg5MTE2NX0.Vwe7yoPTPvTytDRIublSLlBB2p04ef-54frSa0bXXxY';
+
+var _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+var DISCORD_CONFIG = {
+  ADMIN_ID: '1060456493348044820',
+  CLIENT_ID: '1502559344389001216',
+  REDIRECT_URI: window.location.origin + window.location.pathname,
+  SCOPE: 'identify'
 };
-var STORAGE_KEY='zillas_hunt_state_v3';
+
+var appState = {
+  user: null,
+  isAdmin: false,
+  activeHunt: null,
+  huntArchive: [],
+  guesses: {},
+  nextHuntId: 1
+};
+var currentPage = 'home';
+var currentHuntTab = 'live';
+var pendingDeleteSlotIdx = null;
+var activityLog = [];
+var realtimeChannel = null;
 
 // ════════════════════════════════════════════════════════
 // PROVIDER + SLOT DB
@@ -1046,75 +1065,74 @@ var currentHuntTab='live';
 var pendingDeleteSlotIdx=null;
 var activityLog=[];
 
-function loadState(){
-  try{
-    var saved=localStorage.getItem(STORAGE_KEY);
-    if(saved){var s=JSON.parse(saved);appState.huntArchive=s.huntArchive||[];appState.nextHuntId=s.nextHuntId||1;appState.activeHunt=s.activeHunt||null;appState.guesses=s.guesses||{};}
-  }catch(e){}
-}
-function saveState(){
-  try{localStorage.setItem(STORAGE_KEY,JSON.stringify({huntArchive:appState.huntArchive,nextHuntId:appState.nextHuntId,activeHunt:appState.activeHunt,guesses:appState.guesses}));}catch(e){}
+async function fetchActiveHunt() {
+  var { data, error } = await _supabase
+    .from('hunts')
+    .select('*')
+    .is('ended_at', null)
+    .order('id', { ascending: false })
+    .limit(1)
+    .single();
+  if (error || !data) { appState.activeHunt = null; return; }
+
+  var { data: slots } = await _supabase
+    .from('slots')
+    .select('*')
+    .eq('hunt_id', data.id)
+    .order('position', { ascending: true });
+
+  appState.activeHunt = {
+    id: data.id,
+    startBal: data.start_bal,
+    endBal: data.end_bal,
+    guessesOpen: data.guesses_open,
+    startedAt: data.started_at,
+    slots: (slots || []).map(function(s) {
+      return { name: s.name, provider: s.provider, bet: s.bet, win: s.win, opened: s.opened, dbId: s.id };
+    })
+  };
+
+  var { data: guesses } = await _supabase
+    .from('guesses')
+    .select('*')
+    .eq('hunt_id', data.id);
+  appState.guesses[data.id] = (guesses || []).map(function(g) {
+    return { userId: g.user_id, username: g.username, avatar: g.avatar, amount: g.amount };
+  });
 }
 
+async function fetchArchive() {
+  var { data } = await _supabase
+    .from('hunts')
+    .select('*')
+    .not('ended_at', 'is', null)
+    .order('id', { ascending: false });
+  appState.huntArchive = data || [];
+}
 // ════════════════════════════════════════════════════════
 // REAL-TIME SYNC
 // Cross-tab via storage events + aggressive polling fallback
 // ALL users (admin, viewer, guest) subscribe on load
 // ════════════════════════════════════════════════════════
-var lastStateHash='';
-function stateHash(){try{return JSON.stringify({h:appState.activeHunt,g:appState.guesses});}catch(e){return '';}}
 
-// Storage event = instant cross-tab sync (same origin)
-window.addEventListener('storage',function(e){
-  if(e.key!==STORAGE_KEY)return;
-  var prevHash=lastStateHash;
-  loadState();
-  var newHash=stateHash();
-  if(newHash!==prevHash){
-    lastStateHash=newHash;
-    renderAll();
-    // Flash sync badge for non-admin viewers
-    var badge=document.getElementById('sync-badge');
-    badge.classList.add('show');
-    clearTimeout(window._syncTimer);
-    window._syncTimer=setTimeout(function(){badge.classList.remove('show');},1500);
-  }
-});
-
-// ── Polling fallback: every 1.5s for ALL users (catches edge cases) ──
-// Note: For production Vercel + Supabase deployment, replace this block with
-// Supabase Realtime channel subscriptions. The polling here ensures
-// the single-file demo works fully offline/without a backend.
-// Supabase setup: enable realtime on hunts, slots, guesses tables;
-// use createClient().channel('*').on('postgres_changes',...) for all users
-// including anon — ensure RLS allows SELECT for anon role.
-setInterval(function(){
-  var prev=stateHash();
-  loadState();
-  var next=stateHash();
-  if(next!==prev){
-    lastStateHash=next;
-    renderAll();
-    // Show sync badge for non-admins receiving updates
-    if(!appState.isAdmin){
-      var badge=document.getElementById('sync-badge');
-      badge.classList.add('show');
-      clearTimeout(window._syncTimer);
-      window._syncTimer=setTimeout(function(){badge.classList.remove('show');},1200);
-    }
-  }
-},1500);
 
 // ════════════════════════════════════════════════════════
 // INIT — ALL users subscribe immediately on page load
 // ════════════════════════════════════════════════════════
-(function(){
-  loadState();
-  lastStateHash=stateHash();
-  try{var u=localStorage.getItem('zillas_user');if(u){var ud=JSON.parse(u);appState.user=ud;appState.isAdmin=(ud.id===DISCORD_CONFIG.ADMIN_ID);}}catch(e){}
-  handleOAuthCallback();
-  renderNavUser();renderHuntTabs();renderAll();
-  updateAdminHuntIdField();
+(function init() {
+  try {
+    var u = localStorage.getItem('zillas_user');
+    if (u) { var ud = JSON.parse(u); appState.user = ud; appState.isAdmin = (ud.id === DISCORD_CONFIG.ADMIN_ID); }
+  } catch(e) {}
+
+  fetchActiveHunt().then(function() {
+    handleOAuthCallback();
+    renderNavUser();
+    renderHuntTabs();
+    renderAll();
+    subscribeRealtime(); // ← This is the critical line for viewers
+    updateAdminHuntIdField();
+  });
 })();
 
 // ════════════════════════════════════════════════════════
@@ -1300,6 +1318,47 @@ function renderHuntLive(){
   refreshCursor();
 }
 
+function subscribeRealtime() {
+  if (realtimeChannel) {
+    _supabase.removeChannel(realtimeChannel);
+  }
+
+  realtimeChannel = _supabase
+    .channel('hunt-realtime')
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'hunts' }, function() {
+      fetchActiveHunt().then(function() {
+        renderAll();
+        showSyncBadge();
+      });
+    })
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'slots' }, function() {
+      fetchActiveHunt().then(function() {
+        renderAll();
+        showSyncBadge();
+      });
+    })
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'guesses' }, function() {
+      fetchActiveHunt().then(function() {
+        renderAll();
+        showSyncBadge();
+      });
+    })
+    .subscribe(function(status) {
+      if (status === 'CHANNEL_ERROR') {
+        // Retry after 3s if disconnected
+        setTimeout(subscribeRealtime, 3000);
+      }
+    });
+}
+
+function showSyncBadge() {
+  var badge = document.getElementById('sync-badge');
+  if (!badge) return;
+  badge.classList.add('show');
+  clearTimeout(window._syncTimer);
+  window._syncTimer = setTimeout(function() { badge.classList.remove('show'); }, 1500);
+}
+
 // ════════════════════════════════════════════════════════
 // DELETE / QUICK-COMPLETE SLOT
 // ════════════════════════════════════════════════════════
@@ -1313,29 +1372,23 @@ function askDeleteSlot(idx,e){
   document.body.style.overflow='hidden';
 }
 function closeDeleteSlotModal(){document.getElementById('confirm-delete-slot').classList.remove('open');document.body.style.overflow='';pendingDeleteSlotIdx=null;}
-function confirmedDeleteSlot(){
-  if(pendingDeleteSlotIdx===null||!appState.activeHunt)return;
-  var name=appState.activeHunt.slots[pendingDeleteSlotIdx].name;
-  appState.activeHunt.slots.splice(pendingDeleteSlotIdx,1);
-  saveState();
-  addActivity('🗑','Admin removed <strong>'+escHtml(name)+'</strong>');
-  renderAll();
+async function confirmedDeleteSlot() {
+  if (pendingDeleteSlotIdx === null || !appState.activeHunt) return;
+  var slot = appState.activeHunt.slots[pendingDeleteSlotIdx];
+  await _supabase.from('slots').delete().eq('id', slot.dbId);
   closeDeleteSlotModal();
-  showToast('Removed: '+name);
+  showToast('Removed: ' + slot.name);
 }
 
 // Quick-complete from card (opens win input inline)
-function quickCompleteSlot(idx,e){
-  if(e){e.preventDefault();e.stopPropagation();}
-  if(!appState.isAdmin||!appState.activeHunt)return;
-  var win=parseFloat(prompt('Win amount for "'+appState.activeHunt.slots[idx].name+'" ($):'));
-  if(isNaN(win)||win<0){if(win!==null)showToast('Invalid amount.');return;}
-  var slot=appState.activeHunt.slots[idx];
-  slot.win=win;slot.opened=true;
-  saveState();
-  addActivity('✅','<strong>'+escHtml(slot.name)+'</strong> → '+fmt(win)+' ('+fmtM(slot.bet?win/slot.bet:0)+')');
-  renderAll();
-  showToast(slot.name+' → '+fmt(win));
+async function quickCompleteSlot(idx, e) {
+  if (e) { e.preventDefault(); e.stopPropagation(); }
+  if (!appState.isAdmin || !appState.activeHunt) return;
+  var win = parseFloat(prompt('Win amount for "' + appState.activeHunt.slots[idx].name + '" ($):'));
+  if (isNaN(win) || win < 0) { showToast('Invalid amount.'); return; }
+  var slot = appState.activeHunt.slots[idx];
+  await _supabase.from('slots').update({ win: win, opened: true }).eq('id', slot.dbId);
+  showToast(slot.name + ' → ' + fmt(win));
 }
 
 // ════════════════════════════════════════════════════════
@@ -1343,75 +1396,77 @@ function quickCompleteSlot(idx,e){
 // ════════════════════════════════════════════════════════
 function updateAdminHuntIdField(){var f=document.getElementById('admin-hunt-id');if(f)f.value=appState.nextHuntId;}
 
-function adminStartHunt(){
-  var sb=parseFloat(document.getElementById('admin-start-bal').value);
-  if(!sb||sb<=0){showToast('Enter a valid starting balance.');return;}
-  if(appState.activeHunt){showToast('End the current hunt first.');return;}
-  appState.activeHunt={id:appState.nextHuntId++,startBal:sb,slots:[],guessesOpen:true,endBal:null,startedAt:new Date().toISOString()};
-  if(!appState.guesses[appState.activeHunt.id])appState.guesses[appState.activeHunt.id]=[];
-  saveState();updateAdminHuntIdField();
-  addActivity('🎰','Hunt <strong>#'+appState.activeHunt.id+'</strong> started — '+fmt(sb));
-  addActivity('🎯','Guesses are now <strong>OPEN</strong>');
-  renderAll();
-  showToast('Hunt #'+appState.activeHunt.id+' started! ✓');
+async function adminStartHunt() {
+  var sb = parseFloat(document.getElementById('admin-start-bal').value);
+  if (!sb || sb <= 0) { showToast('Enter a valid starting balance.'); return; }
+
+  var { data, error } = await _supabase.from('hunts').insert({
+    start_bal: sb, guesses_open: true, started_at: new Date().toISOString()
+  }).select().single();
+
+  if (error) { showToast('Error starting hunt.'); return; }
+  showToast('Hunt #' + data.id + ' started! ✓');
+  // Realtime will auto-update all viewers
 }
 
-function adminEndHunt(){
-  if(!appState.activeHunt){showToast('No active hunt.');return;}
-  var eb=parseFloat(document.getElementById('admin-end-bal').value);
-  if(!isNaN(eb)&&eb>=0)appState.activeHunt.endBal=eb;
-  appState.activeHunt.endedAt=new Date().toISOString();
-  appState.activeHunt.guessesOpen=false;
-  var completed=JSON.parse(JSON.stringify(appState.activeHunt));
-  var gList=appState.guesses[completed.id]||[];
-  if(completed.endBal!=null&&gList.length>0){completed.winner=gList.reduce(function(best,g){return Math.abs(g.amount-completed.endBal)<Math.abs(best.amount-completed.endBal)?g:best;},gList[0]);}
-  appState.huntArchive.unshift(completed);
-  appState.activeHunt=null;
-  activityLog=[];
-  saveState();renderAll();renderArchive();
-  showToast('Hunt ended and archived!');
-}
+async function adminEndHunt() {
+  if (!appState.activeHunt) { showToast('No active hunt.'); return; }
+  var eb = parseFloat(document.getElementById('admin-end-bal').value);
+  var updates = { ended_at: new Date().toISOString(), guesses_open: false };
+  if (!isNaN(eb) && eb >= 0) updates.end_bal = eb;
 
-function adminAddSlot(){
-  if(!appState.activeHunt){showToast('Start a hunt first.');return;}
-  var name=document.getElementById('admin-slot-name').value.trim();
-  if(!name){showToast('Enter a slot name.');return;}
-  var bet=parseFloat(document.getElementById('admin-slot-bet').value)||5;
-  var detected=detectProvider(name);
-  if(appState.activeHunt.slots.some(function(s){return s.name.toLowerCase()===name.toLowerCase();})){showToast('Slot already in hunt.');return;}
-  appState.activeHunt.slots.push({name:detected.slot||name,provider:detected.provider,bet:bet,win:null,opened:false});
-  document.getElementById('admin-slot-name').value='';
-  document.getElementById('admin-slot-prov').value='';
-  document.getElementById('admin-slot-bet').value='';
-  saveState();
-  addActivity('➕','<strong>'+escHtml(detected.slot||name)+'</strong> ('+detected.provider+') — '+fmt(bet)+' bet');
-  renderAll();
-  showToast(name+' added ✓');
+  await _supabase.from('hunts').update(updates).eq('id', appState.activeHunt.id);
+  showToast('Hunt ended!');
 }
+async function adminAddSlot() {
+  if (!appState.activeHunt) { showToast('Start a hunt first.'); return; }
+  var name = document.getElementById('admin-slot-name').value.trim();
+  if (!name) { showToast('Enter a slot name.'); return; }
+  var bet = parseFloat(document.getElementById('admin-slot-bet').value) || 5;
+  var detected = detectProvider(name);
+  var position = appState.activeHunt.slots.length;
 
-function adminToggleGuess(){
-  if(!appState.activeHunt){showToast('Start a hunt first.');return;}
-  appState.activeHunt.guessesOpen=!appState.activeHunt.guessesOpen;
-  saveState();
-  addActivity('🎯','Guesses → <strong>'+(appState.activeHunt.guessesOpen?'OPEN':'CLOSED')+'</strong>');
-  renderAll();
-  showToast('Guesses '+(appState.activeHunt.guessesOpen?'OPENED ✓':'CLOSED ✕'));
-}
-
-function adminSaveResults(){
-  if(!appState.activeHunt)return;
-  var anyChanged=false;
-  appState.activeHunt.slots.forEach(function(slot,i){
-    var inp=document.getElementById('res-win-'+i);
-    if(inp&&inp.value!==''){var w=parseFloat(inp.value);if(!isNaN(w)){
-      var wasOpened=slot.opened;slot.win=w;slot.opened=true;
-      if(!wasOpened){addActivity('✅','<strong>'+escHtml(slot.name)+'</strong> → '+fmt(w)+' ('+fmtM(slot.bet?w/slot.bet:0)+')');}
-      anyChanged=true;
-    }}
+  await _supabase.from('slots').insert({
+    hunt_id: appState.activeHunt.id,
+    name: detected.slot || name,
+    provider: detected.provider,
+    bet: bet,
+    opened: false,
+    position: position
   });
-  if(anyChanged){saveState();renderAll();showToast('Results saved!');}
-  else{showToast('No new results to save.');}
+
+  document.getElementById('admin-slot-name').value = '';
+  document.getElementById('admin-slot-prov').value = '';
+  document.getElementById('admin-slot-bet').value = '';
+  showToast(name + ' added ✓');
 }
+async function adminToggleGuess() {
+  if (!appState.activeHunt) { showToast('Start a hunt first.'); return; }
+  var newState = !appState.activeHunt.guessesOpen;
+  await _supabase.from('hunts').update({ guesses_open: newState }).eq('id', appState.activeHunt.id);
+  showToast('Guesses ' + (newState ? 'OPENED ✓' : 'CLOSED ✕'));
+}
+
+async function adminSaveResults() {
+  if (!appState.activeHunt) return;
+  var promises = [];
+  appState.activeHunt.slots.forEach(function(slot, i) {
+    var inp = document.getElementById('res-win-' + i);
+    if (inp && inp.value !== '') {
+      var w = parseFloat(inp.value);
+      if (!isNaN(w)) {
+        promises.push(_supabase.from('slots').update({ win: w, opened: true }).eq('id', slot.dbId));
+      }
+    }
+  });
+  if (promises.length > 0) {
+    await Promise.all(promises);
+    showToast('Results saved!');
+  } else {
+    showToast('No new results to save.');
+  }
+}
+
 
 function renderAdminPanel(){
   if(!appState.isAdmin)return;
@@ -1515,24 +1570,27 @@ function renderGuessPanel(){
   refreshCursor();
 }
 
-function submitGuess(){
-  if(!appState.user){openDscModal();return;}
-  loadState();
-  if(!appState.activeHunt){showToast('No active hunt.');return;}
-  if(!appState.activeHunt.guessesOpen){showToast('Guesses are currently closed.');return;}
-  var inp=document.getElementById('guess-input');
-  var amt=parseFloat(inp.value);
-  if(isNaN(amt)||amt<=0){showToast('Enter a valid positive amount.');return;}
-  if(amt>1000000){showToast('Amount too large. Check your input.');return;}
-  var huntId=appState.activeHunt.id;
-  if(!appState.guesses[huntId])appState.guesses[huntId]=[];
-  if(appState.guesses[huntId].find(function(g){return g.userId===appState.user.id;})){showToast('You already submitted a guess!');return;}
-  appState.guesses[huntId].push({userId:appState.user.id,username:appState.user.username,avatar:appState.user.avatar||null,amount:amt,submittedAt:new Date().toISOString()});
-  saveState();
-  addActivity('🎯',escHtml(appState.user.username)+' guessed <strong>'+fmt(amt)+'</strong>');
-  inp.value='';
-  renderGuessPanel();
-  showToast('Guess of '+fmt(amt)+' submitted! 🎯');
+async function submitGuess() {
+  if (!appState.user) { openDscModal(); return; }
+  if (!appState.activeHunt) { showToast('No active hunt.'); return; }
+  if (!appState.activeHunt.guessesOpen) { showToast('Guesses are currently closed.'); return; }
+  var amt = parseFloat(document.getElementById('guess-input').value);
+  if (isNaN(amt) || amt <= 0) { showToast('Enter a valid positive amount.'); return; }
+  var huntId = appState.activeHunt.id;
+  var existing = (appState.guesses[huntId] || []).find(function(g) { return g.userId === appState.user.id; });
+  if (existing) { showToast('You already submitted a guess!'); return; }
+
+  await _supabase.from('guesses').insert({
+    hunt_id: huntId,
+    user_id: appState.user.id,
+    username: appState.user.username,
+    avatar: appState.user.avatar || null,
+    amount: amt,
+    submitted_at: new Date().toISOString()
+  });
+
+  document.getElementById('guess-input').value = '';
+  showToast('Guess of ' + fmt(amt) + ' submitted! 🎯');
 }
 
 // ════════════════════════════════════════════════════════
