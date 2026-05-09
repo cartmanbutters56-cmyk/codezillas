@@ -18,8 +18,6 @@
     body.cursor-hover #cursor-dot{width:12px;height:12px;background:var(--accent-gold);}
     body.cursor-hover #cursor-ring{width:52px;height:52px;border-color:rgba(240,180,41,.5);}
     body{font-family:'Exo 2',sans-serif;background:#03050f;color:var(--text-primary);min-height:100vh;overflow-x:hidden}
-
-    /* NAV */
     nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(3,5,15,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:center;padding:0;height:70px}
     .nav-inner{width:100%;max-width:1100px;margin:0 auto;padding:0 1.5rem;display:flex;align-items:center;gap:0}
     .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;cursor:none;flex-shrink:0;margin-right:1.5rem}
@@ -36,8 +34,6 @@
     .nav-social-btn.kick:hover{border-color:rgba(83,252,24,.4);color:#53fc18;background:rgba(83,252,24,.08)}
     .nav-social-btn.discord-social:hover{border-color:rgba(88,101,242,.5);color:#5865f2;background:rgba(88,101,242,.08)}
     .nav-social-btn.twitter:hover{border-color:rgba(255,255,255,.3);color:#e8eeff;background:rgba(255,255,255,.08)}
-
-    /* Discord Login Button */
     .discord-login-btn{display:flex;align-items:center;gap:7px;padding:7px 14px;border-radius:8px;background:rgba(88,101,242,.12);border:1px solid rgba(88,101,242,.3);color:var(--text-secondary);font-family:'Exo 2',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;cursor:none;transition:all .2s;white-space:nowrap;}
     .discord-login-btn:hover{background:rgba(88,101,242,.2);border-color:var(--discord);color:#fff;}
     .discord-user-btn{display:flex;align-items:center;gap:8px;padding:5px 10px 5px 5px;border-radius:8px;background:rgba(88,101,242,.1);border:1px solid rgba(88,101,242,.25);color:var(--text-primary);font-family:'Exo 2',sans-serif;font-size:.78rem;font-weight:700;cursor:none;transition:all .2s;}
@@ -51,8 +47,6 @@
     @keyframes pageIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
     .page.active{animation:pageIn .35s ease both}
     @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-
-    /* HERO */
     .hero{min-height:85vh;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:2rem;padding:5rem 2.5rem 3rem;position:relative;overflow:hidden;}
     .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 0% 50%,rgba(26,111,255,.05) 0%,transparent 70%);pointer-events:none;}
     .hero-left{display:flex;flex-direction:column;gap:0;min-width:0;}
@@ -79,8 +73,6 @@
     .btn-primary:hover{background:var(--blue-glow);transform:translateY(-2px)}
     .btn-outline{background:transparent;color:var(--text-primary);border:1px solid var(--border-bright);border-radius:10px;padding:14px 32px;font-family:'Exo 2',sans-serif;font-size:1rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:none;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s}
     .btn-outline:hover{border-color:var(--blue-bright);color:var(--blue-bright);transform:translateY(-2px)}
-
-    /* SOCIAL STRIP */
     .social-strip{position:relative;overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:rgba(6,11,26,.6);padding:2rem 0;z-index:1;}
     .social-strip::before,.social-strip::after{content:'';position:absolute;top:0;bottom:0;width:160px;z-index:2;pointer-events:none;}
     .social-strip::before{left:0;background:linear-gradient(90deg,rgba(3,5,15,1),transparent);}
@@ -108,8 +100,6 @@
     .social-pill-label{position:relative;z-index:1;}
     .social-pill-sub{font-size:.65rem;font-weight:500;color:var(--text-muted);display:block;margin-top:1px;letter-spacing:.3px;}
     .social-pill-live{width:6px;height:6px;border-radius:50%;background:#53fc18;animation:pulse-green 1.2s infinite;flex-shrink:0;position:relative;z-index:1;}
-
-    /* STREAM TIME */
     .stream-time-section{position:relative;z-index:1;padding:5rem 2rem;border-bottom:1px solid var(--border);overflow:hidden;}
     .stream-time-section::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(26,111,255,.07) 0%,transparent 70%);}
     .stream-time-inner{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:3.5rem;}
@@ -147,8 +137,6 @@
     .schedule-tz{font-size:.58rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);}
     .schedule-today-badge{display:inline-flex;align-items:center;gap:4px;background:rgba(240,180,41,.14);border:1px solid rgba(240,180,41,.3);color:var(--accent-gold);font-size:.55rem;font-weight:800;letter-spacing:1.5px;padding:3px 8px;border-radius:20px;margin-top:.5rem;}
     .schedule-today-badge-dot{width:5px;height:5px;border-radius:50%;background:var(--accent-gold);animation:pulse-green 1.2s infinite;}
-
-    /* CLIPS */
     .clips-section{position:relative;z-index:1;padding:4rem 0;border-bottom:1px solid var(--border);}
     .clips-inner{max-width:1100px;margin:0 auto;padding:0 2rem;}
     .clips-header{display:flex;align-items:baseline;gap:1rem;margin-bottom:.5rem;}
@@ -199,8 +187,6 @@
     .clip-num{font-family:'Rajdhani',sans-serif;font-size:.8rem;font-weight:700;color:var(--text-muted);letter-spacing:1px;}
     .clip-watch-link{font-size:.72rem;font-weight:700;color:var(--blue-bright);text-decoration:none;cursor:none;letter-spacing:.5px;transition:color .2s;}
     .clip-watch-link:hover{color:var(--blue-glow);}
-
-    /* ═══ BONUS HUNT TRACKER ═══ */
     .hunt-page{background:var(--bg-void);}
     .hunt-hero{position:relative;padding:3.5rem 2rem 2rem;text-align:center;overflow:hidden;border-bottom:1px solid var(--border);}
     .hunt-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(83,252,24,.05) 0%,rgba(26,111,255,.04) 40%,transparent 70%);pointer-events:none;}
@@ -209,20 +195,11 @@
     .hunt-hero-title{font-family:'Rajdhani',sans-serif;font-size:clamp(2.5rem,5vw,4.5rem);font-weight:700;text-transform:uppercase;letter-spacing:-1px;line-height:.95;margin-bottom:.75rem;}
     .hunt-hero-title .word-green{color:var(--kick-green);}
     .hunt-hero-sub{color:var(--text-secondary);font-size:.9rem;line-height:1.7;}
-
-    /* Tabs */
     .hunt-tabs{display:flex;align-items:center;gap:.5rem;padding:1.25rem 2rem 0;max-width:1200px;margin:0 auto;}
     .hunt-tab{padding:9px 22px;border-radius:8px 8px 0 0;border:1px solid transparent;border-bottom:none;font-family:'Exo 2',sans-serif;font-size:.82rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;cursor:none;color:var(--text-muted);background:transparent;transition:all .2s;}
     .hunt-tab.active{color:var(--kick-green);background:var(--bg-card);border-color:var(--border);}
     .hunt-tab:hover:not(.active){color:var(--text-secondary);background:rgba(255,255,255,.03);}
-
     .hunt-main{max-width:1200px;margin:0 auto;padding:0 2rem 4rem;}
-
-    /* Active Hunt Panel */
-    .hunt-active-panel{display:none;background:var(--bg-card);border:1px solid var(--border);border-radius:0 12px 12px 12px;padding:2rem;margin-bottom:1.5rem;}
-    .hunt-active-panel.visible{display:block;}
-
-    /* Stats bar */
     .hunt-stats-row{display:grid;grid-template-columns:repeat(6,1fr);gap:.75rem;margin-bottom:1.5rem;}
     .hunt-stat{background:var(--bg-dark);border:1px solid var(--border);border-radius:12px;padding:1rem .75rem;text-align:center;transition:all .3s;}
     .hunt-stat:hover{border-color:var(--border-bright);transform:translateY(-2px);}
@@ -233,14 +210,10 @@
     .hunt-stat-val.blue{color:var(--blue-bright);}
     .hunt-stat-val.red{color:var(--red);}
     .hunt-stat-label{font-size:.56rem;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--text-muted);}
-
-    /* Progress bar */
     .hunt-progress-wrap{margin-bottom:1.5rem;}
     .hunt-progress-bar{width:100%;height:8px;background:rgba(255,255,255,.05);border-radius:10px;overflow:hidden;margin-bottom:.5rem;}
     .hunt-progress-fill{height:100%;border-radius:10px;background:linear-gradient(90deg,var(--kick-green),#38f080);transition:width .6s ease;box-shadow:0 0 12px rgba(83,252,24,.4);}
     .hunt-progress-label{font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);text-align:center;}
-
-    /* Slots table */
     .hunt-table-wrap{overflow-x:auto;}
     .hunt-table{width:100%;border-collapse:collapse;}
     .hunt-table th{font-size:.6rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);padding:8px 12px;text-align:left;border-bottom:1px solid var(--border);}
@@ -259,14 +232,10 @@
     .status-dot{width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:6px;}
     .status-dot.opened{background:var(--kick-green);}
     .status-dot.pending{background:var(--text-muted);}
-
-    /* No hunt state */
     .no-hunt-state{text-align:center;padding:4rem 2rem;border:1px dashed var(--border);border-radius:12px;background:var(--bg-card);}
     .no-hunt-icon{font-size:2.5rem;margin-bottom:1rem;}
     .no-hunt-title{font-family:'Rajdhani',sans-serif;font-size:1.4rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-secondary);margin-bottom:.5rem;}
     .no-hunt-sub{font-size:.85rem;color:var(--text-muted);}
-
-    /* Guess panel */
     .guess-panel{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-top:1.5rem;}
     .guess-panel-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;}
     .guess-panel-title{font-family:'Rajdhani',sans-serif;font-size:1.1rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;}
@@ -292,8 +261,6 @@
     .guess-user-avatar img{width:100%;height:100%;object-fit:cover;}
     .guess-amount{font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;color:var(--accent-gold);}
     .guess-winner-badge{font-size:.62rem;font-weight:800;letter-spacing:1px;color:var(--accent-gold);background:rgba(240,180,41,.15);border:1px solid rgba(240,180,41,.3);padding:2px 7px;border-radius:10px;}
-
-    /* Archive */
     .archive-panel{display:none;}
     .archive-panel.visible{display:block;}
     .archive-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1rem;}
@@ -313,14 +280,6 @@
     .archive-profit.loss{background:rgba(255,68,68,.1);border:1px solid rgba(255,68,68,.2);color:var(--red);}
     .archive-expand-btn{width:100%;margin-top:.75rem;padding:8px;border-radius:8px;background:rgba(255,255,255,.03);border:1px solid var(--border);color:var(--text-muted);font-family:'Exo 2',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;cursor:none;transition:all .2s;}
     .archive-expand-btn:hover{background:rgba(83,252,24,.05);border-color:rgba(83,252,24,.2);color:var(--kick-green);}
-    .archive-detail{display:none;margin-top:.75rem;border-top:1px solid var(--border);padding-top:.75rem;}
-    .archive-detail.open{display:block;}
-    .archive-slots-list{display:flex;flex-direction:column;gap:.3rem;}
-    .archive-slot-row{display:flex;align-items:center;justify-content:space-between;font-size:.78rem;padding:4px 0;}
-    .archive-slot-name{color:var(--text-secondary);font-weight:600;}
-    .archive-slot-multi{font-family:'Rajdhani',sans-serif;font-weight:700;color:var(--kick-green);font-size:.88rem;}
-
-    /* Admin Panel */
     .admin-panel{background:linear-gradient(135deg,rgba(240,180,41,.04),rgba(240,180,41,.01));border:1px solid rgba(240,180,41,.15);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem;}
     .admin-panel-title{display:flex;align-items:center;gap:8px;font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--accent-gold);margin-bottom:1.25rem;}
     .admin-form-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem;margin-bottom:.75rem;}
@@ -343,21 +302,29 @@
     .guess-toggle-btn.open-state:hover{background:rgba(83,252,24,.2);}
     .guess-toggle-btn.closed-state{background:rgba(255,68,68,.1);border-color:rgba(255,68,68,.3);color:var(--red);}
     .guess-toggle-btn.closed-state:hover{background:rgba(255,68,68,.2);}
+    .autocomplete-list{position:absolute;top:100%;left:0;right:0;background:var(--bg-card2);border:1px solid var(--border-bright);border-radius:0 0 10px 10px;z-index:100;max-height:180px;overflow-y:auto;display:none;}
+    .autocomplete-item{padding:8px 12px;font-size:.85rem;cursor:none;transition:background .15s;display:flex;align-items:center;justify-content:space-between;}
+    .autocomplete-item:hover{background:rgba(26,111,255,.1);}
+    .admin-slot-input-wrap{position:relative;flex:1;}
 
-    /* Detect badge */
-    .detect-indicator{font-size:.65rem;padding:2px 6px;border-radius:5px;background:rgba(83,252,24,.08);border:1px solid rgba(83,252,24,.2);color:var(--kick-green);margin-left:4px;}
-
-    /* Discord modal */
+    /* ── Discord OAuth modal ── */
     .discord-modal{display:none;position:fixed;inset:0;z-index:9500;background:rgba(0,0,0,.85);backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:2rem;}
     .discord-modal.open{display:flex;}
     .discord-modal-inner{background:var(--bg-card2);border:1px solid rgba(88,101,242,.3);border-radius:20px;padding:2.5rem;max-width:400px;width:100%;text-align:center;animation:modalIn .3s cubic-bezier(.23,1,.32,1) both;}
     .discord-modal-icon{width:72px;height:72px;border-radius:50%;background:rgba(88,101,242,.15);border:1px solid rgba(88,101,242,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;font-size:2rem;}
     .discord-modal-title{font-family:'Rajdhani',sans-serif;font-size:1.6rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:.5rem;}
     .discord-modal-sub{font-size:.88rem;color:var(--text-secondary);line-height:1.6;margin-bottom:1.75rem;}
-    .discord-signin-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:13px;border-radius:12px;background:var(--discord);border:none;color:#fff;font-family:'Exo 2',sans-serif;font-size:1rem;font-weight:800;letter-spacing:.5px;text-transform:uppercase;cursor:none;transition:all .2s;margin-bottom:.75rem;}
+    .discord-signin-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:13px;border-radius:12px;background:var(--discord);border:none;color:#fff;font-family:'Exo 2',sans-serif;font-size:1rem;font-weight:800;letter-spacing:.5px;text-transform:uppercase;cursor:none;transition:all .2s;margin-bottom:.75rem;text-decoration:none;}
     .discord-signin-btn:hover{background:#4752c4;transform:translateY(-1px);}
     .discord-cancel-btn{width:100%;padding:10px;border-radius:10px;background:transparent;border:1px solid var(--border);color:var(--text-muted);font-family:'Exo 2',sans-serif;font-size:.85rem;font-weight:700;cursor:none;transition:all .2s;}
     .discord-cancel-btn:hover{border-color:var(--border-bright);color:var(--text-secondary);}
+
+    /* OAuth loading state */
+    .oauth-loading{display:none;position:fixed;inset:0;z-index:9600;background:rgba(3,5,15,.97);align-items:center;justify-content:center;flex-direction:column;gap:1rem;}
+    .oauth-loading.open{display:flex;}
+    .oauth-spinner{width:48px;height:48px;border:3px solid rgba(88,101,242,.2);border-top-color:var(--discord);border-radius:50%;animation:spin 1s linear infinite;}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .oauth-loading-text{font-family:'Rajdhani',sans-serif;font-size:1.1rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-secondary);}
 
     /* Archive modal */
     .archive-hunt-modal{display:none;position:fixed;inset:0;z-index:9200;background:rgba(0,0,0,.88);backdrop-filter:blur(12px);align-items:flex-start;justify-content:center;padding:2rem;overflow-y:auto;}
@@ -369,8 +336,6 @@
     .ahm-close:hover{background:rgba(255,0,0,.15);color:var(--red);}
     .ahm-body{padding:1.5rem;}
     .ahm-stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin-bottom:1.5rem;}
-
-    /* Rewards */
     .rewards-page{background:var(--bg-void);}
     .rewards-hero-new{position:relative;padding:4.5rem 2rem 3rem;text-align:center;overflow:hidden;border-bottom:1px solid var(--border);}
     .rewards-hero-new::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(26,111,255,.08) 0%,transparent 60%);pointer-events:none;}
@@ -423,8 +388,6 @@
     .rewards-refer{background:linear-gradient(135deg,var(--bg-card2) 0%,var(--bg-card) 100%);border:1px solid var(--border-bright);border-radius:18px;padding:2rem 2.5rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;}
     .rewards-refer h3{font-family:'Rajdhani',sans-serif;font-size:1.4rem;font-weight:700;text-transform:uppercase;margin-bottom:.3rem;}
     .rewards-refer p{color:var(--text-secondary);font-size:.88rem;}
-
-    /* FAQ */
     .faq-page-wrap{max-width:760px;margin:0 auto;padding:5rem 2rem;text-align:center}
     .faq-page-wrap .section-label,.faq-page-wrap .section-title,.faq-page-wrap .section-sub{text-align:center}
     .faq-page-wrap .section-sub{margin-left:auto;margin-right:auto}
@@ -440,13 +403,9 @@
     .section-label{font-size:.72rem;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--blue-bright);margin-bottom:.75rem}
     .section-title{font-family:'Rajdhani',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;text-transform:uppercase;margin-bottom:1rem}
     .section-sub{color:var(--text-secondary);font-size:1rem;max-width:500px;line-height:1.7;margin-bottom:3rem}
-
-    /* TOAST */
     .toast{position:fixed;bottom:5rem;left:50%;transform:translateX(-50%) translateY(80px);background:var(--bg-card2);border:1px solid var(--blue-mid);border-radius:10px;padding:12px 20px;font-size:.875rem;font-weight:600;color:var(--text-primary);z-index:9999;display:flex;align-items:center;gap:8px;opacity:0;transition:all .3s;white-space:nowrap}
     .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
     .toast-icon{color:var(--green);font-size:1.1rem}
-
-    /* FLOAT BTN */
     .kick-float{position:fixed;bottom:1.5rem;right:1.5rem;z-index:900;display:flex;flex-direction:column;align-items:flex-end;gap:.5rem;pointer-events:none}
     .kick-float-btn{pointer-events:all;display:flex;align-items:center;gap:8px;background:#1a1f2e;border:1.5px solid rgba(83,252,24,.5);border-radius:50px;padding:10px 18px 10px 12px;text-decoration:none;color:var(--text-primary);font-family:'Exo 2',sans-serif;font-size:.82rem;font-weight:700;letter-spacing:.5px;cursor:none;transition:all .25s}
     .kick-float-icon{width:28px;height:28px;background:#53fc18;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:#000;flex-shrink:0}
@@ -457,8 +416,6 @@
     .kick-float-offline-dot{width:8px;height:8px;border-radius:50%;background:var(--text-muted);flex-shrink:0}
     .kick-float-status{font-size:.7rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#53fc18}
     .kick-float-status.is-offline{color:var(--text-muted)}
-
-    /* FOOTER */
     footer{position:relative;z-index:1;background:var(--bg-deep);border-top:1px solid var(--border);padding:3rem 2rem 2rem}
     .footer-inner{max-width:1200px;margin:0 auto}
     .footer-top{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border);margin-bottom:2rem}
@@ -479,8 +436,6 @@
     .footer-legal{font-size:.78rem;color:var(--text-muted)}
     .age-badge{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:6px;border:1px solid var(--text-muted);font-size:.7rem;font-weight:800;color:var(--text-muted)}
     .footer-disclaimer{font-size:.72rem;color:var(--text-muted);max-width:500px;line-height:1.5}
-
-    /* HAMBURGER */
     .hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;cursor:none;padding:8px;z-index:1100}
     .hamburger span{display:block;width:100%;height:2px;background:var(--text-primary);border-radius:2px;transition:all .3s}
     .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
@@ -493,11 +448,6 @@
     .mobile-menu-divider{height:1px;background:var(--border);margin:.5rem 0}
     .mobile-get-code{background:var(--blue-bright)!important;color:white!important;border-color:transparent!important;justify-content:center;margin-top:.25rem;font-weight:700!important}
     .empty-archive{text-align:center;padding:3rem;color:var(--text-muted);font-size:.9rem;}
-    .autocomplete-list{position:absolute;top:100%;left:0;right:0;background:var(--bg-card2);border:1px solid var(--border-bright);border-radius:0 0 10px 10px;z-index:100;max-height:180px;overflow-y:auto;display:none;}
-    .autocomplete-item{padding:8px 12px;font-size:.85rem;cursor:none;transition:background .15s;display:flex;align-items:center;justify-content:space-between;}
-    .autocomplete-item:hover{background:rgba(26,111,255,.1);}
-    .admin-slot-input-wrap{position:relative;flex:1;}
-
     @media(max-width:1024px){.rewards-perks-grid{grid-template-columns:repeat(2,1fr)}.schedule-grid{grid-template-columns:repeat(3,1fr)}.hunt-stats-row{grid-template-columns:repeat(3,1fr)}.archive-grid{grid-template-columns:1fr 1fr}.ahm-stats-row{grid-template-columns:1fr 1fr}}
     @media(max-width:960px){.hero{grid-template-columns:1fr;min-height:auto;padding:3rem 2rem;}.hero-stream-box{order:-1;}.footer-top{grid-template-columns:1fr 1fr}.rewards-code-hero{grid-template-columns:1fr;text-align:center;padding:2rem 1.5rem;}.rewards-cards-grid{grid-template-columns:1fr;}.clips-row{grid-template-columns:1fr 1fr;}}
     @media(max-width:768px){.schedule-grid{grid-template-columns:repeat(3,1fr)}.clips-row{grid-template-columns:1fr}.archive-grid{grid-template-columns:1fr}.admin-form-row{grid-template-columns:1fr 1fr}.admin-slot-entry{grid-template-columns:1fr 1fr auto auto}}
@@ -536,13 +486,20 @@
       <svg width="36" height="36" viewBox="0 0 24 24" fill="#5865f2"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.1 18.08.11 18.1.128 18.114a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
     </div>
     <div class="discord-modal-title">Sign in with Discord</div>
-    <p class="discord-modal-sub">Connect your Discord account to submit balance guesses during live bonus hunts and appear on the leaderboard.</p>
-    <button class="discord-signin-btn" onclick="simulateDiscordLogin()">
+    <p class="discord-modal-sub">Connect your real Discord account to submit balance guesses and appear on the leaderboard with your username and avatar.</p>
+    <a id="discord-oauth-btn" href="#" class="discord-signin-btn" onclick="startDiscordOAuth()">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.1 18.08.11 18.1.128 18.114a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
       Connect Discord
-    </button>
+    </a>
     <button class="discord-cancel-btn" onclick="closeDiscordModal()">Cancel</button>
+    <p style="font-size:.7rem;color:var(--text-muted);margin-top:.75rem;line-height:1.5;">We only read your username, avatar, and Discord ID. No access to messages or servers.</p>
   </div>
+</div>
+
+<!-- OAuth Loading Overlay -->
+<div class="oauth-loading" id="oauth-loading">
+  <div class="oauth-spinner"></div>
+  <div class="oauth-loading-text">Connecting to Discord…</div>
 </div>
 
 <!-- ARCHIVE HUNT DETAIL MODAL -->
@@ -584,13 +541,7 @@
       <a href="https://kick.com/zillas" target="_blank" class="nav-social-btn kick" title="Watch on Kick"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="2" width="20" height="20" rx="4"/><text x="6" y="16" font-size="11" font-weight="900" fill="#000">K</text></svg></a>
       <a href="https://discord.gg/Rx7rc4bTa" target="_blank" class="nav-social-btn discord-social" title="Join Discord"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.1 18.08.11 18.1.128 18.114a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg></a>
       <a href="https://x.com/zill4s?s=20" target="_blank" class="nav-social-btn twitter" title="Follow on X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-      <!-- Discord Login -->
-      <div id="nav-discord-area">
-        <button class="discord-login-btn" onclick="openDiscordModal()">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.1 18.08.11 18.1.128 18.114a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
-          <span class="login-label">Sign In</span>
-        </button>
-      </div>
+      <div id="nav-discord-area"></div>
     </div>
   </div>
 </nav>
@@ -702,7 +653,6 @@
     </div>
   </div>
 
-  <!-- CLIPS -->
   <div class="clips-section">
     <div class="clips-inner">
       <div class="clips-header">
@@ -744,7 +694,7 @@
   </div>
 </div>
 
-<!-- ═══════════════════════ BONUS HUNT TRACKER ═══════════════════════ -->
+<!-- ═══════════════════════ BONUS HUNT ═══════════════════════ -->
 <div class="page hunt-page" id="page-hunt">
   <div class="hunt-hero">
     <div class="hunt-hero-inner">
@@ -762,18 +712,13 @@
   </div>
 
   <div class="hunt-main">
-
-    <!-- LIVE HUNT TAB -->
     <div id="hunt-live-panel">
-
-      <!-- Admin Panel (only visible to admin) -->
+      <!-- Admin Panel (only shown to Discord ID 1060456493348044820) -->
       <div class="admin-panel" id="admin-panel" style="display:none;">
         <div class="admin-panel-title">
           <span>⚙</span> Admin Controls
-          <span class="admin-badge">ADMIN</span>
+          <span class="admin-badge">👑 ADMIN</span>
         </div>
-
-        <!-- Start New Hunt -->
         <div style="margin-bottom:1rem;">
           <div style="font-size:.68rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:.6rem;">Start New Hunt</div>
           <div class="admin-form-row">
@@ -785,8 +730,6 @@
             </div>
           </div>
         </div>
-
-        <!-- Add Slot -->
         <div id="admin-slot-section" style="display:none;">
           <div style="font-size:.68rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:.6rem;">Add Slot</div>
           <div class="admin-slot-entry">
@@ -794,19 +737,16 @@
               <input class="admin-input" type="text" id="admin-slot-name" placeholder="Slot name…" oninput="onSlotInput(this)" autocomplete="off"/>
               <div class="autocomplete-list" id="autocomplete-list"></div>
             </div>
-            <input class="admin-input" type="text" id="admin-slot-provider" placeholder="Provider (auto-detected)" readonly/>
+            <input class="admin-input" type="text" id="admin-slot-provider" placeholder="Provider (auto)" readonly/>
             <input class="admin-input" type="number" id="admin-slot-bet" placeholder="Bet $" step="0.01"/>
             <button class="admin-btn blue" onclick="adminAddSlot()">+ Add</button>
           </div>
         </div>
-
-        <!-- Open Slots Results -->
         <div id="admin-results-section" style="display:none;margin-top:.75rem;">
-          <div style="font-size:.68rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:.6rem;">Enter Results (Win Amount per slot)</div>
+          <div style="font-size:.68rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:.6rem;">Enter Win Amounts</div>
           <div id="admin-results-list" style="display:flex;flex-direction:column;gap:.4rem;margin-bottom:.75rem;"></div>
           <input class="admin-input" type="number" id="admin-ending-bal" placeholder="Ending Balance ($)" step="0.01" style="max-width:260px;margin-bottom:.75rem;"/>
         </div>
-
         <div class="admin-actions">
           <button class="guess-toggle-btn open-state" id="guess-toggle-btn" onclick="adminToggleGuess()">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
@@ -824,9 +764,7 @@
           <div class="no-hunt-title">No Active Hunt</div>
           <p class="no-hunt-sub" id="no-hunt-sub-msg">Check back during a live stream when a bonus hunt is running!</p>
         </div>
-
         <div id="hunt-display" style="display:none;">
-          <!-- Stats -->
           <div class="hunt-stats-row">
             <div class="hunt-stat"><div class="hunt-stat-icon">🆔</div><div class="hunt-stat-val blue" id="stat-hunt-id">#1</div><div class="hunt-stat-label">Hunt ID</div></div>
             <div class="hunt-stat"><div class="hunt-stat-icon">🎰</div><div class="hunt-stat-val" id="stat-bonuses">0</div><div class="hunt-stat-label">Bonuses</div></div>
@@ -835,27 +773,13 @@
             <div class="hunt-stat"><div class="hunt-stat-icon">✖</div><div class="hunt-stat-val" id="stat-avg-multi">0.00x</div><div class="hunt-stat-label">Avg Multi</div></div>
             <div class="hunt-stat"><div class="hunt-stat-icon">🏆</div><div class="hunt-stat-val" id="stat-req-multi">0.00x</div><div class="hunt-stat-label">Req Multi</div></div>
           </div>
-
-          <!-- Progress -->
           <div class="hunt-progress-wrap">
             <div class="hunt-progress-bar"><div class="hunt-progress-fill" id="hunt-progress-fill" style="width:0%"></div></div>
             <div class="hunt-progress-label" id="hunt-progress-label">0 / 0 BONUSES OPENED</div>
           </div>
-
-          <!-- Slots Table -->
           <div class="hunt-table-wrap">
             <table class="hunt-table">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Slot</th>
-                  <th>Provider</th>
-                  <th>Bet</th>
-                  <th>Win</th>
-                  <th>Multi</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
+              <thead><tr><th>#</th><th>Slot</th><th>Provider</th><th>Bet</th><th>Win</th><th>Multi</th><th>Status</th></tr></thead>
               <tbody id="hunt-table-body"></tbody>
             </table>
           </div>
@@ -868,15 +792,11 @@
           <div class="guess-panel-title">🎯 Guess the Final Balance</div>
           <span id="guess-status-badge" class="guess-closed-badge">⬤ Closed</span>
         </div>
-
-        <!-- Not logged in -->
         <div id="guess-login-prompt" class="guess-need-login">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="#5865f2"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.1 18.08.11 18.1.128 18.114a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
           <span>Sign in with Discord to submit your guess and appear on the leaderboard.</span>
           <button class="discord-login-btn" onclick="openDiscordModal()" style="margin-left:auto;white-space:nowrap;">Sign In</button>
         </div>
-
-        <!-- Logged in guess form -->
         <div id="guess-form-area" style="display:none;">
           <div class="guess-input-row">
             <input class="guess-input" type="number" id="guess-amount-input" placeholder="Your guess: $0.00" step="0.01" min="0"/>
@@ -884,8 +804,6 @@
           </div>
           <div id="my-guess-display" style="display:none;font-size:.8rem;color:var(--kick-green);margin-bottom:.75rem;">✓ Your guess: <strong id="my-guess-val"></strong></div>
         </div>
-
-        <!-- Guesses list -->
         <div style="font-size:.68rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:.6rem;" id="guesses-list-label">Community Guesses (0)</div>
         <div class="guess-list" id="guesses-list">
           <div style="text-align:center;padding:1.5rem;color:var(--text-muted);font-size:.85rem;">No guesses yet — be the first!</div>
@@ -903,14 +821,13 @@
         <div style="font-size:.8rem;color:var(--text-muted);" id="archive-count-label">0 hunts archived</div>
       </div>
       <div class="archive-grid" id="archive-grid">
-        <div class="empty-archive">No archived hunts yet. Start and complete a hunt to see it here!</div>
+        <div class="empty-archive">No archived hunts yet.</div>
       </div>
     </div>
-
   </div>
 </div>
 
-<!-- ═══════════════════════ REWARDS / BONUSES ═══════════════════════ -->
+<!-- ═══════════════════════ REWARDS ═══════════════════════ -->
 <div class="page rewards-page" id="page-rewards">
   <div class="rewards-hero-new">
     <div class="rewards-hero-inner">
@@ -938,12 +855,12 @@
     <p class="rewards-what-label">✨ WHAT YOU GET WITH CODE ZILLAS</p>
     <div class="rewards-cards-grid">
       <div class="reward-card rc-gold"><div class="reward-card-badge badge-rakeback">⚡ Instant</div><div class="reward-card-icon">📈</div><div class="reward-card-amount amount-gold">3.5%</div><div class="reward-card-name">Rakeback</div><p class="reward-card-desc">Instant 3.5% rakeback on every wager — automatically credited back to your account.</p></div>
-      <div class="reward-card rc-stake"><div class="reward-card-badge badge-stake">Stake Cash</div><div class="reward-card-icon">💵</div><div class="reward-card-amount amount-stake">$25</div><div class="reward-card-name">Stake Cash</div><p class="reward-card-desc">$25 in Stake Cash credited on sign-up with code ZILLAS. Use it on all your favourite casino games.</p></div>
+      <div class="reward-card rc-stake"><div class="reward-card-badge badge-stake">Stake Cash</div><div class="reward-card-icon">💵</div><div class="reward-card-amount amount-stake">$25</div><div class="reward-card-name">Stake Cash</div><p class="reward-card-desc">$25 in Stake Cash credited on sign-up with code ZILLAS.</p></div>
       <div class="reward-card rc-coins"><div class="reward-card-badge badge-coins">Gold Coins</div><div class="reward-card-icon">🪙</div><div class="reward-card-amount amount-coins">250K</div><div class="reward-card-name">Gold Coins</div><p class="reward-card-desc">250,000 Gold Coins loaded straight into your account — ready from the moment you register.</p></div>
     </div>
     <p class="rewards-what-label" style="margin-top:2rem;">🎁 STREAM EXCLUSIVE PERKS</p>
     <div class="rewards-perks-grid">
-      <div class="rewards-perk"><div class="rewards-perk-icon">🎰</div><div class="rewards-perk-title">Bonus Drops</div><p class="rewards-perk-desc">Random bonus drops during live streams. Stay active in chat — winners are picked on the spot.</p></div>
+      <div class="rewards-perk"><div class="rewards-perk-icon">🎰</div><div class="rewards-perk-title">Bonus Drops</div><p class="rewards-perk-desc">Random bonus drops during live streams. Stay active in chat — winners picked on the spot.</p></div>
       <div class="rewards-perk"><div class="rewards-perk-icon">🔄</div><div class="rewards-perk-title">Auto Rakeback</div><p class="rewards-perk-desc">Your 3.5% rakeback compounds automatically. No claiming required.</p></div>
       <div class="rewards-perk"><div class="rewards-perk-icon">👑</div><div class="rewards-perk-title">VIP Access</div><p class="rewards-perk-desc">Top community members get invited to our VIP Discord with exclusive early codes and private giveaways.</p></div>
       <div class="rewards-perk"><div class="rewards-perk-icon">🏆</div><div class="rewards-perk-title">Hunt Entry</div><p class="rewards-perk-desc">Code ZILLAS keeps you eligible for all live hunt prizes and community competitions.</p></div>
@@ -964,7 +881,7 @@
     <div class="faq-list">
       <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">How do I use the Zillas promo code?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer"><p>Go to Stake.us, create an account, and enter <strong>ZILLAS</strong> in the promo code field. You'll instantly unlock 3.5% rakeback, $25 Stake Cash, and 250,000 Gold Coins.</p></div></div>
       <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">What is the Bonus Hunt Tracker?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer"><p>During live streams, the host opens bonus buys across multiple slots. The tracker shows every slot, bet size, win amount, and multiplier in real time. Sign in with Discord to guess the final balance!</p></div></div>
-      <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">How do I guess the final balance?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer"><p>Sign in with your Discord account from the Bonus Hunt page, then enter your predicted final balance while guesses are open. Your guess will show alongside your Discord username on the leaderboard.</p></div></div>
+      <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">How do I guess the final balance?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer"><p>Sign in with your real Discord account, then enter your predicted final balance while guesses are open. Your Discord username and avatar will appear on the leaderboard.</p></div></div>
       <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">When does Zillas go live on Kick?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer"><p>We stream Monday & Friday at 7 AM EST, Wednesday at 8 AM EST, Saturday at 6 AM EST, and Sunday at 5 AM EST. Follow us at kick.com/zillas and join the Discord for notifications!</p></div></div>
       <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">What is Stake.us?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer"><p>Stake.us is a social casino platform available in the United States offering casino-style games using virtual currency, with opportunities to earn real prizes through sweepstakes mechanics.</p></div></div>
       <div class="faq-item" style="border:none;"><div class="faq-question" onclick="toggleFaq(this)">How do I contact Zillas?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer"><p>The best way is through our Discord or catching us live on Kick. We respond to all DMs and community questions as fast as we can!</p></div></div>
@@ -1017,520 +934,304 @@
 <div class="toast" id="toast"><span class="toast-icon">✓</span><span id="toast-msg">Done!</span></div>
 
 <script>
-// ─────────────────────────────────────────────
+// ═══════════════════════════════════════════════════
+// CONFIGURATION — Set your Discord OAuth app details here
+// ═══════════════════════════════════════════════════
+var DISCORD_CONFIG = {
+  // ── YOUR admin Discord user ID (only this ID gets admin access) ──
+  ADMIN_ID: '1060456493348044820',
+
+  // ── Discord OAuth2 settings ──
+  // 1. Go to https://discord.com/developers/applications
+  // 2. Create a New Application → OAuth2 → add redirect URI matching your domain
+  // 3. Paste your Client ID below:
+  CLIENT_ID: 'YOUR_DISCORD_CLIENT_ID',   // ← replace with your real client ID
+
+  // The redirect URI must EXACTLY match what you set in the Discord dev portal.
+  // When running locally it will be: http://localhost:PORT/
+  // When deployed it will be your real domain e.g. https://zillas.gg/
+  REDIRECT_URI: window.location.origin + window.location.pathname,
+
+  // Scopes we request (identify = basic profile, no email/guilds needed)
+  SCOPE: 'identify',
+};
+
+// ═══════════════════════════════════════════════════
+// DISCORD OAUTH  (PKCE-less implicit flow — simplest for static sites)
+// ═══════════════════════════════════════════════════
+function buildDiscordAuthURL() {
+  var state = Math.random().toString(36).substring(2);
+  try { sessionStorage.setItem('discord_oauth_state', state); } catch(e){}
+  var params = new URLSearchParams({
+    client_id:     DISCORD_CONFIG.CLIENT_ID,
+    redirect_uri:  DISCORD_CONFIG.REDIRECT_URI,
+    response_type: 'token',         // implicit — token returned in hash, no server needed
+    scope:         DISCORD_CONFIG.SCOPE,
+    state:         state,
+  });
+  return 'https://discord.com/api/oauth2/authorize?' + params.toString();
+}
+
+function startDiscordOAuth() {
+  if (DISCORD_CONFIG.CLIENT_ID === 'YOUR_DISCORD_CLIENT_ID') {
+    closeDiscordModal();
+    showToast('⚠ Set your Discord Client ID in DISCORD_CONFIG first!');
+    return;
+  }
+  // Save which page was active so we can restore after redirect
+  try { sessionStorage.setItem('pre_oauth_page', currentPage); } catch(e){}
+  document.getElementById('oauth-loading').classList.add('open');
+  window.location.href = buildDiscordAuthURL();
+}
+
+// Called on page load — check if we're returning from Discord OAuth
+function handleOAuthCallback() {
+  var hash = window.location.hash;
+  if (!hash || hash.indexOf('access_token') === -1) return;
+
+  document.getElementById('oauth-loading').classList.add('open');
+
+  // Parse the fragment
+  var params = {};
+  hash.substring(1).split('&').forEach(function(p) {
+    var kv = p.split('=');
+    params[decodeURIComponent(kv[0])] = decodeURIComponent(kv[1] || '');
+  });
+
+  // Validate state to prevent CSRF
+  var savedState = '';
+  try { savedState = sessionStorage.getItem('discord_oauth_state') || ''; } catch(e){}
+  if (params.state && savedState && params.state !== savedState) {
+    document.getElementById('oauth-loading').classList.remove('open');
+    showToast('❌ OAuth state mismatch — try again.');
+    // Clean the URL
+    history.replaceState(null, '', window.location.pathname);
+    return;
+  }
+
+  var token = params.access_token;
+  if (!token) {
+    document.getElementById('oauth-loading').classList.remove('open');
+    history.replaceState(null, '', window.location.pathname);
+    return;
+  }
+
+  // Fetch the Discord user with the token
+  fetch('https://discord.com/api/users/@me', {
+    headers: { 'Authorization': 'Bearer ' + token }
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(user) {
+    var avatarUrl = user.avatar
+      ? 'https://cdn.discordapp.com/avatars/' + user.id + '/' + user.avatar + '.png?size=64'
+      : null;
+
+    var userData = {
+      id:       user.id,
+      username: user.global_name || user.username,
+      avatar:   avatarUrl,
+      token:    token,
+    };
+
+    try { localStorage.setItem('zillas_user', JSON.stringify(userData)); } catch(e){}
+    appState.user   = userData;
+    appState.isAdmin = (user.id === DISCORD_CONFIG.ADMIN_ID);
+
+    // Clean URL (remove hash with token for security)
+    history.replaceState(null, '', window.location.pathname);
+    try { sessionStorage.removeItem('discord_oauth_state'); } catch(e){}
+
+    // Restore page
+    var prePage = '';
+    try { prePage = sessionStorage.getItem('pre_oauth_page') || 'home'; sessionStorage.removeItem('pre_oauth_page'); } catch(e){}
+    showPage(prePage || 'home');
+
+    document.getElementById('oauth-loading').classList.remove('open');
+    renderNavUser();
+    renderHuntPage();
+    showToast('✓ Signed in as ' + userData.username + (appState.isAdmin ? ' 👑' : ''));
+  })
+  .catch(function() {
+    document.getElementById('oauth-loading').classList.remove('open');
+    history.replaceState(null, '', window.location.pathname);
+    showToast('❌ Discord sign-in failed — please try again.');
+  });
+}
+
+function openDiscordModal()  { document.getElementById('discord-modal').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeDiscordModal() { document.getElementById('discord-modal').classList.remove('open'); document.body.style.overflow=''; }
+
+function discordLogout() {
+  appState.user    = null;
+  appState.isAdmin = false;
+  try { localStorage.removeItem('zillas_user'); } catch(e){}
+  renderNavUser();
+  renderHuntPage();
+  showToast('Signed out.');
+}
+
+function renderNavUser() {
+  var area = document.getElementById('nav-discord-area');
+  if (appState.user) {
+    var avatarHtml = appState.user.avatar
+      ? '<img src="' + appState.user.avatar + '" alt="">'
+      : appState.user.username.substring(0,2).toUpperCase();
+    area.innerHTML = '<div class="discord-user-btn" onclick="discordLogout()" title="Click to sign out">'
+      + '<div class="discord-avatar">' + avatarHtml + '</div>'
+      + '<span>' + escapeHtml(appState.user.username) + '</span>'
+      + (appState.isAdmin ? '<span class="admin-badge">👑 ADMIN</span>' : '')
+      + '</div>';
+  } else {
+    area.innerHTML = '<button class="discord-login-btn" onclick="openDiscordModal()">'
+      + '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.1 18.08.11 18.1.128 18.114a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>'
+      + '<span class="login-label">Sign In</span></button>';
+  }
+  refreshCursorListeners();
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ═══════════════════════════════════════════════════
 // STARFIELD
-// ─────────────────────────────────────────────
+// ═══════════════════════════════════════════════════
 (function(){var canvas=document.getElementById('starfield');var ctx=canvas.getContext('2d');var stars=[];var W,H;function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}resize();window.addEventListener('resize',resize);function initStars(){stars=[];var count=Math.floor((W*H)/6000);for(var i=0;i<count;i++){var size=Math.random();var isBright=size>0.92;var isMid=size>0.75&&!isBright;stars.push({x:Math.random()*W,y:Math.random()*H,r:isBright?(1.5+Math.random()*2.5):(isMid?(0.8+Math.random()*1.2):(0.2+Math.random()*0.6)),alpha:isBright?(0.7+Math.random()*0.3):(isMid?(0.35+Math.random()*0.45):(0.1+Math.random()*0.35)),hue:185+Math.random()*40,twinkleSpeed:0.003+Math.random()*0.012,twinkleOffset:Math.random()*Math.PI*2,glow:isBright});}}initStars();window.addEventListener('resize',initStars);var t=0;function draw(){ctx.fillStyle='#030810';ctx.fillRect(0,0,W,H);t+=0.016;for(var i=0;i<stars.length;i++){var s=stars[i];var twinkle=0.7+0.3*Math.sin(t*s.twinkleSpeed*60+s.twinkleOffset);var a=s.alpha*twinkle;if(s.glow){var grd=ctx.createRadialGradient(s.x,s.y,0,s.x,s.y,s.r*5);grd.addColorStop(0,'hsla('+s.hue+',90%,80%,'+a+')');grd.addColorStop(1,'hsla('+s.hue+',70%,50%,0)');ctx.beginPath();ctx.arc(s.x,s.y,s.r*5,0,Math.PI*2);ctx.fillStyle=grd;ctx.fill();}ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle='hsla('+s.hue+',85%,'+(s.glow?90:70)+'%,'+a+')';ctx.fill();}requestAnimationFrame(draw);}draw();})();
 
-// ─────────────────────────────────────────────
+// ═══════════════════════════════════════════════════
 // CURSOR
-// ─────────────────────────────────────────────
+// ═══════════════════════════════════════════════════
 var cursor=document.getElementById('cursor');var cx=0,cy=0,rx=0,ry=0;
 document.addEventListener('mousemove',function(e){cx=e.clientX;cy=e.clientY;document.getElementById('cursor-dot').style.left=cx+'px';document.getElementById('cursor-dot').style.top=cy+'px';});
 (function animRing(){rx+=(cx-rx)*0.14;ry+=(cy-ry)*0.14;document.getElementById('cursor-ring').style.left=rx+'px';document.getElementById('cursor-ring').style.top=ry+'px';requestAnimationFrame(animRing);})();
-document.querySelectorAll('a,button,[onclick]').forEach(function(el){el.addEventListener('mouseenter',function(){document.body.classList.add('cursor-hover');});el.addEventListener('mouseleave',function(){document.body.classList.remove('cursor-hover');});});
+function refreshCursorListeners(){document.querySelectorAll('a,button,[onclick]').forEach(function(el){el.addEventListener('mouseenter',function(){document.body.classList.add('cursor-hover');});el.addEventListener('mouseleave',function(){document.body.classList.remove('cursor-hover');});});}
+refreshCursorListeners();
 
-// ─────────────────────────────────────────────
-// SLOT PROVIDER DETECTION ENGINE
-// ─────────────────────────────────────────────
-var PROVIDER_DB = {
-  'Pragmatic Play': {
-    exact: ['Gates of Olympus','Sweet Bonanza','Big Bass Bonanza','Starlight Princess','Sugar Rush','Wild West Gold','The Dog House','Wolf Gold','Fruit Party','Book of Tut','Gates of Olympus 1000','Sweet Bonanza 1000','The Hand of Midas','Bigger Bass Bonanza','Great Rhino Megaways','Twilight Princess','Fire Strike','Power of Thor Megaways','Book of Golden Sands','5 Lions Megaways','Pirate Gold','Madame Destiny','Eye of Cleopatra','Gems Bonanza'],
-    aliases: ['gg olympus','gates','sweet bon','starlight','dog house','wolf gold','big bass','sugar rush','pragmatic','PP'],
-    regex: [/gates\s*of\s*olympus/i, /sweet\s*bonanza/i, /starlight\s*princess/i, /big\s*bass/i, /dog\s*house/i, /wolf\s*gold/i, /sugar\s*rush/i, /fruit\s*party/i, /fire\s*strike/i, /gems\s*bonanza/i, /pirate\s*gold/i, /pragmatic/i]
-  },
-  'Hacksaw Gaming': {
-    exact: ['Chaos Crew','Stick Em','Wanted Dead or a Wild','Chaos Crew 2','Xways Hoarder','Mental','Chaos Crew Scratch','Dead or Alive','Tiki Tumble','Chaos Crew Megaways','Stick\'Em','Blood and Shadow','Busted','Chaos Crew 3','Invaders from the Planet Moolah','Lucky Streak','Wheel of Wonders'],
-    aliases: ['chaos crew','hacksaw','stick em','wanted dead','wanted or a wild','wanted dead or a wild','mental','xways'],
-    regex: [/chaos\s*crew/i, /stick\s*em/i, /wanted\s*(dead|or)/i, /hacksaw/i, /xways/i, /mental/i, /blood\s*and\s*shadow/i]
-  },
-  'Nolimit City': {
-    exact: ['xWays Hoarder','Mental','San Quentin','Tombstone RIP','East Coast vs West Coast','Fire in the Hole','Punk Toilet','Deadwood','Poison Eve','Fold\'em','Warrior Graveyard','West Town','Book of Shadows','Dragon Train','tombstone','San Quentin xWays','Fire in the Hole xBomb','Infectious 5','Milf Hunter','Thor Lightning Elephant','Silk Road','Valholl'],
-    aliases: ['nolimit','nlc','san quentin','tombstone','punk toilet','fire in the hole','east coast','west coast','deadwood','warrior'],
-    regex: [/nolimit/i, /nlc/i, /san\s*quentin/i, /tombstone/i, /punk\s*toilet/i, /fire\s*in\s*the\s*hole/i, /east\s*coast/i, /west\s*coast/i, /deadwood/i, /warrior\s*graveyard/i, /valholl/i, /infectious/i]
-  }
+// ═══════════════════════════════════════════════════
+// PROVIDER DETECTION
+// ═══════════════════════════════════════════════════
+var PROVIDER_DB={
+  'Pragmatic Play':{exact:['Gates of Olympus','Sweet Bonanza','Big Bass Bonanza','Starlight Princess','Sugar Rush','Wild West Gold','The Dog House','Wolf Gold','Fruit Party','Book of Tut','Gates of Olympus 1000','Sweet Bonanza 1000','The Hand of Midas','Bigger Bass Bonanza','Great Rhino Megaways','Twilight Princess','Fire Strike','Power of Thor Megaways','Book of Golden Sands','5 Lions Megaways','Pirate Gold','Madame Destiny','Eye of Cleopatra','Gems Bonanza'],aliases:['gg olympus','gates','sweet bon','starlight','dog house','wolf gold','big bass','sugar rush','pragmatic','PP'],regex:[/gates\s*of\s*olympus/i,/sweet\s*bonanza/i,/starlight\s*princess/i,/big\s*bass/i,/dog\s*house/i,/wolf\s*gold/i,/sugar\s*rush/i,/fruit\s*party/i,/fire\s*strike/i,/gems\s*bonanza/i,/pirate\s*gold/i,/pragmatic/i]},
+  'Hacksaw Gaming':{exact:['Chaos Crew','Stick Em','Wanted Dead or a Wild','Chaos Crew 2','Xways Hoarder','Mental','Chaos Crew Scratch','Blood and Shadow','Busted','Chaos Crew 3','Wheel of Wonders'],aliases:['chaos crew','hacksaw','stick em','wanted dead','wanted or a wild','mental','xways'],regex:[/chaos\s*crew/i,/stick\s*em/i,/wanted\s*(dead|or)/i,/hacksaw/i,/xways/i,/mental/i,/blood\s*and\s*shadow/i]},
+  'Nolimit City':{exact:['Mental','San Quentin','Tombstone RIP','East Coast vs West Coast','Fire in the Hole','Punk Toilet','Deadwood','Poison Eve','Fold\'em','Warrior Graveyard','West Town','Book of Shadows','Dragon Train','San Quentin xWays','Fire in the Hole xBomb','Infectious 5','Thor Lightning Elephant','Silk Road','Valholl'],aliases:['nolimit','nlc','san quentin','tombstone','punk toilet','fire in the hole','east coast','west coast','deadwood','warrior'],regex:[/nolimit/i,/nlc/i,/san\s*quentin/i,/tombstone/i,/punk\s*toilet/i,/fire\s*in\s*the\s*hole/i,/east\s*coast/i,/west\s*coast/i,/deadwood/i,/warrior\s*graveyard/i,/valholl/i,/infectious/i]}
 };
+var ALL_SLOTS=[];Object.keys(PROVIDER_DB).forEach(function(p){PROVIDER_DB[p].exact.forEach(function(s){ALL_SLOTS.push({name:s,provider:p});});});
+function normalizeStr(s){return s.toLowerCase().replace(/[^a-z0-9\s]/g,'').replace(/\s+/g,' ').trim();}
+function levenshtein(a,b){var m=a.length,n=b.length,dp=[];for(var i=0;i<=m;i++){dp[i]=[i];for(var j=1;j<=n;j++){if(!i)dp[i][j]=j;else dp[i][j]=a[i-1]===b[j-1]?dp[i-1][j-1]:1+Math.min(dp[i-1][j],dp[i][j-1],dp[i-1][j-1]);}}return dp[m][n];}
+function detectProvider(slotName){if(!slotName||!slotName.trim())return{slot:slotName,provider:'Unknown'};var norm=normalizeStr(slotName);for(var p in PROVIDER_DB){for(var i=0;i<PROVIDER_DB[p].exact.length;i++){if(normalizeStr(PROVIDER_DB[p].exact[i])===norm)return{slot:PROVIDER_DB[p].exact[i],provider:p};}}for(var p in PROVIDER_DB){for(var i=0;i<PROVIDER_DB[p].aliases.length;i++){if(norm.indexOf(normalizeStr(PROVIDER_DB[p].aliases[i]))!==-1)return{slot:slotName,provider:p};}}for(var p in PROVIDER_DB){for(var i=0;i<PROVIDER_DB[p].regex.length;i++){if(PROVIDER_DB[p].regex[i].test(slotName))return{slot:slotName,provider:p};}}var best=null,bestScore=99;ALL_SLOTS.forEach(function(s){var score=levenshtein(norm,normalizeStr(s.name));if(score<bestScore){bestScore=score;best=s;}});if(best&&bestScore<=3)return{slot:best.name,provider:best.provider};return{slot:slotName,provider:'Other'};}
+function getProviderBadgeClass(p){if(p==='Pragmatic Play')return 'provider-pragmatic';if(p==='Hacksaw Gaming')return 'provider-hacksaw';if(p==='Nolimit City')return 'provider-nolimit';return 'provider-other';}
+function onSlotInput(input){var val=input.value.trim().toLowerCase();var list=document.getElementById('autocomplete-list');var provInput=document.getElementById('admin-slot-provider');if(val.length<2){list.style.display='none';return;}var matches=ALL_SLOTS.filter(function(s){return normalizeStr(s.name).indexOf(val)!==-1;}).slice(0,8);if(matches.length===0){list.style.display='none';return;}list.innerHTML='';matches.forEach(function(s){var item=document.createElement('div');item.className='autocomplete-item';item.innerHTML='<span>'+escapeHtml(s.name)+'</span><span class="provider-badge '+getProviderBadgeClass(s.provider)+'">'+s.provider+'</span>';item.addEventListener('click',function(){input.value=s.name;provInput.value=s.provider;list.style.display='none';});list.appendChild(item);});list.style.display='block';var detected=detectProvider(input.value);provInput.value=detected.provider;}
+document.addEventListener('click',function(e){var l=document.getElementById('autocomplete-list');if(l)l.style.display='none';});
 
-var ALL_SLOTS = [];
-Object.keys(PROVIDER_DB).forEach(function(p){
-  PROVIDER_DB[p].exact.forEach(function(s){ ALL_SLOTS.push({name:s,provider:p}); });
-});
-
-function normalizeStr(s){ return s.toLowerCase().replace(/[^a-z0-9\s]/g,'').replace(/\s+/g,' ').trim(); }
-
-function levenshtein(a,b){
-  var m=a.length,n=b.length,dp=[];
-  for(var i=0;i<=m;i++){dp[i]=[i];for(var j=1;j<=n;j++){if(!i)dp[i][j]=j;else dp[i][j]=a[i-1]===b[j-1]?dp[i-1][j-1]:1+Math.min(dp[i-1][j],dp[i][j-1],dp[i-1][j-1]);}}
-  return dp[m][n];
-}
-
-function detectProvider(slotName) {
-  if(!slotName||!slotName.trim()) return {slot:slotName,provider:'Unknown'};
-  var norm = normalizeStr(slotName);
-
-  // 1. Exact match (case-insensitive)
-  for(var p in PROVIDER_DB){
-    for(var i=0;i<PROVIDER_DB[p].exact.length;i++){
-      if(normalizeStr(PROVIDER_DB[p].exact[i])===norm) return {slot:PROVIDER_DB[p].exact[i],provider:p};
-    }
-  }
-
-  // 2. Alias match
-  for(var p in PROVIDER_DB){
-    for(var i=0;i<PROVIDER_DB[p].aliases.length;i++){
-      if(norm.indexOf(normalizeStr(PROVIDER_DB[p].aliases[i]))!==-1) return {slot:slotName,provider:p};
-    }
-  }
-
-  // 3. Regex match
-  for(var p in PROVIDER_DB){
-    for(var i=0;i<PROVIDER_DB[p].regex.length;i++){
-      if(PROVIDER_DB[p].regex[i].test(slotName)) return {slot:slotName,provider:p};
-    }
-  }
-
-  // 4. Fuzzy (Levenshtein ≤ 3)
-  var best=null,bestScore=99;
-  ALL_SLOTS.forEach(function(s){
-    var score=levenshtein(norm,normalizeStr(s.name));
-    if(score<bestScore){bestScore=score;best=s;}
-  });
-  if(best&&bestScore<=3) return {slot:best.name,provider:best.provider};
-
-  return {slot:slotName,provider:'Other'};
-}
-
-function getProviderBadgeClass(p){
-  if(p==='Pragmatic Play') return 'provider-pragmatic';
-  if(p==='Hacksaw Gaming') return 'provider-hacksaw';
-  if(p==='Nolimit City') return 'provider-nolimit';
-  return 'provider-other';
-}
-
-// Autocomplete
-function onSlotInput(input){
-  var val = input.value.trim().toLowerCase();
-  var list = document.getElementById('autocomplete-list');
-  var provInput = document.getElementById('admin-slot-provider');
-  if(val.length < 2){ list.style.display='none'; return; }
-  var matches = ALL_SLOTS.filter(function(s){ return normalizeStr(s.name).indexOf(val)!==-1; }).slice(0,8);
-  if(matches.length===0){ list.style.display='none'; return; }
-  list.innerHTML='';
-  matches.forEach(function(s){
-    var item=document.createElement('div');
-    item.className='autocomplete-item';
-    item.innerHTML='<span>'+s.name+'</span><span class="provider-badge '+getProviderBadgeClass(s.provider)+'">'+s.provider+'</span>';
-    item.addEventListener('click',function(){
-      input.value=s.name;
-      provInput.value=s.provider;
-      list.style.display='none';
-    });
-    list.appendChild(item);
-  });
-  list.style.display='block';
-  // Also auto-detect as typing
-  var detected=detectProvider(input.value);
-  provInput.value=detected.provider;
-}
-document.addEventListener('click',function(e){ var l=document.getElementById('autocomplete-list'); if(l)l.style.display='none'; });
-
-// ─────────────────────────────────────────────
+// ═══════════════════════════════════════════════════
 // APP STATE
-// ─────────────────────────────────────────────
-// Admin Discord IDs that get admin access (add yours here)
-var ADMIN_DISCORD_IDS = ['zillas_admin', 'uglypiggy', 'zillas']; // Simulated — in production use real IDs
+// ═══════════════════════════════════════════════════
+var appState={user:null,isAdmin:false,activeHunt:null,huntArchive:[],guesses:{},nextHuntId:1};
+var currentPage='home';
 
-var appState = {
-  user: null,        // { id, username, avatar }
-  isAdmin: false,
-  activeHunt: null,  // { id, startBal, slots[], guessesOpen, endBal }
-  huntArchive: [],   // array of completed hunts
-  guesses: {},       // huntId -> [ { userId, username, avatar, amount } ]
-  nextHuntId: 1
-};
-
-// Load from localStorage
+// Load persisted state
 (function(){
   try{
     var saved=localStorage.getItem('zillas_hunt_state');
-    if(saved){
-      var s=JSON.parse(saved);
-      if(s.huntArchive) appState.huntArchive=s.huntArchive;
-      if(s.nextHuntId) appState.nextHuntId=s.nextHuntId;
-      if(s.activeHunt) appState.activeHunt=s.activeHunt;
-      if(s.guesses) appState.guesses=s.guesses;
-    }
+    if(saved){var s=JSON.parse(saved);if(s.huntArchive)appState.huntArchive=s.huntArchive;if(s.nextHuntId)appState.nextHuntId=s.nextHuntId;if(s.activeHunt)appState.activeHunt=s.activeHunt;if(s.guesses)appState.guesses=s.guesses;}
     var savedUser=localStorage.getItem('zillas_user');
-    if(savedUser){
-      var u=JSON.parse(savedUser);
-      appState.user=u;
-      appState.isAdmin=ADMIN_DISCORD_IDS.indexOf(u.id)!==-1||ADMIN_DISCORD_IDS.indexOf(u.username.toLowerCase())!==-1;
-    }
+    if(savedUser){var u=JSON.parse(savedUser);appState.user=u;appState.isAdmin=(u.id===DISCORD_CONFIG.ADMIN_ID);}
   }catch(e){}
+
+  // Handle OAuth callback FIRST (may set user)
+  handleOAuthCallback();
+
   renderNavUser();
   renderHuntPage();
   renderArchive();
   updateAdminHuntIdField();
 })();
 
-function saveState(){
-  try{
-    localStorage.setItem('zillas_hunt_state',JSON.stringify({
-      huntArchive:appState.huntArchive,
-      nextHuntId:appState.nextHuntId,
-      activeHunt:appState.activeHunt,
-      guesses:appState.guesses
-    }));
-  }catch(e){}
-}
+function saveState(){try{localStorage.setItem('zillas_hunt_state',JSON.stringify({huntArchive:appState.huntArchive,nextHuntId:appState.nextHuntId,activeHunt:appState.activeHunt,guesses:appState.guesses}));}catch(e){}}
 
-// ─────────────────────────────────────────────
-// DISCORD AUTH (Simulated — real app uses OAuth)
-// ─────────────────────────────────────────────
-function openDiscordModal(){ document.getElementById('discord-modal').classList.add('open'); document.body.style.overflow='hidden'; }
-function closeDiscordModal(){ document.getElementById('discord-modal').classList.remove('open'); document.body.style.overflow=''; }
+// ═══════════════════════════════════════════════════
+// ADMIN CONTROLS
+// ═══════════════════════════════════════════════════
+function updateAdminHuntIdField(){var f=document.getElementById('admin-hunt-id');if(f)f.value='#'+appState.nextHuntId;}
+function adminStartHunt(){var startBal=parseFloat(document.getElementById('admin-start-bal').value);if(!startBal||startBal<=0){showToast('Enter a valid starting balance.');return;}if(appState.activeHunt){showToast('End the current hunt first.');return;}appState.activeHunt={id:appState.nextHuntId++,startBal:startBal,slots:[],guessesOpen:false,endBal:null,startedAt:new Date().toISOString()};if(!appState.guesses[appState.activeHunt.id])appState.guesses[appState.activeHunt.id]=[];saveState();updateAdminHuntIdField();renderHuntPage();showToast('Hunt #'+appState.activeHunt.id+' started!');}
+function adminEndHunt(){if(!appState.activeHunt){showToast('No active hunt.');return;}var endBal=parseFloat(document.getElementById('admin-ending-bal').value);if(!isNaN(endBal)&&endBal>=0)appState.activeHunt.endBal=endBal;appState.activeHunt.endedAt=new Date().toISOString();appState.activeHunt.guessesOpen=false;var completed=JSON.parse(JSON.stringify(appState.activeHunt));var gList=appState.guesses[completed.id]||[];if(completed.endBal!=null&&gList.length>0){completed.winner=gList.reduce(function(best,g){return Math.abs(g.amount-completed.endBal)<Math.abs(best.amount-completed.endBal)?g:best;},gList[0]);}appState.huntArchive.unshift(completed);appState.activeHunt=null;saveState();renderHuntPage();renderArchive();showToast('Hunt ended and archived!');}
+function adminAddSlot(){if(!appState.activeHunt){showToast('Start a hunt first.');return;}var name=document.getElementById('admin-slot-name').value.trim();if(!name){showToast('Enter a slot name.');return;}var bet=parseFloat(document.getElementById('admin-slot-bet').value)||5;var detected=detectProvider(name);var exists=appState.activeHunt.slots.some(function(s){return s.name.toLowerCase()===name.toLowerCase();});if(exists){showToast('That slot is already in the hunt.');return;}appState.activeHunt.slots.push({name:detected.slot||name,provider:detected.provider,bet:bet,win:null,opened:false});document.getElementById('admin-slot-name').value='';document.getElementById('admin-slot-provider').value='';document.getElementById('admin-slot-bet').value='';saveState();renderHuntPage();showToast(name+' added ('+detected.provider+')');}
+function adminToggleGuess(){if(!appState.activeHunt){showToast('Start a hunt first.');return;}appState.activeHunt.guessesOpen=!appState.activeHunt.guessesOpen;saveState();renderHuntPage();showToast('Guesses '+(appState.activeHunt.guessesOpen?'OPENED ✓':'CLOSED ✕'));}
+function adminSaveResults(){if(!appState.activeHunt)return;appState.activeHunt.slots.forEach(function(slot,i){var inp=document.getElementById('result-win-'+i);if(inp&&inp.value!==''){var win=parseFloat(inp.value);if(!isNaN(win)){slot.win=win;slot.opened=true;}}});saveState();renderHuntPage();showToast('Results saved!');}
+function adminClearHunt(){if(!confirm('Clear the current hunt? This cannot be undone.'))return;appState.activeHunt=null;saveState();renderHuntPage();showToast('Hunt cleared.');}
 
-function simulateDiscordLogin(){
-  // In production: redirect to Discord OAuth2
-  // Simulated: prompt for username
-  closeDiscordModal();
-  var name = prompt('Enter your Discord username (demo mode):','');
-  if(!name||!name.trim()) return;
-  var cleanName=name.trim();
-  var isAdmin=ADMIN_DISCORD_IDS.indexOf(cleanName.toLowerCase())!==-1;
-  appState.user={ id:cleanName.toLowerCase().replace(/[^a-z0-9]/g,'_'), username:cleanName, avatar:null };
-  appState.isAdmin=isAdmin;
-  try{ localStorage.setItem('zillas_user',JSON.stringify(appState.user)); }catch(e){}
-  renderNavUser();
-  renderHuntPage();
-  showToast('Signed in as '+(isAdmin?'👑 ':'')+cleanName+(isAdmin?' (Admin)':''));
-}
+// ═══════════════════════════════════════════════════
+// HUNT CALCULATIONS & RENDERING
+// ═══════════════════════════════════════════════════
+function calcHuntStats(hunt){var slots=hunt.slots||[];var opened=slots.filter(function(s){return s.opened;});var totalWin=opened.reduce(function(a,s){return a+(s.win||0);},0);var totalBet=slots.reduce(function(a,s){return a+(s.bet||0)*1;},0);var avgMulti=0;if(opened.length>0){var multiSum=opened.reduce(function(a,s){return a+(s.win&&s.bet?(s.win/s.bet):0);},0);avgMulti=multiSum/opened.length;}var reqMulti=0;if(totalBet>0)reqMulti=hunt.startBal/totalBet;var currentBal=(hunt.endBal!=null)?hunt.endBal:totalWin;return{opened:opened.length,total:slots.length,totalWin:totalWin,currentBal:currentBal,avgMulti:avgMulti,reqMulti:reqMulti,totalBet:totalBet};}
+function fmt(n){return '$'+parseFloat(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function fmtMulti(n){return parseFloat(n).toFixed(2)+'x';}
+function pad(n){return String(n).padStart(2,'0');}
 
-function discordLogout(){
-  appState.user=null;
-  appState.isAdmin=false;
-  try{ localStorage.removeItem('zillas_user'); }catch(e){}
-  renderNavUser();
-  renderHuntPage();
-  showToast('Signed out.');
-}
-
-function renderNavUser(){
-  var area=document.getElementById('nav-discord-area');
-  if(appState.user){
-    var initials=appState.user.username.substring(0,2).toUpperCase();
-    area.innerHTML='<div class="discord-user-btn" onclick="discordLogout()" title="Click to sign out">'
-      +'<div class="discord-avatar">'+initials+'</div>'
-      +'<span>'+appState.user.username+'</span>'
-      +(appState.isAdmin?'<span class="admin-badge">ADMIN</span>':'')
-      +'</div>';
-  } else {
-    area.innerHTML='<button class="discord-login-btn" onclick="openDiscordModal()">'
-      +'<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.1 18.08.11 18.1.128 18.114a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>'
-      +'<span class="login-label">Sign In</span></button>';
-  }
-  setTimeout(function(){document.querySelectorAll('#nav-discord-area a,#nav-discord-area button,[onclick]').forEach(function(el){el.addEventListener('mouseenter',function(){document.body.classList.add('cursor-hover');});el.addEventListener('mouseleave',function(){document.body.classList.remove('cursor-hover');});});},100);
-}
-
-// ─────────────────────────────────────────────
-// ADMIN HUNT CONTROLS
-// ─────────────────────────────────────────────
-function updateAdminHuntIdField(){
-  var f=document.getElementById('admin-hunt-id');
-  if(f) f.value='#'+appState.nextHuntId;
-}
-
-function adminStartHunt(){
-  var startBal=parseFloat(document.getElementById('admin-start-bal').value);
-  if(!startBal||startBal<=0){ showToast('Enter a valid starting balance.'); return; }
-  if(appState.activeHunt){ showToast('End the current hunt first.'); return; }
-  appState.activeHunt={
-    id:appState.nextHuntId++,
-    startBal:startBal,
-    slots:[],
-    guessesOpen:false,
-    endBal:null,
-    startedAt:new Date().toISOString()
-  };
-  if(!appState.guesses[appState.activeHunt.id]) appState.guesses[appState.activeHunt.id]=[];
-  saveState();
-  updateAdminHuntIdField();
-  renderHuntPage();
-  showToast('Hunt #'+appState.activeHunt.id+' started!');
-}
-
-function adminEndHunt(){
-  if(!appState.activeHunt){ showToast('No active hunt.'); return; }
-  var endBal=parseFloat(document.getElementById('admin-ending-bal').value);
-  if(!isNaN(endBal)&&endBal>=0) appState.activeHunt.endBal=endBal;
-  appState.activeHunt.endedAt=new Date().toISOString();
-  appState.activeHunt.guessesOpen=false;
-  appState.huntArchive.unshift(JSON.parse(JSON.stringify(appState.activeHunt)));
-  // Find winner
-  var hunt=appState.activeHunt;
-  if(hunt.endBal!=null){
-    var gList=appState.guesses[hunt.id]||[];
-    if(gList.length>0){
-      var winner=gList.reduce(function(best,g){
-        return Math.abs(g.amount-hunt.endBal)<Math.abs(best.amount-hunt.endBal)?g:best;
-      },gList[0]);
-      appState.huntArchive[0].winner=winner;
-    }
-  }
-  appState.activeHunt=null;
-  saveState();
-  renderHuntPage();
-  renderArchive();
-  showToast('Hunt ended and archived!');
-}
-
-function adminAddSlot(){
-  if(!appState.activeHunt){ showToast('Start a hunt first.'); return; }
-  var name=document.getElementById('admin-slot-name').value.trim();
-  if(!name){ showToast('Enter a slot name.'); return; }
-  var bet=parseFloat(document.getElementById('admin-slot-bet').value)||5;
-  var detected=detectProvider(name);
-  // Prevent duplicate
-  var exists=appState.activeHunt.slots.some(function(s){ return s.name.toLowerCase()===name.toLowerCase(); });
-  if(exists){ showToast('That slot is already in the hunt.'); return; }
-  appState.activeHunt.slots.push({ name:detected.slot||name, provider:detected.provider, bet:bet, win:null, opened:false });
-  document.getElementById('admin-slot-name').value='';
-  document.getElementById('admin-slot-provider').value='';
-  document.getElementById('admin-slot-bet').value='';
-  saveState();
-  renderHuntPage();
-  showToast(name+' added ('+detected.provider+')');
-}
-
-function adminToggleGuess(){
-  if(!appState.activeHunt){ showToast('Start a hunt first.'); return; }
-  appState.activeHunt.guessesOpen=!appState.activeHunt.guessesOpen;
-  saveState();
-  renderHuntPage();
-  showToast('Guesses '+(appState.activeHunt.guessesOpen?'OPENED ✓':'CLOSED ✕'));
-}
-
-function adminSaveResults(){
-  if(!appState.activeHunt) return;
-  appState.activeHunt.slots.forEach(function(slot,i){
-    var inp=document.getElementById('result-win-'+i);
-    if(inp&&inp.value!==''){
-      var win=parseFloat(inp.value);
-      if(!isNaN(win)){
-        slot.win=win;
-        slot.opened=true;
-      }
-    }
-  });
-  saveState();
-  renderHuntPage();
-  showToast('Results saved!');
-}
-
-function adminClearHunt(){
-  if(!confirm('Clear the current hunt? This cannot be undone.')) return;
-  appState.activeHunt=null;
-  saveState();
-  renderHuntPage();
-  showToast('Hunt cleared.');
-}
-
-// ─────────────────────────────────────────────
-// HUNT CALCULATIONS
-// ─────────────────────────────────────────────
-function calcHuntStats(hunt){
-  var slots=hunt.slots||[];
-  var opened=slots.filter(function(s){return s.opened;});
-  var totalWin=opened.reduce(function(a,s){return a+(s.win||0);},0);
-  var totalBet=slots.reduce(function(a,s){return a+(s.bet||0)*1;},0); // each slot wagered once
-  var avgMulti=0;
-  if(opened.length>0){
-    var multiSum=opened.reduce(function(a,s){return a+(s.win&&s.bet?(s.win/s.bet):0);},0);
-    avgMulti=multiSum/opened.length;
-  }
-  var reqMulti=0;
-  if(totalBet>0) reqMulti=hunt.startBal/totalBet;
-  var currentBal=(hunt.endBal!=null)?hunt.endBal:totalWin;
-  return {opened:opened.length,total:slots.length,totalWin:totalWin,currentBal:currentBal,avgMulti:avgMulti,reqMulti:reqMulti,totalBet:totalBet};
-}
-
-function fmt(n){ return '$'+parseFloat(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
-function fmtMulti(n){ return parseFloat(n).toFixed(2)+'x'; }
-function pad(n){ return String(n).padStart(2,'0'); }
-
-// ─────────────────────────────────────────────
-// RENDER HUNT PAGE
-// ─────────────────────────────────────────────
 function renderHuntPage(){
-  // Admin panel
   var ap=document.getElementById('admin-panel');
-  if(ap) ap.style.display=appState.isAdmin?'block':'none';
-
-  // Admin slot/results sections
+  if(ap)ap.style.display=appState.isAdmin?'block':'none';
   var ss=document.getElementById('admin-slot-section');
   var rs=document.getElementById('admin-results-section');
   var saveBtn=document.getElementById('admin-save-results');
-  if(ss) ss.style.display=(appState.isAdmin&&appState.activeHunt)?'block':'none';
-  if(rs) rs.style.display=(appState.isAdmin&&appState.activeHunt&&appState.activeHunt.slots.length>0)?'block':'none';
-  if(saveBtn) saveBtn.style.display=(appState.isAdmin&&appState.activeHunt)?'inline-flex':'none';
-
-  // Admin guess toggle button
+  if(ss)ss.style.display=(appState.isAdmin&&appState.activeHunt)?'block':'none';
+  if(rs)rs.style.display=(appState.isAdmin&&appState.activeHunt&&appState.activeHunt.slots.length>0)?'block':'none';
+  if(saveBtn)saveBtn.style.display=(appState.isAdmin&&appState.activeHunt)?'inline-flex':'none';
   var gtb=document.getElementById('guess-toggle-btn');
-  if(gtb&&appState.activeHunt){
-    if(appState.activeHunt.guessesOpen){
-      gtb.className='guess-toggle-btn open-state';
-      gtb.innerHTML='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Guesses Open';
-    } else {
-      gtb.className='guess-toggle-btn closed-state';
-      gtb.innerHTML='✕ Guesses Closed';
-    }
-  }
-
-  // No hunt vs hunt display
+  if(gtb&&appState.activeHunt){if(appState.activeHunt.guessesOpen){gtb.className='guess-toggle-btn open-state';gtb.innerHTML='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Guesses Open';}else{gtb.className='guess-toggle-btn closed-state';gtb.innerHTML='✕ Guesses Closed';}}
   var noHuntMsg=document.getElementById('no-hunt-msg');
   var huntDisplay=document.getElementById('hunt-display');
-  if(!appState.activeHunt){
-    if(noHuntMsg) noHuntMsg.style.display='block';
-    if(huntDisplay) huntDisplay.style.display='none';
-    if(noHuntMsg){
-      var sub=document.getElementById('no-hunt-sub-msg');
-      if(sub) sub.textContent=appState.isAdmin?'Start a hunt from the admin panel above.':'Check back during a live stream when a bonus hunt is running!';
-    }
-  } else {
-    if(noHuntMsg) noHuntMsg.style.display='none';
-    if(huntDisplay) huntDisplay.style.display='block';
-    renderHuntStats();
-    renderHuntTable();
-    renderAdminResultsList();
-  }
-
-  // Guess panel
+  if(!appState.activeHunt){if(noHuntMsg)noHuntMsg.style.display='block';if(huntDisplay)huntDisplay.style.display='none';if(noHuntMsg){var sub=document.getElementById('no-hunt-sub-msg');if(sub)sub.textContent=appState.isAdmin?'Start a hunt from the admin panel above.':'Check back during a live stream when a bonus hunt is running!';}}else{if(noHuntMsg)noHuntMsg.style.display='none';if(huntDisplay)huntDisplay.style.display='block';renderHuntStats();renderHuntTable();renderAdminResultsList();}
   renderGuessPanel();
 }
 
-function renderHuntStats(){
-  if(!appState.activeHunt) return;
-  var hunt=appState.activeHunt;
-  var stats=calcHuntStats(hunt);
-  document.getElementById('stat-hunt-id').textContent='#'+hunt.id;
-  document.getElementById('stat-bonuses').textContent=hunt.slots.length;
-  document.getElementById('stat-start-bal').textContent=fmt(hunt.startBal);
-  document.getElementById('stat-current-bal').textContent=fmt(stats.currentBal);
-  document.getElementById('stat-avg-multi').textContent=fmtMulti(stats.avgMulti);
-  document.getElementById('stat-req-multi').textContent=fmtMulti(stats.reqMulti);
-  // Color req multi
-  var reqEl=document.getElementById('stat-req-multi');
-  reqEl.className='hunt-stat-val';
-  if(stats.avgMulti>0){ reqEl.classList.add(stats.avgMulti>=stats.reqMulti?'green':'red'); }
-  // Progress
-  var pct=hunt.slots.length>0?(stats.opened/hunt.slots.length*100):0;
-  var fill=document.getElementById('hunt-progress-fill');
-  if(fill) fill.style.width=pct+'%';
-  var lbl=document.getElementById('hunt-progress-label');
-  if(lbl) lbl.textContent=stats.opened+' / '+hunt.slots.length+' BONUSES OPENED';
-}
+function renderHuntStats(){if(!appState.activeHunt)return;var hunt=appState.activeHunt;var stats=calcHuntStats(hunt);document.getElementById('stat-hunt-id').textContent='#'+hunt.id;document.getElementById('stat-bonuses').textContent=hunt.slots.length;document.getElementById('stat-start-bal').textContent=fmt(hunt.startBal);document.getElementById('stat-current-bal').textContent=fmt(stats.currentBal);document.getElementById('stat-avg-multi').textContent=fmtMulti(stats.avgMulti);document.getElementById('stat-req-multi').textContent=fmtMulti(stats.reqMulti);var reqEl=document.getElementById('stat-req-multi');reqEl.className='hunt-stat-val';if(stats.avgMulti>0){reqEl.classList.add(stats.avgMulti>=stats.reqMulti?'green':'red');}var pct=hunt.slots.length>0?(stats.opened/hunt.slots.length*100):0;var fill=document.getElementById('hunt-progress-fill');if(fill)fill.style.width=pct+'%';var lbl=document.getElementById('hunt-progress-label');if(lbl)lbl.textContent=stats.opened+' / '+hunt.slots.length+' BONUSES OPENED';}
 
-function renderHuntTable(){
-  if(!appState.activeHunt) return;
-  var tbody=document.getElementById('hunt-table-body');
-  if(!tbody) return;
-  tbody.innerHTML='';
-  appState.activeHunt.slots.forEach(function(slot,i){
-    var multi=slot.opened&&slot.bet?(slot.win/slot.bet):null;
-    var tr=document.createElement('tr');
-    tr.innerHTML='<td style="color:var(--text-muted);font-size:.8rem;">'+(i+1)+'</td>'
-      +'<td class="slot-name-cell">'+slot.name+'</td>'
-      +'<td><span class="provider-badge '+getProviderBadgeClass(slot.provider)+'">'+slot.provider+'</span></td>'
-      +'<td style="color:var(--text-secondary);">'+fmt(slot.bet||0)+'</td>'
-      +'<td class="win-cell'+(slot.opened&&slot.win>0?'':' loss')+'">'+(slot.opened?(slot.win!=null?fmt(slot.win):'?'):'—')+'</td>'
-      +'<td class="multi-cell">'+(multi!=null?fmtMulti(multi):'—')+'</td>'
-      +'<td><span class="status-dot '+(slot.opened?'opened':'pending')+'"></span>'+(slot.opened?'Opened':'Pending')+'</td>';
-    tbody.appendChild(tr);
-  });
-}
+function renderHuntTable(){if(!appState.activeHunt)return;var tbody=document.getElementById('hunt-table-body');if(!tbody)return;tbody.innerHTML='';appState.activeHunt.slots.forEach(function(slot,i){var multi=slot.opened&&slot.bet?(slot.win/slot.bet):null;var tr=document.createElement('tr');tr.innerHTML='<td style="color:var(--text-muted);font-size:.8rem;">'+(i+1)+'</td><td class="slot-name-cell">'+escapeHtml(slot.name)+'</td><td><span class="provider-badge '+getProviderBadgeClass(slot.provider)+'">'+slot.provider+'</span></td><td style="color:var(--text-secondary);">'+fmt(slot.bet||0)+'</td><td class="win-cell'+(slot.opened&&slot.win>0?'':' loss')+'">'+(slot.opened?(slot.win!=null?fmt(slot.win):'?'):'—')+'</td><td class="multi-cell">'+(multi!=null?fmtMulti(multi):'—')+'</td><td><span class="status-dot '+(slot.opened?'opened':'pending')+'"></span>'+(slot.opened?'Opened':'Pending')+'</td>';tbody.appendChild(tr);});}
 
-function renderAdminResultsList(){
-  if(!appState.activeHunt||!appState.isAdmin) return;
-  var container=document.getElementById('admin-results-list');
-  if(!container) return;
-  container.innerHTML='';
-  appState.activeHunt.slots.forEach(function(slot,i){
-    var row=document.createElement('div');
-    row.style.cssText='display:flex;align-items:center;gap:.5rem;';
-    row.innerHTML='<span style="font-size:.82rem;color:var(--text-secondary);min-width:160px;font-weight:600;">'+slot.name+'</span>'
-      +'<input class="admin-input" type="number" id="result-win-'+i+'" placeholder="Win amount $" step="0.01" value="'+(slot.win!=null?slot.win:'')+'" style="max-width:180px;"/>'
-      +'<span class="provider-badge '+getProviderBadgeClass(slot.provider)+'">'+slot.provider+'</span>'
-      +(slot.opened?'<span style="color:var(--kick-green);font-size:.75rem;">✓ Set</span>':'');
-    container.appendChild(row);
-  });
-}
+function renderAdminResultsList(){if(!appState.activeHunt||!appState.isAdmin)return;var container=document.getElementById('admin-results-list');if(!container)return;container.innerHTML='';appState.activeHunt.slots.forEach(function(slot,i){var row=document.createElement('div');row.style.cssText='display:flex;align-items:center;gap:.5rem;';row.innerHTML='<span style="font-size:.82rem;color:var(--text-secondary);min-width:160px;font-weight:600;">'+escapeHtml(slot.name)+'</span><input class="admin-input" type="number" id="result-win-'+i+'" placeholder="Win amount $" step="0.01" value="'+(slot.win!=null?slot.win:'')+'" style="max-width:180px;"/><span class="provider-badge '+getProviderBadgeClass(slot.provider)+'">'+slot.provider+'</span>'+(slot.opened?'<span style="color:var(--kick-green);font-size:.75rem;">✓ Set</span>':'');container.appendChild(row);});}
 
-// ─────────────────────────────────────────────
+// ═══════════════════════════════════════════════════
 // GUESS SYSTEM
-// ─────────────────────────────────────────────
+// ═══════════════════════════════════════════════════
 function renderGuessPanel(){
   var hunt=appState.activeHunt;
   var huntId=hunt?hunt.id:null;
   var guessesOpen=hunt&&hunt.guessesOpen;
   var guesses=huntId&&appState.guesses[huntId]?appState.guesses[huntId]:[];
-
-  // Badge
   var badge=document.getElementById('guess-status-badge');
-  if(badge){
-    badge.className=guessesOpen?'guess-open-badge':'guess-closed-badge';
-    badge.innerHTML=guessesOpen?'⬤ Open':'⬤ Closed';
-  }
-
-  // Login prompt vs form
+  if(badge){badge.className=guessesOpen?'guess-open-badge':'guess-closed-badge';badge.innerHTML=guessesOpen?'⬤ Open':'⬤ Closed';}
   var loginPrompt=document.getElementById('guess-login-prompt');
   var formArea=document.getElementById('guess-form-area');
   if(appState.user){
-    if(loginPrompt) loginPrompt.style.display='none';
-    if(formArea) formArea.style.display='block';
-    // Check if already guessed
+    if(loginPrompt)loginPrompt.style.display='none';
+    if(formArea)formArea.style.display='block';
     var myGuess=guesses.find(function(g){return g.userId===appState.user.id;});
     var submitBtn=document.getElementById('guess-submit-btn');
     var myGuessDisplay=document.getElementById('my-guess-display');
     var myGuessVal=document.getElementById('my-guess-val');
-    if(myGuess){
-      if(submitBtn){ submitBtn.disabled=true; submitBtn.textContent='Guess Submitted'; }
-      if(myGuessDisplay) myGuessDisplay.style.display='block';
-      if(myGuessVal) myGuessVal.textContent=fmt(myGuess.amount);
-    } else {
-      if(submitBtn){ submitBtn.disabled=!guessesOpen; submitBtn.textContent=guessesOpen?'Submit Guess':'Guesses Closed'; }
-      if(myGuessDisplay) myGuessDisplay.style.display='none';
-    }
-  } else {
-    if(loginPrompt) loginPrompt.style.display='flex';
-    if(formArea) formArea.style.display='none';
-  }
-
-  // Guesses list
+    if(myGuess){if(submitBtn){submitBtn.disabled=true;submitBtn.textContent='Guess Submitted';}if(myGuessDisplay)myGuessDisplay.style.display='block';if(myGuessVal)myGuessVal.textContent=fmt(myGuess.amount);}
+    else{if(submitBtn){submitBtn.disabled=!guessesOpen;submitBtn.textContent=guessesOpen?'Submit Guess':'Guesses Closed';}if(myGuessDisplay)myGuessDisplay.style.display='none';}
+  }else{if(loginPrompt)loginPrompt.style.display='flex';if(formArea)formArea.style.display='none';}
   var listLabel=document.getElementById('guesses-list-label');
   var list=document.getElementById('guesses-list');
-  if(listLabel) listLabel.textContent='Community Guesses ('+guesses.length+')';
+  if(listLabel)listLabel.textContent='Community Guesses ('+guesses.length+')';
   if(list){
-    if(guesses.length===0){
-      list.innerHTML='<div style="text-align:center;padding:1.5rem;color:var(--text-muted);font-size:.85rem;">No guesses yet — be the first!</div>';
-    } else {
+    if(guesses.length===0){list.innerHTML='<div style="text-align:center;padding:1.5rem;color:var(--text-muted);font-size:.85rem;">No guesses yet — be the first!</div>';}
+    else{
       var sorted=[].concat(guesses).sort(function(a,b){return a.amount-b.amount;});
       var winner=null;
-      if(hunt&&hunt.endBal!=null&&sorted.length>0){
-        winner=sorted.reduce(function(best,g){return Math.abs(g.amount-hunt.endBal)<Math.abs(best.amount-hunt.endBal)?g:best;},sorted[0]);
-      }
+      if(hunt&&hunt.endBal!=null&&sorted.length>0){winner=sorted.reduce(function(best,g){return Math.abs(g.amount-hunt.endBal)<Math.abs(best.amount-hunt.endBal)?g:best;},sorted[0]);}
       list.innerHTML='';
       sorted.forEach(function(g){
         var isMe=appState.user&&g.userId===appState.user.id;
         var isWinner=winner&&g.userId===winner.userId;
         var item=document.createElement('div');
         item.className='guess-item'+(isMe?' mine':'')+(isWinner?' winner':'');
-        var initials=g.username.substring(0,2).toUpperCase();
-        item.innerHTML='<div class="guess-user">'
-          +'<div class="guess-user-avatar">'+initials+'</div>'
-          +'<span>'+g.username+(isMe?' <span style="color:var(--kick-green);font-size:.65rem;">(you)</span>':'')+'</span>'
-          +(isWinner?'<span class="guess-winner-badge">🏆 Winner</span>':'')
-          +'</div>'
-          +'<span class="guess-amount">'+fmt(g.amount)+'</span>';
+        var avatarHtml=g.avatar
+          ?'<img src="'+g.avatar+'" alt="">'
+          :escapeHtml(g.username.substring(0,2).toUpperCase());
+        item.innerHTML='<div class="guess-user"><div class="guess-user-avatar">'+avatarHtml+'</div><span>'+escapeHtml(g.username)+(isMe?' <span style="color:var(--kick-green);font-size:.65rem;">(you)</span>':'')+'</span>'+(isWinner?'<span class="guess-winner-badge">🏆 Winner</span>':'')+'</div><span class="guess-amount">'+fmt(g.amount)+'</span>';
         list.appendChild(item);
       });
     }
@@ -1538,195 +1239,82 @@ function renderGuessPanel(){
 }
 
 function submitGuess(){
-  if(!appState.user){ openDiscordModal(); return; }
-  if(!appState.activeHunt||!appState.activeHunt.guessesOpen){ showToast('Guesses are currently closed.'); return; }
+  if(!appState.user){openDiscordModal();return;}
+  if(!appState.activeHunt||!appState.activeHunt.guessesOpen){showToast('Guesses are currently closed.');return;}
   var amt=parseFloat(document.getElementById('guess-amount-input').value);
-  if(!amt||amt<0){ showToast('Enter a valid amount.'); return; }
+  if(!amt||amt<0){showToast('Enter a valid amount.');return;}
   var huntId=appState.activeHunt.id;
-  if(!appState.guesses[huntId]) appState.guesses[huntId]=[];
-  // Check duplicate
+  if(!appState.guesses[huntId])appState.guesses[huntId]=[];
   var existing=appState.guesses[huntId].findIndex(function(g){return g.userId===appState.user.id;});
-  if(existing!==-1){ showToast('You already submitted a guess.'); return; }
-  appState.guesses[huntId].push({ userId:appState.user.id, username:appState.user.username, avatar:appState.user.avatar, amount:amt });
+  if(existing!==-1){showToast('You already submitted a guess.');return;}
+  appState.guesses[huntId].push({userId:appState.user.id,username:appState.user.username,avatar:appState.user.avatar||null,amount:amt});
   saveState();
   renderGuessPanel();
   showToast('Guess of '+fmt(amt)+' submitted! 🎯');
 }
 
-// ─────────────────────────────────────────────
+// ═══════════════════════════════════════════════════
 // ARCHIVE
-// ─────────────────────────────────────────────
-function renderArchive(){
-  var grid=document.getElementById('archive-grid');
-  var countLabel=document.getElementById('archive-count-label');
-  if(!grid) return;
-  if(countLabel) countLabel.textContent=appState.huntArchive.length+' hunt'+(appState.huntArchive.length!==1?'s':'')+' archived';
-  if(appState.huntArchive.length===0){
-    grid.innerHTML='<div class="empty-archive">No archived hunts yet. Start and complete a hunt to see it here!</div>';
-    return;
-  }
-  grid.innerHTML='';
-  appState.huntArchive.forEach(function(hunt){
-    var stats=calcHuntStats(hunt);
-    var profit=hunt.endBal!=null?(hunt.endBal-hunt.startBal):null;
-    var dateStr=hunt.endedAt?new Date(hunt.endedAt).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'–';
-    var card=document.createElement('div');
-    card.className='archive-card';
-    var slotsPreview=hunt.slots.slice(0,4).map(function(s){
-      var m=s.opened&&s.bet?(s.win/s.bet):null;
-      return '<div class="archive-slot-row"><span class="archive-slot-name">'+s.name+'</span><span class="archive-slot-multi">'+(m?fmtMulti(m):'—')+'</span></div>';
-    }).join('');
-    card.innerHTML=''
-      +'<div class="archive-card-header">'
-        +'<span class="archive-hunt-id">Hunt #'+hunt.id+'</span>'
-        +'<span class="archive-date">'+dateStr+'</span>'
-      +'</div>'
-      +'<div class="archive-stats">'
-        +'<div class="archive-stat"><div class="archive-stat-val">'+hunt.slots.length+'</div><div class="archive-stat-label">Bonuses</div></div>'
-        +'<div class="archive-stat"><div class="archive-stat-val">'+fmt(hunt.startBal)+'</div><div class="archive-stat-label">Start Bal</div></div>'
-        +'<div class="archive-stat"><div class="archive-stat-val">'+(hunt.endBal!=null?fmt(hunt.endBal):'—')+'</div><div class="archive-stat-label">End Bal</div></div>'
-        +'<div class="archive-stat"><div class="archive-stat-val">'+fmtMulti(stats.avgMulti)+'</div><div class="archive-stat-label">Avg Multi</div></div>'
-      +'</div>'
-      +(profit!=null?'<div style="margin-bottom:.5rem;"><span class="archive-profit '+(profit>=0?'win':'loss')+'">'+(profit>=0?'▲':'▼')+' '+fmt(Math.abs(profit))+(profit>=0?' Profit':' Loss')+'</span></div>':'')
-      +(hunt.winner?'<div style="font-size:.75rem;color:var(--accent-gold);margin-bottom:.5rem;">🏆 Winner: <strong>'+hunt.winner.username+'</strong> ('+fmt(hunt.winner.amount)+')</div>':'')
-      +'<button class="archive-expand-btn" onclick="openArchiveModal('+hunt.id+')">View Full Details →</button>';
-    grid.appendChild(card);
-  });
-}
+// ═══════════════════════════════════════════════════
+function renderArchive(){var grid=document.getElementById('archive-grid');var countLabel=document.getElementById('archive-count-label');if(!grid)return;if(countLabel)countLabel.textContent=appState.huntArchive.length+' hunt'+(appState.huntArchive.length!==1?'s':'')+' archived';if(appState.huntArchive.length===0){grid.innerHTML='<div class="empty-archive">No archived hunts yet.</div>';return;}grid.innerHTML='';appState.huntArchive.forEach(function(hunt){var stats=calcHuntStats(hunt);var profit=hunt.endBal!=null?(hunt.endBal-hunt.startBal):null;var dateStr=hunt.endedAt?new Date(hunt.endedAt).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'–';var card=document.createElement('div');card.className='archive-card';card.innerHTML='<div class="archive-card-header"><span class="archive-hunt-id">Hunt #'+hunt.id+'</span><span class="archive-date">'+dateStr+'</span></div><div class="archive-stats"><div class="archive-stat"><div class="archive-stat-val">'+hunt.slots.length+'</div><div class="archive-stat-label">Bonuses</div></div><div class="archive-stat"><div class="archive-stat-val">'+fmt(hunt.startBal)+'</div><div class="archive-stat-label">Start Bal</div></div><div class="archive-stat"><div class="archive-stat-val">'+(hunt.endBal!=null?fmt(hunt.endBal):'—')+'</div><div class="archive-stat-label">End Bal</div></div><div class="archive-stat"><div class="archive-stat-val">'+fmtMulti(stats.avgMulti)+'</div><div class="archive-stat-label">Avg Multi</div></div></div>'+(profit!=null?'<div style="margin-bottom:.5rem;"><span class="archive-profit '+(profit>=0?'win':'loss')+'">'+(profit>=0?'▲':'▼')+' '+fmt(Math.abs(profit))+(profit>=0?' Profit':' Loss')+'</span></div>':'')+(hunt.winner?'<div style="font-size:.75rem;color:var(--accent-gold);margin-bottom:.5rem;">🏆 Winner: <strong>'+escapeHtml(hunt.winner.username)+'</strong> ('+fmt(hunt.winner.amount)+')</div>':'')+'<button class="archive-expand-btn" onclick="openArchiveModal('+hunt.id+')">View Full Details →</button>';grid.appendChild(card);});}
 
-function openArchiveModal(huntId){
-  var hunt=appState.huntArchive.find(function(h){return h.id===huntId;});
-  if(!hunt) return;
-  var stats=calcHuntStats(hunt);
-  var profit=hunt.endBal!=null?(hunt.endBal-hunt.startBal):null;
-  var dateStr=hunt.endedAt?new Date(hunt.endedAt).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'}):'–';
-  document.getElementById('ahm-title').textContent='Hunt #'+hunt.id+' · '+dateStr;
-  var guesses=appState.guesses[hunt.id]||[];
-  var winner=null;
-  if(hunt.endBal!=null&&guesses.length>0){
-    winner=guesses.reduce(function(best,g){return Math.abs(g.amount-hunt.endBal)<Math.abs(best.amount-hunt.endBal)?g:best;},guesses[0]);
-  }
-  var rows=hunt.slots.map(function(s,i){
-    var m=s.opened&&s.bet?(s.win/s.bet):null;
-    return '<tr>'
-      +'<td style="color:var(--text-muted);font-size:.78rem;">'+(i+1)+'</td>'
-      +'<td class="slot-name-cell">'+s.name+'</td>'
-      +'<td><span class="provider-badge '+getProviderBadgeClass(s.provider)+'">'+s.provider+'</span></td>'
-      +'<td style="color:var(--text-secondary);">'+fmt(s.bet||0)+'</td>'
-      +'<td class="win-cell'+(s.opened&&s.win>0?'':' loss')+'">'+(s.opened?(s.win!=null?fmt(s.win):'?'):'—')+'</td>'
-      +'<td class="multi-cell">'+(m!=null?fmtMulti(m):'—')+'</td>'
-      +'</tr>';
-  }).join('');
-  var gRows=guesses.length>0?guesses.sort(function(a,b){return a.amount-b.amount;}).map(function(g){
-    var isW=winner&&g.userId===winner.userId;
-    return '<div class="guess-item'+(isW?' winner':'')+'"><div class="guess-user"><div class="guess-user-avatar">'+g.username.substring(0,2).toUpperCase()+'</div><span>'+g.username+'</span>'+(isW?'<span class="guess-winner-badge">🏆</span>':'')+'</div><span class="guess-amount">'+fmt(g.amount)+'</span></div>';
-  }).join(''):'<div style="color:var(--text-muted);font-size:.85rem;padding:1rem 0;">No guesses were submitted for this hunt.</div>';
+function openArchiveModal(huntId){var hunt=appState.huntArchive.find(function(h){return h.id===huntId;});if(!hunt)return;var stats=calcHuntStats(hunt);var profit=hunt.endBal!=null?(hunt.endBal-hunt.startBal):null;var dateStr=hunt.endedAt?new Date(hunt.endedAt).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'}):'–';document.getElementById('ahm-title').textContent='Hunt #'+hunt.id+' · '+dateStr;var guesses=appState.guesses[hunt.id]||[];var winner=null;if(hunt.endBal!=null&&guesses.length>0){winner=guesses.reduce(function(best,g){return Math.abs(g.amount-hunt.endBal)<Math.abs(best.amount-hunt.endBal)?g:best;},guesses[0]);}var rows=hunt.slots.map(function(s,i){var m=s.opened&&s.bet?(s.win/s.bet):null;return'<tr><td style="color:var(--text-muted);font-size:.78rem;">'+(i+1)+'</td><td class="slot-name-cell">'+escapeHtml(s.name)+'</td><td><span class="provider-badge '+getProviderBadgeClass(s.provider)+'">'+s.provider+'</span></td><td style="color:var(--text-secondary);">'+fmt(s.bet||0)+'</td><td class="win-cell'+(s.opened&&s.win>0?'':' loss')+'">'+(s.opened?(s.win!=null?fmt(s.win):'?'):'—')+'</td><td class="multi-cell">'+(m!=null?fmtMulti(m):'—')+'</td></tr>';}).join('');var gRows=guesses.length>0?guesses.sort(function(a,b){return a.amount-b.amount;}).map(function(g){var isW=winner&&g.userId===winner.userId;var avatarHtml=g.avatar?'<img src="'+g.avatar+'" alt="">':escapeHtml(g.username.substring(0,2).toUpperCase());return'<div class="guess-item'+(isW?' winner':'')+'"><div class="guess-user"><div class="guess-user-avatar">'+avatarHtml+'</div><span>'+escapeHtml(g.username)+'</span>'+(isW?'<span class="guess-winner-badge">🏆</span>':'')+'</div><span class="guess-amount">'+fmt(g.amount)+'</span></div>';}).join(''):'<div style="color:var(--text-muted);font-size:.85rem;padding:1rem 0;">No guesses were submitted for this hunt.</div>';document.getElementById('ahm-body').innerHTML='<div class="ahm-stats-row"><div class="hunt-stat"><div class="hunt-stat-icon">🎰</div><div class="hunt-stat-val">'+hunt.slots.length+'</div><div class="hunt-stat-label">Bonuses</div></div><div class="hunt-stat"><div class="hunt-stat-icon">💵</div><div class="hunt-stat-val gold">'+fmt(hunt.startBal)+'</div><div class="hunt-stat-label">Start Bal</div></div><div class="hunt-stat"><div class="hunt-stat-icon">📊</div><div class="hunt-stat-val '+(profit!=null?(profit>=0?'green':'red'):'')+'">'+fmt(hunt.endBal||0)+'</div><div class="hunt-stat-label">End Bal</div></div><div class="hunt-stat"><div class="hunt-stat-icon">✖</div><div class="hunt-stat-val">'+fmtMulti(stats.avgMulti)+'</div><div class="hunt-stat-label">Avg Multi</div></div></div>'+(profit!=null?'<div style="margin-bottom:1.25rem;"><span class="archive-profit '+(profit>=0?'win':'loss')+'">'+(profit>=0?'▲ Profit':'▼ Loss')+': '+fmt(Math.abs(profit))+'</span></div>':'')+'<div style="font-size:.68rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:.6rem;">Slot Results</div><div class="hunt-table-wrap" style="margin-bottom:1.25rem;"><table class="hunt-table"><thead><tr><th>#</th><th>Slot</th><th>Provider</th><th>Bet</th><th>Win</th><th>Multi</th></tr></thead><tbody>'+rows+'</tbody></table></div><div style="font-size:.68rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:.6rem;">Community Guesses ('+guesses.length+')</div><div class="guess-list">'+gRows+'</div>';document.getElementById('archive-hunt-modal').classList.add('open');document.body.style.overflow='hidden';}
+function closeArchiveModal(e){if(!e||e.target===document.getElementById('archive-hunt-modal')||e===undefined){document.getElementById('archive-hunt-modal').classList.remove('open');document.body.style.overflow='';}}
 
-  document.getElementById('ahm-body').innerHTML=''
-    +'<div class="ahm-stats-row">'
-      +'<div class="hunt-stat"><div class="hunt-stat-icon">🎰</div><div class="hunt-stat-val">'+hunt.slots.length+'</div><div class="hunt-stat-label">Bonuses</div></div>'
-      +'<div class="hunt-stat"><div class="hunt-stat-icon">💵</div><div class="hunt-stat-val gold">'+fmt(hunt.startBal)+'</div><div class="hunt-stat-label">Start Bal</div></div>'
-      +'<div class="hunt-stat"><div class="hunt-stat-icon">📊</div><div class="hunt-stat-val '+(profit!=null?(profit>=0?'green':'red'):'')+'">'+fmt(hunt.endBal||0)+'</div><div class="hunt-stat-label">End Bal</div></div>'
-      +'<div class="hunt-stat"><div class="hunt-stat-icon">✖</div><div class="hunt-stat-val">'+fmtMulti(stats.avgMulti)+'</div><div class="hunt-stat-label">Avg Multi</div></div>'
-    +'</div>'
-    +(profit!=null?'<div style="margin-bottom:1.25rem;"><span class="archive-profit '+(profit>=0?'win':'loss')+'">'+(profit>=0?'▲ Profit':'▼ Loss')+': '+fmt(Math.abs(profit))+'</span></div>':'')
-    +'<div style="font-size:.68rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:.6rem;">Slot Results</div>'
-    +'<div class="hunt-table-wrap" style="margin-bottom:1.25rem;"><table class="hunt-table"><thead><tr><th>#</th><th>Slot</th><th>Provider</th><th>Bet</th><th>Win</th><th>Multi</th></tr></thead><tbody>'+rows+'</tbody></table></div>'
-    +'<div style="font-size:.68rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:.6rem;">Community Guesses ('+guesses.length+')</div>'
-    +'<div class="guess-list">'+gRows+'</div>';
-  document.getElementById('archive-hunt-modal').classList.add('open');
-  document.body.style.overflow='hidden';
-}
-
-function closeArchiveModal(e){
-  if(!e||e.target===document.getElementById('archive-hunt-modal')||e===undefined){
-    document.getElementById('archive-hunt-modal').classList.remove('open');
-    document.body.style.overflow='';
-  }
-}
-
-// ─────────────────────────────────────────────
-// HUNT TAB SWITCH
-// ─────────────────────────────────────────────
-function switchHuntTab(tab){
-  document.getElementById('tab-live').className='hunt-tab'+(tab==='live'?' active':'');
-  document.getElementById('tab-archive').className='hunt-tab'+(tab==='archive'?' active':'');
-  document.getElementById('hunt-live-panel').style.display=tab==='live'?'block':'none';
-  var ap=document.getElementById('hunt-archive-panel');
-  ap.className='archive-panel'+(tab==='archive'?' visible':'');
-  if(tab==='archive') renderArchive();
-}
-
-// ─────────────────────────────────────────────
+// ═══════════════════════════════════════════════════
 // SOCIAL STRIP
-// ─────────────────────────────────────────────
+// ═══════════════════════════════════════════════════
 var SOCIALS=[{cls:'discord',href:'https://discord.gg/Rx7rc4bTa',label:'Discord',sub:'Join the community',icon:'<svg width="18" height="18" viewBox="0 0 24 24" fill="#5865f2"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.1 18.08.11 18.1.128 18.114a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>',live:false},{cls:'kick',href:'https://kick.com/zillas',label:'Kick',sub:'Watch live',icon:'<svg width="16" height="16" viewBox="0 0 24 24" fill="#53fc18"><rect x="2" y="2" width="20" height="20" rx="4"/><text x="6" y="16" font-size="11" font-weight="900" fill="#000">K</text></svg>',live:true},{cls:'twitter',href:'https://x.com/zill4s?s=20',label:'X / Twitter',sub:'Latest updates',icon:'<svg width="15" height="15" viewBox="0 0 24 24" fill="#e8eeff"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>',live:false},{cls:'kick',href:'https://kick.com/zillas',label:'Kick',sub:'Follow the stream',icon:'<svg width="16" height="16" viewBox="0 0 24 24" fill="#53fc18"><rect x="2" y="2" width="20" height="20" rx="4"/><text x="6" y="16" font-size="11" font-weight="900" fill="#000">K</text></svg>',live:true},{cls:'discord',href:'https://discord.gg/Rx7rc4bTa',label:'Discord',sub:'Giveaways & chat',icon:'<svg width="18" height="18" viewBox="0 0 24 24" fill="#5865f2"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.1 18.08.11 18.1.128 18.114a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>',live:false}];
-var track=document.getElementById('social-strip-track');
-[0,1].forEach(function(){SOCIALS.forEach(function(s){var a=document.createElement('a');a.href=s.href;a.target='_blank';a.className='social-pill '+s.cls;a.innerHTML='<div class="social-pill-icon">'+s.icon+'</div><div class="social-pill-label"><span style="display:block;line-height:1.2;">'+s.label+'</span><span class="social-pill-sub">'+s.sub+'</span></div>'+(s.live?'<span class="social-pill-live"></span>':'');track.appendChild(a);});});
+var track=document.getElementById('social-strip-track');[0,1].forEach(function(){SOCIALS.forEach(function(s){var a=document.createElement('a');a.href=s.href;a.target='_blank';a.className='social-pill '+s.cls;a.innerHTML='<div class="social-pill-icon">'+s.icon+'</div><div class="social-pill-label"><span style="display:block;line-height:1.2;">'+s.label+'</span><span class="social-pill-sub">'+s.sub+'</span></div>'+(s.live?'<span class="social-pill-live"></span>':'');track.appendChild(a);});});
 
-// ─────────────────────────────────────────────
+// ═══════════════════════════════════════════════════
 // SCHEDULE + COUNTDOWN
-// ─────────────────────────────────────────────
+// ═══════════════════════════════════════════════════
 var SCHEDULE_DEF=[{day:1,hour:7,label:'Monday',time:'7 AM EST'},{day:3,hour:8,label:'Wednesday',time:'8 AM EST'},{day:5,hour:7,label:'Friday',time:'7 AM EST'},{day:6,hour:6,label:'Saturday',time:'6 AM EST'},{day:0,hour:5,label:'Sunday',time:'5 AM EST'}];
 function buildSchedule(){var nowEST=new Date(new Date().getTime()-5*3600000);var todayDay=nowEST.getDay();var grid=document.getElementById('schedule-grid');SCHEDULE_DEF.forEach(function(s){var isToday=s.day===todayDay;var card=document.createElement('div');card.className='schedule-card'+(isToday?' today':'');card.innerHTML='<div class="schedule-day-name">'+s.label+'</div><div class="schedule-time-big">'+s.time+'</div><div class="schedule-tz">Eastern Time</div>'+(isToday?'<div class="schedule-today-badge"><span class="schedule-today-badge-dot"></span>Today</div>':'');grid.appendChild(card);});}
 buildSchedule();
 var SCHEDULE=[{day:1,hour:7,label:'Monday 7AM EST'},{day:3,hour:8,label:'Wednesday 8AM EST'},{day:5,hour:7,label:'Friday 7AM EST'},{day:6,hour:6,label:'Saturday 6AM EST'},{day:0,hour:5,label:'Sunday 5AM EST'}];
 function getNextStream(){var nowEST=new Date(new Date().getTime()-5*3600000);var soonest=null,label='';for(var i=0;i<14;i++){for(var j=0;j<SCHEDULE.length;j++){var s=SCHEDULE[j];var c=new Date(nowEST);c.setDate(c.getDate()+i);if(c.getDay()===s.day){c.setHours(s.hour,0,0,0);if(c>nowEST&&(!soonest||c<soonest)){soonest=new Date(c);label=s.label;}}}if(soonest)break;}return{target:soonest,label:label};}
-function updateCountdown(){var r=getNextStream();if(!r.target)return;var nowEST=new Date(new Date().getTime()-5*3600000);var diff=r.target-nowEST;if(diff<=0){return;}document.getElementById('cd-days').textContent=pad(Math.floor(diff/86400000));document.getElementById('cd-hours').textContent=pad(Math.floor(diff%86400000/3600000));document.getElementById('cd-mins').textContent=pad(Math.floor(diff%3600000/60000));document.getElementById('cd-secs').textContent=pad(Math.floor(diff%60000/1000));document.getElementById('cd-label').innerHTML='Next: <span>'+r.label+'</span>';}
+function updateCountdown(){var r=getNextStream();if(!r.target)return;var nowEST=new Date(new Date().getTime()-5*3600000);var diff=r.target-nowEST;if(diff<=0)return;document.getElementById('cd-days').textContent=pad(Math.floor(diff/86400000));document.getElementById('cd-hours').textContent=pad(Math.floor(diff%86400000/3600000));document.getElementById('cd-mins').textContent=pad(Math.floor(diff%3600000/60000));document.getElementById('cd-secs').textContent=pad(Math.floor(diff%60000/1000));document.getElementById('cd-label').innerHTML='Next: <span>'+r.label+'</span>';}
 updateCountdown();setInterval(updateCountdown,1000);
 
-// ─────────────────────────────────────────────
+// ═══════════════════════════════════════════════════
 // KICK STATUS CHECK
-// ─────────────────────────────────────────────
+// ═══════════════════════════════════════════════════
 function checkKickStatus(){var url='https://corsproxy.io/?url='+encodeURIComponent('https://kick.com/api/v1/channels/zillas');fetch(url,{headers:{'Accept':'application/json'}}).then(function(r){if(!r.ok)throw new Error('err');return r.json();}).then(function(data){var live=!!(data.livestream);var viewers=live?(data.livestream.viewer_count||0):0;document.getElementById('hero-checking-embed').style.display='none';var pill=document.getElementById('hero-stream-pill');pill.style.display='inline-flex';pill.textContent=live?'LIVE':'OFFLINE';if(live){pill.style.background='rgba(83,252,24,.12)';pill.style.border='1px solid rgba(83,252,24,.35)';pill.style.color='#53fc18';}else{pill.style.background='rgba(61,80,128,.2)';pill.style.border='1px solid rgba(42,64,128,.4)';pill.style.color='var(--text-muted)';}document.getElementById('hero-live-embed').style.display=live?'block':'none';document.getElementById('hero-offline-embed').style.display=live?'none':'flex';document.getElementById('hero-viewer-row').style.display=live?'flex':'none';if(live)document.getElementById('hero-viewer-count').textContent=viewers.toLocaleString()+' viewers';document.getElementById('kick-float-dot').className=live?'kick-float-live-dot':'kick-float-offline-dot';document.getElementById('kick-float-status').textContent=live?'LIVE':'Offline';document.getElementById('kick-float-status').className=live?'kick-float-status':'kick-float-status is-offline';}).catch(function(){document.getElementById('hero-checking-embed').style.display='none';document.getElementById('hero-live-embed').style.display='none';document.getElementById('hero-offline-embed').style.display='flex';});}
 checkKickStatus();setInterval(checkKickStatus,60000);
 
-// ─────────────────────────────────────────────
+// ═══════════════════════════════════════════════════
 // CLIP MODAL
-// ─────────────────────────────────────────────
+// ═══════════════════════════════════════════════════
 function openClip(videoFile,title,kickUrl){var modal=document.getElementById('clip-modal');var video=document.getElementById('clip-modal-video');document.getElementById('clip-modal-title').textContent=title;document.getElementById('clip-modal-kick-link').href=kickUrl;video.src=videoFile;video.play();modal.classList.add('open');document.body.style.overflow='hidden';}
 function closeClipModal(e){if(e.target===document.getElementById('clip-modal'))closeClipModalDirect();}
 function closeClipModalDirect(){var modal=document.getElementById('clip-modal');var video=document.getElementById('clip-modal-video');modal.classList.remove('open');video.pause();video.src='';document.body.style.overflow='';}
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeClipModalDirect();closeDiscordModal();closeArchiveModal();}});
 
-// ─────────────────────────────────────────────
-// PAGES
-// ─────────────────────────────────────────────
-function showPage(name){
-  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
-  document.querySelectorAll('.nav-links a').forEach(function(a){a.classList.remove('active');});
-  document.querySelectorAll('.mobile-menu a').forEach(function(a){a.classList.remove('active');});
-  var page=document.getElementById('page-'+name);
-  if(page)page.classList.add('active');
-  var nav=document.getElementById('nav-'+name);
-  if(nav)nav.classList.add('active');
-  var mob=document.getElementById('mob-'+name);
-  if(mob)mob.classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
-}
+// ═══════════════════════════════════════════════════
+// HUNT TAB SWITCH
+// ═══════════════════════════════════════════════════
+function switchHuntTab(tab){document.getElementById('tab-live').className='hunt-tab'+(tab==='live'?' active':'');document.getElementById('tab-archive').className='hunt-tab'+(tab==='archive'?' active':'');document.getElementById('hunt-live-panel').style.display=tab==='live'?'block':'none';var ap=document.getElementById('hunt-archive-panel');ap.className='archive-panel'+(tab==='archive'?' visible':'');if(tab==='archive')renderArchive();}
 
-// ─────────────────────────────────────────────
+// ═══════════════════════════════════════════════════
+// PAGES
+// ═══════════════════════════════════════════════════
+function showPage(name){currentPage=name;document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});document.querySelectorAll('.nav-links a').forEach(function(a){a.classList.remove('active');});document.querySelectorAll('.mobile-menu a').forEach(function(a){a.classList.remove('active');});var page=document.getElementById('page-'+name);if(page)page.classList.add('active');var nav=document.getElementById('nav-'+name);if(nav)nav.classList.add('active');var mob=document.getElementById('mob-'+name);if(mob)mob.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+
+// ═══════════════════════════════════════════════════
 // COPY CODE
-// ─────────────────────────────────────────────
+// ═══════════════════════════════════════════════════
 function copyCodeBig(code){navigator.clipboard.writeText(code).then(function(){var btn=document.getElementById('big-copy-btn');if(btn){btn.textContent='✓ Copied!';btn.style.background='#00e676';btn.style.color='#000';setTimeout(function(){btn.textContent='Copy Code';btn.style.background='';btn.style.color='';},2000);}showToast('Code '+code+' copied!');}).catch(function(){showToast('Please copy manually: '+code);});}
 
-// ─────────────────────────────────────────────
+// ═══════════════════════════════════════════════════
 // HELPERS
-// ─────────────────────────────────────────────
+// ═══════════════════════════════════════════════════
 function showToast(msg){var t=document.getElementById('toast');document.getElementById('toast-msg').textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2500);}
 function toggleFaq(el){el.parentElement.classList.toggle('open');}
 function toggleMobileMenu(){document.getElementById('mobile-menu').classList.toggle('open');document.getElementById('hamburger').classList.toggle('open');}
 function closeMobileMenu(){document.getElementById('mobile-menu').classList.remove('open');document.getElementById('hamburger').classList.remove('open');}
-
-// Cursor refresh on dynamic elements
-setTimeout(function(){document.querySelectorAll('a,button,[onclick]').forEach(function(el){el.addEventListener('mouseenter',function(){document.body.classList.add('cursor-hover');});el.addEventListener('mouseleave',function(){document.body.classList.remove('cursor-hover');});});},500);
-
-// Keep hunt refreshed
-setInterval(function(){
-  if(appState.activeHunt&&document.getElementById('page-hunt').classList.contains('active')){
-    renderHuntStats();
-  }
-},5000);
+setInterval(function(){if(appState.activeHunt&&document.getElementById('page-hunt').classList.contains('active')){renderHuntStats();}},5000);
 </script>
 </body>
 </html>
