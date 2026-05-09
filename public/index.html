@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{--bg-void:#03050f;--bg-deep:#060b1a;--bg-dark:#0a1128;--bg-card:#0e1835;--bg-card2:#111e42;--blue-bright:#1a6fff;--blue-mid:#1254cc;--blue-glow:#2e8fff;--accent-gold:#f0b429;--text-primary:#e8eeff;--text-secondary:#7a90c4;--text-muted:#3d5080;--border:#1a2d5a;--border-bright:#2a4080;--green:#00e676;--kick-green:#53fc18;--red:#ff4444}
+    :root{--bg-void:#03050f;--bg-deep:#060b1a;--bg-dark:#0a1128;--bg-card:#0e1835;--bg-card2:#111e42;--blue-bright:#1a6fff;--blue-mid:#1254cc;--blue-glow:#2e8fff;--accent-gold:#f0b429;--text-primary:#e8eeff;--text-secondary:#7a90c4;--text-muted:#3d5080;--border:#1a2d5a;--border-bright:#2a4080;--green:#00e676;--kick-green:#53fc18;--red:#ff4444;--discord:#5865f2}
     html{scroll-behavior:smooth}
     #starfield{position:fixed;inset:0;z-index:0;pointer-events:none;}
     *{cursor:none!important}
@@ -34,8 +34,17 @@
     .nav-social-btn{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;text-decoration:none;color:var(--text-secondary);transition:all .2s;cursor:none;flex-shrink:0}
     .nav-social-btn:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);color:var(--text-primary);transform:translateY(-1px)}
     .nav-social-btn.kick:hover{border-color:rgba(83,252,24,.4);color:#53fc18;background:rgba(83,252,24,.08)}
-    .nav-social-btn.discord:hover{border-color:rgba(88,101,242,.5);color:#5865f2;background:rgba(88,101,242,.08)}
+    .nav-social-btn.discord-social:hover{border-color:rgba(88,101,242,.5);color:#5865f2;background:rgba(88,101,242,.08)}
     .nav-social-btn.twitter:hover{border-color:rgba(255,255,255,.3);color:#e8eeff;background:rgba(255,255,255,.08)}
+
+    /* Discord Login Button */
+    .discord-login-btn{display:flex;align-items:center;gap:7px;padding:7px 14px;border-radius:8px;background:rgba(88,101,242,.12);border:1px solid rgba(88,101,242,.3);color:var(--text-secondary);font-family:'Exo 2',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;cursor:none;transition:all .2s;white-space:nowrap;}
+    .discord-login-btn:hover{background:rgba(88,101,242,.2);border-color:var(--discord);color:#fff;}
+    .discord-user-btn{display:flex;align-items:center;gap:8px;padding:5px 10px 5px 5px;border-radius:8px;background:rgba(88,101,242,.1);border:1px solid rgba(88,101,242,.25);color:var(--text-primary);font-family:'Exo 2',sans-serif;font-size:.78rem;font-weight:700;cursor:none;transition:all .2s;}
+    .discord-user-btn:hover{background:rgba(88,101,242,.2);border-color:var(--discord);}
+    .discord-avatar{width:26px;height:26px;border-radius:50%;background:var(--discord);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;color:#fff;overflow:hidden;flex-shrink:0;}
+    .discord-avatar img{width:100%;height:100%;object-fit:cover;}
+    .admin-badge{display:inline-flex;align-items:center;gap:3px;background:rgba(240,180,41,.15);border:1px solid rgba(240,180,41,.3);color:var(--accent-gold);font-size:.55rem;font-weight:800;letter-spacing:1px;padding:2px 6px;border-radius:10px;margin-left:4px;}
     @keyframes pulse-green{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
     .page{display:none;position:relative;z-index:1;padding-top:70px}
     .page.active{display:block}
@@ -102,7 +111,7 @@
 
     /* STREAM TIME */
     .stream-time-section{position:relative;z-index:1;padding:5rem 2rem;border-bottom:1px solid var(--border);overflow:hidden;}
-    .stream-time-section::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(26,111,255,.07) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 20% 80%,rgba(240,180,41,.04) 0%,transparent 60%);}
+    .stream-time-section::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(26,111,255,.07) 0%,transparent 70%);}
     .stream-time-inner{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:3.5rem;}
     .stream-time-header{text-align:center;}
     .stream-time-label{display:inline-flex;align-items:center;gap:8px;font-size:.7rem;font-weight:800;letter-spacing:5px;text-transform:uppercase;color:var(--blue-bright);margin-bottom:.9rem;}
@@ -112,9 +121,8 @@
     .countdown-sublabel{font-size:.68rem;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--text-muted);}
     .countdown-blocks{display:flex;align-items:center;gap:.75rem;}
     .countdown-block{display:flex;flex-direction:column;align-items:center;gap:6px;}
-    .countdown-num{font-family:'Rajdhani',sans-serif;font-size:3.2rem;font-weight:700;color:var(--text-primary);background:linear-gradient(135deg,rgba(26,111,255,.12) 0%,rgba(26,111,255,.04) 100%);border:1px solid var(--border-bright);border-radius:14px;padding:10px 22px;min-width:88px;text-align:center;line-height:1;position:relative;overflow:hidden;box-shadow:0 0 24px rgba(26,111,255,.1),inset 0 1px 0 rgba(255,255,255,.05);transition:box-shadow .3s;}
+    .countdown-num{font-family:'Rajdhani',sans-serif;font-size:3.2rem;font-weight:700;color:var(--text-primary);background:linear-gradient(135deg,rgba(26,111,255,.12) 0%,rgba(26,111,255,.04) 100%);border:1px solid var(--border-bright);border-radius:14px;padding:10px 22px;min-width:88px;text-align:center;line-height:1;position:relative;overflow:hidden;box-shadow:0 0 24px rgba(26,111,255,.1),inset 0 1px 0 rgba(255,255,255,.05);}
     .countdown-num::after{content:'';position:absolute;top:50%;left:8px;right:8px;height:1px;background:rgba(26,111,255,.12);}
-    .countdown-block:hover .countdown-num{box-shadow:0 0 36px rgba(26,111,255,.22),inset 0 1px 0 rgba(255,255,255,.08);}
     .countdown-unit{font-size:.6rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);}
     .countdown-sep{font-family:'Rajdhani',sans-serif;font-size:3rem;font-weight:700;color:var(--blue-mid);margin-bottom:22px;animation:blink 1s step-end infinite;}
     @keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
@@ -128,9 +136,9 @@
     .schedule-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;width:100%;max-width:900px;}
     .schedule-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:1.4rem .75rem;text-align:center;position:relative;overflow:hidden;transition:all .35s cubic-bezier(.23,1,.32,1);}
     .schedule-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--blue-bright),transparent);opacity:0;transition:opacity .3s;}
-    .schedule-card:hover{border-color:var(--border-bright);transform:translateY(-5px) scale(1.02);box-shadow:0 16px 40px rgba(0,0,0,.5),0 0 20px rgba(26,111,255,.1);}
+    .schedule-card:hover{border-color:var(--border-bright);transform:translateY(-5px) scale(1.02);}
     .schedule-card:hover::before{opacity:1;}
-    .schedule-card.today{border-color:rgba(240,180,41,.35);background:linear-gradient(135deg,rgba(240,180,41,.06) 0%,var(--bg-card) 100%);box-shadow:0 0 30px rgba(240,180,41,.1);}
+    .schedule-card.today{border-color:rgba(240,180,41,.35);background:linear-gradient(135deg,rgba(240,180,41,.06) 0%,var(--bg-card) 100%);}
     .schedule-card.today::before{opacity:1;background:linear-gradient(90deg,transparent,var(--accent-gold),transparent);}
     .schedule-day-name{font-family:'Rajdhani',sans-serif;font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-secondary);margin-bottom:.5rem;}
     .schedule-card.today .schedule-day-name{color:var(--accent-gold);}
@@ -149,7 +157,7 @@
     .clips-sub{color:var(--text-secondary);font-size:.9rem;margin-bottom:2rem;line-height:1.6;}
     .clip-modal{display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.88);backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:2rem;}
     .clip-modal.open{display:flex;}
-    .clip-modal-inner{position:relative;width:100%;max-width:960px;border-radius:18px;overflow:hidden;border:1px solid var(--border-bright);box-shadow:0 0 80px rgba(26,111,255,.25),0 0 160px rgba(26,111,255,.1);animation:modalIn .3s cubic-bezier(.23,1,.32,1) both;}
+    .clip-modal-inner{position:relative;width:100%;max-width:960px;border-radius:18px;overflow:hidden;border:1px solid var(--border-bright);animation:modalIn .3s cubic-bezier(.23,1,.32,1) both;}
     @keyframes modalIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
     .clip-modal-header{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;background:var(--bg-card2);border-bottom:1px solid var(--border);}
     .clip-modal-title{font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;}
@@ -160,28 +168,23 @@
     .clip-modal-footer{display:flex;align-items:center;justify-content:space-between;padding:10px 18px;background:var(--bg-card2);border-top:1px solid var(--border);}
     .clip-modal-kick-link{display:flex;align-items:center;gap:6px;text-decoration:none;color:var(--text-secondary);font-size:.78rem;font-weight:600;cursor:none;transition:color .2s;}
     .clip-modal-kick-link:hover{color:var(--kick-green);}
-    .clips-featured{border-radius:16px;overflow:hidden;border:1px solid var(--border-bright);background:var(--bg-card);box-shadow:0 0 40px rgba(26,111,255,.10);margin-bottom:1.25rem;transition:box-shadow .3s,border-color .3s,transform .3s;cursor:none;}
-    .clips-featured:hover{border-color:rgba(26,111,255,.5);box-shadow:0 0 60px rgba(26,111,255,.2);transform:translateY(-3px);}
+    .clips-featured{border-radius:16px;overflow:hidden;border:1px solid var(--border-bright);background:var(--bg-card);margin-bottom:1.25rem;transition:all .3s;cursor:none;}
+    .clips-featured:hover{border-color:rgba(26,111,255,.5);transform:translateY(-3px);}
     .clips-featured-header{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--bg-card2);border-bottom:1px solid var(--border);}
     .clips-featured-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(240,180,41,.12);border:1px solid rgba(240,180,41,.3);color:var(--accent-gold);font-size:.65rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:3px 10px;border-radius:20px;}
     .clip-kick-link{display:flex;align-items:center;gap:6px;text-decoration:none;color:var(--text-secondary);font-size:.75rem;font-weight:600;cursor:none;transition:color .2s;}
     .clip-kick-link:hover{color:var(--kick-green);}
     .clip-thumb-wrap{position:relative;width:100%;aspect-ratio:16/9;background:var(--bg-deep);overflow:hidden;}
-    .clip-thumb-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease, filter .4s ease;}
+    .clip-thumb-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease,filter .4s ease;}
     .clips-featured:hover .clip-thumb-img{transform:scale(1.04);filter:blur(3px) brightness(.85);}
     .clip-card:hover .clip-thumb-img{transform:scale(1.06);filter:blur(3px) brightness(.8);}
     .clip-play-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.2);transition:background .35s;}
-    .clips-featured:hover .clip-play-overlay{background:rgba(0,0,0,.35);}
-    .clip-card:hover .clip-play-overlay{background:rgba(0,0,0,.4);}
+    .clips-featured:hover .clip-play-overlay,.clip-card:hover .clip-play-overlay{background:rgba(0,0,0,.35);}
     .clip-play-btn{position:relative;width:72px;height:72px;display:flex;align-items:center;justify-content:center;}
-    .clip-play-btn::before{content:'';position:absolute;inset:0;border-radius:50%;border:1.5px solid rgba(255,255,255,.18);transition:transform .4s cubic-bezier(.23,1,.32,1),border-color .3s;}
-    .clip-play-btn::after{content:'';position:absolute;inset:8px;border-radius:50%;background:rgba(26,111,255,.85);backdrop-filter:blur(4px);box-shadow:0 0 24px rgba(26,111,255,.6), inset 0 1px 0 rgba(255,255,255,.2);transition:transform .4s cubic-bezier(.23,1,.32,1),box-shadow .3s,background .3s;}
-    .clip-play-btn svg{position:relative;z-index:2;margin-left:4px;transition:transform .3s;}
-    .clips-featured:hover .clip-play-btn::before{transform:scale(1.25);border-color:rgba(26,111,255,.4);}
-    .clips-featured:hover .clip-play-btn::after{transform:scale(1.1);background:rgba(26,111,255,1);box-shadow:0 0 40px rgba(26,111,255,.8), inset 0 1px 0 rgba(255,255,255,.3);}
-    .clips-featured:hover .clip-play-btn svg{transform:scale(1.1);}
-    .clip-card:hover .clip-play-btn::before{transform:scale(1.3);border-color:rgba(26,111,255,.4);}
-    .clip-card:hover .clip-play-btn::after{transform:scale(1.15);background:rgba(26,111,255,1);box-shadow:0 0 36px rgba(26,111,255,.9);}
+    .clip-play-btn::before{content:'';position:absolute;inset:0;border-radius:50%;border:1.5px solid rgba(255,255,255,.18);transition:transform .4s cubic-bezier(.23,1,.32,1);}
+    .clip-play-btn::after{content:'';position:absolute;inset:8px;border-radius:50%;background:rgba(26,111,255,.85);backdrop-filter:blur(4px);box-shadow:0 0 24px rgba(26,111,255,.6);transition:transform .4s cubic-bezier(.23,1,.32,1);}
+    .clip-play-btn svg{position:relative;z-index:2;margin-left:4px;}
+    .clips-featured:hover .clip-play-btn::after,.clip-card:hover .clip-play-btn::after{transform:scale(1.1);background:rgba(26,111,255,1);}
     .clip-play-btn-sm{width:54px;height:54px;}
     @keyframes pingRing{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.8);opacity:0}}
     .clip-play-pulse{position:absolute;inset:0;border-radius:50%;border:1.5px solid rgba(26,111,255,.5);opacity:0;}
@@ -190,142 +193,194 @@
     .clips-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
     .clip-card{border-radius:14px;overflow:hidden;border:1px solid var(--border);background:var(--bg-card);transition:all .3s;position:relative;cursor:none;}
     .clip-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--blue-bright),transparent);opacity:0;transition:opacity .3s;z-index:1;}
-    .clip-card:hover{border-color:var(--border-bright);transform:translateY(-5px);box-shadow:0 16px 40px rgba(0,0,0,.5),0 0 20px rgba(26,111,255,.1);}
+    .clip-card:hover{border-color:var(--border-bright);transform:translateY(-5px);}
     .clip-card:hover::before{opacity:1;}
     .clip-card-footer{padding:10px 12px;background:var(--bg-card2);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
     .clip-num{font-family:'Rajdhani',sans-serif;font-size:.8rem;font-weight:700;color:var(--text-muted);letter-spacing:1px;}
     .clip-watch-link{font-size:.72rem;font-weight:700;color:var(--blue-bright);text-decoration:none;cursor:none;letter-spacing:.5px;transition:color .2s;}
     .clip-watch-link:hover{color:var(--blue-glow);}
 
-    /* ══════════════════════════════════════
-       RAFFLE — COMING SOON REDESIGN
-    ══════════════════════════════════════ */
-    .giveaway-section{position:relative;z-index:1;padding:0;overflow:hidden;}
+    /* ═══ BONUS HUNT TRACKER ═══ */
+    .hunt-page{background:var(--bg-void);}
+    .hunt-hero{position:relative;padding:3.5rem 2rem 2rem;text-align:center;overflow:hidden;border-bottom:1px solid var(--border);}
+    .hunt-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(83,252,24,.05) 0%,rgba(26,111,255,.04) 40%,transparent 70%);pointer-events:none;}
+    .hunt-hero-inner{position:relative;z-index:1;max-width:700px;margin:0 auto;}
+    .hunt-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.65rem;font-weight:800;letter-spacing:5px;text-transform:uppercase;color:var(--kick-green);background:rgba(83,252,24,.07);border:1px solid rgba(83,252,24,.2);border-radius:30px;padding:5px 16px;margin-bottom:1.25rem;}
+    .hunt-hero-title{font-family:'Rajdhani',sans-serif;font-size:clamp(2.5rem,5vw,4.5rem);font-weight:700;text-transform:uppercase;letter-spacing:-1px;line-height:.95;margin-bottom:.75rem;}
+    .hunt-hero-title .word-green{color:var(--kick-green);}
+    .hunt-hero-sub{color:var(--text-secondary);font-size:.9rem;line-height:1.7;}
 
-    .raffle-hero{position:relative;padding:4rem 2rem 3rem;text-align:center;overflow:hidden;}
-    .raffle-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(240,180,41,.07) 0%,transparent 60%),radial-gradient(ellipse 40% 40% at 20% 100%,rgba(26,111,255,.05) 0%,transparent 60%);pointer-events:none;}
-    .raffle-hero::after{content:'';position:absolute;inset:0;opacity:.02;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;}
-    .raffle-hero-inner{position:relative;z-index:1;max-width:700px;margin:0 auto;}
+    /* Tabs */
+    .hunt-tabs{display:flex;align-items:center;gap:.5rem;padding:1.25rem 2rem 0;max-width:1200px;margin:0 auto;}
+    .hunt-tab{padding:9px 22px;border-radius:8px 8px 0 0;border:1px solid transparent;border-bottom:none;font-family:'Exo 2',sans-serif;font-size:.82rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;cursor:none;color:var(--text-muted);background:transparent;transition:all .2s;}
+    .hunt-tab.active{color:var(--kick-green);background:var(--bg-card);border-color:var(--border);}
+    .hunt-tab:hover:not(.active){color:var(--text-secondary);background:rgba(255,255,255,.03);}
 
-    .raffle-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.68rem;font-weight:800;letter-spacing:5px;text-transform:uppercase;color:var(--accent-gold);background:rgba(240,180,41,.08);border:1px solid rgba(240,180,41,.2);border-radius:30px;padding:5px 16px;margin-bottom:1.5rem;}
-    .raffle-eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--accent-gold);animation:pulse-green 1.2s infinite;}
-    .raffle-hero-title{font-family:'Rajdhani',sans-serif;font-size:clamp(2.8rem,6vw,5rem);font-weight:700;text-transform:uppercase;letter-spacing:-1px;line-height:.95;margin-bottom:1rem;}
-    .raffle-hero-title .word-drop{color:var(--accent-gold);}
-    .raffle-hero-title .word-zone{display:block;color:rgba(232,238,255,.5);font-size:.6em;letter-spacing:4px;font-weight:600;margin-top:.2rem;}
-    .raffle-hero-sub{color:var(--text-secondary);font-size:.95rem;line-height:1.7;max-width:500px;margin:0 auto 2rem;}
+    .hunt-main{max-width:1200px;margin:0 auto;padding:0 2rem 4rem;}
 
-    /* Big coming soon lock */
-    .raffle-lock-banner{
-      max-width:620px;margin:0 auto 2.5rem;
-      background:linear-gradient(135deg,rgba(240,180,41,.06),rgba(240,180,41,.02));
-      border:1px solid rgba(240,180,41,.2);
-      border-radius:20px;padding:2rem 2rem 1.75rem;
-      text-align:center;position:relative;overflow:hidden;
-    }
-    .raffle-lock-banner::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent-gold),transparent);}
-    .raffle-lock-icon{width:64px;height:64px;border-radius:50%;background:rgba(240,180,41,.1);border:1px solid rgba(240,180,41,.25);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:1.8rem;}
-    .raffle-lock-title{font-family:'Rajdhani',sans-serif;font-size:1.6rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--accent-gold);margin-bottom:.4rem;}
-    .raffle-lock-sub{font-size:.85rem;color:var(--text-secondary);line-height:1.6;}
-    .raffle-notify-form{display:flex;gap:.5rem;max-width:380px;margin:1.25rem auto 0;}
-    .raffle-notify-input{flex:1;background:rgba(255,255,255,.05);border:1px solid var(--border-bright);border-radius:10px;padding:10px 14px;font-family:'Exo 2',sans-serif;font-size:.85rem;color:var(--text-primary);outline:none;transition:border .2s;}
-    .raffle-notify-input:focus{border-color:var(--accent-gold);}
-    .raffle-notify-input::placeholder{color:var(--text-muted);}
-    .raffle-notify-btn{background:linear-gradient(135deg,var(--accent-gold),#d49a15);color:#000;border:none;border-radius:10px;padding:10px 18px;font-family:'Exo 2',sans-serif;font-size:.82rem;font-weight:800;letter-spacing:.5px;cursor:none;white-space:nowrap;transition:all .2s;}
-    .raffle-notify-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(240,180,41,.35);}
+    /* Active Hunt Panel */
+    .hunt-active-panel{display:none;background:var(--bg-card);border:1px solid var(--border);border-radius:0 12px 12px 12px;padding:2rem;margin-bottom:1.5rem;}
+    .hunt-active-panel.visible{display:block;}
 
-    /* Raffle body */
-    .raffle-body{max-width:1200px;margin:0 auto;padding:2rem 2rem 5rem;}
-    .raffle-section-head{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;}
-    .raffle-section-label{font-family:'Rajdhani',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--text-muted);}
-    .raffle-section-line{flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);}
+    /* Stats bar */
+    .hunt-stats-row{display:grid;grid-template-columns:repeat(6,1fr);gap:.75rem;margin-bottom:1.5rem;}
+    .hunt-stat{background:var(--bg-dark);border:1px solid var(--border);border-radius:12px;padding:1rem .75rem;text-align:center;transition:all .3s;}
+    .hunt-stat:hover{border-color:var(--border-bright);transform:translateY(-2px);}
+    .hunt-stat-icon{font-size:1.1rem;margin-bottom:.4rem;}
+    .hunt-stat-val{font-family:'Rajdhani',sans-serif;font-size:1.4rem;font-weight:700;color:var(--text-primary);line-height:1;margin-bottom:.2rem;}
+    .hunt-stat-val.green{color:var(--kick-green);}
+    .hunt-stat-val.gold{color:var(--accent-gold);}
+    .hunt-stat-val.blue{color:var(--blue-bright);}
+    .hunt-stat-val.red{color:var(--red);}
+    .hunt-stat-label{font-size:.56rem;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--text-muted);}
 
-    /* Countdown to launch */
-    .raffle-countdown-box{
-      background:var(--bg-card);border:1px solid var(--border-bright);border-radius:20px;
-      padding:2.5rem;margin-bottom:1.5rem;text-align:center;position:relative;overflow:hidden;
-    }
-    .raffle-countdown-box::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(26,111,255,.06),transparent 60%);pointer-events:none;}
-    .raffle-cd-label{font-size:.65rem;font-weight:800;letter-spacing:5px;text-transform:uppercase;color:var(--blue-bright);margin-bottom:1.5rem;position:relative;z-index:1;}
-    .raffle-cd-blocks{display:flex;align-items:center;justify-content:center;gap:.75rem;position:relative;z-index:1;}
-    .raffle-cd-block{display:flex;flex-direction:column;align-items:center;gap:6px;}
-    .raffle-cd-num{font-family:'Rajdhani',sans-serif;font-size:3rem;font-weight:700;color:var(--text-primary);background:rgba(26,111,255,.08);border:1px solid var(--border-bright);border-radius:12px;padding:8px 20px;min-width:80px;text-align:center;line-height:1;}
-    .raffle-cd-unit{font-size:.58rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);}
-    .raffle-cd-sep{font-family:'Rajdhani',sans-serif;font-size:2.8rem;font-weight:700;color:var(--blue-mid);margin-bottom:20px;animation:blink 1s step-end infinite;}
-    .raffle-cd-sub{font-size:.82rem;color:var(--text-secondary);margin-top:1.25rem;position:relative;z-index:1;}
-    .raffle-cd-sub span{color:var(--accent-gold);font-weight:700;}
+    /* Progress bar */
+    .hunt-progress-wrap{margin-bottom:1.5rem;}
+    .hunt-progress-bar{width:100%;height:8px;background:rgba(255,255,255,.05);border-radius:10px;overflow:hidden;margin-bottom:.5rem;}
+    .hunt-progress-fill{height:100%;border-radius:10px;background:linear-gradient(90deg,var(--kick-green),#38f080);transition:width .6s ease;box-shadow:0 0 12px rgba(83,252,24,.4);}
+    .hunt-progress-label{font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);text-align:center;}
 
-    /* Prize cards — coming soon */
-    .raffle-prizes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.5rem;}
+    /* Slots table */
+    .hunt-table-wrap{overflow-x:auto;}
+    .hunt-table{width:100%;border-collapse:collapse;}
+    .hunt-table th{font-size:.6rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);padding:8px 12px;text-align:left;border-bottom:1px solid var(--border);}
+    .hunt-table td{padding:10px 12px;font-size:.85rem;border-bottom:1px solid rgba(26,45,90,.4);transition:background .2s;}
+    .hunt-table tr:hover td{background:rgba(26,111,255,.04);}
+    .hunt-table tr:last-child td{border-bottom:none;}
+    .slot-name-cell{font-weight:700;color:var(--text-primary);}
+    .provider-badge{display:inline-flex;align-items:center;font-size:.62rem;font-weight:700;letter-spacing:.5px;padding:2px 8px;border-radius:6px;}
+    .provider-pragmatic{background:rgba(255,80,80,.1);border:1px solid rgba(255,80,80,.2);color:#ff6060;}
+    .provider-hacksaw{background:rgba(26,111,255,.1);border:1px solid rgba(26,111,255,.2);color:var(--blue-bright);}
+    .provider-nolimit{background:rgba(240,180,41,.1);border:1px solid rgba(240,180,41,.2);color:var(--accent-gold);}
+    .provider-other{background:rgba(122,144,196,.1);border:1px solid rgba(122,144,196,.2);color:var(--text-secondary);}
+    .multi-cell{font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;color:var(--kick-green);}
+    .win-cell{font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;color:var(--accent-gold);}
+    .win-cell.loss{color:var(--text-muted);}
+    .status-dot{width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:6px;}
+    .status-dot.opened{background:var(--kick-green);}
+    .status-dot.pending{background:var(--text-muted);}
 
-    .raffle-prize-card{
-      position:relative;overflow:hidden;
-      background:var(--bg-card);border:1px solid var(--border);border-radius:20px;
-      padding:2rem 1.5rem;text-align:center;
-      transition:all .4s cubic-bezier(.23,1,.32,1);
-    }
-    .raffle-prize-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .3s;}
-    .raffle-prize-card:hover{transform:translateY(-6px);border-color:var(--border-bright);box-shadow:0 24px 60px rgba(0,0,0,.5);}
-    .raffle-prize-card:hover::before{opacity:1;}
-    .raffle-prize-card.gold::before{background:linear-gradient(90deg,transparent,var(--accent-gold),transparent);}
-    .raffle-prize-card.blue::before{background:linear-gradient(90deg,transparent,var(--blue-bright),transparent);}
-    .raffle-prize-card.green::before{background:linear-gradient(90deg,transparent,var(--kick-green),transparent);}
-    .raffle-prize-card:hover.gold{box-shadow:0 24px 60px rgba(0,0,0,.4),0 0 30px rgba(240,180,41,.08);}
-    .raffle-prize-card:hover.blue{box-shadow:0 24px 60px rgba(0,0,0,.4),0 0 30px rgba(26,111,255,.08);}
-    .raffle-prize-card:hover.green{box-shadow:0 24px 60px rgba(0,0,0,.4),0 0 30px rgba(83,252,24,.06);}
+    /* No hunt state */
+    .no-hunt-state{text-align:center;padding:4rem 2rem;border:1px dashed var(--border);border-radius:12px;background:var(--bg-card);}
+    .no-hunt-icon{font-size:2.5rem;margin-bottom:1rem;}
+    .no-hunt-title{font-family:'Rajdhani',sans-serif;font-size:1.4rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-secondary);margin-bottom:.5rem;}
+    .no-hunt-sub{font-size:.85rem;color:var(--text-muted);}
 
-    .rp-lock{position:absolute;top:1rem;right:1rem;width:28px;height:28px;border-radius:8px;background:rgba(61,80,128,.3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.8rem;}
-    .rp-soon{position:absolute;top:1rem;left:1rem;font-size:.55rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:3px 8px;border-radius:20px;}
-    .rp-soon.gold{background:rgba(240,180,41,.12);border:1px solid rgba(240,180,41,.25);color:var(--accent-gold);}
-    .rp-soon.blue{background:rgba(26,111,255,.12);border:1px solid rgba(26,111,255,.25);color:var(--blue-bright);}
-    .rp-soon.green{background:rgba(83,252,24,.1);border:1px solid rgba(83,252,24,.2);color:var(--kick-green);}
+    /* Guess panel */
+    .guess-panel{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-top:1.5rem;}
+    .guess-panel-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;}
+    .guess-panel-title{font-family:'Rajdhani',sans-serif;font-size:1.1rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;}
+    .guess-open-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(83,252,24,.1);border:1px solid rgba(83,252,24,.25);color:var(--kick-green);font-size:.62rem;font-weight:800;letter-spacing:2px;padding:3px 10px;border-radius:20px;}
+    .guess-closed-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(61,80,128,.2);border:1px solid var(--border);color:var(--text-muted);font-size:.62rem;font-weight:800;letter-spacing:2px;padding:3px 10px;border-radius:20px;}
+    .guess-input-row{display:flex;gap:.75rem;margin-bottom:1.25rem;}
+    .guess-input{flex:1;background:rgba(255,255,255,.04);border:1px solid var(--border-bright);border-radius:10px;padding:10px 14px;font-family:'Exo 2',sans-serif;font-size:.9rem;color:var(--text-primary);outline:none;transition:border .2s;}
+    .guess-input:focus{border-color:var(--kick-green);}
+    .guess-input::placeholder{color:var(--text-muted);}
+    .guess-submit-btn{background:linear-gradient(135deg,var(--kick-green),#38f080);color:#000;border:none;border-radius:10px;padding:10px 22px;font-family:'Exo 2',sans-serif;font-size:.85rem;font-weight:800;letter-spacing:.5px;cursor:none;transition:all .2s;white-space:nowrap;}
+    .guess-submit-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(83,252,24,.3);}
+    .guess-submit-btn:disabled{opacity:.4;transform:none;box-shadow:none;}
+    .guess-need-login{display:flex;align-items:center;gap:10px;background:rgba(88,101,242,.06);border:1px solid rgba(88,101,242,.2);border-radius:10px;padding:12px 16px;font-size:.85rem;color:var(--text-secondary);}
+    .guess-list{display:flex;flex-direction:column;gap:.5rem;max-height:280px;overflow-y:auto;}
+    .guess-list::-webkit-scrollbar{width:4px;}
+    .guess-list::-webkit-scrollbar-track{background:transparent;}
+    .guess-list::-webkit-scrollbar-thumb{background:var(--border-bright);border-radius:4px;}
+    .guess-item{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:8px;}
+    .guess-item.mine{border-color:rgba(83,252,24,.2);background:rgba(83,252,24,.03);}
+    .guess-item.winner{border-color:rgba(240,180,41,.4);background:rgba(240,180,41,.06);}
+    .guess-user{display:flex;align-items:center;gap:8px;font-size:.82rem;font-weight:700;}
+    .guess-user-avatar{width:22px;height:22px;border-radius:50%;background:var(--discord);display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:800;color:#fff;overflow:hidden;flex-shrink:0;}
+    .guess-user-avatar img{width:100%;height:100%;object-fit:cover;}
+    .guess-amount{font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;color:var(--accent-gold);}
+    .guess-winner-badge{font-size:.62rem;font-weight:800;letter-spacing:1px;color:var(--accent-gold);background:rgba(240,180,41,.15);border:1px solid rgba(240,180,41,.3);padding:2px 7px;border-radius:10px;}
 
-    .rp-icon{font-size:2.5rem;margin:1.5rem 0 .75rem;}
-    .rp-amount{font-family:'Rajdhani',sans-serif;font-size:2.4rem;font-weight:700;line-height:1;margin-bottom:.2rem;}
-    .rp-amount.gold{color:var(--accent-gold);}
-    .rp-amount.blue{color:var(--blue-bright);}
-    .rp-amount.green{color:var(--kick-green);}
-    .rp-name{font-family:'Rajdhani',sans-serif;font-size:.9rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-secondary);margin-bottom:.75rem;}
-    .rp-desc{font-size:.8rem;color:var(--text-muted);line-height:1.5;margin-bottom:1.25rem;}
-    .rp-reqs{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;margin-bottom:1.25rem;}
-    .rp-req{font-size:.62rem;font-weight:600;padding:3px 8px;border-radius:6px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:var(--text-muted);}
-    .rp-btn-cs{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);color:var(--text-muted);font-family:'Exo 2',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:not-allowed;display:flex;align-items:center;justify-content:center;gap:6px;}
+    /* Archive */
+    .archive-panel{display:none;}
+    .archive-panel.visible{display:block;}
+    .archive-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1rem;}
+    .archive-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:1.5rem;cursor:none;transition:all .3s;position:relative;overflow:hidden;}
+    .archive-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--kick-green),transparent);opacity:0;transition:opacity .3s;}
+    .archive-card:hover{border-color:var(--border-bright);transform:translateY(-4px);}
+    .archive-card:hover::before{opacity:1;}
+    .archive-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;}
+    .archive-hunt-id{font-family:'Rajdhani',sans-serif;font-size:1.3rem;font-weight:700;color:var(--kick-green);}
+    .archive-date{font-size:.7rem;color:var(--text-muted);font-weight:600;}
+    .archive-stats{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.75rem;}
+    .archive-stat{text-align:center;}
+    .archive-stat-val{font-family:'Rajdhani',sans-serif;font-size:1.1rem;font-weight:700;color:var(--text-primary);}
+    .archive-stat-label{font-size:.58rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);}
+    .archive-profit{display:inline-flex;align-items:center;gap:5px;font-family:'Rajdhani',sans-serif;font-size:.9rem;font-weight:700;padding:4px 10px;border-radius:8px;}
+    .archive-profit.win{background:rgba(83,252,24,.1);border:1px solid rgba(83,252,24,.2);color:var(--kick-green);}
+    .archive-profit.loss{background:rgba(255,68,68,.1);border:1px solid rgba(255,68,68,.2);color:var(--red);}
+    .archive-expand-btn{width:100%;margin-top:.75rem;padding:8px;border-radius:8px;background:rgba(255,255,255,.03);border:1px solid var(--border);color:var(--text-muted);font-family:'Exo 2',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;cursor:none;transition:all .2s;}
+    .archive-expand-btn:hover{background:rgba(83,252,24,.05);border-color:rgba(83,252,24,.2);color:var(--kick-green);}
+    .archive-detail{display:none;margin-top:.75rem;border-top:1px solid var(--border);padding-top:.75rem;}
+    .archive-detail.open{display:block;}
+    .archive-slots-list{display:flex;flex-direction:column;gap:.3rem;}
+    .archive-slot-row{display:flex;align-items:center;justify-content:space-between;font-size:.78rem;padding:4px 0;}
+    .archive-slot-name{color:var(--text-secondary);font-weight:600;}
+    .archive-slot-multi{font-family:'Rajdhani',sans-serif;font-weight:700;color:var(--kick-green);font-size:.88rem;}
 
-    /* How to enter */
-    .raffle-how-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;}
-    .raffle-how-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:1.5rem;text-align:center;position:relative;}
-    .raffle-how-num{font-family:'Rajdhani',sans-serif;font-size:2.5rem;font-weight:700;line-height:1;margin-bottom:.5rem;}
-    .raffle-how-title{font-family:'Rajdhani',sans-serif;font-size:.95rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:.4rem;}
-    .raffle-how-desc{font-size:.78rem;color:var(--text-secondary);line-height:1.5;}
-    .raffle-how-bar{position:absolute;top:0;left:50%;transform:translateX(-50%);width:28px;height:3px;border-radius:0 0 4px 4px;}
+    /* Admin Panel */
+    .admin-panel{background:linear-gradient(135deg,rgba(240,180,41,.04),rgba(240,180,41,.01));border:1px solid rgba(240,180,41,.15);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem;}
+    .admin-panel-title{display:flex;align-items:center;gap:8px;font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--accent-gold);margin-bottom:1.25rem;}
+    .admin-form-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem;margin-bottom:.75rem;}
+    .admin-input{background:rgba(255,255,255,.04);border:1px solid var(--border-bright);border-radius:8px;padding:9px 12px;font-family:'Exo 2',sans-serif;font-size:.85rem;color:var(--text-primary);outline:none;transition:border .2s;width:100%;}
+    .admin-input:focus{border-color:var(--accent-gold);}
+    .admin-input::placeholder{color:var(--text-muted);}
+    .admin-actions{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.75rem;}
+    .admin-btn{padding:9px 18px;border-radius:8px;font-family:'Exo 2',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;cursor:none;border:none;transition:all .2s;}
+    .admin-btn.green{background:linear-gradient(135deg,var(--kick-green),#38f080);color:#000;}
+    .admin-btn.green:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(83,252,24,.3);}
+    .admin-btn.gold{background:linear-gradient(135deg,var(--accent-gold),#d49a15);color:#000;}
+    .admin-btn.gold:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(240,180,41,.3);}
+    .admin-btn.red{background:rgba(255,68,68,.15);color:var(--red);border:1px solid rgba(255,68,68,.3);}
+    .admin-btn.red:hover{background:rgba(255,68,68,.25);}
+    .admin-btn.blue{background:rgba(26,111,255,.15);color:var(--blue-bright);border:1px solid rgba(26,111,255,.3);}
+    .admin-btn.blue:hover{background:rgba(26,111,255,.25);}
+    .admin-slot-entry{display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:.5rem;align-items:center;margin-bottom:.5rem;}
+    .guess-toggle-btn{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:8px;font-family:'Exo 2',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.5px;cursor:none;border:1px solid;transition:all .2s;}
+    .guess-toggle-btn.open-state{background:rgba(83,252,24,.1);border-color:rgba(83,252,24,.3);color:var(--kick-green);}
+    .guess-toggle-btn.open-state:hover{background:rgba(83,252,24,.2);}
+    .guess-toggle-btn.closed-state{background:rgba(255,68,68,.1);border-color:rgba(255,68,68,.3);color:var(--red);}
+    .guess-toggle-btn.closed-state:hover{background:rgba(255,68,68,.2);}
 
-    /* ══════════════════════════════════════
-       REWARDS — FULL REDESIGN
-    ══════════════════════════════════════ */
+    /* Detect badge */
+    .detect-indicator{font-size:.65rem;padding:2px 6px;border-radius:5px;background:rgba(83,252,24,.08);border:1px solid rgba(83,252,24,.2);color:var(--kick-green);margin-left:4px;}
+
+    /* Discord modal */
+    .discord-modal{display:none;position:fixed;inset:0;z-index:9500;background:rgba(0,0,0,.85);backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:2rem;}
+    .discord-modal.open{display:flex;}
+    .discord-modal-inner{background:var(--bg-card2);border:1px solid rgba(88,101,242,.3);border-radius:20px;padding:2.5rem;max-width:400px;width:100%;text-align:center;animation:modalIn .3s cubic-bezier(.23,1,.32,1) both;}
+    .discord-modal-icon{width:72px;height:72px;border-radius:50%;background:rgba(88,101,242,.15);border:1px solid rgba(88,101,242,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;font-size:2rem;}
+    .discord-modal-title{font-family:'Rajdhani',sans-serif;font-size:1.6rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:.5rem;}
+    .discord-modal-sub{font-size:.88rem;color:var(--text-secondary);line-height:1.6;margin-bottom:1.75rem;}
+    .discord-signin-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:13px;border-radius:12px;background:var(--discord);border:none;color:#fff;font-family:'Exo 2',sans-serif;font-size:1rem;font-weight:800;letter-spacing:.5px;text-transform:uppercase;cursor:none;transition:all .2s;margin-bottom:.75rem;}
+    .discord-signin-btn:hover{background:#4752c4;transform:translateY(-1px);}
+    .discord-cancel-btn{width:100%;padding:10px;border-radius:10px;background:transparent;border:1px solid var(--border);color:var(--text-muted);font-family:'Exo 2',sans-serif;font-size:.85rem;font-weight:700;cursor:none;transition:all .2s;}
+    .discord-cancel-btn:hover{border-color:var(--border-bright);color:var(--text-secondary);}
+
+    /* Archive modal */
+    .archive-hunt-modal{display:none;position:fixed;inset:0;z-index:9200;background:rgba(0,0,0,.88);backdrop-filter:blur(12px);align-items:flex-start;justify-content:center;padding:2rem;overflow-y:auto;}
+    .archive-hunt-modal.open{display:flex;}
+    .archive-hunt-modal-inner{background:var(--bg-card2);border:1px solid var(--border-bright);border-radius:20px;max-width:800px;width:100%;margin:auto;animation:modalIn .3s cubic-bezier(.23,1,.32,1) both;}
+    .ahm-header{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);}
+    .ahm-title{font-family:'Rajdhani',sans-serif;font-size:1.2rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;}
+    .ahm-close{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--text-secondary);font-size:1.3rem;cursor:none;display:flex;align-items:center;justify-content:center;}
+    .ahm-close:hover{background:rgba(255,0,0,.15);color:var(--red);}
+    .ahm-body{padding:1.5rem;}
+    .ahm-stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin-bottom:1.5rem;}
+
+    /* Rewards */
     .rewards-page{background:var(--bg-void);}
-
-    /* Hero */
-    .rewards-hero-new{
-      position:relative;padding:4.5rem 2rem 3rem;text-align:center;overflow:hidden;
-      border-bottom:1px solid var(--border);
-    }
+    .rewards-hero-new{position:relative;padding:4.5rem 2rem 3rem;text-align:center;overflow:hidden;border-bottom:1px solid var(--border);}
     .rewards-hero-new::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(26,111,255,.08) 0%,transparent 60%);pointer-events:none;}
-    .rewards-hero-new::after{content:'';position:absolute;inset:0;opacity:.025;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:50px 50px;pointer-events:none;}
     .rewards-hero-inner{position:relative;z-index:1;max-width:680px;margin:0 auto;}
     .rewards-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.65rem;font-weight:800;letter-spacing:5px;text-transform:uppercase;color:var(--blue-bright);background:rgba(26,111,255,.08);border:1px solid rgba(26,111,255,.2);border-radius:30px;padding:5px 16px;margin-bottom:1.25rem;}
     .rewards-hero-title{font-family:'Rajdhani',sans-serif;font-size:clamp(2.5rem,5vw,4.2rem);font-weight:700;text-transform:uppercase;letter-spacing:-1px;line-height:.95;margin-bottom:.75rem;}
     .rewards-hero-title span{color:var(--blue-bright);}
     .rewards-hero-sub{color:var(--text-secondary);font-size:.95rem;line-height:1.7;max-width:480px;margin:0 auto;}
-
-    /* Main promo code box */
     .rewards-main-new{max-width:1100px;margin:0 auto;padding:3rem 2rem 4rem;}
-
-    .rewards-code-hero{
-      position:relative;overflow:hidden;
-      display:grid;grid-template-columns:1fr auto;gap:2.5rem;align-items:center;
-      background:linear-gradient(135deg,#0b1d4a 0%,#09152e 60%,#0c1d44 100%);
-      border:1px solid rgba(26,111,255,.25);
-      border-radius:24px;padding:2.5rem 3rem;margin-bottom:2rem;
-    }
+    .rewards-code-hero{position:relative;overflow:hidden;display:grid;grid-template-columns:1fr auto;gap:2.5rem;align-items:center;background:linear-gradient(135deg,#0b1d4a 0%,#09152e 60%,#0c1d44 100%);border:1px solid rgba(26,111,255,.25);border-radius:24px;padding:2.5rem 3rem;margin-bottom:2rem;}
     .rewards-code-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 80% at 0% 50%,rgba(26,111,255,.07),transparent 60%);pointer-events:none;}
     .rewards-code-hero::after{content:'STAKE.US PARTNER';position:absolute;top:0;right:0;background:rgba(26,111,255,.1);border-bottom-left-radius:12px;border-top-right-radius:23px;border-left:1px solid rgba(26,111,255,.2);border-bottom:1px solid rgba(26,111,255,.2);padding:6px 18px;font-size:.58rem;font-weight:800;letter-spacing:3px;color:var(--blue-bright);}
     .rewards-code-left{position:relative;z-index:1;}
@@ -333,10 +388,7 @@
     .rewards-code-title{font-family:'Rajdhani',sans-serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;text-transform:uppercase;letter-spacing:-.5px;margin-bottom:.5rem;line-height:1.1;}
     .rewards-code-desc{font-size:.9rem;color:var(--text-secondary);line-height:1.6;max-width:380px;}
     .rewards-code-right{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:.75rem;min-width:220px;}
-    .rewards-code-display{
-      background:rgba(26,111,255,.07);border:2px dashed rgba(26,111,255,.3);border-radius:16px;
-      padding:1.25rem 2rem;text-align:center;cursor:none;transition:all .25s;width:100%;
-    }
+    .rewards-code-display{background:rgba(26,111,255,.07);border:2px dashed rgba(26,111,255,.3);border-radius:16px;padding:1.25rem 2rem;text-align:center;cursor:none;transition:all .25s;width:100%;}
     .rewards-code-display:hover{border-color:var(--blue-bright);background:rgba(26,111,255,.12);}
     .rewards-code-display-label{font-size:.6rem;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;}
     .rewards-code-value{font-family:'Rajdhani',sans-serif;font-size:2.2rem;font-weight:700;color:var(--blue-bright);letter-spacing:6px;}
@@ -344,51 +396,30 @@
     .rewards-copy-btn:hover{background:var(--blue-glow);transform:translateY(-1px);}
     .rewards-play-btn{display:block;text-align:center;background:transparent;color:var(--blue-bright);border:1px solid rgba(26,111,255,.3);border-radius:12px;padding:10px;font-family:'Exo 2',sans-serif;font-size:.82rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-decoration:none;cursor:none;transition:all .2s;width:100%;}
     .rewards-play-btn:hover{background:rgba(26,111,255,.08);border-color:var(--blue-bright);}
-
-    /* Rewards grid — 3 cards from the image */
     .rewards-what-label{font-size:.7rem;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--text-secondary);margin-bottom:1.25rem;}
     .rewards-cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-bottom:2rem;}
-
-    .reward-card{
-      position:relative;overflow:hidden;
-      background:var(--bg-card);border:1px solid var(--border);border-radius:20px;
-      padding:1.75rem;text-align:center;
-      transition:all .35s cubic-bezier(.23,1,.32,1);
-    }
+    .reward-card{position:relative;overflow:hidden;background:var(--bg-card);border:1px solid var(--border);border-radius:20px;padding:1.75rem;text-align:center;transition:all .35s cubic-bezier(.23,1,.32,1);}
     .reward-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:20px 20px 0 0;transition:opacity .3s;opacity:0;}
     .reward-card:hover{transform:translateY(-6px);border-color:var(--border-bright);}
     .reward-card:hover::before{opacity:1;}
     .reward-card.rc-gold::before{background:linear-gradient(90deg,transparent,var(--accent-gold),transparent);}
     .reward-card.rc-stake::before{background:linear-gradient(90deg,transparent,#e84142,transparent);}
     .reward-card.rc-coins::before{background:linear-gradient(90deg,transparent,#d4af37,transparent);}
-
-    .reward-card:hover.rc-gold{box-shadow:0 24px 60px rgba(0,0,0,.4),0 0 30px rgba(240,180,41,.1);}
-    .reward-card:hover.rc-stake{box-shadow:0 24px 60px rgba(0,0,0,.4),0 0 30px rgba(232,65,66,.08);}
-    .reward-card:hover.rc-coins{box-shadow:0 24px 60px rgba(0,0,0,.4),0 0 30px rgba(212,175,55,.08);}
-
     .reward-card-badge{display:inline-flex;align-items:center;gap:5px;font-size:.58rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:3px 10px;border-radius:20px;margin-bottom:1.25rem;}
     .badge-rakeback{background:rgba(240,180,41,.12);border:1px solid rgba(240,180,41,.25);color:var(--accent-gold);}
     .badge-stake{background:rgba(232,65,66,.12);border:1px solid rgba(232,65,66,.25);color:#e84142;}
     .badge-coins{background:rgba(212,175,55,.12);border:1px solid rgba(212,175,55,.25);color:#d4af37;}
-
     .reward-card-amount{font-family:'Rajdhani',sans-serif;font-size:2.8rem;font-weight:700;line-height:1;margin-bottom:.2rem;}
-    .amount-gold{color:var(--accent-gold);}
-    .amount-stake{color:#e84142;}
-    .amount-coins{color:#d4af37;}
-
+    .amount-gold{color:var(--accent-gold);}.amount-stake{color:#e84142;}.amount-coins{color:#d4af37;}
     .reward-card-name{font-family:'Rajdhani',sans-serif;font-size:.9rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--text-secondary);margin-bottom:.75rem;}
     .reward-card-desc{font-size:.82rem;color:var(--text-muted);line-height:1.6;margin-bottom:1.25rem;}
     .reward-card-icon{font-size:2.5rem;margin:0 0 .75rem;}
-
-    /* Perks strip */
     .rewards-perks-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem;}
     .rewards-perk{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:1.4rem;display:flex;flex-direction:column;gap:.5rem;transition:all .3s;}
     .rewards-perk:hover{border-color:var(--border-bright);transform:translateY(-3px);}
     .rewards-perk-icon{font-size:1.4rem;margin-bottom:.25rem;}
     .rewards-perk-title{font-family:'Rajdhani',sans-serif;font-size:.95rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;}
     .rewards-perk-desc{font-size:.78rem;color:var(--text-secondary);line-height:1.5;}
-
-    /* Refer box */
     .rewards-refer{background:linear-gradient(135deg,var(--bg-card2) 0%,var(--bg-card) 100%);border:1px solid var(--border-bright);border-radius:18px;padding:2rem 2.5rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;}
     .rewards-refer h3{font-family:'Rajdhani',sans-serif;font-size:1.4rem;font-weight:700;text-transform:uppercase;margin-bottom:.3rem;}
     .rewards-refer p{color:var(--text-secondary);font-size:.88rem;}
@@ -461,13 +492,16 @@
     .mobile-menu a:hover,.mobile-menu a.active{color:var(--blue-bright);background:rgba(26,111,255,.08);border-color:rgba(26,111,255,.2)}
     .mobile-menu-divider{height:1px;background:var(--border);margin:.5rem 0}
     .mobile-get-code{background:var(--blue-bright)!important;color:white!important;border-color:transparent!important;justify-content:center;margin-top:.25rem;font-weight:700!important}
+    .empty-archive{text-align:center;padding:3rem;color:var(--text-muted);font-size:.9rem;}
+    .autocomplete-list{position:absolute;top:100%;left:0;right:0;background:var(--bg-card2);border:1px solid var(--border-bright);border-radius:0 0 10px 10px;z-index:100;max-height:180px;overflow-y:auto;display:none;}
+    .autocomplete-item{padding:8px 12px;font-size:.85rem;cursor:none;transition:background .15s;display:flex;align-items:center;justify-content:space-between;}
+    .autocomplete-item:hover{background:rgba(26,111,255,.1);}
+    .admin-slot-input-wrap{position:relative;flex:1;}
 
-    /* RESPONSIVE */
-    @media(max-width:1024px){.rewards-perks-grid{grid-template-columns:repeat(2,1fr)}.schedule-grid{grid-template-columns:repeat(3,1fr)}.raffle-prizes-grid{grid-template-columns:1fr 1fr;}.rewards-cards-grid{grid-template-columns:1fr;}}
-    @media(max-width:960px){.hero{grid-template-columns:1fr;min-height:auto;padding:3rem 2rem;}.hero-stream-box{order:-1;}.footer-top{grid-template-columns:1fr 1fr}.rewards-code-hero{grid-template-columns:1fr;text-align:center;padding:2rem 1.5rem;}.rewards-code-right{width:100%;max-width:280px;margin:0 auto;}.rewards-code-desc{max-width:100%;}.clips-row{grid-template-columns:1fr 1fr;}.countdown-num{font-size:2.4rem;padding:8px 16px;min-width:70px;}.raffle-how-grid{grid-template-columns:1fr 1fr;}}
-    @media(max-width:768px){.schedule-grid{grid-template-columns:repeat(3,1fr)}.clips-row{grid-template-columns:1fr;}.raffle-prizes-grid{grid-template-columns:1fr;}.rewards-cards-grid{grid-template-columns:1fr;}}
-    @media(max-width:640px){nav{padding:0 1rem}.footer-top{grid-template-columns:1fr}.rewards-refer{flex-direction:column;text-align:center}.rewards-perks-grid{grid-template-columns:1fr 1fr;gap:.75rem}.hamburger{display:flex}.nav-links{display:none!important}.nav-right .live-badge,.nav-right .offline-badge,.nav-right .btn-primary{display:none}.schedule-grid{grid-template-columns:repeat(2,1fr);}.countdown-num{font-size:1.9rem;padding:6px 12px;min-width:56px;}.countdown-sep{font-size:2.2rem;}.raffle-how-grid{grid-template-columns:1fr 1fr;}}
-    @media(max-width:400px){.rewards-perks-grid{grid-template-columns:1fr}.schedule-grid{grid-template-columns:1fr 1fr;}}
+    @media(max-width:1024px){.rewards-perks-grid{grid-template-columns:repeat(2,1fr)}.schedule-grid{grid-template-columns:repeat(3,1fr)}.hunt-stats-row{grid-template-columns:repeat(3,1fr)}.archive-grid{grid-template-columns:1fr 1fr}.ahm-stats-row{grid-template-columns:1fr 1fr}}
+    @media(max-width:960px){.hero{grid-template-columns:1fr;min-height:auto;padding:3rem 2rem;}.hero-stream-box{order:-1;}.footer-top{grid-template-columns:1fr 1fr}.rewards-code-hero{grid-template-columns:1fr;text-align:center;padding:2rem 1.5rem;}.rewards-cards-grid{grid-template-columns:1fr;}.clips-row{grid-template-columns:1fr 1fr;}}
+    @media(max-width:768px){.schedule-grid{grid-template-columns:repeat(3,1fr)}.clips-row{grid-template-columns:1fr}.archive-grid{grid-template-columns:1fr}.admin-form-row{grid-template-columns:1fr 1fr}.admin-slot-entry{grid-template-columns:1fr 1fr auto auto}}
+    @media(max-width:640px){nav{padding:0 1rem}.footer-top{grid-template-columns:1fr}.rewards-refer{flex-direction:column;text-align:center}.rewards-perks-grid{grid-template-columns:1fr 1fr;gap:.75rem}.hamburger{display:flex}.nav-links{display:none!important}.schedule-grid{grid-template-columns:repeat(2,1fr)}.hunt-stats-row{grid-template-columns:repeat(2,1fr)}.discord-login-btn .login-label{display:none}}
   </style>
 </head>
 <body>
@@ -495,6 +529,33 @@
   </div>
 </div>
 
+<!-- DISCORD LOGIN MODAL -->
+<div class="discord-modal" id="discord-modal">
+  <div class="discord-modal-inner">
+    <div class="discord-modal-icon">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="#5865f2"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.1 18.08.11 18.1.128 18.114a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+    </div>
+    <div class="discord-modal-title">Sign in with Discord</div>
+    <p class="discord-modal-sub">Connect your Discord account to submit balance guesses during live bonus hunts and appear on the leaderboard.</p>
+    <button class="discord-signin-btn" onclick="simulateDiscordLogin()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.1 18.08.11 18.1.128 18.114a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+      Connect Discord
+    </button>
+    <button class="discord-cancel-btn" onclick="closeDiscordModal()">Cancel</button>
+  </div>
+</div>
+
+<!-- ARCHIVE HUNT DETAIL MODAL -->
+<div class="archive-hunt-modal" id="archive-hunt-modal" onclick="closeArchiveModal(event)">
+  <div class="archive-hunt-modal-inner">
+    <div class="ahm-header">
+      <span class="ahm-title" id="ahm-title">Hunt Details</span>
+      <button class="ahm-close" onclick="closeArchiveModal()">✕</button>
+    </div>
+    <div class="ahm-body" id="ahm-body"></div>
+  </div>
+</div>
+
 <div class="kick-float">
   <a href="https://kick.com/zillas" target="_blank" class="kick-float-btn">
     <div class="kick-float-icon">K</div>
@@ -514,22 +575,29 @@
     </a>
     <ul class="nav-links">
       <li><a href="#" id="nav-home" class="active" onclick="showPage('home');return false;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>Home</a></li>
-      <li><a href="#" id="nav-giveaways" onclick="showPage('giveaways');return false;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>Raffle</a></li>
+      <li><a href="#" id="nav-hunt" onclick="showPage('hunt');return false;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Bonus Hunt</a></li>
       <li><a href="#" id="nav-rewards" onclick="showPage('rewards');return false;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>Bonuses</a></li>
       <li><a href="#" id="nav-faq" onclick="showPage('faq');return false;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>FAQ</a></li>
     </ul>
     <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
     <div class="nav-right">
       <a href="https://kick.com/zillas" target="_blank" class="nav-social-btn kick" title="Watch on Kick"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="2" width="20" height="20" rx="4"/><text x="6" y="16" font-size="11" font-weight="900" fill="#000">K</text></svg></a>
-      <a href="https://discord.gg/Rx7rc4bTa" target="_blank" class="nav-social-btn discord" title="Join Discord"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.1 18.08.11 18.1.128 18.114a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg></a>
+      <a href="https://discord.gg/Rx7rc4bTa" target="_blank" class="nav-social-btn discord-social" title="Join Discord"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.1 18.08.11 18.1.128 18.114a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg></a>
       <a href="https://x.com/zill4s?s=20" target="_blank" class="nav-social-btn twitter" title="Follow on X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+      <!-- Discord Login -->
+      <div id="nav-discord-area">
+        <button class="discord-login-btn" onclick="openDiscordModal()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.1 18.08.11 18.1.128 18.114a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+          <span class="login-label">Sign In</span>
+        </button>
+      </div>
     </div>
   </div>
 </nav>
 
 <div class="mobile-menu" id="mobile-menu">
   <a href="#" id="mob-home" class="active" onclick="showPage('home');closeMobileMenu();return false;">🏠 Home</a>
-  <a href="#" id="mob-giveaways" onclick="showPage('giveaways');closeMobileMenu();return false;">🎉 Raffle</a>
+  <a href="#" id="mob-hunt" onclick="showPage('hunt');closeMobileMenu();return false;">🎰 Bonus Hunt</a>
   <a href="#" id="mob-rewards" onclick="showPage('rewards');closeMobileMenu();return false;">🏆 Bonuses</a>
   <a href="#" id="mob-faq" onclick="showPage('faq');closeMobileMenu();return false;">❓ FAQ</a>
   <div class="mobile-menu-divider"></div>
@@ -596,12 +664,10 @@
     </div>
   </div>
 
-  <!-- SOCIAL STRIP -->
   <div class="social-strip">
     <div class="social-strip-track" id="social-strip-track"></div>
   </div>
 
-  <!-- STREAM TIME -->
   <div class="stream-time-section">
     <div class="stream-time-inner">
       <div class="stream-time-header">
@@ -643,7 +709,7 @@
         <span class="clips-label">🎬 Viral Moments</span>
         <h2 class="clips-title">Best Clips</h2>
       </div>
-      <p class="clips-sub">Watch the wildest moments from the stream — big wins, crazy reactions, and unforgettable plays. Click any clip to watch.</p>
+      <p class="clips-sub">Watch the wildest moments from the stream — big wins, crazy reactions, and unforgettable plays.</p>
       <div class="clips-featured" onclick="openClip('clip1.mp4','Featured Clip 🔥','https://kick.com/zillas/clips/clip_01K9PJY5MG3GBJ84V4FGXFYE9C')">
         <div class="clips-featured-header">
           <span class="clips-featured-badge">🔥 Featured Clip</span>
@@ -655,44 +721,22 @@
         <div class="clip-thumb-wrap">
           <img src="/thumb1.jpg" class="clip-thumb-img" alt="">
           <div class="clip-play-overlay">
-            <div class="clip-play-btn">
-              <span class="clip-play-pulse"></span>
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
-            </div>
+            <div class="clip-play-btn"><span class="clip-play-pulse"></span><svg width="28" height="28" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg></div>
           </div>
           <div class="clip-thumb-gradient"></div>
-          <div style="position:absolute;bottom:14px;left:16px;display:flex;align-items:center;gap:8px;z-index:2;">
-            <div style="width:22px;height:22px;background:#53fc18;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;color:#000;">K</div>
-            <span style="font-family:'Rajdhani',sans-serif;font-size:.9rem;font-weight:700;letter-spacing:1px;color:rgba(255,255,255,.65);">CLIP 01 · Featured</span>
-          </div>
         </div>
       </div>
       <div class="clips-row">
         <div class="clip-card" onclick="openClip('clip2.mp4','Clip 02','https://kick.com/zillas/clips/clip_01HR2FFT9KB8S429P4AY0PY8E9')">
-          <div class="clip-thumb-wrap" style="aspect-ratio:16/9;">
-            <img src="/thumb2.jpg" class="clip-thumb-img" alt="">
-            <div class="clip-play-overlay"><div class="clip-play-btn clip-play-btn-sm"><span class="clip-play-pulse"></span><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg></div></div>
-            <div class="clip-thumb-gradient"></div>
-            <div style="position:absolute;bottom:10px;left:12px;display:flex;align-items:center;gap:6px;z-index:2;"><div style="width:18px;height:18px;background:#53fc18;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:900;color:#000;">K</div><span style="font-family:'Rajdhani',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:1px;color:rgba(255,255,255,.55);">CLIP 02</span></div>
-          </div>
+          <div class="clip-thumb-wrap" style="aspect-ratio:16/9;"><img src="/thumb2.jpg" class="clip-thumb-img" alt=""><div class="clip-play-overlay"><div class="clip-play-btn clip-play-btn-sm"><span class="clip-play-pulse"></span><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg></div></div><div class="clip-thumb-gradient"></div></div>
           <div class="clip-card-footer"><span class="clip-num">CLIP 02</span><a href="https://kick.com/zillas/clips/clip_01HR2FFT9KB8S429P4AY0PY8E9" target="_blank" class="clip-watch-link" onclick="event.stopPropagation()">View on Kick →</a></div>
         </div>
         <div class="clip-card" onclick="openClip('clip3.mp4','Clip 03','https://kick.com/zillas/clips/clip_01JNSEK1K8CMKQXHCQ9ZFX1D17')">
-          <div class="clip-thumb-wrap" style="aspect-ratio:16/9;">
-            <img src="/thumb3.jpg" class="clip-thumb-img" alt="">
-            <div class="clip-play-overlay"><div class="clip-play-btn clip-play-btn-sm"><span class="clip-play-pulse"></span><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg></div></div>
-            <div class="clip-thumb-gradient"></div>
-            <div style="position:absolute;bottom:10px;left:12px;display:flex;align-items:center;gap:6px;z-index:2;"><div style="width:18px;height:18px;background:#53fc18;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:900;color:#000;">K</div><span style="font-family:'Rajdhani',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:1px;color:rgba(255,255,255,.55);">CLIP 03</span></div>
-          </div>
+          <div class="clip-thumb-wrap" style="aspect-ratio:16/9;"><img src="/thumb3.jpg" class="clip-thumb-img" alt=""><div class="clip-play-overlay"><div class="clip-play-btn clip-play-btn-sm"><span class="clip-play-pulse"></span><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg></div></div><div class="clip-thumb-gradient"></div></div>
           <div class="clip-card-footer"><span class="clip-num">CLIP 03</span><a href="https://kick.com/zillas/clips/clip_01JNSEK1K8CMKQXHCQ9ZFX1D17" target="_blank" class="clip-watch-link" onclick="event.stopPropagation()">View on Kick →</a></div>
         </div>
         <div class="clip-card" onclick="openClip('clip4.mp4','Clip 04','https://kick.com/zillas/clips/clip_01KEG68QAEM6QE5PQTSA5267DA')">
-          <div class="clip-thumb-wrap" style="aspect-ratio:16/9;">
-            <img src="/thumb4.jpg" class="clip-thumb-img" alt="">
-            <div class="clip-play-overlay"><div class="clip-play-btn clip-play-btn-sm"><span class="clip-play-pulse"></span><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg></div></div>
-            <div class="clip-thumb-gradient"></div>
-            <div style="position:absolute;bottom:10px;left:12px;display:flex;align-items:center;gap:6px;z-index:2;"><div style="width:18px;height:18px;background:#53fc18;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:900;color:#000;">K</div><span style="font-family:'Rajdhani',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:1px;color:rgba(255,255,255,.55);">CLIP 04</span></div>
-          </div>
+          <div class="clip-thumb-wrap" style="aspect-ratio:16/9;"><img src="/thumb4.jpg" class="clip-thumb-img" alt=""><div class="clip-play-overlay"><div class="clip-play-btn clip-play-btn-sm"><span class="clip-play-pulse"></span><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg></div></div><div class="clip-thumb-gradient"></div></div>
           <div class="clip-card-footer"><span class="clip-num">CLIP 04</span><a href="https://kick.com/zillas/clips/clip_01KEG68QAEM6QE5PQTSA5267DA" target="_blank" class="clip-watch-link" onclick="event.stopPropagation()">View on Kick →</a></div>
         </div>
       </div>
@@ -700,151 +744,174 @@
   </div>
 </div>
 
-<!-- ═══════════════════════ RAFFLE — COMING SOON ═══════════════════════ -->
-<div class="page" id="page-giveaways">
-  <div class="giveaway-section">
+<!-- ═══════════════════════ BONUS HUNT TRACKER ═══════════════════════ -->
+<div class="page hunt-page" id="page-hunt">
+  <div class="hunt-hero">
+    <div class="hunt-hero-inner">
+      <div class="hunt-eyebrow">🎰 Live Tracker</div>
+      <h1 class="hunt-hero-title">BONUS <span class="word-green">HUNT</span></h1>
+      <p class="hunt-hero-sub">Track every slot, every multiplier, every win — live as the hunt unfolds. Guess the final balance and compete with the community.</p>
+    </div>
+  </div>
 
-    <div class="raffle-hero">
-      <div class="raffle-hero-inner">
-        <div class="raffle-eyebrow"><span class="raffle-eyebrow-dot"></span>Drop Zone</div>
-        <h1 class="raffle-hero-title">
-          Win Big<br>
-          <span class="word-drop">Every Stream</span>
-          <span class="word-zone">Real Prizes · Real Winners</span>
-        </h1>
-        <p class="raffle-hero-sub">Live giveaways drop every single stream. Use code <strong style="color:var(--accent-gold);">ZILLAS</strong> on Stake.us, follow on Kick, and join Discord to be eligible.</p>
+  <div style="max-width:1200px;margin:0 auto;padding:0 2rem;">
+    <div class="hunt-tabs" style="padding-left:0;padding-right:0;">
+      <button class="hunt-tab active" id="tab-live" onclick="switchHuntTab('live')">🔴 Live Hunt</button>
+      <button class="hunt-tab" id="tab-archive" onclick="switchHuntTab('archive')">📁 Archive</button>
+    </div>
+  </div>
+
+  <div class="hunt-main">
+
+    <!-- LIVE HUNT TAB -->
+    <div id="hunt-live-panel">
+
+      <!-- Admin Panel (only visible to admin) -->
+      <div class="admin-panel" id="admin-panel" style="display:none;">
+        <div class="admin-panel-title">
+          <span>⚙</span> Admin Controls
+          <span class="admin-badge">ADMIN</span>
+        </div>
+
+        <!-- Start New Hunt -->
+        <div style="margin-bottom:1rem;">
+          <div style="font-size:.68rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:.6rem;">Start New Hunt</div>
+          <div class="admin-form-row">
+            <input class="admin-input" type="number" id="admin-start-bal" placeholder="Starting Balance ($)" step="0.01"/>
+            <input class="admin-input" type="number" id="admin-hunt-id" placeholder="Hunt ID (auto)" readonly style="opacity:.5;"/>
+            <div style="display:flex;gap:.5rem;">
+              <button class="admin-btn green" onclick="adminStartHunt()" style="flex:1;">▶ Start Hunt</button>
+              <button class="admin-btn red" onclick="adminEndHunt()" style="flex:1;">■ End Hunt</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Add Slot -->
+        <div id="admin-slot-section" style="display:none;">
+          <div style="font-size:.68rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:.6rem;">Add Slot</div>
+          <div class="admin-slot-entry">
+            <div class="admin-slot-input-wrap">
+              <input class="admin-input" type="text" id="admin-slot-name" placeholder="Slot name…" oninput="onSlotInput(this)" autocomplete="off"/>
+              <div class="autocomplete-list" id="autocomplete-list"></div>
+            </div>
+            <input class="admin-input" type="text" id="admin-slot-provider" placeholder="Provider (auto-detected)" readonly/>
+            <input class="admin-input" type="number" id="admin-slot-bet" placeholder="Bet $" step="0.01"/>
+            <button class="admin-btn blue" onclick="adminAddSlot()">+ Add</button>
+          </div>
+        </div>
+
+        <!-- Open Slots Results -->
+        <div id="admin-results-section" style="display:none;margin-top:.75rem;">
+          <div style="font-size:.68rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:.6rem;">Enter Results (Win Amount per slot)</div>
+          <div id="admin-results-list" style="display:flex;flex-direction:column;gap:.4rem;margin-bottom:.75rem;"></div>
+          <input class="admin-input" type="number" id="admin-ending-bal" placeholder="Ending Balance ($)" step="0.01" style="max-width:260px;margin-bottom:.75rem;"/>
+        </div>
+
+        <div class="admin-actions">
+          <button class="guess-toggle-btn open-state" id="guess-toggle-btn" onclick="adminToggleGuess()">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Guesses Open
+          </button>
+          <button class="admin-btn gold" onclick="adminSaveResults()" id="admin-save-results" style="display:none;">💾 Save Results</button>
+          <button class="admin-btn red" onclick="adminClearHunt()" style="margin-left:auto;">🗑 Clear Hunt</button>
+        </div>
+      </div>
+
+      <!-- Active Hunt Display -->
+      <div id="active-hunt-area">
+        <div class="no-hunt-state" id="no-hunt-msg">
+          <div class="no-hunt-icon">🎰</div>
+          <div class="no-hunt-title">No Active Hunt</div>
+          <p class="no-hunt-sub" id="no-hunt-sub-msg">Check back during a live stream when a bonus hunt is running!</p>
+        </div>
+
+        <div id="hunt-display" style="display:none;">
+          <!-- Stats -->
+          <div class="hunt-stats-row">
+            <div class="hunt-stat"><div class="hunt-stat-icon">🆔</div><div class="hunt-stat-val blue" id="stat-hunt-id">#1</div><div class="hunt-stat-label">Hunt ID</div></div>
+            <div class="hunt-stat"><div class="hunt-stat-icon">🎰</div><div class="hunt-stat-val" id="stat-bonuses">0</div><div class="hunt-stat-label">Bonuses</div></div>
+            <div class="hunt-stat"><div class="hunt-stat-icon">💵</div><div class="hunt-stat-val gold" id="stat-start-bal">$0</div><div class="hunt-stat-label">Start Bal</div></div>
+            <div class="hunt-stat"><div class="hunt-stat-icon">📊</div><div class="hunt-stat-val green" id="stat-current-bal">$0</div><div class="hunt-stat-label">Current Bal</div></div>
+            <div class="hunt-stat"><div class="hunt-stat-icon">✖</div><div class="hunt-stat-val" id="stat-avg-multi">0.00x</div><div class="hunt-stat-label">Avg Multi</div></div>
+            <div class="hunt-stat"><div class="hunt-stat-icon">🏆</div><div class="hunt-stat-val" id="stat-req-multi">0.00x</div><div class="hunt-stat-label">Req Multi</div></div>
+          </div>
+
+          <!-- Progress -->
+          <div class="hunt-progress-wrap">
+            <div class="hunt-progress-bar"><div class="hunt-progress-fill" id="hunt-progress-fill" style="width:0%"></div></div>
+            <div class="hunt-progress-label" id="hunt-progress-label">0 / 0 BONUSES OPENED</div>
+          </div>
+
+          <!-- Slots Table -->
+          <div class="hunt-table-wrap">
+            <table class="hunt-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Slot</th>
+                  <th>Provider</th>
+                  <th>Bet</th>
+                  <th>Win</th>
+                  <th>Multi</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="hunt-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Guess Panel -->
+      <div class="guess-panel" id="guess-panel" style="margin-top:1.5rem;">
+        <div class="guess-panel-header">
+          <div class="guess-panel-title">🎯 Guess the Final Balance</div>
+          <span id="guess-status-badge" class="guess-closed-badge">⬤ Closed</span>
+        </div>
+
+        <!-- Not logged in -->
+        <div id="guess-login-prompt" class="guess-need-login">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#5865f2"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.1 18.08.11 18.1.128 18.114a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+          <span>Sign in with Discord to submit your guess and appear on the leaderboard.</span>
+          <button class="discord-login-btn" onclick="openDiscordModal()" style="margin-left:auto;white-space:nowrap;">Sign In</button>
+        </div>
+
+        <!-- Logged in guess form -->
+        <div id="guess-form-area" style="display:none;">
+          <div class="guess-input-row">
+            <input class="guess-input" type="number" id="guess-amount-input" placeholder="Your guess: $0.00" step="0.01" min="0"/>
+            <button class="guess-submit-btn" id="guess-submit-btn" onclick="submitGuess()">Submit Guess</button>
+          </div>
+          <div id="my-guess-display" style="display:none;font-size:.8rem;color:var(--kick-green);margin-bottom:.75rem;">✓ Your guess: <strong id="my-guess-val"></strong></div>
+        </div>
+
+        <!-- Guesses list -->
+        <div style="font-size:.68rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:.6rem;" id="guesses-list-label">Community Guesses (0)</div>
+        <div class="guess-list" id="guesses-list">
+          <div style="text-align:center;padding:1.5rem;color:var(--text-muted);font-size:.85rem;">No guesses yet — be the first!</div>
+        </div>
       </div>
     </div>
 
-    <div class="raffle-body">
-
-      <!-- Coming Soon Lock Banner -->
-      <div class="raffle-lock-banner">
-        <div class="raffle-lock-icon">🔒</div>
-        <div class="raffle-lock-title">Raffle Season Opening Soon</div>
-        <p class="raffle-lock-sub">Our next raffle series kicks off with the May 15 stream. Join the Discord to get the first entry link the moment it drops.</p>
-        <div class="raffle-notify-form">
-          <input class="raffle-notify-input" type="text" placeholder="Your Discord username…" id="notify-input" />
-          <button class="raffle-notify-btn" onclick="handleNotify()">Notify Me</button>
+    <!-- ARCHIVE TAB -->
+    <div class="archive-panel" id="hunt-archive-panel">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
+        <div>
+          <div style="font-size:.68rem;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--kick-green);margin-bottom:.3rem;">Hunt History</div>
+          <div style="font-family:'Rajdhani',sans-serif;font-size:1.5rem;font-weight:700;text-transform:uppercase;">All Past Hunts</div>
         </div>
+        <div style="font-size:.8rem;color:var(--text-muted);" id="archive-count-label">0 hunts archived</div>
       </div>
-
-      <!-- Countdown to next stream raffle -->
-      <div class="raffle-section-head">
-        <span class="raffle-section-label">⏳ Raffle Opens In</span>
-        <div class="raffle-section-line"></div>
+      <div class="archive-grid" id="archive-grid">
+        <div class="empty-archive">No archived hunts yet. Start and complete a hunt to see it here!</div>
       </div>
-      <div class="raffle-countdown-box">
-        <div class="raffle-cd-label">Time Until First Drop</div>
-        <div class="raffle-cd-blocks">
-          <div class="raffle-cd-block"><div class="raffle-cd-num" id="rc-days">00</div><div class="raffle-cd-unit">Days</div></div>
-          <div class="raffle-cd-sep">:</div>
-          <div class="raffle-cd-block"><div class="raffle-cd-num" id="rc-hours">00</div><div class="raffle-cd-unit">Hours</div></div>
-          <div class="raffle-cd-sep">:</div>
-          <div class="raffle-cd-block"><div class="raffle-cd-num" id="rc-mins">00</div><div class="raffle-cd-unit">Mins</div></div>
-          <div class="raffle-cd-sep">:</div>
-          <div class="raffle-cd-block"><div class="raffle-cd-num" id="rc-secs">00</div><div class="raffle-cd-unit">Secs</div></div>
-        </div>
-        <div class="raffle-cd-sub">First drop: <span>May 15, 2025 — Live on Kick</span></div>
-      </div>
-
-      <!-- Prize Preview Cards -->
-      <div class="raffle-section-head" style="margin-top:2rem;">
-        <span class="raffle-section-label">🎁 Prize Preview</span>
-        <div class="raffle-section-line"></div>
-      </div>
-
-      <div class="raffle-prizes-grid">
-
-        <!-- $50 Stake Cash -->
-        <div class="raffle-prize-card gold">
-          <span class="rp-soon gold">Coming Soon</span>
-          <span class="rp-lock">🔒</span>
-          <div class="rp-icon">💰</div>
-          <div class="rp-amount gold">$50</div>
-          <div class="rp-name">Stake.us Credits</div>
-          <p class="rp-desc">Fifty bucks in Stake Cash dropped live — you must be present in chat to claim when your name is called.</p>
-          <div class="rp-reqs">
-            <span class="rp-req">Follow on Kick</span>
-            <span class="rp-req">Join Discord</span>
-            <span class="rp-req">Use Code ZILLAS</span>
-            <span class="rp-req">Present in Chat</span>
-          </div>
-          <button class="rp-btn-cs" disabled>🔒 Opens May 15</button>
-        </div>
-
-        <!-- VIP Role -->
-        <div class="raffle-prize-card blue">
-          <span class="rp-soon blue">Coming Soon</span>
-          <span class="rp-lock">🔒</span>
-          <div class="rp-icon">👑</div>
-          <div class="rp-amount blue">VIP</div>
-          <div class="rp-name">Discord VIP Role</div>
-          <p class="rp-desc">Exclusive VIP access — private channels, early code drops, and invitation-only giveaways every month.</p>
-          <div class="rp-reqs">
-            <span class="rp-req">Join Discord</span>
-            <span class="rp-req">Active in Community</span>
-          </div>
-          <button class="rp-btn-cs" disabled>🔒 Monthly Draw</button>
-        </div>
-
-        <!-- $100 Cash Drop -->
-        <div class="raffle-prize-card green">
-          <span class="rp-soon green">Coming Soon</span>
-          <span class="rp-lock">🔒</span>
-          <div class="rp-icon">💎</div>
-          <div class="rp-amount green">$100</div>
-          <div class="rp-name">Cash Drop</div>
-          <p class="rp-desc">Our biggest ever — $100 live cash drop. Must be watching and chatting when the wheel spins to qualify.</p>
-          <div class="rp-reqs">
-            <span class="rp-req">Follow on Kick</span>
-            <span class="rp-req">Use Code ZILLAS</span>
-            <span class="rp-req">Present in Chat</span>
-          </div>
-          <button class="rp-btn-cs" disabled>🔒 Season Finale</button>
-        </div>
-
-      </div>
-
-      <!-- How to Enter -->
-      <div class="raffle-section-head" style="margin-top:2rem;">
-        <span class="raffle-section-label">📖 How to Enter</span>
-        <div class="raffle-section-line"></div>
-      </div>
-      <div class="raffle-how-grid">
-        <div class="raffle-how-card">
-          <div class="raffle-how-bar" style="background:var(--blue-bright);"></div>
-          <div class="raffle-how-num" style="color:rgba(26,111,255,.2);">01</div>
-          <div class="raffle-how-title">Follow on Kick</div>
-          <p class="raffle-how-desc">Hit follow at kick.com/zillas to get notified the moment we go live.</p>
-        </div>
-        <div class="raffle-how-card">
-          <div class="raffle-how-bar" style="background:var(--accent-gold);"></div>
-          <div class="raffle-how-num" style="color:rgba(240,180,41,.15);">02</div>
-          <div class="raffle-how-title">Join Discord</div>
-          <p class="raffle-how-desc">Join discord.gg/Rx7rc4bTa — entry links are posted there first.</p>
-        </div>
-        <div class="raffle-how-card">
-          <div class="raffle-how-bar" style="background:var(--kick-green);"></div>
-          <div class="raffle-how-num" style="color:rgba(83,252,24,.1);">03</div>
-          <div class="raffle-how-title">Use Code ZILLAS</div>
-          <p class="raffle-how-desc">Sign up on Stake.us with code ZILLAS — required to qualify for all drops.</p>
-        </div>
-        <div class="raffle-how-card">
-          <div class="raffle-how-bar" style="background:#c084fc;"></div>
-          <div class="raffle-how-num" style="color:rgba(192,132,252,.1);">04</div>
-          <div class="raffle-how-title">Be Present Live</div>
-          <p class="raffle-how-desc">Watch the stream and stay active in chat — winners are picked in real time!</p>
-        </div>
-      </div>
-
     </div>
+
   </div>
 </div>
 
 <!-- ═══════════════════════ REWARDS / BONUSES ═══════════════════════ -->
 <div class="page rewards-page" id="page-rewards">
-
   <div class="rewards-hero-new">
     <div class="rewards-hero-inner">
       <div class="rewards-eyebrow">⚡ Stake.us Partner Code</div>
@@ -852,16 +919,10 @@
       <p class="rewards-hero-sub">Sign up on Stake.us using code ZILLAS and instantly unlock three stacked rewards — real value, no gimmicks.</p>
     </div>
   </div>
-
   <div class="rewards-main-new">
-
-    <!-- Code hero box -->
     <div class="rewards-code-hero">
       <div class="rewards-code-left">
-        <div class="rewards-code-tag">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-          Exclusive Partner Code
-        </div>
+        <div class="rewards-code-tag"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Exclusive Partner Code</div>
         <h2 class="rewards-code-title">Use Code ZILLAS<br>at Stake.us</h2>
         <p class="rewards-code-desc">Enter at sign-up to instantly unlock your triple reward stack — rakeback, Stake Cash, and Gold Coins.</p>
       </div>
@@ -874,80 +935,23 @@
         <a href="https://stake.us/?c=ZILLAS" target="_blank" class="rewards-play-btn">Play at Stake.us →</a>
       </div>
     </div>
-
-    <!-- 3 Reward Cards from the promo image -->
     <p class="rewards-what-label">✨ WHAT YOU GET WITH CODE ZILLAS</p>
     <div class="rewards-cards-grid">
-
-      <!-- Rakeback -->
-      <div class="reward-card rc-gold">
-        <div class="reward-card-badge badge-rakeback">⚡ Instant</div>
-        <div class="reward-card-icon">📈</div>
-        <div class="reward-card-amount amount-gold">3.5%</div>
-        <div class="reward-card-name">Rakeback</div>
-        <p class="reward-card-desc">Instant 3.5% rakeback on every wager — automatically credited back to your account. The more you play, the more you earn back in real time.</p>
-      </div>
-
-      <!-- $25 Stake Cash -->
-      <div class="reward-card rc-stake">
-        <div class="reward-card-badge badge-stake">
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/><text x="7.5" y="16" font-size="10" font-weight="900" fill="white">S</text></svg>
-          Stake Cash
-        </div>
-        <div class="reward-card-icon">💵</div>
-        <div class="reward-card-amount amount-stake">$25</div>
-        <div class="reward-card-name">Stake Cash</div>
-        <p class="reward-card-desc">$25 in Stake Cash credited on sign-up with code ZILLAS. Stake Cash can be used to play all your favourite casino games immediately.</p>
-      </div>
-
-      <!-- Gold Coins -->
-      <div class="reward-card rc-coins">
-        <div class="reward-card-badge badge-coins">
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/><text x="7.5" y="16" font-size="10" font-weight="900" fill="#000">G</text></svg>
-          Gold Coins
-        </div>
-        <div class="reward-card-icon">🪙</div>
-        <div class="reward-card-amount amount-coins">250K</div>
-        <div class="reward-card-name">Gold Coins</div>
-        <p class="reward-card-desc">250,000 Gold Coins loaded straight into your account — ready to play with from the moment you register using code ZILLAS.</p>
-      </div>
-
+      <div class="reward-card rc-gold"><div class="reward-card-badge badge-rakeback">⚡ Instant</div><div class="reward-card-icon">📈</div><div class="reward-card-amount amount-gold">3.5%</div><div class="reward-card-name">Rakeback</div><p class="reward-card-desc">Instant 3.5% rakeback on every wager — automatically credited back to your account.</p></div>
+      <div class="reward-card rc-stake"><div class="reward-card-badge badge-stake">Stake Cash</div><div class="reward-card-icon">💵</div><div class="reward-card-amount amount-stake">$25</div><div class="reward-card-name">Stake Cash</div><p class="reward-card-desc">$25 in Stake Cash credited on sign-up with code ZILLAS. Use it on all your favourite casino games.</p></div>
+      <div class="reward-card rc-coins"><div class="reward-card-badge badge-coins">Gold Coins</div><div class="reward-card-icon">🪙</div><div class="reward-card-amount amount-coins">250K</div><div class="reward-card-name">Gold Coins</div><p class="reward-card-desc">250,000 Gold Coins loaded straight into your account — ready from the moment you register.</p></div>
     </div>
-
-    <!-- Extra perks strip -->
     <p class="rewards-what-label" style="margin-top:2rem;">🎁 STREAM EXCLUSIVE PERKS</p>
     <div class="rewards-perks-grid">
-      <div class="rewards-perk">
-        <div class="rewards-perk-icon">🎰</div>
-        <div class="rewards-perk-title">Bonus Drops</div>
-        <p class="rewards-perk-desc">Random bonus drops during live streams. Stay active in chat — winners are picked on the spot.</p>
-      </div>
-      <div class="rewards-perk">
-        <div class="rewards-perk-icon">🔄</div>
-        <div class="rewards-perk-title">Auto Rakeback</div>
-        <p class="rewards-perk-desc">Your 3.5% rakeback compounds automatically. No claiming required — it just hits your balance.</p>
-      </div>
-      <div class="rewards-perk">
-        <div class="rewards-perk-icon">👑</div>
-        <div class="rewards-perk-title">VIP Access</div>
-        <p class="rewards-perk-desc">Top community members get invited to our VIP Discord with exclusive early codes and private giveaways.</p>
-      </div>
-      <div class="rewards-perk">
-        <div class="rewards-perk-icon">🏆</div>
-        <div class="rewards-perk-title">Raffle Entry</div>
-        <p class="rewards-perk-desc">Code ZILLAS is your golden ticket for every live raffle. No code = no entry — it's that simple.</p>
-      </div>
+      <div class="rewards-perk"><div class="rewards-perk-icon">🎰</div><div class="rewards-perk-title">Bonus Drops</div><p class="rewards-perk-desc">Random bonus drops during live streams. Stay active in chat — winners are picked on the spot.</p></div>
+      <div class="rewards-perk"><div class="rewards-perk-icon">🔄</div><div class="rewards-perk-title">Auto Rakeback</div><p class="rewards-perk-desc">Your 3.5% rakeback compounds automatically. No claiming required.</p></div>
+      <div class="rewards-perk"><div class="rewards-perk-icon">👑</div><div class="rewards-perk-title">VIP Access</div><p class="rewards-perk-desc">Top community members get invited to our VIP Discord with exclusive early codes and private giveaways.</p></div>
+      <div class="rewards-perk"><div class="rewards-perk-icon">🏆</div><div class="rewards-perk-title">Hunt Entry</div><p class="rewards-perk-desc">Code ZILLAS keeps you eligible for all live hunt prizes and community competitions.</p></div>
     </div>
-
-    <!-- Refer box -->
     <div class="rewards-refer">
-      <div>
-        <h3>Refer a Friend</h3>
-        <p>Get your friends on Stake.us with your ZILLAS code and grow the community together.</p>
-      </div>
+      <div><h3>Refer a Friend</h3><p>Get your friends on Stake.us with your ZILLAS code and grow the community together.</p></div>
       <a href="https://kick.com/zillas" target="_blank" class="btn-primary">Join the Community</a>
     </div>
-
   </div>
 </div>
 
@@ -958,12 +962,11 @@
     <h2 class="section-title">FAQ</h2>
     <p class="section-sub">Everything you need to know about Zillas, our code, and Stake.us.</p>
     <div class="faq-list">
-      <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">How do I use the Zillas promo code?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer"><p>Go to Stake.us, create an account, navigate to the promotions or deposit section, and enter <strong>ZILLAS</strong> in the promo code field. You'll instantly unlock 3.5% rakeback, $25 Stake Cash, and 250,000 Gold Coins.</p></div></div>
-      <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">What exactly do I get with code ZILLAS?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer"><p>You get three stacked rewards: instant 3.5% rakeback on all your wagers, $25 Stake Cash credited on sign-up, and 250,000 Gold Coins added to your account — all on registration.</p></div></div>
-      <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">What is Stake.us?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer"><p>Stake.us is a social casino platform available in the United States offering casino-style games using virtual currency, with opportunities to earn real prizes through sweepstakes mechanics.</p></div></div>
+      <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">How do I use the Zillas promo code?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer"><p>Go to Stake.us, create an account, and enter <strong>ZILLAS</strong> in the promo code field. You'll instantly unlock 3.5% rakeback, $25 Stake Cash, and 250,000 Gold Coins.</p></div></div>
+      <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">What is the Bonus Hunt Tracker?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer"><p>During live streams, the host opens bonus buys across multiple slots. The tracker shows every slot, bet size, win amount, and multiplier in real time. Sign in with Discord to guess the final balance!</p></div></div>
+      <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">How do I guess the final balance?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer"><p>Sign in with your Discord account from the Bonus Hunt page, then enter your predicted final balance while guesses are open. Your guess will show alongside your Discord username on the leaderboard.</p></div></div>
       <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">When does Zillas go live on Kick?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer"><p>We stream Monday & Friday at 7 AM EST, Wednesday at 8 AM EST, Saturday at 6 AM EST, and Sunday at 5 AM EST. Follow us at kick.com/zillas and join the Discord for notifications!</p></div></div>
-      <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">When do the raffles start?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer"><p>Raffle season kicks off on the May 15 stream. Join the Discord now — entry links go out there first. You'll need code ZILLAS active on Stake.us to qualify.</p></div></div>
-      <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Is Stake.us safe and legitimate?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer"><p>Stake.us is a licensed social casino with a strong reputation. It is provably fair and has processed millions in transactions. Always gamble responsibly and only play within your means.</p></div></div>
+      <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">What is Stake.us?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer"><p>Stake.us is a social casino platform available in the United States offering casino-style games using virtual currency, with opportunities to earn real prizes through sweepstakes mechanics.</p></div></div>
       <div class="faq-item" style="border:none;"><div class="faq-question" onclick="toggleFaq(this)">How do I contact Zillas?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer"><p>The best way is through our Discord or catching us live on Kick. We respond to all DMs and community questions as fast as we can!</p></div></div>
     </div>
   </div>
@@ -985,7 +988,7 @@
         <h4>Navigate</h4>
         <ul>
           <li><a href="#" onclick="showPage('home');return false;">Home</a></li>
-          <li><a href="#" onclick="showPage('giveaways');return false;">Raffle</a></li>
+          <li><a href="#" onclick="showPage('hunt');return false;">Bonus Hunt</a></li>
           <li><a href="#" onclick="showPage('rewards');return false;">Bonuses & Codes</a></li>
           <li><a href="#" onclick="showPage('faq');return false;">FAQ</a></li>
           <li><a href="https://kick.com/zillas" target="_blank">Live Stream</a></li>
@@ -1011,72 +1014,719 @@
   </div>
 </footer>
 
-<div class="toast" id="toast"><span class="toast-icon">✓</span><span id="toast-msg">Code copied!</span></div>
+<div class="toast" id="toast"><span class="toast-icon">✓</span><span id="toast-msg">Done!</span></div>
 
 <script>
-// ─── STARFIELD ───
-(function(){var canvas=document.getElementById('starfield');var ctx=canvas.getContext('2d');var stars=[];var W,H;function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}resize();window.addEventListener('resize',resize);function initStars(){stars=[];var count=Math.floor((W*H)/6000);for(var i=0;i<count;i++){var size=Math.random();var isBright=size>0.92;var isMid=size>0.75&&!isBright;stars.push({x:Math.random()*W,y:Math.random()*H,r:isBright?(1.5+Math.random()*2.5):(isMid?(0.8+Math.random()*1.2):(0.2+Math.random()*0.6)),alpha:isBright?(0.7+Math.random()*0.3):(isMid?(0.35+Math.random()*0.45):(0.1+Math.random()*0.35)),hue:185+Math.random()*40,twinkleSpeed:0.003+Math.random()*0.012,twinkleOffset:Math.random()*Math.PI*2,glow:isBright});}for(var j=0;j<Math.floor(count*0.4);j++){stars.push({x:Math.random()*W,y:H*0.5+Math.random()*H*0.5,r:0.2+Math.random()*0.8,alpha:0.08+Math.random()*0.3,hue:185+Math.random()*50,twinkleSpeed:0.002+Math.random()*0.008,twinkleOffset:Math.random()*Math.PI*2,glow:false});}}initStars();window.addEventListener('resize',initStars);var t=0;function draw(){ctx.fillStyle='#030810';ctx.fillRect(0,0,W,H);var vignette=ctx.createRadialGradient(W*0.5,H*0.45,H*0.1,W*0.5,H*0.45,H*0.85);vignette.addColorStop(0,'rgba(4,8,22,0)');vignette.addColorStop(1,'rgba(1,2,8,0.6)');ctx.fillStyle=vignette;ctx.fillRect(0,0,W,H);t+=0.016;for(var i=0;i<stars.length;i++){var s=stars[i];var twinkle=0.7+0.3*Math.sin(t*s.twinkleSpeed*60+s.twinkleOffset);var a=s.alpha*twinkle;if(s.glow){var grd=ctx.createRadialGradient(s.x,s.y,0,s.x,s.y,s.r*5);grd.addColorStop(0,'hsla('+s.hue+',90%,80%,'+a+')');grd.addColorStop(0.3,'hsla('+s.hue+',80%,65%,'+(a*0.5)+')');grd.addColorStop(1,'hsla('+s.hue+',70%,50%,0)');ctx.beginPath();ctx.arc(s.x,s.y,s.r*5,0,Math.PI*2);ctx.fillStyle=grd;ctx.fill();}ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle='hsla('+s.hue+',85%,'+(s.glow?90:70)+'%,'+a+')';ctx.fill();}requestAnimationFrame(draw);}draw();})();
+// ─────────────────────────────────────────────
+// STARFIELD
+// ─────────────────────────────────────────────
+(function(){var canvas=document.getElementById('starfield');var ctx=canvas.getContext('2d');var stars=[];var W,H;function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}resize();window.addEventListener('resize',resize);function initStars(){stars=[];var count=Math.floor((W*H)/6000);for(var i=0;i<count;i++){var size=Math.random();var isBright=size>0.92;var isMid=size>0.75&&!isBright;stars.push({x:Math.random()*W,y:Math.random()*H,r:isBright?(1.5+Math.random()*2.5):(isMid?(0.8+Math.random()*1.2):(0.2+Math.random()*0.6)),alpha:isBright?(0.7+Math.random()*0.3):(isMid?(0.35+Math.random()*0.45):(0.1+Math.random()*0.35)),hue:185+Math.random()*40,twinkleSpeed:0.003+Math.random()*0.012,twinkleOffset:Math.random()*Math.PI*2,glow:isBright});}}initStars();window.addEventListener('resize',initStars);var t=0;function draw(){ctx.fillStyle='#030810';ctx.fillRect(0,0,W,H);t+=0.016;for(var i=0;i<stars.length;i++){var s=stars[i];var twinkle=0.7+0.3*Math.sin(t*s.twinkleSpeed*60+s.twinkleOffset);var a=s.alpha*twinkle;if(s.glow){var grd=ctx.createRadialGradient(s.x,s.y,0,s.x,s.y,s.r*5);grd.addColorStop(0,'hsla('+s.hue+',90%,80%,'+a+')');grd.addColorStop(1,'hsla('+s.hue+',70%,50%,0)');ctx.beginPath();ctx.arc(s.x,s.y,s.r*5,0,Math.PI*2);ctx.fillStyle=grd;ctx.fill();}ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle='hsla('+s.hue+',85%,'+(s.glow?90:70)+'%,'+a+')';ctx.fill();}requestAnimationFrame(draw);}draw();})();
 
-// ─── CURSOR ───
+// ─────────────────────────────────────────────
+// CURSOR
+// ─────────────────────────────────────────────
 var cursor=document.getElementById('cursor');var cx=0,cy=0,rx=0,ry=0;
 document.addEventListener('mousemove',function(e){cx=e.clientX;cy=e.clientY;document.getElementById('cursor-dot').style.left=cx+'px';document.getElementById('cursor-dot').style.top=cy+'px';});
 (function animRing(){rx+=(cx-rx)*0.14;ry+=(cy-ry)*0.14;document.getElementById('cursor-ring').style.left=rx+'px';document.getElementById('cursor-ring').style.top=ry+'px';requestAnimationFrame(animRing);})();
 document.querySelectorAll('a,button,[onclick]').forEach(function(el){el.addEventListener('mouseenter',function(){document.body.classList.add('cursor-hover');});el.addEventListener('mouseleave',function(){document.body.classList.remove('cursor-hover');});});
 
-// ─── SOCIAL STRIP ───
-var SOCIALS=[{cls:'discord',href:'https://discord.gg/Rx7rc4bTa',label:'Discord',sub:'Join the community',icon:'<svg width="18" height="18" viewBox="0 0 24 24" fill="#5865f2"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.1 18.08.11 18.1.128 18.114a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>',live:false},{cls:'kick',href:'https://kick.com/zillas',label:'Kick',sub:'Watch live',icon:'<svg width="16" height="16" viewBox="0 0 24 24" fill="#53fc18"><rect x="2" y="2" width="20" height="20" rx="4"/><text x="6" y="16" font-size="11" font-weight="900" fill="#000">K</text></svg>',live:true},{cls:'twitter',href:'https://x.com/zill4s?s=20',label:'X / Twitter',sub:'Latest updates',icon:'<svg width="15" height="15" viewBox="0 0 24 24" fill="#e8eeff"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>',live:false},{cls:'kick',href:'https://kick.com/zillas',label:'Kick',sub:'Follow the stream',icon:'<svg width="16" height="16" viewBox="0 0 24 24" fill="#53fc18"><rect x="2" y="2" width="20" height="20" rx="4"/><text x="6" y="16" font-size="11" font-weight="900" fill="#000">K</text></svg>',live:true},{cls:'discord',href:'https://discord.gg/Rx7rc4bTa',label:'Discord',sub:'Giveaways & chat',icon:'<svg width="18" height="18" viewBox="0 0 24 24" fill="#5865f2"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.1 18.08.11 18.1.128 18.114a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>',live:false},{cls:'twitter',href:'https://x.com/zill4s?s=20',label:'X / Twitter',sub:'Follow @zill4s',icon:'<svg width="15" height="15" viewBox="0 0 24 24" fill="#e8eeff"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>',live:false}];
+// ─────────────────────────────────────────────
+// SLOT PROVIDER DETECTION ENGINE
+// ─────────────────────────────────────────────
+var PROVIDER_DB = {
+  'Pragmatic Play': {
+    exact: ['Gates of Olympus','Sweet Bonanza','Big Bass Bonanza','Starlight Princess','Sugar Rush','Wild West Gold','The Dog House','Wolf Gold','Fruit Party','Book of Tut','Gates of Olympus 1000','Sweet Bonanza 1000','The Hand of Midas','Bigger Bass Bonanza','Great Rhino Megaways','Twilight Princess','Fire Strike','Power of Thor Megaways','Book of Golden Sands','5 Lions Megaways','Pirate Gold','Madame Destiny','Eye of Cleopatra','Gems Bonanza'],
+    aliases: ['gg olympus','gates','sweet bon','starlight','dog house','wolf gold','big bass','sugar rush','pragmatic','PP'],
+    regex: [/gates\s*of\s*olympus/i, /sweet\s*bonanza/i, /starlight\s*princess/i, /big\s*bass/i, /dog\s*house/i, /wolf\s*gold/i, /sugar\s*rush/i, /fruit\s*party/i, /fire\s*strike/i, /gems\s*bonanza/i, /pirate\s*gold/i, /pragmatic/i]
+  },
+  'Hacksaw Gaming': {
+    exact: ['Chaos Crew','Stick Em','Wanted Dead or a Wild','Chaos Crew 2','Xways Hoarder','Mental','Chaos Crew Scratch','Dead or Alive','Tiki Tumble','Chaos Crew Megaways','Stick\'Em','Blood and Shadow','Busted','Chaos Crew 3','Invaders from the Planet Moolah','Lucky Streak','Wheel of Wonders'],
+    aliases: ['chaos crew','hacksaw','stick em','wanted dead','wanted or a wild','wanted dead or a wild','mental','xways'],
+    regex: [/chaos\s*crew/i, /stick\s*em/i, /wanted\s*(dead|or)/i, /hacksaw/i, /xways/i, /mental/i, /blood\s*and\s*shadow/i]
+  },
+  'Nolimit City': {
+    exact: ['xWays Hoarder','Mental','San Quentin','Tombstone RIP','East Coast vs West Coast','Fire in the Hole','Punk Toilet','Deadwood','Poison Eve','Fold\'em','Warrior Graveyard','West Town','Book of Shadows','Dragon Train','tombstone','San Quentin xWays','Fire in the Hole xBomb','Infectious 5','Milf Hunter','Thor Lightning Elephant','Silk Road','Valholl'],
+    aliases: ['nolimit','nlc','san quentin','tombstone','punk toilet','fire in the hole','east coast','west coast','deadwood','warrior'],
+    regex: [/nolimit/i, /nlc/i, /san\s*quentin/i, /tombstone/i, /punk\s*toilet/i, /fire\s*in\s*the\s*hole/i, /east\s*coast/i, /west\s*coast/i, /deadwood/i, /warrior\s*graveyard/i, /valholl/i, /infectious/i]
+  }
+};
+
+var ALL_SLOTS = [];
+Object.keys(PROVIDER_DB).forEach(function(p){
+  PROVIDER_DB[p].exact.forEach(function(s){ ALL_SLOTS.push({name:s,provider:p}); });
+});
+
+function normalizeStr(s){ return s.toLowerCase().replace(/[^a-z0-9\s]/g,'').replace(/\s+/g,' ').trim(); }
+
+function levenshtein(a,b){
+  var m=a.length,n=b.length,dp=[];
+  for(var i=0;i<=m;i++){dp[i]=[i];for(var j=1;j<=n;j++){if(!i)dp[i][j]=j;else dp[i][j]=a[i-1]===b[j-1]?dp[i-1][j-1]:1+Math.min(dp[i-1][j],dp[i][j-1],dp[i-1][j-1]);}}
+  return dp[m][n];
+}
+
+function detectProvider(slotName) {
+  if(!slotName||!slotName.trim()) return {slot:slotName,provider:'Unknown'};
+  var norm = normalizeStr(slotName);
+
+  // 1. Exact match (case-insensitive)
+  for(var p in PROVIDER_DB){
+    for(var i=0;i<PROVIDER_DB[p].exact.length;i++){
+      if(normalizeStr(PROVIDER_DB[p].exact[i])===norm) return {slot:PROVIDER_DB[p].exact[i],provider:p};
+    }
+  }
+
+  // 2. Alias match
+  for(var p in PROVIDER_DB){
+    for(var i=0;i<PROVIDER_DB[p].aliases.length;i++){
+      if(norm.indexOf(normalizeStr(PROVIDER_DB[p].aliases[i]))!==-1) return {slot:slotName,provider:p};
+    }
+  }
+
+  // 3. Regex match
+  for(var p in PROVIDER_DB){
+    for(var i=0;i<PROVIDER_DB[p].regex.length;i++){
+      if(PROVIDER_DB[p].regex[i].test(slotName)) return {slot:slotName,provider:p};
+    }
+  }
+
+  // 4. Fuzzy (Levenshtein ≤ 3)
+  var best=null,bestScore=99;
+  ALL_SLOTS.forEach(function(s){
+    var score=levenshtein(norm,normalizeStr(s.name));
+    if(score<bestScore){bestScore=score;best=s;}
+  });
+  if(best&&bestScore<=3) return {slot:best.name,provider:best.provider};
+
+  return {slot:slotName,provider:'Other'};
+}
+
+function getProviderBadgeClass(p){
+  if(p==='Pragmatic Play') return 'provider-pragmatic';
+  if(p==='Hacksaw Gaming') return 'provider-hacksaw';
+  if(p==='Nolimit City') return 'provider-nolimit';
+  return 'provider-other';
+}
+
+// Autocomplete
+function onSlotInput(input){
+  var val = input.value.trim().toLowerCase();
+  var list = document.getElementById('autocomplete-list');
+  var provInput = document.getElementById('admin-slot-provider');
+  if(val.length < 2){ list.style.display='none'; return; }
+  var matches = ALL_SLOTS.filter(function(s){ return normalizeStr(s.name).indexOf(val)!==-1; }).slice(0,8);
+  if(matches.length===0){ list.style.display='none'; return; }
+  list.innerHTML='';
+  matches.forEach(function(s){
+    var item=document.createElement('div');
+    item.className='autocomplete-item';
+    item.innerHTML='<span>'+s.name+'</span><span class="provider-badge '+getProviderBadgeClass(s.provider)+'">'+s.provider+'</span>';
+    item.addEventListener('click',function(){
+      input.value=s.name;
+      provInput.value=s.provider;
+      list.style.display='none';
+    });
+    list.appendChild(item);
+  });
+  list.style.display='block';
+  // Also auto-detect as typing
+  var detected=detectProvider(input.value);
+  provInput.value=detected.provider;
+}
+document.addEventListener('click',function(e){ var l=document.getElementById('autocomplete-list'); if(l)l.style.display='none'; });
+
+// ─────────────────────────────────────────────
+// APP STATE
+// ─────────────────────────────────────────────
+// Admin Discord IDs that get admin access (add yours here)
+var ADMIN_DISCORD_IDS = ['zillas_admin', 'uglypiggy', 'zillas']; // Simulated — in production use real IDs
+
+var appState = {
+  user: null,        // { id, username, avatar }
+  isAdmin: false,
+  activeHunt: null,  // { id, startBal, slots[], guessesOpen, endBal }
+  huntArchive: [],   // array of completed hunts
+  guesses: {},       // huntId -> [ { userId, username, avatar, amount } ]
+  nextHuntId: 1
+};
+
+// Load from localStorage
+(function(){
+  try{
+    var saved=localStorage.getItem('zillas_hunt_state');
+    if(saved){
+      var s=JSON.parse(saved);
+      if(s.huntArchive) appState.huntArchive=s.huntArchive;
+      if(s.nextHuntId) appState.nextHuntId=s.nextHuntId;
+      if(s.activeHunt) appState.activeHunt=s.activeHunt;
+      if(s.guesses) appState.guesses=s.guesses;
+    }
+    var savedUser=localStorage.getItem('zillas_user');
+    if(savedUser){
+      var u=JSON.parse(savedUser);
+      appState.user=u;
+      appState.isAdmin=ADMIN_DISCORD_IDS.indexOf(u.id)!==-1||ADMIN_DISCORD_IDS.indexOf(u.username.toLowerCase())!==-1;
+    }
+  }catch(e){}
+  renderNavUser();
+  renderHuntPage();
+  renderArchive();
+  updateAdminHuntIdField();
+})();
+
+function saveState(){
+  try{
+    localStorage.setItem('zillas_hunt_state',JSON.stringify({
+      huntArchive:appState.huntArchive,
+      nextHuntId:appState.nextHuntId,
+      activeHunt:appState.activeHunt,
+      guesses:appState.guesses
+    }));
+  }catch(e){}
+}
+
+// ─────────────────────────────────────────────
+// DISCORD AUTH (Simulated — real app uses OAuth)
+// ─────────────────────────────────────────────
+function openDiscordModal(){ document.getElementById('discord-modal').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeDiscordModal(){ document.getElementById('discord-modal').classList.remove('open'); document.body.style.overflow=''; }
+
+function simulateDiscordLogin(){
+  // In production: redirect to Discord OAuth2
+  // Simulated: prompt for username
+  closeDiscordModal();
+  var name = prompt('Enter your Discord username (demo mode):','');
+  if(!name||!name.trim()) return;
+  var cleanName=name.trim();
+  var isAdmin=ADMIN_DISCORD_IDS.indexOf(cleanName.toLowerCase())!==-1;
+  appState.user={ id:cleanName.toLowerCase().replace(/[^a-z0-9]/g,'_'), username:cleanName, avatar:null };
+  appState.isAdmin=isAdmin;
+  try{ localStorage.setItem('zillas_user',JSON.stringify(appState.user)); }catch(e){}
+  renderNavUser();
+  renderHuntPage();
+  showToast('Signed in as '+(isAdmin?'👑 ':'')+cleanName+(isAdmin?' (Admin)':''));
+}
+
+function discordLogout(){
+  appState.user=null;
+  appState.isAdmin=false;
+  try{ localStorage.removeItem('zillas_user'); }catch(e){}
+  renderNavUser();
+  renderHuntPage();
+  showToast('Signed out.');
+}
+
+function renderNavUser(){
+  var area=document.getElementById('nav-discord-area');
+  if(appState.user){
+    var initials=appState.user.username.substring(0,2).toUpperCase();
+    area.innerHTML='<div class="discord-user-btn" onclick="discordLogout()" title="Click to sign out">'
+      +'<div class="discord-avatar">'+initials+'</div>'
+      +'<span>'+appState.user.username+'</span>'
+      +(appState.isAdmin?'<span class="admin-badge">ADMIN</span>':'')
+      +'</div>';
+  } else {
+    area.innerHTML='<button class="discord-login-btn" onclick="openDiscordModal()">'
+      +'<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.1 18.08.11 18.1.128 18.114a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>'
+      +'<span class="login-label">Sign In</span></button>';
+  }
+  setTimeout(function(){document.querySelectorAll('#nav-discord-area a,#nav-discord-area button,[onclick]').forEach(function(el){el.addEventListener('mouseenter',function(){document.body.classList.add('cursor-hover');});el.addEventListener('mouseleave',function(){document.body.classList.remove('cursor-hover');});});},100);
+}
+
+// ─────────────────────────────────────────────
+// ADMIN HUNT CONTROLS
+// ─────────────────────────────────────────────
+function updateAdminHuntIdField(){
+  var f=document.getElementById('admin-hunt-id');
+  if(f) f.value='#'+appState.nextHuntId;
+}
+
+function adminStartHunt(){
+  var startBal=parseFloat(document.getElementById('admin-start-bal').value);
+  if(!startBal||startBal<=0){ showToast('Enter a valid starting balance.'); return; }
+  if(appState.activeHunt){ showToast('End the current hunt first.'); return; }
+  appState.activeHunt={
+    id:appState.nextHuntId++,
+    startBal:startBal,
+    slots:[],
+    guessesOpen:false,
+    endBal:null,
+    startedAt:new Date().toISOString()
+  };
+  if(!appState.guesses[appState.activeHunt.id]) appState.guesses[appState.activeHunt.id]=[];
+  saveState();
+  updateAdminHuntIdField();
+  renderHuntPage();
+  showToast('Hunt #'+appState.activeHunt.id+' started!');
+}
+
+function adminEndHunt(){
+  if(!appState.activeHunt){ showToast('No active hunt.'); return; }
+  var endBal=parseFloat(document.getElementById('admin-ending-bal').value);
+  if(!isNaN(endBal)&&endBal>=0) appState.activeHunt.endBal=endBal;
+  appState.activeHunt.endedAt=new Date().toISOString();
+  appState.activeHunt.guessesOpen=false;
+  appState.huntArchive.unshift(JSON.parse(JSON.stringify(appState.activeHunt)));
+  // Find winner
+  var hunt=appState.activeHunt;
+  if(hunt.endBal!=null){
+    var gList=appState.guesses[hunt.id]||[];
+    if(gList.length>0){
+      var winner=gList.reduce(function(best,g){
+        return Math.abs(g.amount-hunt.endBal)<Math.abs(best.amount-hunt.endBal)?g:best;
+      },gList[0]);
+      appState.huntArchive[0].winner=winner;
+    }
+  }
+  appState.activeHunt=null;
+  saveState();
+  renderHuntPage();
+  renderArchive();
+  showToast('Hunt ended and archived!');
+}
+
+function adminAddSlot(){
+  if(!appState.activeHunt){ showToast('Start a hunt first.'); return; }
+  var name=document.getElementById('admin-slot-name').value.trim();
+  if(!name){ showToast('Enter a slot name.'); return; }
+  var bet=parseFloat(document.getElementById('admin-slot-bet').value)||5;
+  var detected=detectProvider(name);
+  // Prevent duplicate
+  var exists=appState.activeHunt.slots.some(function(s){ return s.name.toLowerCase()===name.toLowerCase(); });
+  if(exists){ showToast('That slot is already in the hunt.'); return; }
+  appState.activeHunt.slots.push({ name:detected.slot||name, provider:detected.provider, bet:bet, win:null, opened:false });
+  document.getElementById('admin-slot-name').value='';
+  document.getElementById('admin-slot-provider').value='';
+  document.getElementById('admin-slot-bet').value='';
+  saveState();
+  renderHuntPage();
+  showToast(name+' added ('+detected.provider+')');
+}
+
+function adminToggleGuess(){
+  if(!appState.activeHunt){ showToast('Start a hunt first.'); return; }
+  appState.activeHunt.guessesOpen=!appState.activeHunt.guessesOpen;
+  saveState();
+  renderHuntPage();
+  showToast('Guesses '+(appState.activeHunt.guessesOpen?'OPENED ✓':'CLOSED ✕'));
+}
+
+function adminSaveResults(){
+  if(!appState.activeHunt) return;
+  appState.activeHunt.slots.forEach(function(slot,i){
+    var inp=document.getElementById('result-win-'+i);
+    if(inp&&inp.value!==''){
+      var win=parseFloat(inp.value);
+      if(!isNaN(win)){
+        slot.win=win;
+        slot.opened=true;
+      }
+    }
+  });
+  saveState();
+  renderHuntPage();
+  showToast('Results saved!');
+}
+
+function adminClearHunt(){
+  if(!confirm('Clear the current hunt? This cannot be undone.')) return;
+  appState.activeHunt=null;
+  saveState();
+  renderHuntPage();
+  showToast('Hunt cleared.');
+}
+
+// ─────────────────────────────────────────────
+// HUNT CALCULATIONS
+// ─────────────────────────────────────────────
+function calcHuntStats(hunt){
+  var slots=hunt.slots||[];
+  var opened=slots.filter(function(s){return s.opened;});
+  var totalWin=opened.reduce(function(a,s){return a+(s.win||0);},0);
+  var totalBet=slots.reduce(function(a,s){return a+(s.bet||0)*1;},0); // each slot wagered once
+  var avgMulti=0;
+  if(opened.length>0){
+    var multiSum=opened.reduce(function(a,s){return a+(s.win&&s.bet?(s.win/s.bet):0);},0);
+    avgMulti=multiSum/opened.length;
+  }
+  var reqMulti=0;
+  if(totalBet>0) reqMulti=hunt.startBal/totalBet;
+  var currentBal=(hunt.endBal!=null)?hunt.endBal:totalWin;
+  return {opened:opened.length,total:slots.length,totalWin:totalWin,currentBal:currentBal,avgMulti:avgMulti,reqMulti:reqMulti,totalBet:totalBet};
+}
+
+function fmt(n){ return '$'+parseFloat(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function fmtMulti(n){ return parseFloat(n).toFixed(2)+'x'; }
+function pad(n){ return String(n).padStart(2,'0'); }
+
+// ─────────────────────────────────────────────
+// RENDER HUNT PAGE
+// ─────────────────────────────────────────────
+function renderHuntPage(){
+  // Admin panel
+  var ap=document.getElementById('admin-panel');
+  if(ap) ap.style.display=appState.isAdmin?'block':'none';
+
+  // Admin slot/results sections
+  var ss=document.getElementById('admin-slot-section');
+  var rs=document.getElementById('admin-results-section');
+  var saveBtn=document.getElementById('admin-save-results');
+  if(ss) ss.style.display=(appState.isAdmin&&appState.activeHunt)?'block':'none';
+  if(rs) rs.style.display=(appState.isAdmin&&appState.activeHunt&&appState.activeHunt.slots.length>0)?'block':'none';
+  if(saveBtn) saveBtn.style.display=(appState.isAdmin&&appState.activeHunt)?'inline-flex':'none';
+
+  // Admin guess toggle button
+  var gtb=document.getElementById('guess-toggle-btn');
+  if(gtb&&appState.activeHunt){
+    if(appState.activeHunt.guessesOpen){
+      gtb.className='guess-toggle-btn open-state';
+      gtb.innerHTML='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Guesses Open';
+    } else {
+      gtb.className='guess-toggle-btn closed-state';
+      gtb.innerHTML='✕ Guesses Closed';
+    }
+  }
+
+  // No hunt vs hunt display
+  var noHuntMsg=document.getElementById('no-hunt-msg');
+  var huntDisplay=document.getElementById('hunt-display');
+  if(!appState.activeHunt){
+    if(noHuntMsg) noHuntMsg.style.display='block';
+    if(huntDisplay) huntDisplay.style.display='none';
+    if(noHuntMsg){
+      var sub=document.getElementById('no-hunt-sub-msg');
+      if(sub) sub.textContent=appState.isAdmin?'Start a hunt from the admin panel above.':'Check back during a live stream when a bonus hunt is running!';
+    }
+  } else {
+    if(noHuntMsg) noHuntMsg.style.display='none';
+    if(huntDisplay) huntDisplay.style.display='block';
+    renderHuntStats();
+    renderHuntTable();
+    renderAdminResultsList();
+  }
+
+  // Guess panel
+  renderGuessPanel();
+}
+
+function renderHuntStats(){
+  if(!appState.activeHunt) return;
+  var hunt=appState.activeHunt;
+  var stats=calcHuntStats(hunt);
+  document.getElementById('stat-hunt-id').textContent='#'+hunt.id;
+  document.getElementById('stat-bonuses').textContent=hunt.slots.length;
+  document.getElementById('stat-start-bal').textContent=fmt(hunt.startBal);
+  document.getElementById('stat-current-bal').textContent=fmt(stats.currentBal);
+  document.getElementById('stat-avg-multi').textContent=fmtMulti(stats.avgMulti);
+  document.getElementById('stat-req-multi').textContent=fmtMulti(stats.reqMulti);
+  // Color req multi
+  var reqEl=document.getElementById('stat-req-multi');
+  reqEl.className='hunt-stat-val';
+  if(stats.avgMulti>0){ reqEl.classList.add(stats.avgMulti>=stats.reqMulti?'green':'red'); }
+  // Progress
+  var pct=hunt.slots.length>0?(stats.opened/hunt.slots.length*100):0;
+  var fill=document.getElementById('hunt-progress-fill');
+  if(fill) fill.style.width=pct+'%';
+  var lbl=document.getElementById('hunt-progress-label');
+  if(lbl) lbl.textContent=stats.opened+' / '+hunt.slots.length+' BONUSES OPENED';
+}
+
+function renderHuntTable(){
+  if(!appState.activeHunt) return;
+  var tbody=document.getElementById('hunt-table-body');
+  if(!tbody) return;
+  tbody.innerHTML='';
+  appState.activeHunt.slots.forEach(function(slot,i){
+    var multi=slot.opened&&slot.bet?(slot.win/slot.bet):null;
+    var tr=document.createElement('tr');
+    tr.innerHTML='<td style="color:var(--text-muted);font-size:.8rem;">'+(i+1)+'</td>'
+      +'<td class="slot-name-cell">'+slot.name+'</td>'
+      +'<td><span class="provider-badge '+getProviderBadgeClass(slot.provider)+'">'+slot.provider+'</span></td>'
+      +'<td style="color:var(--text-secondary);">'+fmt(slot.bet||0)+'</td>'
+      +'<td class="win-cell'+(slot.opened&&slot.win>0?'':' loss')+'">'+(slot.opened?(slot.win!=null?fmt(slot.win):'?'):'—')+'</td>'
+      +'<td class="multi-cell">'+(multi!=null?fmtMulti(multi):'—')+'</td>'
+      +'<td><span class="status-dot '+(slot.opened?'opened':'pending')+'"></span>'+(slot.opened?'Opened':'Pending')+'</td>';
+    tbody.appendChild(tr);
+  });
+}
+
+function renderAdminResultsList(){
+  if(!appState.activeHunt||!appState.isAdmin) return;
+  var container=document.getElementById('admin-results-list');
+  if(!container) return;
+  container.innerHTML='';
+  appState.activeHunt.slots.forEach(function(slot,i){
+    var row=document.createElement('div');
+    row.style.cssText='display:flex;align-items:center;gap:.5rem;';
+    row.innerHTML='<span style="font-size:.82rem;color:var(--text-secondary);min-width:160px;font-weight:600;">'+slot.name+'</span>'
+      +'<input class="admin-input" type="number" id="result-win-'+i+'" placeholder="Win amount $" step="0.01" value="'+(slot.win!=null?slot.win:'')+'" style="max-width:180px;"/>'
+      +'<span class="provider-badge '+getProviderBadgeClass(slot.provider)+'">'+slot.provider+'</span>'
+      +(slot.opened?'<span style="color:var(--kick-green);font-size:.75rem;">✓ Set</span>':'');
+    container.appendChild(row);
+  });
+}
+
+// ─────────────────────────────────────────────
+// GUESS SYSTEM
+// ─────────────────────────────────────────────
+function renderGuessPanel(){
+  var hunt=appState.activeHunt;
+  var huntId=hunt?hunt.id:null;
+  var guessesOpen=hunt&&hunt.guessesOpen;
+  var guesses=huntId&&appState.guesses[huntId]?appState.guesses[huntId]:[];
+
+  // Badge
+  var badge=document.getElementById('guess-status-badge');
+  if(badge){
+    badge.className=guessesOpen?'guess-open-badge':'guess-closed-badge';
+    badge.innerHTML=guessesOpen?'⬤ Open':'⬤ Closed';
+  }
+
+  // Login prompt vs form
+  var loginPrompt=document.getElementById('guess-login-prompt');
+  var formArea=document.getElementById('guess-form-area');
+  if(appState.user){
+    if(loginPrompt) loginPrompt.style.display='none';
+    if(formArea) formArea.style.display='block';
+    // Check if already guessed
+    var myGuess=guesses.find(function(g){return g.userId===appState.user.id;});
+    var submitBtn=document.getElementById('guess-submit-btn');
+    var myGuessDisplay=document.getElementById('my-guess-display');
+    var myGuessVal=document.getElementById('my-guess-val');
+    if(myGuess){
+      if(submitBtn){ submitBtn.disabled=true; submitBtn.textContent='Guess Submitted'; }
+      if(myGuessDisplay) myGuessDisplay.style.display='block';
+      if(myGuessVal) myGuessVal.textContent=fmt(myGuess.amount);
+    } else {
+      if(submitBtn){ submitBtn.disabled=!guessesOpen; submitBtn.textContent=guessesOpen?'Submit Guess':'Guesses Closed'; }
+      if(myGuessDisplay) myGuessDisplay.style.display='none';
+    }
+  } else {
+    if(loginPrompt) loginPrompt.style.display='flex';
+    if(formArea) formArea.style.display='none';
+  }
+
+  // Guesses list
+  var listLabel=document.getElementById('guesses-list-label');
+  var list=document.getElementById('guesses-list');
+  if(listLabel) listLabel.textContent='Community Guesses ('+guesses.length+')';
+  if(list){
+    if(guesses.length===0){
+      list.innerHTML='<div style="text-align:center;padding:1.5rem;color:var(--text-muted);font-size:.85rem;">No guesses yet — be the first!</div>';
+    } else {
+      var sorted=[].concat(guesses).sort(function(a,b){return a.amount-b.amount;});
+      var winner=null;
+      if(hunt&&hunt.endBal!=null&&sorted.length>0){
+        winner=sorted.reduce(function(best,g){return Math.abs(g.amount-hunt.endBal)<Math.abs(best.amount-hunt.endBal)?g:best;},sorted[0]);
+      }
+      list.innerHTML='';
+      sorted.forEach(function(g){
+        var isMe=appState.user&&g.userId===appState.user.id;
+        var isWinner=winner&&g.userId===winner.userId;
+        var item=document.createElement('div');
+        item.className='guess-item'+(isMe?' mine':'')+(isWinner?' winner':'');
+        var initials=g.username.substring(0,2).toUpperCase();
+        item.innerHTML='<div class="guess-user">'
+          +'<div class="guess-user-avatar">'+initials+'</div>'
+          +'<span>'+g.username+(isMe?' <span style="color:var(--kick-green);font-size:.65rem;">(you)</span>':'')+'</span>'
+          +(isWinner?'<span class="guess-winner-badge">🏆 Winner</span>':'')
+          +'</div>'
+          +'<span class="guess-amount">'+fmt(g.amount)+'</span>';
+        list.appendChild(item);
+      });
+    }
+  }
+}
+
+function submitGuess(){
+  if(!appState.user){ openDiscordModal(); return; }
+  if(!appState.activeHunt||!appState.activeHunt.guessesOpen){ showToast('Guesses are currently closed.'); return; }
+  var amt=parseFloat(document.getElementById('guess-amount-input').value);
+  if(!amt||amt<0){ showToast('Enter a valid amount.'); return; }
+  var huntId=appState.activeHunt.id;
+  if(!appState.guesses[huntId]) appState.guesses[huntId]=[];
+  // Check duplicate
+  var existing=appState.guesses[huntId].findIndex(function(g){return g.userId===appState.user.id;});
+  if(existing!==-1){ showToast('You already submitted a guess.'); return; }
+  appState.guesses[huntId].push({ userId:appState.user.id, username:appState.user.username, avatar:appState.user.avatar, amount:amt });
+  saveState();
+  renderGuessPanel();
+  showToast('Guess of '+fmt(amt)+' submitted! 🎯');
+}
+
+// ─────────────────────────────────────────────
+// ARCHIVE
+// ─────────────────────────────────────────────
+function renderArchive(){
+  var grid=document.getElementById('archive-grid');
+  var countLabel=document.getElementById('archive-count-label');
+  if(!grid) return;
+  if(countLabel) countLabel.textContent=appState.huntArchive.length+' hunt'+(appState.huntArchive.length!==1?'s':'')+' archived';
+  if(appState.huntArchive.length===0){
+    grid.innerHTML='<div class="empty-archive">No archived hunts yet. Start and complete a hunt to see it here!</div>';
+    return;
+  }
+  grid.innerHTML='';
+  appState.huntArchive.forEach(function(hunt){
+    var stats=calcHuntStats(hunt);
+    var profit=hunt.endBal!=null?(hunt.endBal-hunt.startBal):null;
+    var dateStr=hunt.endedAt?new Date(hunt.endedAt).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'–';
+    var card=document.createElement('div');
+    card.className='archive-card';
+    var slotsPreview=hunt.slots.slice(0,4).map(function(s){
+      var m=s.opened&&s.bet?(s.win/s.bet):null;
+      return '<div class="archive-slot-row"><span class="archive-slot-name">'+s.name+'</span><span class="archive-slot-multi">'+(m?fmtMulti(m):'—')+'</span></div>';
+    }).join('');
+    card.innerHTML=''
+      +'<div class="archive-card-header">'
+        +'<span class="archive-hunt-id">Hunt #'+hunt.id+'</span>'
+        +'<span class="archive-date">'+dateStr+'</span>'
+      +'</div>'
+      +'<div class="archive-stats">'
+        +'<div class="archive-stat"><div class="archive-stat-val">'+hunt.slots.length+'</div><div class="archive-stat-label">Bonuses</div></div>'
+        +'<div class="archive-stat"><div class="archive-stat-val">'+fmt(hunt.startBal)+'</div><div class="archive-stat-label">Start Bal</div></div>'
+        +'<div class="archive-stat"><div class="archive-stat-val">'+(hunt.endBal!=null?fmt(hunt.endBal):'—')+'</div><div class="archive-stat-label">End Bal</div></div>'
+        +'<div class="archive-stat"><div class="archive-stat-val">'+fmtMulti(stats.avgMulti)+'</div><div class="archive-stat-label">Avg Multi</div></div>'
+      +'</div>'
+      +(profit!=null?'<div style="margin-bottom:.5rem;"><span class="archive-profit '+(profit>=0?'win':'loss')+'">'+(profit>=0?'▲':'▼')+' '+fmt(Math.abs(profit))+(profit>=0?' Profit':' Loss')+'</span></div>':'')
+      +(hunt.winner?'<div style="font-size:.75rem;color:var(--accent-gold);margin-bottom:.5rem;">🏆 Winner: <strong>'+hunt.winner.username+'</strong> ('+fmt(hunt.winner.amount)+')</div>':'')
+      +'<button class="archive-expand-btn" onclick="openArchiveModal('+hunt.id+')">View Full Details →</button>';
+    grid.appendChild(card);
+  });
+}
+
+function openArchiveModal(huntId){
+  var hunt=appState.huntArchive.find(function(h){return h.id===huntId;});
+  if(!hunt) return;
+  var stats=calcHuntStats(hunt);
+  var profit=hunt.endBal!=null?(hunt.endBal-hunt.startBal):null;
+  var dateStr=hunt.endedAt?new Date(hunt.endedAt).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'}):'–';
+  document.getElementById('ahm-title').textContent='Hunt #'+hunt.id+' · '+dateStr;
+  var guesses=appState.guesses[hunt.id]||[];
+  var winner=null;
+  if(hunt.endBal!=null&&guesses.length>0){
+    winner=guesses.reduce(function(best,g){return Math.abs(g.amount-hunt.endBal)<Math.abs(best.amount-hunt.endBal)?g:best;},guesses[0]);
+  }
+  var rows=hunt.slots.map(function(s,i){
+    var m=s.opened&&s.bet?(s.win/s.bet):null;
+    return '<tr>'
+      +'<td style="color:var(--text-muted);font-size:.78rem;">'+(i+1)+'</td>'
+      +'<td class="slot-name-cell">'+s.name+'</td>'
+      +'<td><span class="provider-badge '+getProviderBadgeClass(s.provider)+'">'+s.provider+'</span></td>'
+      +'<td style="color:var(--text-secondary);">'+fmt(s.bet||0)+'</td>'
+      +'<td class="win-cell'+(s.opened&&s.win>0?'':' loss')+'">'+(s.opened?(s.win!=null?fmt(s.win):'?'):'—')+'</td>'
+      +'<td class="multi-cell">'+(m!=null?fmtMulti(m):'—')+'</td>'
+      +'</tr>';
+  }).join('');
+  var gRows=guesses.length>0?guesses.sort(function(a,b){return a.amount-b.amount;}).map(function(g){
+    var isW=winner&&g.userId===winner.userId;
+    return '<div class="guess-item'+(isW?' winner':'')+'"><div class="guess-user"><div class="guess-user-avatar">'+g.username.substring(0,2).toUpperCase()+'</div><span>'+g.username+'</span>'+(isW?'<span class="guess-winner-badge">🏆</span>':'')+'</div><span class="guess-amount">'+fmt(g.amount)+'</span></div>';
+  }).join(''):'<div style="color:var(--text-muted);font-size:.85rem;padding:1rem 0;">No guesses were submitted for this hunt.</div>';
+
+  document.getElementById('ahm-body').innerHTML=''
+    +'<div class="ahm-stats-row">'
+      +'<div class="hunt-stat"><div class="hunt-stat-icon">🎰</div><div class="hunt-stat-val">'+hunt.slots.length+'</div><div class="hunt-stat-label">Bonuses</div></div>'
+      +'<div class="hunt-stat"><div class="hunt-stat-icon">💵</div><div class="hunt-stat-val gold">'+fmt(hunt.startBal)+'</div><div class="hunt-stat-label">Start Bal</div></div>'
+      +'<div class="hunt-stat"><div class="hunt-stat-icon">📊</div><div class="hunt-stat-val '+(profit!=null?(profit>=0?'green':'red'):'')+'">'+fmt(hunt.endBal||0)+'</div><div class="hunt-stat-label">End Bal</div></div>'
+      +'<div class="hunt-stat"><div class="hunt-stat-icon">✖</div><div class="hunt-stat-val">'+fmtMulti(stats.avgMulti)+'</div><div class="hunt-stat-label">Avg Multi</div></div>'
+    +'</div>'
+    +(profit!=null?'<div style="margin-bottom:1.25rem;"><span class="archive-profit '+(profit>=0?'win':'loss')+'">'+(profit>=0?'▲ Profit':'▼ Loss')+': '+fmt(Math.abs(profit))+'</span></div>':'')
+    +'<div style="font-size:.68rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:.6rem;">Slot Results</div>'
+    +'<div class="hunt-table-wrap" style="margin-bottom:1.25rem;"><table class="hunt-table"><thead><tr><th>#</th><th>Slot</th><th>Provider</th><th>Bet</th><th>Win</th><th>Multi</th></tr></thead><tbody>'+rows+'</tbody></table></div>'
+    +'<div style="font-size:.68rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:.6rem;">Community Guesses ('+guesses.length+')</div>'
+    +'<div class="guess-list">'+gRows+'</div>';
+  document.getElementById('archive-hunt-modal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeArchiveModal(e){
+  if(!e||e.target===document.getElementById('archive-hunt-modal')||e===undefined){
+    document.getElementById('archive-hunt-modal').classList.remove('open');
+    document.body.style.overflow='';
+  }
+}
+
+// ─────────────────────────────────────────────
+// HUNT TAB SWITCH
+// ─────────────────────────────────────────────
+function switchHuntTab(tab){
+  document.getElementById('tab-live').className='hunt-tab'+(tab==='live'?' active':'');
+  document.getElementById('tab-archive').className='hunt-tab'+(tab==='archive'?' active':'');
+  document.getElementById('hunt-live-panel').style.display=tab==='live'?'block':'none';
+  var ap=document.getElementById('hunt-archive-panel');
+  ap.className='archive-panel'+(tab==='archive'?' visible':'');
+  if(tab==='archive') renderArchive();
+}
+
+// ─────────────────────────────────────────────
+// SOCIAL STRIP
+// ─────────────────────────────────────────────
+var SOCIALS=[{cls:'discord',href:'https://discord.gg/Rx7rc4bTa',label:'Discord',sub:'Join the community',icon:'<svg width="18" height="18" viewBox="0 0 24 24" fill="#5865f2"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.1 18.08.11 18.1.128 18.114a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>',live:false},{cls:'kick',href:'https://kick.com/zillas',label:'Kick',sub:'Watch live',icon:'<svg width="16" height="16" viewBox="0 0 24 24" fill="#53fc18"><rect x="2" y="2" width="20" height="20" rx="4"/><text x="6" y="16" font-size="11" font-weight="900" fill="#000">K</text></svg>',live:true},{cls:'twitter',href:'https://x.com/zill4s?s=20',label:'X / Twitter',sub:'Latest updates',icon:'<svg width="15" height="15" viewBox="0 0 24 24" fill="#e8eeff"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>',live:false},{cls:'kick',href:'https://kick.com/zillas',label:'Kick',sub:'Follow the stream',icon:'<svg width="16" height="16" viewBox="0 0 24 24" fill="#53fc18"><rect x="2" y="2" width="20" height="20" rx="4"/><text x="6" y="16" font-size="11" font-weight="900" fill="#000">K</text></svg>',live:true},{cls:'discord',href:'https://discord.gg/Rx7rc4bTa',label:'Discord',sub:'Giveaways & chat',icon:'<svg width="18" height="18" viewBox="0 0 24 24" fill="#5865f2"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.1 18.08.11 18.1.128 18.114a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>',live:false}];
 var track=document.getElementById('social-strip-track');
 [0,1].forEach(function(){SOCIALS.forEach(function(s){var a=document.createElement('a');a.href=s.href;a.target='_blank';a.className='social-pill '+s.cls;a.innerHTML='<div class="social-pill-icon">'+s.icon+'</div><div class="social-pill-label"><span style="display:block;line-height:1.2;">'+s.label+'</span><span class="social-pill-sub">'+s.sub+'</span></div>'+(s.live?'<span class="social-pill-live"></span>':'');track.appendChild(a);});});
 
-// ─── SCHEDULE ───
+// ─────────────────────────────────────────────
+// SCHEDULE + COUNTDOWN
+// ─────────────────────────────────────────────
 var SCHEDULE_DEF=[{day:1,hour:7,label:'Monday',time:'7 AM EST'},{day:3,hour:8,label:'Wednesday',time:'8 AM EST'},{day:5,hour:7,label:'Friday',time:'7 AM EST'},{day:6,hour:6,label:'Saturday',time:'6 AM EST'},{day:0,hour:5,label:'Sunday',time:'5 AM EST'}];
 function buildSchedule(){var nowEST=new Date(new Date().getTime()-5*3600000);var todayDay=nowEST.getDay();var grid=document.getElementById('schedule-grid');SCHEDULE_DEF.forEach(function(s){var isToday=s.day===todayDay;var card=document.createElement('div');card.className='schedule-card'+(isToday?' today':'');card.innerHTML='<div class="schedule-day-name">'+s.label+'</div><div class="schedule-time-big">'+s.time+'</div><div class="schedule-tz">Eastern Time</div>'+(isToday?'<div class="schedule-today-badge"><span class="schedule-today-badge-dot"></span>Today</div>':'');grid.appendChild(card);});}
 buildSchedule();
-
-// ─── COUNTDOWN ───
 var SCHEDULE=[{day:1,hour:7,label:'Monday 7AM EST'},{day:3,hour:8,label:'Wednesday 8AM EST'},{day:5,hour:7,label:'Friday 7AM EST'},{day:6,hour:6,label:'Saturday 6AM EST'},{day:0,hour:5,label:'Sunday 5AM EST'}];
 function getNextStream(){var nowEST=new Date(new Date().getTime()-5*3600000);var soonest=null,label='';for(var i=0;i<14;i++){for(var j=0;j<SCHEDULE.length;j++){var s=SCHEDULE[j];var c=new Date(nowEST);c.setDate(c.getDate()+i);if(c.getDay()===s.day){c.setHours(s.hour,0,0,0);if(c>nowEST&&(!soonest||c<soonest)){soonest=new Date(c);label=s.label;}}}if(soonest)break;}return{target:soonest,label:label};}
-function pad(n){return String(n).padStart(2,'0');}
-function updateCountdown(){var r=getNextStream();if(!r.target)return;var nowEST=new Date(new Date().getTime()-5*3600000);var diff=r.target-nowEST;if(diff<=0){updateCountdown();return;}document.getElementById('cd-days').textContent=pad(Math.floor(diff/86400000));document.getElementById('cd-hours').textContent=pad(Math.floor(diff%86400000/3600000));document.getElementById('cd-mins').textContent=pad(Math.floor(diff%3600000/60000));document.getElementById('cd-secs').textContent=pad(Math.floor(diff%60000/1000));document.getElementById('cd-label').innerHTML='Next: <span>'+r.label+'</span>';}
+function updateCountdown(){var r=getNextStream();if(!r.target)return;var nowEST=new Date(new Date().getTime()-5*3600000);var diff=r.target-nowEST;if(diff<=0){return;}document.getElementById('cd-days').textContent=pad(Math.floor(diff/86400000));document.getElementById('cd-hours').textContent=pad(Math.floor(diff%86400000/3600000));document.getElementById('cd-mins').textContent=pad(Math.floor(diff%3600000/60000));document.getElementById('cd-secs').textContent=pad(Math.floor(diff%60000/1000));document.getElementById('cd-label').innerHTML='Next: <span>'+r.label+'</span>';}
 updateCountdown();setInterval(updateCountdown,1000);
 
-// ─── RAFFLE COUNTDOWN to May 15 ───
-function updateRaffleCountdown(){
-  var now=new Date();
-  var target=new Date('2025-05-15T19:00:00');
-  var diff=target-now;
-  if(diff<0)diff=0;
-  document.getElementById('rc-days').textContent=pad(Math.floor(diff/86400000));
-  document.getElementById('rc-hours').textContent=pad(Math.floor(diff%86400000/3600000));
-  document.getElementById('rc-mins').textContent=pad(Math.floor(diff%3600000/60000));
-  document.getElementById('rc-secs').textContent=pad(Math.floor(diff%60000/1000));
-}
-updateRaffleCountdown();setInterval(updateRaffleCountdown,1000);
-
-// ─── KICK STATUS ───
+// ─────────────────────────────────────────────
+// KICK STATUS CHECK
+// ─────────────────────────────────────────────
 function checkKickStatus(){var url='https://corsproxy.io/?url='+encodeURIComponent('https://kick.com/api/v1/channels/zillas');fetch(url,{headers:{'Accept':'application/json'}}).then(function(r){if(!r.ok)throw new Error('err');return r.json();}).then(function(data){var live=!!(data.livestream);var viewers=live?(data.livestream.viewer_count||0):0;document.getElementById('hero-checking-embed').style.display='none';var pill=document.getElementById('hero-stream-pill');pill.style.display='inline-flex';pill.textContent=live?'LIVE':'OFFLINE';if(live){pill.style.background='rgba(83,252,24,.12)';pill.style.border='1px solid rgba(83,252,24,.35)';pill.style.color='#53fc18';}else{pill.style.background='rgba(61,80,128,.2)';pill.style.border='1px solid rgba(42,64,128,.4)';pill.style.color='var(--text-muted)';}document.getElementById('hero-live-embed').style.display=live?'block':'none';document.getElementById('hero-offline-embed').style.display=live?'none':'flex';document.getElementById('hero-viewer-row').style.display=live?'flex':'none';if(live)document.getElementById('hero-viewer-count').textContent=viewers.toLocaleString()+' viewers';document.getElementById('kick-float-dot').className=live?'kick-float-live-dot':'kick-float-offline-dot';document.getElementById('kick-float-status').textContent=live?'LIVE':'Offline';document.getElementById('kick-float-status').className=live?'kick-float-status':'kick-float-status is-offline';}).catch(function(){document.getElementById('hero-checking-embed').style.display='none';document.getElementById('hero-live-embed').style.display='none';document.getElementById('hero-offline-embed').style.display='flex';});}
 checkKickStatus();setInterval(checkKickStatus,60000);
 
-// ─── CLIP MODAL ───
+// ─────────────────────────────────────────────
+// CLIP MODAL
+// ─────────────────────────────────────────────
 function openClip(videoFile,title,kickUrl){var modal=document.getElementById('clip-modal');var video=document.getElementById('clip-modal-video');document.getElementById('clip-modal-title').textContent=title;document.getElementById('clip-modal-kick-link').href=kickUrl;video.src=videoFile;video.play();modal.classList.add('open');document.body.style.overflow='hidden';}
 function closeClipModal(e){if(e.target===document.getElementById('clip-modal'))closeClipModalDirect();}
 function closeClipModalDirect(){var modal=document.getElementById('clip-modal');var video=document.getElementById('clip-modal-video');modal.classList.remove('open');video.pause();video.src='';document.body.style.overflow='';}
-document.addEventListener('keydown',function(e){if(e.key==='Escape')closeClipModalDirect();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeClipModalDirect();closeDiscordModal();closeArchiveModal();}});
 
-// ─── PAGES ───
-function showPage(name){document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});document.querySelectorAll('.nav-links a').forEach(function(a){a.classList.remove('active');});document.querySelectorAll('.mobile-menu a').forEach(function(a){a.classList.remove('active');});var page=document.getElementById('page-'+name);if(page)page.classList.add('active');var nav=document.getElementById('nav-'+name);if(nav)nav.classList.add('active');var mob=document.getElementById('mob-'+name);if(mob)mob.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+// ─────────────────────────────────────────────
+// PAGES
+// ─────────────────────────────────────────────
+function showPage(name){
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.nav-links a').forEach(function(a){a.classList.remove('active');});
+  document.querySelectorAll('.mobile-menu a').forEach(function(a){a.classList.remove('active');});
+  var page=document.getElementById('page-'+name);
+  if(page)page.classList.add('active');
+  var nav=document.getElementById('nav-'+name);
+  if(nav)nav.classList.add('active');
+  var mob=document.getElementById('mob-'+name);
+  if(mob)mob.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
 
-// ─── COPY CODE ───
+// ─────────────────────────────────────────────
+// COPY CODE
+// ─────────────────────────────────────────────
 function copyCodeBig(code){navigator.clipboard.writeText(code).then(function(){var btn=document.getElementById('big-copy-btn');if(btn){btn.textContent='✓ Copied!';btn.style.background='#00e676';btn.style.color='#000';setTimeout(function(){btn.textContent='Copy Code';btn.style.background='';btn.style.color='';},2000);}showToast('Code '+code+' copied!');}).catch(function(){showToast('Please copy manually: '+code);});}
 
-// ─── NOTIFY ───
-function handleNotify(){var input=document.getElementById('notify-input');var val=input.value.trim();if(!val){input.style.borderColor='var(--red)';setTimeout(function(){input.style.borderColor='';},1500);return;}showToast('Thanks '+val+'! We\'ll ping you on Discord when raffles open.');input.value='';}
-
+// ─────────────────────────────────────────────
+// HELPERS
+// ─────────────────────────────────────────────
 function showToast(msg){var t=document.getElementById('toast');document.getElementById('toast-msg').textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2500);}
 function toggleFaq(el){el.parentElement.classList.toggle('open');}
 function toggleMobileMenu(){document.getElementById('mobile-menu').classList.toggle('open');document.getElementById('hamburger').classList.toggle('open');}
 function closeMobileMenu(){document.getElementById('mobile-menu').classList.remove('open');document.getElementById('hamburger').classList.remove('open');}
+
+// Cursor refresh on dynamic elements
 setTimeout(function(){document.querySelectorAll('a,button,[onclick]').forEach(function(el){el.addEventListener('mouseenter',function(){document.body.classList.add('cursor-hover');});el.addEventListener('mouseleave',function(){document.body.classList.remove('cursor-hover');});});},500);
+
+// Keep hunt refreshed
+setInterval(function(){
+  if(appState.activeHunt&&document.getElementById('page-hunt').classList.contains('active')){
+    renderHuntStats();
+  }
+},5000);
 </script>
 </body>
 </html>
