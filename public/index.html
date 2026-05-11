@@ -9,6 +9,13 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <div id="loading-screen" style="position:fixed;inset:0;z-index:99999;background:#050508;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;transition:opacity .6s ease;">
+  <div style="font-family:'Orbitron',monospace;font-size:clamp(1.5rem,5vw,3rem);font-weight:900;color:#ff0066;text-shadow:0 0 40px #ff0066,0 0 80px rgba(255,0,102,.5);letter-spacing:8px;">YAMA</div>
+  <div style="font-family:'Share Tech Mono',monospace;font-size:.85rem;letter-spacing:4px;color:rgba(255,0,102,.7);text-transform:uppercase;">Use Code <strong style="color:#ff0066;text-shadow:0 0 12px #ff0066;">YAMA</strong> on Spartans.com</div>
+  <div style="width:200px;height:3px;background:rgba(255,0,102,.15);border-radius:3px;overflow:hidden;margin-top:.5rem;">
+    <div id="load-bar" style="width:0%;height:100%;background:#ff0066;box-shadow:0 0 12px #ff0066;transition:width 1.8s ease;border-radius:3px;"></div>
+  </div>
+</div>
 <canvas id="sf"></canvas>
 <div id="cur"><div id="cur-ring"></div><div id="cur-dot"></div></div>
 <div class="sync-badge" id="sync-badge"><span class="sync-dot"></span>Live Syncing</div>
@@ -136,7 +143,7 @@
       </div>
       <div id="hero-live" style="display:none;"><div class="stream-embed"><iframe src="https://player.kick.com/yama?autoplay=true&muted=true" allowfullscreen allow="autoplay; fullscreen"></iframe></div></div>
       <div id="hero-offline" class="offline-screen" style="display:none;">
-        <div style="width:48px;height:48px;background:rgba(0,212,255,.06);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--neon)" stroke-width="1.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+        <div style="width:48px;height:48px;background:rgba(255,0,102,.06);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--neon)" stroke-width="1.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
         <h3 style="font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;">Currently Offline</h3>
         <p style="font-size:.78rem;color:var(--text3);">Follow on Kick to get notified!</p>
         <a href="https://kick.com/yama" target="_blank" class="btn btn-green btn-sm">Follow on Kick</a>
@@ -286,9 +293,11 @@
   </div>
   <div style="max-width:1200px;margin:0 auto;padding:0 2rem;">
     <div class="hunt-tabs" id="hunt-tabs">
-      <button class="h-tab active" id="tab-live" onclick="switchTab('live')">🔴 Live Hunt</button>
-      <button class="h-tab" id="tab-stats" onclick="switchTab('stats')">🏆 Stats & Winners</button>
-    </div>
+  <button class="h-tab active" id="tab-live" onclick="switchTab('live')">🔴 Live Hunt</button>
+  <button class="h-tab" id="tab-stats" onclick="switchTab('stats')">🏆 Stats & Winners</button>
+  <button class="h-tab" id="tab-archive" onclick="switchTab('archive')">📁 Archive</button>
+  <button class="h-tab" id="tab-admin" onclick="switchTab('admin')" style="display:none;">⚙️ Admin Control</button>
+</div>
   </div>
   <div class="hunt-main">
     <div id="panel-live">

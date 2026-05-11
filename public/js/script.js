@@ -209,20 +209,14 @@ function escHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').
 
 // ════ HUNT TABS ════
 function renderHuntTabs(){
-  var tabs=document.getElementById('hunt-tabs');
-  var at=document.getElementById('tab-admin');var art=document.getElementById('tab-archive');
-  if(appState.isAdmin){
-    if(!at){var b=document.createElement('button');b.className='h-tab';b.id='tab-admin';b.onclick=function(){switchTab('admin');};b.textContent='⚙️ Admin Control';tabs.appendChild(b);}
-    if(!art){var c=document.createElement('button');c.className='h-tab';c.id='tab-archive';c.onclick=function(){switchTab('archive');};c.textContent='📁 Archive';tabs.appendChild(c);}
-  }else{
-    if(at)at.remove();if(art)art.remove();
-    if(currentHuntTab==='admin'||currentHuntTab==='archive')switchTab('live');
-  }
+  var at = document.getElementById('tab-admin');
+  if(at) at.style.display = appState.isAdmin ? 'block' : 'none';
+  if(!appState.isAdmin && (currentHuntTab==='admin')) switchTab('live');
 }
 function switchTab(tab){
   currentHuntTab=tab;
   if((tab==='admin'||tab==='archive')&&!appState.isAdmin){switchTab('live');return;}
-  ['live','stats','admin','archive'].forEach(function(t){
+  ['live','stats','archive','admin'].forEach(function(t){
     var el=document.getElementById('tab-'+t);if(el)el.className='h-tab'+(tab===t?' active':'');
     var panel=document.getElementById('panel-'+t);if(panel)panel.style.display=tab===t?'block':'none';
   });
@@ -718,7 +712,6 @@ async function renderStatsPanel(){
 
 // ════ ARCHIVE ════
 async function renderArchive(){
-  if(!appState.isAdmin)return;
   await fetchArchive();
   var grid=document.getElementById('archive-grid');
   var countLabel=document.getElementById('archive-count-label');
@@ -939,3 +932,12 @@ window.addEventListener('scroll',function(){
   }
   _lastScrollY=cur;
 },{passive:true});
+(function(){
+  var ls = document.getElementById('loading-screen');
+  var lb = document.getElementById('load-bar');
+  setTimeout(function(){ lb.style.width = '100%'; }, 50);
+  setTimeout(function(){
+    ls.style.opacity = '0';
+    setTimeout(function(){ ls.style.display = 'none'; }, 600);
+  }, 2000);
+})();
