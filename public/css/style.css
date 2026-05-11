@@ -1,21 +1,19 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --void:#03010a;--deep:#08030d;--dark:#0e050f;--card:#0d060f;--card2:#1a0c18;
-  --neon:#ff0066;--neon2:#cc0050;--neonsoft:#ff6699;
-  --blue:#ff0066;--blue2:#cc0050;--blueglow:rgba(255,0,102,.25);
+  --void:#020008;--deep:#05000f;--dark:#0a0018;--card:#0d0020;--card2:#150030;
+  --neon:#ff0080;--neon2:#cc0060;--neonsoft:#ff66aa;
+  --blue:#00d4ff;--blue2:#0099cc;--blueglow:rgba(0,212,255,.2);
   --electric:#39ff14;--electricdim:rgba(57,255,20,.15);
-  --gold:#ff0066;--gold2:#ff0055;
+  --gold:#ffd700;--gold2:#ffaa00;
   --green:#39ff14;--green2:#22dd00;
   --red:#ff3355;--discord:#5865f2;
-  --text:#e8f8ff;--text2:#d4a0b5;--text3:#7a4060;
-  --border:#2a0d1e;--border2:#ff0066;
+  --text:#f0e8ff;--text2:#c0a0d0;--text3:#6a4080;
+  --border:#2a0050;--border2:#ff0080;
   --r:16px;
-  --purple:#c4a8ff;--pink:#f9a8d4;--cyan:#67e8f9;
-  --pink:#ff0066;--pink2:#cc0050;--pinkg:rgba(255,0,102,.25);
-  --yellow:#ff0066;--yellow2:#cc0050;--yellowg:rgba(255,45,120,.15);
-  --chrome:#e8e8f0;--chrome2:#b0b0c0;--chrome3:#6060a0;
-  --jet:#050508;--jet2:#0a0a10;--jet3:#0f0f18;
-  --led:#ff0066;--led-off:rgba(255,0,102,.15);
+  --purple:#c084fc;--pink:#ff0080;--pink2:#cc0060;--pinkg:rgba(255,0,128,.2);
+  --cyan:#00d4ff;--yellow:#ffd700;--yellow2:#ffaa00;
+  --chrome:#e8e8f0;--chrome2:#b0b0c0;--chrome3:#4a0080;
+  --led:#ff0080;--led-off:rgba(255,0,128,.12);
 }
 html{scroll-behavior:smooth}
 #cur{position:fixed;pointer-events:none;z-index:99999;mix-blend-mode:normal;display:none}
@@ -165,14 +163,14 @@ nav.nav-hidden{transform:translateY(-100%);}
 .sched-inner{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:3.5rem}
 .section-eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:.67rem;font-weight:800;letter-spacing:5px;text-transform:uppercase;color:var(--neon);margin-bottom:.8rem;text-shadow:0 0 8px rgba(255,45,120,.4)}
 .section-title{font-family:'Rajdhani',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;text-transform:uppercase;letter-spacing:-.5px;line-height:1}
-.section-title span{color:var(--blue);text-shadow:0 0 16px rgba(255,0,102,.5)}
+.section-title span{color:#00d4ff;text-shadow:0 0 16px rgba(0,212,255,.6);}
 .cd-wrap{display:flex;flex-direction:column;align-items:center;gap:1.1rem}
 .cd-sub{font-size:.65rem;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--text3)}
 .cd-blocks{display:flex;align-items:center;gap:.65rem}
 .cd-block{display:flex;flex-direction:column;align-items:center;gap:5px}
 .cd-num{font-family:'Rajdhani',sans-serif;font-size:3.2rem;font-weight:700;color:var(--neon);background:rgba(255,45,120,.06);border:1px solid rgba(255,45,120,.2);border-radius:13px;padding:10px 20px;min-width:85px;text-align:center;line-height:1;text-shadow:0 0 20px rgba(255,45,120,.4);box-shadow:0 0 20px rgba(255,45,120,.08),inset 0 0 20px rgba(255,45,120,.03)}
 .cd-unit{font-size:.58rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--text3)}
-.cd-sep{font-family:'Rajdhani',sans-serif;font-size:2.8rem;font-weight:700;color:var(--blue);margin-bottom:20px;animation:blink 1s step-end infinite;text-shadow:0 0 12px #ff0066}
+.cd-sep{font-family:'Rajdhani',sans-serif;font-size:2.8rem;font-weight:700;color:#00d4ff;margin-bottom:20px;animation:blink 1s step-end infinite;text-shadow:0 0 12px #ff0066}
 .cd-next{font-size:.82rem;color:var(--text2);font-weight:600;background:rgba(255,45,120,.07);border:1px solid rgba(255,45,120,.2);border-radius:25px;padding:5px 18px}
 .cd-next span{color:var(--blue);font-weight:800;text-shadow:0 0 8px rgba(255,0,102,.4)}
 .sched-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1rem;width:100%;max-width:1000px}
@@ -291,11 +289,7 @@ nav.nav-hidden{transform:translateY(-100%);}
     3px 3px 0 rgba(255,45,120,.3);
 }
 .hunt-title span{
-  color:var(--pink);display:block;
-  text-shadow:
-    0 0 20px rgba(255,45,120,1),
-    0 0 60px rgba(255,45,120,.6),
-    3px 3px 0 rgba(180,0,60,.5);
+  color:#ff0080;text-shadow:0 0 20px rgba(255,0,128,1),0 0 60px rgba(255,0,128,.6),3px 3px 0 rgba(180,0,80,.5);
   animation:arcadeFlicker 4s infinite;
 }
 @keyframes arcadeFlicker{
@@ -381,7 +375,7 @@ nav.nav-hidden{transform:translateY(-100%);}
   font-family:'Share Tech Mono',monospace;
   font-size:1.25rem;line-height:1;margin-bottom:.25rem;
   letter-spacing:2px;
-  text-shadow:0 0 10px currentColor,0 0 20px currentColor;
+  text-shadow:0 0 10px currentColor,0 0 20px currentColor,0 0 40px currentColor;
 }
 .hsc-label{
   font-family:'Orbitron',monospace;

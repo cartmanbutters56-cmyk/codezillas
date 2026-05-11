@@ -72,10 +72,10 @@ document.addEventListener('click',function(e){var l=document.getElementById('aut
   var canvas=document.getElementById('sf'),ctx=canvas.getContext('2d'),stars=[],W,H;
   function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
   resize();window.addEventListener('resize',resize);
-  function initStars(){stars=[];var count=Math.floor((W*H)/5500);for(var i=0;i<count;i++){var size=Math.random();var bright=size>0.93,mid=size>0.77&&!bright;var hue=180+Math.random()*60;stars.push({x:Math.random()*W,y:Math.random()*H,r:bright?(1.4+Math.random()*2):(mid?(0.7+Math.random()*.9):(0.15+Math.random()*.5)),alpha:bright?(0.65+Math.random()*0.35):(mid?(0.3+Math.random()*.4):(0.08+Math.random()*.22)),hue:hue,ts:0.003+Math.random()*.01,to:Math.random()*Math.PI*2,glow:bright});}}
+  function initStars(){stars=[];var count=Math.floor((W*H)/5500);for(var i=0;i<count;i++){var size=Math.random();var bright=size>0.93,mid=size>0.77&&!bright;var hue=Math.random()>0.5?(300+Math.random()*40):(180+Math.random()*40);stars.push({x:Math.random()*W,y:Math.random()*H,r:bright?(1.4+Math.random()*2):(mid?(0.7+Math.random()*.9):(0.15+Math.random()*.5)),alpha:bright?(0.65+Math.random()*0.35):(mid?(0.3+Math.random()*.4):(0.08+Math.random()*.22)),hue:hue,ts:0.003+Math.random()*.01,to:Math.random()*Math.PI*2,glow:bright});}}
   initStars();window.addEventListener('resize',initStars);
   var t=0;
-  function draw(){ctx.fillStyle='#020a14';ctx.fillRect(0,0,W,H);t+=0.016;for(var i=0;i<stars.length;i++){var s=stars[i];var tw=0.7+0.3*Math.sin(t*s.ts*60+s.to);var a=s.alpha*tw;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle='hsla('+s.hue+',80%,'+(s.glow?98:75)+'%,'+a+')';ctx.fill();}requestAnimationFrame(draw);}
+  function draw(){ctx.fillStyle='#020008';ctx.fillRect(0,0,W,H);t+=0.016;for(var i=0;i<stars.length;i++){var s=stars[i];var tw=0.7+0.3*Math.sin(t*s.ts*60+s.to);var a=s.alpha*tw;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle='hsla('+s.hue+',80%,'+(s.glow?98:75)+'%,'+a+')';ctx.fill();}requestAnimationFrame(draw);}
   draw();
 })();
 
