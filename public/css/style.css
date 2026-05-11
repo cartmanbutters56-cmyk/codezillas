@@ -74,19 +74,20 @@ nav.nav-hidden{transform:translateY(-100%);}
 .hero{
   min-height:90vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;
   gap:3rem;padding:6rem 3rem 4rem;position:relative;overflow:hidden;
-  background-image:url('/zeus.jpg');
+  background-image:url('/hero-bg.png');
   background-size:cover;
   background-position:center top;
   background-repeat:no-repeat;
+  background-attachment:fixed;
 }
 .hero::before{
   content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(2,0,8,.85) 0%,rgba(2,0,8,.7) 50%,rgba(2,0,8,.85) 100%);
+  background:linear-gradient(135deg,rgba(2,0,8,.55) 0%,rgba(2,0,8,.35) 50%,rgba(2,0,8,.55) 100%);
   pointer-events:none;z-index:0;
 }
 .hero::after{
   content:'';position:absolute;inset:0;
-  background:linear-gradient(to top, rgba(2,0,8,1) 0%, transparent 30%);
+  background:linear-gradient(to top, rgba(2,0,8,.9) 0%, transparent 20%);
   pointer-events:none;z-index:0;
 }
 .hero-left,.hero-stream{position:relative;z-index:1;}
