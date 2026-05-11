@@ -893,6 +893,12 @@ function checkKickStatus() {
       .catch(function() { tryProxy(idx + 1); });
   }
   tryProxy(0);
+setTimeout(function() {
+  var pill = document.getElementById('hero-pill');
+  if(pill && pill.style.display === 'none') {
+    applyKickState(false, 0);
+  }
+}, 5000);
 }
 checkKickStatus();
 setInterval(checkKickStatus, 60000);
