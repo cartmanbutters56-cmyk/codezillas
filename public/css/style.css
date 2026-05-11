@@ -10,7 +10,7 @@
   --text:#e8f8ff;--text2:#99cce0;--text3:#336688;
   --border:#084060;--border2:#00ccff;
   --r:20px;
-  --purple:#cc99ff;--pink:#ff99cc;--pink2:#ff66aa;--pinkg:rgba(255,153,204,.2);
+  --purple:#00ccff;--pink:#00ccff;--pink2:#0099dd;--pinkg:rgba(0,204,255,.2);
   --cyan:#00ccff;--yellow:#ffcc00;--yellow2:#ffaa00;
   --chrome:#c0e8f8;--chrome2:#6090b0;--chrome3:#084060;
   --led:#00ccff;--led-off:rgba(0,204,255,.12);
@@ -220,7 +220,7 @@ nav.nav-hidden{transform:translateY(-100%);}
 .clip-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.18);transition:background .3s}
 .play-btn{position:relative;width:68px;height:68px;display:flex;align-items:center;justify-content:center}
 .play-btn::before{content:'';position:absolute;inset:0;border-radius:50%;border:1.5px solid rgba(255,255,255,.15)}
-.play-btn::after{content:'';position:absolute;inset:8px;border-radius:50%;background:rgba(255,45,120,.85);transition:transform .4s}
+.play-btn::after{content:'';position:absolute;inset:8px;border-radius:50%;background: rgba(0,204,255,.85);transition:transform .4s}
 .play-btn svg{position:relative;z-index:2;margin-left:4px}
 .clip-featured:hover .play-btn::after,.clip-card:hover .play-btn::after{transform:scale(1.1);background:var(--neon)}
 .play-btn-sm{width:52px;height:52px}
@@ -264,7 +264,7 @@ nav.nav-hidden{transform:translateY(-100%);}
 .hunt-hero::before{
   content:'';position:absolute;inset:0;
   background:
-    radial-gradient(ellipse 70% 60% at 50% 0%,rgba(255,0,34,.25),transparent 65%),
+    radial-gradient(ellipse 70% 60% at 50% 0%,rgba(0,204,255,.25),transparent 65%),
     radial-gradient(ellipse 30% 40% at 10% 100%,rgba(255,0,34,.1),transparent 60%),
     radial-gradient(ellipse 30% 40% at 90% 100%,rgba(255,0,34,.1),transparent 60%);
   pointer-events:none;
