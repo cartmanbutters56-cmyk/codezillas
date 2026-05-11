@@ -617,7 +617,8 @@ async function renderStatsPanel(){
     var multiClasses = ['m1','m2','m3'];
 
     var card = document.createElement('div');
-    card.className = 'stats-hunt-card';
+    card.className = 'stats-hunt-card reveal';
+    card.dataset.delay = (idx * 80) + ''
     card.style.animationDelay = (idx * 0.06) + 's';
     card.style.animation = 'slideInSlot .4s ease both';
 
@@ -725,7 +726,8 @@ async function renderArchive(){
     var dateStr=hunt.endedAt?new Date(hunt.endedAt).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'–';
     var guesses=appState.guesses[hunt.id]||[];
     var winner=findWinner(hunt,guesses);
-    var card=document.createElement('div');card.className='archive-card';
+    var card=document.createElement('div');card.className = 'archive-card reveal';
+    card.dataset.delay = (appState.huntArchive.indexOf(hunt) * 80) + '';
     card.innerHTML='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.9rem;"><span class="archive-hunt-id">Hunt #'+hunt.id+'</span><span class="archive-date">'+dateStr+'</span></div>'
       +'<div class="archive-stats">'
       +'<div><div class="archive-stat-val">'+hunt.slots.length+'</div><div class="archive-stat-label">Bonuses</div></div>'
@@ -813,7 +815,8 @@ function buildNYStreamTime(nyYear, nyMonth, nyDay) {
   SCHED_DAYS.forEach(function(s) {
     var isToday = s.day === todayDayOfWeek;
     var card = document.createElement('div');
-    card.className = 'sched-card' + (isToday ? ' today' : '');
+    card.className = 'sched-card' + (isToday ? ' today' : '') + ' reveal';
+    card.dataset.delay = s.day * 60 + '';
     card.innerHTML = '<div class="sched-day">' + s.label + '</div>'
       + '<div class="sched-time">10 AM ET</div>'
       + '<div class="sched-tz">Eastern Time</div>'
@@ -940,4 +943,32 @@ window.addEventListener('scroll',function(){
     ls.style.opacity = '0';
     setTimeout(function(){ ls.style.display = 'none'; }, 600);
   }, 2000);
+})();
+// ════ SCROLL REVEAL ════
+(function initReveal() {
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var el = entry.target;
+        var delay = el.dataset.delay || 0;
+        setTimeout(function() {
+          el.classList.add('visible');
+        }, delay);
+        observer.unobserve(el);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  function observeAll() {
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale')
+      .forEach(function(el) {
+        if (!el.classList.contains('visible')) {
+          observer.observe(el);
+        }
+      });
+  }
+
+  observeAll();
+  // re-observe after dynamic content renders
+  window.addEventListener('scroll', observeAll, { passive: true });
 })();
