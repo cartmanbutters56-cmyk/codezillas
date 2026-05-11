@@ -948,13 +948,14 @@ window.addEventListener('scroll',function(){
 (function initReveal() {
   var observer = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
+      var el = entry.target;
       if (entry.isIntersecting) {
-        var el = entry.target;
         var delay = el.dataset.delay || 0;
         setTimeout(function() {
           el.classList.add('visible');
         }, delay);
-        observer.unobserve(el);
+      } else {
+        el.classList.remove('visible');
       }
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
@@ -962,13 +963,14 @@ window.addEventListener('scroll',function(){
   function observeAll() {
     document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale')
       .forEach(function(el) {
-        if (!el.classList.contains('visible')) {
-          observer.observe(el);
-        }
+        observer.observe(el);
       });
   }
 
   observeAll();
-  // re-observe after dynamic content renders
-  window.addEventListener('scroll', observeAll, { passive: true });
+
+  var mutationObserver = new MutationObserver(function() {
+    observeAll();
+  });
+  mutationObserver.observe(document.body, { childList: true, subtree: true });
 })();
