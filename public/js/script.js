@@ -885,8 +885,7 @@ function checkKickStatus() {
       applyKickState(false, 0);
     });
 }
-checkKickStatus();
-setInterval(checkKickStatus, 60000);
+applyKickState(false, 0);
 
 // ════ CLIP MODAL ════
 function openClip(f,t,k){var v=document.getElementById('clip-m-video');document.getElementById('clip-m-title').textContent=t;document.getElementById('clip-m-kick-link').href=k;v.src=f;v.play();document.getElementById('clip-modal').classList.add('open');document.body.style.overflow='hidden';}
