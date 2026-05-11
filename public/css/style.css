@@ -1225,7 +1225,10 @@ footer{position:relative;z-index:1;background:var(--deep);border-top:1px solid v
     display:none!important;
   }
   .nav-right{
-    display:none!important;
+    display:flex!important;
+  }
+  .nav-right .nav-icon-btn{
+    display:none;
   }
   .hamburger{
     display:flex!important;
@@ -1436,3 +1439,20 @@ footer{position:relative;z-index:1;background:var(--deep);border-top:1px solid v
     width:130px!important;
   }
 }
+  #nav-user-area{
+    display:flex;
+    align-items:center;
+  }
+  #nav-user-area .login-btn{
+    font-size:.65rem;
+    padding:5px 9px;
+    white-space:nowrap;
+  }
+  #nav-user-area .user-btn{
+    font-size:.65rem;
+    padding:3px 7px 3px 3px;
+    gap:5px;
+  }
+  #nav-user-area .admin-pill{
+    display:none;
+  }
