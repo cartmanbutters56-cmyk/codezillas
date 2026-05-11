@@ -1216,3 +1216,188 @@ footer{position:relative;z-index:1;background:var(--deep);border-top:1px solid v
 .reveal-right.visible{opacity:1;transform:translateX(0);}
 .reveal-scale{opacity:0;transform:scale(.92);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1);}
 .reveal-scale.visible{opacity:1;transform:scale(1);}
+/* ══ MOBILE NAV FIX ══ */
+@media(max-width:768px){
+  .nav-inner{
+    padding:0 1rem;
+  }
+  .nav-links{
+    display:none!important;
+  }
+  .nav-right{
+    display:none!important;
+  }
+  .hamburger{
+    display:flex!important;
+  }
+  .nav-logo-txt{
+    font-size:1.1rem;
+  }
+}
+
+/* ══ MOBILE SOCIAL STRIP FIX ══ */
+@media(max-width:768px){
+  .social-strip-v2{
+    padding:0 1rem;
+  }
+  .ssv2-inner{
+    flex-direction:column;
+    align-items:stretch;
+    gap:.6rem;
+    padding:.8rem 0;
+  }
+  .ssv2-label{
+    border-right:none;
+    border-bottom:1px solid var(--border);
+    padding:.4rem 0;
+    margin-right:0;
+    margin-bottom:.2rem;
+  }
+  .ssv2-cards{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:.5rem;
+    flex-wrap:unset;
+    overflow:visible;
+    padding:0;
+  }
+  .ssv2-card{
+    width:100%;
+    height:70px;
+  }
+  .ssv2-sep{
+    display:none;
+  }
+  .ssv2-promo{
+    display:flex;
+    margin-left:0;
+    justify-content:center;
+    padding:.75rem;
+  }
+}
+
+/* ══ MOBILE STATS & WINNERS FIX ══ */
+@media(max-width:768px){
+  .stats-panel-wrap{
+    padding:0;
+  }
+  .stats-hunt-card{
+    margin-bottom:1rem;
+    border-radius:12px;
+  }
+  .shc-header{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:.5rem;
+    padding:.9rem 1rem;
+  }
+  .shc-meta{
+    flex-wrap:wrap;
+    gap:.4rem;
+  }
+  .shc-body{
+    grid-template-columns:1fr;
+  }
+  .shc-left{
+    border-right:none;
+    border-bottom:1px solid rgba(0,204,255,.06);
+    padding:1rem;
+  }
+  .shc-right{
+    padding:1rem;
+  }
+  .shc-balances{
+    flex-wrap:wrap;
+    gap:.4rem;
+  }
+  .shc-bal-item{
+    flex:1 1 calc(50% - .4rem);
+    min-width:calc(50% - .4rem);
+  }
+  .shc-top3-row{
+    gap:7px;
+  }
+  .shc-slot-name{
+    font-size:.55rem;
+  }
+  .shc-winner-row{
+    flex-wrap:wrap;
+    gap:7px;
+  }
+  /* All guesses list inside stats */
+  .shc-right > div:last-child > div{
+    max-height:120px;
+  }
+  /* Hunt header stat cards on stats page */
+  .hunt-header-bar{
+    grid-template-columns:repeat(2,1fr);
+    padding:.8rem;
+    gap:.5rem;
+  }
+  .hunt-header-bar::before{
+    font-size:.42rem;
+    letter-spacing:2px;
+  }
+  .hsc-val{
+    font-size:1rem;
+  }
+  /* Tabs scrollable */
+  .hunt-tabs{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    padding:0 1rem;
+    gap:0;
+  }
+  .hunt-tabs::-webkit-scrollbar{
+    display:none;
+  }
+  .h-tab{
+    padding:12px 14px;
+    font-size:.52rem;
+    letter-spacing:1px;
+    white-space:nowrap;
+    flex-shrink:0;
+  }
+  /* Hunt main padding */
+  .hunt-main{
+    padding:1rem 1rem 3rem;
+  }
+  /* Live feed rows hide provider on small screens */
+  .lft-head,.lft-row{
+    grid-template-columns:28px 1fr 75px 85px!important;
+  }
+  .lft-head-cell:nth-child(3),
+  .lft-row>div:nth-child(3),
+  .lft-head-cell:nth-child(4),
+  .lft-row>div:nth-child(4){
+    display:none!important;
+  }
+  /* Guess panel */
+  .guess-panel{
+    margin-top:.5rem;
+  }
+  .guess-body::before{
+    font-size:.42rem;
+    letter-spacing:2px;
+  }
+}
+
+@media(max-width:480px){
+  .shc-hunt-id{
+    font-size:.75rem;
+  }
+  .shc-bal-item{
+    flex:1 1 100%;
+  }
+  .shc-balances{
+    grid-template-columns:1fr 1fr;
+    display:grid;
+  }
+  .archive-grid{
+    grid-template-columns:1fr;
+  }
+  .hunt-header-bar{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
