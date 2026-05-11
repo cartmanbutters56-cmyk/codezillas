@@ -215,7 +215,7 @@ function renderHuntTabs(){
 }
 function switchTab(tab){
   currentHuntTab=tab;
-  if((tab==='admin'||tab==='archive')&&!appState.isAdmin){switchTab('live');return;}
+  if(tab==='admin'&&!appState.isAdmin){switchTab('live');return;}
   ['live','stats','archive','admin'].forEach(function(t){
     var el=document.getElementById('tab-'+t);if(el)el.className='h-tab'+(tab===t?' active':'');
     var panel=document.getElementById('panel-'+t);if(panel)panel.style.display=tab===t?'block':'none';
