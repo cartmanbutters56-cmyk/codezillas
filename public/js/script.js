@@ -874,31 +874,16 @@ function applyKickState(live, viewers) {
   document.getElementById('kf-status').className = live ? 'kf-status' : 'kf-status offline';
 }
 function checkKickStatus() {
-  var KICK_API = 'https://kick.com/api/v1/channels/yama';
-  var proxies = [
-    'https://corsproxy.io/?url=' + encodeURIComponent(KICK_API),
-    'https://api.allorigins.win/get?url=' + encodeURIComponent(KICK_API),
-    'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(KICK_API)
-  ];
-  function tryProxy(idx) {
-    if (idx >= proxies.length) { applyKickState(false, 0); return; }
-    fetch(proxies[idx], { headers: { 'Accept': 'application/json' } })
-      .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
-      .then(function(raw) {
-        var data = (raw && raw.contents) ? JSON.parse(raw.contents) : raw;
-        var live = !!(data && data.livestream);
-        var viewers = live ? (data.livestream.viewer_count || 0) : 0;
-        applyKickState(live, viewers);
-      })
-      .catch(function() { tryProxy(idx + 1); });
-  }
-  tryProxy(0);
-setTimeout(function() {
-  var pill = document.getElementById('hero-pill');
-  if(pill && pill.style.display === 'none') {
-    applyKickState(false, 0);
-  }
-}, 5000);
+  fetch('https://kick.com/api/v1/channels/yama')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      var live = !!(data && data.livestream);
+      var viewers = live ? (data.livestream.viewer_count || 0) : 0;
+      applyKickState(live, viewers);
+    })
+    .catch(function() {
+      applyKickState(false, 0);
+    });
 }
 checkKickStatus();
 setInterval(checkKickStatus, 60000);
