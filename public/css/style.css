@@ -71,10 +71,25 @@ nav.nav-hidden{transform:translateY(-100%);}
 @keyframes neonFlicker{0%,100%{opacity:1}92%{opacity:1}94%{opacity:.4}96%{opacity:1}98%{opacity:.6}}
 @keyframes scanline{0%{transform:translateY(-100%)}100%{transform:translateY(100%)}}
 @keyframes cyberGlow{0%,100%{box-shadow:0 0 5px rgba(255,45,120,.2)}50%{box-shadow:0 0 20px rgba(255,45,120,.5),0 0 40px rgba(255,45,120,.2)}}
-.hero{min-height:90vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:3rem;padding:6rem 3rem 4rem;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 0% 50%,rgba(255,45,120,.07),transparent 70%);pointer-events:none}
-.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 40% 60% at 100% 50%,rgba(255,45,120,.05),transparent 70%);pointer-events:none}
-.hero-left{display:flex;flex-direction:column;gap:0;min-width:0}
+.hero{
+  min-height:90vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;
+  gap:3rem;padding:6rem 3rem 4rem;position:relative;overflow:hidden;
+  background-image:url('/zeus.jpg');
+  background-size:cover;
+  background-position:center top;
+  background-repeat:no-repeat;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(2,0,8,.85) 0%,rgba(2,0,8,.7) 50%,rgba(2,0,8,.85) 100%);
+  pointer-events:none;z-index:0;
+}
+.hero::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to top, rgba(2,0,8,1) 0%, transparent 30%);
+  pointer-events:none;z-index:0;
+}
+.hero-left,.hero-stream{position:relative;z-index:1;}
 .hero-eyebrow{font-size:.7rem;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--neon);margin-bottom:1.25rem;opacity:0;animation:fadeUp .6s .1s ease both;text-shadow:0 0 10px rgba(255,45,120,.4)}
 .hero-h1{font-family:'Rajdhani',sans-serif;font-size:clamp(3rem,7vw,5.8rem);font-weight:700;line-height:.95;letter-spacing:-1px;text-transform:uppercase;margin-bottom:1.25rem;opacity:0;animation:fadeUp .6s .2s ease both}
 .hero-h1 span{color:var(--neon);display:block;text-shadow:0 0 30px rgba(255,45,120,.5),0 0 60px rgba(255,45,120,.2);animation:neonFlicker 4s infinite 2s}
