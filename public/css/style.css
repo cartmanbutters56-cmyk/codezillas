@@ -1,19 +1,19 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --void:#020008;--deep:#05000f;--dark:#0a0018;--card:#0d0020;--card2:#150030;
-  --neon:#ff0080;--neon2:#cc0060;--neonsoft:#ff66aa;
-  --blue:#00d4ff;--blue2:#0099cc;--blueglow:rgba(0,212,255,.2);
-  --electric:#39ff14;--electricdim:rgba(57,255,20,.15);
-  --gold:#ffd700;--gold2:#ffaa00;
-  --green:#39ff14;--green2:#22dd00;
-  --red:#ff3355;--discord:#5865f2;
-  --text:#f0e8ff;--text2:#c0a0d0;--text3:#6a4080;
-  --border:#2a0050;--border2:#ff0080;
+  --void:#080000;--deep:#100000;--dark:#180000;--card:#1a0000;--card2:#250000;
+  --neon:#ff0022;--neon2:#cc0018;--neonsoft:#ff6677;
+  --blue:#ff0022;--blue2:#cc0018;--blueglow:rgba(255,0,34,.2);
+  --electric:#ff3300;--electricdim:rgba(255,51,0,.15);
+  --gold:#ff6600;--gold2:#cc4400;
+  --green:#ff0022;--green2:#cc0018;
+  --red:#ff0022;--discord:#5865f2;
+  --text:#ffe8e8;--text2:#d4a0a0;--text3:#7a3030;
+  --border:#3a0000;--border2:#ff0022;
   --r:16px;
-  --purple:#c084fc;--pink:#ff0080;--pink2:#cc0060;--pinkg:rgba(255,0,128,.2);
-  --cyan:#00d4ff;--yellow:#ffd700;--yellow2:#ffaa00;
-  --chrome:#e8e8f0;--chrome2:#b0b0c0;--chrome3:#4a0080;
-  --led:#ff0080;--led-off:rgba(255,0,128,.12);
+  --purple:#ff0044;--pink:#ff0022;--pink2:#cc0018;--pinkg:rgba(255,0,34,.2);
+  --cyan:#ff4400;--yellow:#ff6600;--yellow2:#cc4400;
+  --chrome:#f0d0d0;--chrome2:#c09090;--chrome3:#600000;
+  --led:#ff0022;--led-off:rgba(255,0,34,.12);
 }
 html{scroll-behavior:smooth}
 #cur{position:fixed;pointer-events:none;z-index:99999;mix-blend-mode:normal;display:none}
@@ -82,7 +82,7 @@ nav.nav-hidden{transform:translateY(-100%);}
 }
 .hero::before{
   content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(2,0,8,.55) 0%,rgba(2,0,8,.35) 50%,rgba(2,0,8,.55) 100%);
+  background:linear-gradient(135deg,rgba(8,0,0,.55) 0%,rgba(8,0,0,.35) 50%,rgba(8,0,0,.55) 100%);
   pointer-events:none;z-index:0;
 }
 .hero::after{
@@ -184,7 +184,7 @@ nav.nav-hidden{transform:translateY(-100%);}
 .cd-sub{font-size:.65rem;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--text3)}
 .cd-blocks{display:flex;align-items:center;gap:.65rem}
 .cd-block{display:flex;flex-direction:column;align-items:center;gap:5px}
-.cd-num{font-family:'Rajdhani',sans-serif;font-size:3.2rem;font-weight:700;color:var(--neon);background:rgba(255,45,120,.06);border:1px solid rgba(255,45,120,.2);border-radius:13px;padding:10px 20px;min-width:85px;text-align:center;line-height:1;text-shadow:0 0 20px rgba(255,45,120,.4);box-shadow:0 0 20px rgba(255,45,120,.08),inset 0 0 20px rgba(255,45,120,.03)}
+.cd-num{font-family:'Rajdhani',sans-serif;font-size:3.2rem;font-weight:700;color:var(--neon);background:rgba(255,45,120,.06);border:1px solid rgba(255,45,120,.2);border-radius:13px;padding:10px 20px;min-width:85px;text-align:center;line-height:1;text-shadow:0 0 20px rgba(255,45,120,.4);box-shadow:0 0 20px rgba(255,0,34,.15),inset 0 0 20px rgba(255,0,34,.05);}
 .cd-unit{font-size:.58rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--text3)}
 .cd-sep{font-family:'Rajdhani',sans-serif;font-size:2.8rem;font-weight:700;color:#00d4ff;margin-bottom:20px;animation:blink 1s step-end infinite;text-shadow:0 0 12px #ff0066}
 .cd-next{font-size:.82rem;color:var(--text2);font-weight:600;background:rgba(255,45,120,.07);border:1px solid rgba(255,45,120,.2);border-radius:25px;padding:5px 18px}
@@ -264,9 +264,9 @@ nav.nav-hidden{transform:translateY(-100%);}
 .hunt-hero::before{
   content:'';position:absolute;inset:0;
   background:
-    radial-gradient(ellipse 70% 60% at 50% 0%,rgba(255,45,120,.2),transparent 65%),
-    radial-gradient(ellipse 30% 40% at 10% 100%,rgba(255,45,120,.08),transparent 60%),
-    radial-gradient(ellipse 30% 40% at 90% 100%,rgba(255,45,120,.08),transparent 60%);
+    radial-gradient(ellipse 70% 60% at 50% 0%,rgba(255,0,34,.25),transparent 65%),
+    radial-gradient(ellipse 30% 40% at 10% 100%,rgba(255,0,34,.1),transparent 60%),
+    radial-gradient(ellipse 30% 40% at 90% 100%,rgba(255,0,34,.1),transparent 60%);
   pointer-events:none;
 }
 /* Decorative side chrome strips */
