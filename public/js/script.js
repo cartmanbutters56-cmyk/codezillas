@@ -866,6 +866,21 @@ function applyKickState(live, viewers) {
   document.getElementById('kf-dot').className = live ? 'kf-live' : 'kf-off';
   document.getElementById('kf-status').textContent = live ? 'LIVE' : 'Offline';
   document.getElementById('kf-status').className = live ? 'kf-status' : 'kf-status offline';
+  // Fix float player
+  var liveEmbed = document.getElementById('fp-live-embed');
+  var offlineScreen = document.getElementById('fp-offline-screen');
+  var statusBadge = document.getElementById('fp-status-badge');
+
+  if (liveEmbed) liveEmbed.style.display = live ? 'block' : 'none';
+  if (offlineScreen) offlineScreen.style.display = live ? 'none' : 'flex';
+  if (statusBadge) {
+    statusBadge.className = live ? 'fp-live-badge' : 'fp-offline-badge';
+    statusBadge.innerHTML = live ? '<span class="fp-dot"></span>LIVE' : '⬤ Offline';
+  }
+  if (live && viewers) {
+    var fpViewers = document.getElementById('fp-viewer-count');
+    if (fpViewers) fpViewers.textContent = viewers.toLocaleString() + ' viewers';
+  }
 }
 function checkKickStatus() {
   var KICK_API = 'https://kick.com/api/v1/channels/yama';
@@ -907,6 +922,9 @@ function showPage(name){
   var nav=document.getElementById('nav-'+name);if(nav)nav.classList.add('active');
   var mob=document.getElementById('mob-'+name);if(mob)mob.classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
+  // Show crypto coins only on home page
+  var coins = document.getElementById('crypto-floats');
+  if (coins) coins.style.display = name === 'home' ? 'block' : 'none';
 }
 
 function showToast(msg){var t=document.getElementById('toast');document.getElementById('toast-msg').textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2600);}
@@ -1003,3 +1021,17 @@ window.addEventListener('scroll',function(){
   document.addEventListener('touchmove',  function(e) { if (dragging) { e.preventDefault(); var t = e.touches[0]; onMove(t.clientX, t.clientY); } }, { passive: false });
   document.addEventListener('touchend',   onEnd);
 })();
+function showPage(name){
+  currentPage=name;
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.nav-links a').forEach(function(a){a.classList.remove('active');});
+  document.querySelectorAll('.mob-menu a').forEach(function(a){a.classList.remove('active');});
+  var page=document.getElementById('page-'+name);if(page)page.classList.add('active');
+  var nav=document.getElementById('nav-'+name);if(nav)nav.classList.add('active');
+  var mob=document.getElementById('mob-'+name);if(mob)mob.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+
+  // Show coins only on home page
+  var coins=document.getElementById('crypto-floats');
+  if(coins)coins.style.display=name==='home'?'block':'none';
+}
