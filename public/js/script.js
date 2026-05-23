@@ -79,12 +79,6 @@ document.addEventListener('click',function(e){var l=document.getElementById('aut
   draw();
 })();
 
-var cx=0,cy=0,rx=0,ry=0;
-document.addEventListener('mousemove',function(e){cx=e.clientX;cy=e.clientY;document.getElementById('cur-dot').style.left=cx+'px';document.getElementById('cur-dot').style.top=cy+'px';});
-(function anim(){rx+=(cx-rx)*.14;ry+=(cy-ry)*.14;document.getElementById('cur-ring').style.left=rx+'px';document.getElementById('cur-ring').style.top=ry+'px';requestAnimationFrame(anim);})();
-function refreshCursor(){document.querySelectorAll('a,button,[onclick]').forEach(function(el){el.addEventListener('mouseenter',function(){document.body.classList.add('ch');});el.addEventListener('mouseleave',function(){document.body.classList.remove('ch');});});}
-refreshCursor();
-
 // ════ SUPABASE DATA ════
 async function fetchActiveHunt() {
   var { data, error } = await _supabase
@@ -802,7 +796,7 @@ function buildNYStreamTime(nyYear, nyMonth, nyDay) {
   var probeNY = getNYComponents(probeUTC);
   var probeNYasUTC = new Date(Date.UTC(probeNY.year, probeNY.month, probeNY.day, probeNY.hour, probeNY.minute, probeNY.second));
   var offsetMs = probeUTC.getTime() - probeNYasUTC.getTime();
-  var targetNYasUTC = new Date(Date.UTC(nyYear, nyMonth, nyDay, 10, 0, 0));
+  var targetNYasUTC = new Date(Date.UTC(nyYear, nyMonth, nyDay, 11, 0, 0));
   return new Date(targetNYasUTC.getTime() + offsetMs);
 }
 
@@ -973,4 +967,39 @@ window.addEventListener('scroll',function(){
     observeAll();
   });
   mutationObserver.observe(document.body, { childList: true, subtree: true });
+})();
+// ════ FLOAT PLAYER DRAG ════
+(function initFloatDrag() {
+  var el = document.getElementById('float-player');
+  if (!el) return;
+  var handle = el.querySelector('.fp-handle');
+  if (!handle) return;
+
+  var dragging = false, startX, startY, origLeft, origTop;
+
+  function onStart(x, y) {
+    dragging = true;
+    startX = x; startY = y;
+    origLeft = el.offsetLeft;
+    origTop = el.offsetTop;
+    el.style.transition = 'none';
+  }
+  function onMove(x, y) {
+    if (!dragging) return;
+    el.style.left = (origLeft + x - startX) + 'px';
+    el.style.top  = (origTop  + y - startY) + 'px';
+    el.style.right = 'auto';
+    el.style.bottom = 'auto';
+  }
+  function onEnd() { dragging = false; }
+
+  // Mouse
+  handle.addEventListener('mousedown',  function(e) { e.preventDefault(); onStart(e.clientX, e.clientY); });
+  document.addEventListener('mousemove', function(e) { onMove(e.clientX, e.clientY); });
+  document.addEventListener('mouseup',   onEnd);
+
+  // Touch
+  handle.addEventListener('touchstart',  function(e) { var t = e.touches[0]; onStart(t.clientX, t.clientY); }, { passive: true });
+  document.addEventListener('touchmove',  function(e) { if (dragging) { e.preventDefault(); var t = e.touches[0]; onMove(t.clientX, t.clientY); } }, { passive: false });
+  document.addEventListener('touchend',   onEnd);
 })();
