@@ -297,17 +297,6 @@ function renderHuntLive(){
   var stats=calcStats(hunt);
   document.getElementById('s-id').textContent='#'+hunt.id;
   document.getElementById('s-bonuses').textContent=hunt.slots.length;
-  // populate hero chips
-var chips = document.getElementById('hunt-hero-chips');
-if (chips && hunt) {
-  var opened = hunt.slots.filter(function(s){return s.opened}).length;
-  var gs = (appState.guesses[hunt.id]||[]).length;
-  chips.innerHTML =
-    '<div class="h-chip"><span class="h-chip-icon">🎰</span>' + hunt.slots.length + ' slots</div>' +
-    '<div class="h-chip"><span class="h-chip-icon">👥</span>' + gs + ' guesses</div>' +
-    '<div class="h-chip"><span class="h-chip-icon">💵</span>' + fmt(hunt.startBal) + ' start</div>' +
-    '<div class="h-chip"><span class="h-chip-icon">📊</span>' + opened + ' opened</div>';
-}
   document.getElementById('s-start').textContent=fmt(hunt.startBal);
   document.getElementById('s-current').textContent=fmt(stats.currentBal);
   document.getElementById('s-avg').textContent=fmtM(stats.avgMulti);
@@ -553,6 +542,27 @@ function renderGuessPanel(){
   }else{
     if(loginPrompt)loginPrompt.style.display='flex';
     if(formArea)formArea.style.display='none';
+  }
+
+  var ll=document.getElementById('guess-list-label');
+  var gl=document.getElementById('guess-list');
+  if(ll)ll.textContent='Community Guesses ('+guesses.length+')';
+  if(gl){
+    if(guesses.length===0){gl.innerHTML='<div style="text-align:center;padding:1.4rem;color:var(--text3);font-size:.82rem;">No guesses yet — be the first!</div>';}
+    else{
+      var sorted=[].concat(guesses).sort(function(a,b){return a.amount-b.amount;});
+      var winner=findWinner(hunt,sorted);
+      gl.innerHTML='';
+      sorted.forEach(function(g){
+        var isMe=appState.user&&g.userId===appState.user.id;
+        var isW=winner&&g.userId===winner.userId;
+        var item=document.createElement('div');
+        item.className='guess-item'+(isMe?' mine':'')+(isW?' winner':'');
+        var ava=g.avatar?'<img src="'+g.avatar+'" alt="">':escHtml(g.username.substring(0,2).toUpperCase());
+        item.innerHTML='<div class="guess-user"><div class="guess-ava">'+ava+'</div><span>'+escHtml(g.username)+(isMe?' <span style="color:var(--neon);font-size:.62rem;">(you)</span>':'')+'</span>'+(isW?'<span class="guess-winner-badge">🏆 Closest</span>':'')+'</div><span class="guess-amount">'+fmt(g.amount)+'</span>';
+        gl.appendChild(item);
+      });
+    }
   }
   refreshCursor();
 }
