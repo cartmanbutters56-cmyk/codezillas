@@ -1503,11 +1503,3 @@ footer{position:relative;z-index:1;background:var(--deep);border-top:1px solid v
 .lft-multi { color: #007aaa; }
 .lft-bet { color: #4a7a9a; }
 .lft-num { color: #99bbcc; }
-.lft-head,
-.lft-row {
-  grid-template-columns: 56px 1fr 180px 120px 140px 130px;
-  padding: 16px 20px;
-}
-
-.lft-slot-name { font-size: .82rem; }
-.lft-win, .lft-multi, .lft-bet { font-size: 1.05rem; }
