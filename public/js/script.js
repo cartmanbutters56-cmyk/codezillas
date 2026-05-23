@@ -79,6 +79,12 @@ document.addEventListener('click',function(e){var l=document.getElementById('aut
   draw();
 })();
 
+var cx=0,cy=0,rx=0,ry=0;
+document.addEventListener('mousemove',function(e){cx=e.clientX;cy=e.clientY;document.getElementById('cur-dot').style.left=cx+'px';document.getElementById('cur-dot').style.top=cy+'px';});
+(function anim(){rx+=(cx-rx)*.14;ry+=(cy-ry)*.14;document.getElementById('cur-ring').style.left=rx+'px';document.getElementById('cur-ring').style.top=ry+'px';requestAnimationFrame(anim);})();
+function refreshCursor(){document.querySelectorAll('a,button,[onclick]').forEach(function(el){el.addEventListener('mouseenter',function(){document.body.classList.add('ch');});el.addEventListener('mouseleave',function(){document.body.classList.remove('ch');});});}
+refreshCursor();
+
 // ════ SUPABASE DATA ════
 async function fetchActiveHunt() {
   var { data, error } = await _supabase
