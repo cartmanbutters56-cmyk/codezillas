@@ -107,6 +107,7 @@
       <li><a href="#" id="nav-hunt" onclick="showPage('hunt');return false;">Bonus Hunt</a></li>
       <li><a href="#" id="nav-rewards" onclick="showPage('rewards');return false;">Bonuses</a></li>
       <li><a href="#" id="nav-faq" onclick="showPage('faq');return false;">FAQ</a></li>
+      <li><a href="#" id="nav-admin" onclick="showPage('admin');return false;" style="display:none;">Admin</a></li>
     </ul>
     <button class="hamburger" id="hamburger" onclick="toggleMob()"><span></span><span></span><span></span></button>
     <div class="nav-right">
@@ -123,6 +124,7 @@
   <a href="#" id="mob-hunt" onclick="showPage('hunt');closeMob();return false;">Bonus Hunt</a>
   <a href="#" id="mob-rewards" onclick="showPage('rewards');closeMob();return false;">Bonuses</a>
   <a href="#" id="mob-faq" onclick="showPage('faq');closeMob();return false;">FAQ</a>
+  <a href="#" id="mob-admin" onclick="showPage('admin');closeMob();return false;" style="display:none;">Admin</a>
   <div style="height:1px;background:var(--border);margin:.4rem 0;"></div>
   <a href="https://kick.com/yama" target="_blank" onclick="closeMob()">Watch on Kick</a>
   <a href="#" onclick="showPage('rewards');closeMob();return false;" style="background:linear-gradient(135deg,var(--neon),var(--neon2))!important;color:#fff!important;border-color:transparent!important;text-align:center;font-weight:800!important;margin-top:.2rem;">Use Code YAMA</a>
@@ -257,7 +259,7 @@
         <div style="width:8px;height:8px;border-radius:50%;background:var(--neon);box-shadow:0 0 14px rgba(0,204,255,.7);"></div>
         <div style="flex:1;height:1px;background:linear-gradient(90deg,var(--border2),transparent);"></div>
       </div>
-      <div style="text-align:center;"><div class="cd-sub" style="margin-bottom:1rem;">DAILY SCHEDULE — 10 AM ET</div><div class="sched-grid" id="sched-grid"></div></div>
+      <div style="text-align:center;"><div class="cd-sub" style="margin-bottom:1rem;">DAILY SCHEDULE</div><div class="sched-grid" id="sched-grid"></div></div>
     </div>
   </div>
   <div class="clips-section">
@@ -267,15 +269,8 @@
         <h2 style="font-family:'Rajdhani',sans-serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:700;text-transform:uppercase;">Best Clips</h2>
         <p style="color:var(--text2);font-size:.88rem;margin-top:.3rem;line-height:1.6;">Watch the wildest moments — big wins, crazy reactions, unforgettable plays.</p>
       </div>
-      <div class="clip-featured reveal" onclick="openClip('clip1.mp4','Featured Clip','https://kick.com/yama/clips/clip_01KR1F1Y6DCRYC41HZNPEV1CFV')">
-        <div class="clip-feat-hdr"><span class="clip-badge">Featured Clip</span><a href="https://kick.com/yama/clips" target="_blank" class="kick-link" onclick="event.stopPropagation()">View on Kick →</a></div>
-        <div class="clip-thumb"><img src="/thumb1.jpg" alt=""><div class="clip-play"><div class="play-btn"><span class="play-pulse"></span><svg width="26" height="26" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg></div></div><div class="clip-grad"></div></div>
-      </div>
-      <div class="clips-row">
-        <div class="clip-card reveal" onclick="openClip('clip2.mp4','Clip 02','https://kick.com/yama/clips/clip_01KR1P04ESQHZHQK07CRBQ6SN6')"><div class="clip-thumb" style="aspect-ratio:16/9;"><img src="/thumb2.jpg" alt=""><div class="clip-play"><div class="play-btn play-btn-sm"><span class="play-pulse"></span><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg></div></div><div class="clip-grad"></div></div><div class="clip-card-ftr"><span class="clip-num">CLIP 02</span><a href="https://kick.com/yama/clips" target="_blank" class="kick-link" onclick="event.stopPropagation()">View on Kick →</a></div></div>
-        <div class="clip-card reveal" onclick="openClip('clip3.mp4','Clip 03','https://kick.com/yama/clips/clip_01KR1N61T6M8ACQXDKB57JW647')"><div class="clip-thumb" style="aspect-ratio:16/9;"><img src="/thumb3.jpg" alt=""><div class="clip-play"><div class="play-btn play-btn-sm"><span class="play-pulse"></span><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg></div></div><div class="clip-grad"></div></div><div class="clip-card-ftr"><span class="clip-num">CLIP 03</span><a href="https://kick.com/yama/clips" target="_blank" class="kick-link" onclick="event.stopPropagation()">View on Kick →</a></div></div>
-        <div class="clip-card reveal" onclick="openClip('clip4.mp4','Clip 04','https://kick.com/yama/clips/clip_01KR1N61T6M8ACQXDKB57JW647')"><div class="clip-thumb" style="aspect-ratio:16/9;"><img src="/thumb4.jpg" alt=""><div class="clip-play"><div class="play-btn play-btn-sm"><span class="play-pulse"></span><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg></div></div><div class="clip-grad"></div></div><div class="clip-card-ftr"><span class="clip-num">CLIP 04</span><a href="https://kick.com/yama/clips" target="_blank" class="kick-link" onclick="event.stopPropagation()">View on Kick →</a></div></div>
-      </div>
+      <div id="clip-featured-wrap" class="clip-featured reveal" style="cursor:pointer;"></div>
+      <div class="clips-row" id="clip-grid-wrap"></div>
     </div>
   </div>
 </div>
@@ -511,6 +506,89 @@
       <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">When does Yama go live on Kick?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-ans"><p>Yama streams every day at 10 AM ET. Follow at kick.com/yama and join the Discord for notifications!</p></div></div>
       <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">What is Spartans.com?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-ans"><p>Spartans.com is an online gaming platform offering casino-style games with exclusive rakeback and cashback rewards for players.</p></div></div>
       <div class="faq-item reveal" style="border:none;"><div class="faq-q" onclick="toggleFaq(this)">How do I contact Yama?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-ans"><p>Join the Discord at discord.gg/codeyambo or catch Yama live on Kick at kick.com/yama. All DMs and community questions are answered as fast as possible!</p></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN PAGE -->
+<div class="page admin-page" id="page-admin">
+  <div class="admin-dash-hero">
+    <div class="admin-dash-hero-inner">
+      <div class="admin-dash-eyebrow">Dashboard</div>
+      <h1 class="admin-dash-title">ADMIN <span>CONTROL</span></h1>
+      <p style="color:var(--text2);font-size:.88rem;line-height:1.7;">Manage schedule, clips, and hunts.</p>
+    </div>
+  </div>
+  <div class="admin-dash-tabs-wrap">
+    <div class="admin-dash-tabs">
+      <button class="ad-tab active" id="ad-tab-sched" onclick="switchAdminTab('sched')">Time Schedule</button>
+      <button class="ad-tab" id="ad-tab-clips" onclick="switchAdminTab('clips')">Best Clips</button>
+      <button class="ad-tab" id="ad-tab-hunt" onclick="switchAdminTab('hunt')">Hunt Control</button>
+    </div>
+  </div>
+  <div class="admin-dash-main">
+    <!-- SCHEDULE TAB -->
+    <div class="ad-panel active" id="ad-panel-sched">
+      <div class="ad-card">
+        <div class="ad-card-hdr"><div class="ad-card-title">Weekly Schedule</div><span class="admin-pill">EDIT</span></div>
+        <div class="ad-card-body">
+          <p style="font-size:.82rem;color:var(--text3);margin-bottom:1.25rem;">Toggle days on/off, set stream time per day, and choose timezone.</p>
+          <div id="admin-sched-list"></div>
+          <button class="btn btn-primary btn-sm" onclick="adminSaveSchedule()" style="margin-top:1rem;">Save Schedule</button>
+          <span id="sched-save-msg" style="font-size:.78rem;color:var(--green);margin-left:.8rem;opacity:0;transition:opacity .3s;">Saved!</span>
+        </div>
+      </div>
+    </div>
+    <!-- CLIPS TAB -->
+    <div class="ad-panel" id="ad-panel-clips">
+      <div class="ad-card">
+        <div class="ad-card-hdr"><div class="ad-card-title">Upload Clip</div><span class="admin-pill">ADD</span></div>
+        <div class="ad-card-body">
+          <div class="ad-upload-form">
+            <div class="ad-field">
+              <div class="ad-field-label">Title</div>
+              <input class="admin-input" type="text" id="ad-clip-title" placeholder="Clip title..." />
+            </div>
+            <div class="ad-field-row">
+              <div class="ad-field" style="flex:1;">
+                <div class="ad-field-label">Video File (mp4)</div>
+                <input class="ad-file-input" type="file" id="ad-clip-video" accept="video/mp4,video/webm" />
+                <div id="ad-video-name" style="font-size:.7rem;color:var(--text3);margin-top:4px;"></div>
+              </div>
+              <div class="ad-field" style="flex:1;">
+                <div class="ad-field-label">Thumbnail (jpg/png)</div>
+                <input class="ad-file-input" type="file" id="ad-clip-thumb" accept="image/*" />
+              </div>
+            </div>
+            <div class="ad-field">
+              <div class="ad-field-label">Kick Link (optional)</div>
+              <input class="admin-input" type="url" id="ad-clip-link" placeholder="https://kick.com/yama/clips/..." />
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="adminUploadClip()" id="ad-upload-btn">Upload Clip</button>
+            <div id="ad-upload-progress" style="font-size:.78rem;color:var(--neon);margin-top:.5rem;display:none;">Uploading...</div>
+          </div>
+        </div>
+      </div>
+      <div class="ad-card">
+        <div class="ad-card-hdr"><div class="ad-card-title">All Clips</div><span class="admin-pill" id="ad-clip-count">0</span></div>
+        <div class="ad-card-body">
+          <div id="admin-clip-list" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;"></div>
+          <div id="admin-clip-empty" style="text-align:center;padding:2rem;color:var(--text3);font-size:.85rem;">No clips uploaded yet.</div>
+        </div>
+      </div>
+    </div>
+    <!-- HUNT CONTROL TAB -->
+    <div class="ad-panel" id="ad-panel-hunt">
+      <div class="ad-card">
+        <div class="ad-card-hdr"><div class="ad-card-title">Bonus Hunt Admin</div><span class="admin-pill">CONTROL</span></div>
+        <div class="ad-card-body">
+          <p style="font-size:.82rem;color:var(--text3);margin-bottom:1rem;">Manage active hunts, slots, and guesses. This is the same panel available under the Bonus Hunt page.</p>
+          <a href="#" onclick="showPage('hunt');setTimeout(function(){switchTab('admin')},300);return false;" class="btn btn-outline btn-sm">Go to Hunt Admin Panel →</a>
+          <div style="margin-top:1.5rem;border-top:1px solid var(--border);padding-top:1.5rem;">
+            <div id="ad-hunt-summary"></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

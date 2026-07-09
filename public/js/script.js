@@ -1,8 +1,9 @@
 const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-const appState = { user: null, isAdmin: false, activeHunt: null, huntArchive: [], guesses: {} };
+const appState = { user: null, isAdmin: false, activeHunt: null, huntArchive: [], guesses: {}, clips: [], schedule: [] };
 let currentPage = 'home';
 let currentHuntTab = 'live';
+let currentAdminTab = 'sched';
 let pendingDeleteSlotIdx = null;
 let activityLog = [];
 let realtimeChannel = null;
@@ -119,6 +120,45 @@ async function fetchArchive() {
   appState.huntArchive = enriched;
 }
 
+async function fetchClips() {
+  let { data } = await _supabase
+    .from('clips').select('*').order('position', { ascending: true }).order('created_at', { ascending: false });
+  appState.clips = data || [];
+  renderHomeClips();
+}
+
+async function fetchSchedule() {
+  let { data } = await _supabase
+    .from('schedule').select('*').order('day_of_week', { ascending: true });
+  appState.schedule = data || [];
+  if (currentPage === 'admin' && currentAdminTab === 'sched') renderAdminSchedule();
+}
+
+function renderHomeClips() {
+  let active = appState.clips.filter(function(c) { return c.active; });
+  let featured = active.find(function(c) { return c.featured; });
+  let others = active.filter(function(c) { return !c.featured; });
+  let fWrap = document.getElementById('clip-featured-wrap');
+  let gWrap = document.getElementById('clip-grid-wrap');
+  if (fWrap) {
+    if (featured) {
+      fWrap.style.display = 'block';
+      fWrap.onclick = function() { openClip(featured.video_url, featured.title || 'Featured Clip', featured.kick_link || '#'); };
+      fWrap.innerHTML = '<div class="clip-feat-hdr"><span class="clip-badge">Featured Clip</span><a href="https://kick.com/yama/clips" target="_blank" class="kick-link" onclick="event.stopPropagation()">View on Kick →</a></div>'
+        + '<div class="clip-thumb"><img src="' + escHtml(featured.thumbnail_url || featured.video_url) + '" alt=""><div class="clip-play"><div class="play-btn"><span class="play-pulse"></span><svg width="26" height="26" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg></div></div><div class="clip-grad"></div></div>';
+    } else {
+      fWrap.style.display = 'none';
+    }
+  }
+  if (gWrap) {
+    if (others.length === 0) { gWrap.innerHTML = ''; return; }
+    gWrap.innerHTML = others.map(function(c, i) {
+      return '<div class="clip-card reveal" onclick="openClip(\'' + escHtml(c.video_url) + '\',\'' + escHtml(c.title || 'Clip ' + (i+1)) + '\',\'' + escHtml(c.kick_link || '#') + '\')"><div class="clip-thumb" style="aspect-ratio:16/9;"><img src="' + escHtml(c.thumbnail_url || c.video_url) + '" alt=""><div class="clip-play"><div class="play-btn play-btn-sm"><span class="play-pulse"></span><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg></div></div><div class="clip-grad"></div></div><div class="clip-card-ftr"><span class="clip-num">' + escHtml(c.title || 'CLIP ' + (i+1)) + '</span><a href="https://kick.com/yama/clips" target="_blank" class="kick-link" onclick="event.stopPropagation()">View on Kick →</a></div></div>';
+    }).join('');
+  }
+  refreshCursor();
+}
+
 // REALTIME SUBSCRIPTION
 function subscribeRealtime() {
   if (realtimeChannel) _supabase.removeChannel(realtimeChannel);
@@ -179,8 +219,16 @@ function closeConfirmSignout(){document.getElementById('confirm-signout').classL
 function confirmedLogout(){appState.user=null;appState.isAdmin=false;try{localStorage.removeItem('yama_user');}catch(e){}closeConfirmSignout();renderNavUser();renderHuntTabs();renderAll();showToast('Signed out.');}
 function renderNavUser(){
   let area=document.getElementById('nav-user-area');
-  if(appState.user){let ava=appState.user.avatar?'<img src="'+appState.user.avatar+'" alt="">':appState.user.username.substring(0,2).toUpperCase();area.innerHTML='<div class="user-btn" onclick="askSignOut()"><div class="u-ava">'+ava+'</div><span>'+escHtml(appState.user.username)+'</span>'+(appState.isAdmin?'<span class="admin-pill">👑 ADMIN</span>':'')+'</div>';}
-  else{area.innerHTML='<button class="login-btn" onclick="openDscModal()">Sign In</button>';}
+  if(appState.user){
+    let ava=appState.user.avatar?'<img src="'+appState.user.avatar+'" alt="">':appState.user.username.substring(0,2).toUpperCase();
+    area.innerHTML='<div class="user-btn" onclick="askSignOut()"><div class="u-ava">'+ava+'</div><span>'+escHtml(appState.user.username)+'</span>'+(appState.isAdmin?'<span class="admin-pill">👑 ADMIN</span>':'')+'</div>';
+  } else {
+    area.innerHTML='<button class="login-btn" onclick="openDscModal()">Sign In</button>';
+  }
+  let adminNav = document.getElementById('nav-admin');
+  let adminMob = document.getElementById('mob-admin');
+  if (adminNav) adminNav.style.display = appState.isAdmin ? 'inline-flex' : 'none';
+  if (adminMob) adminMob.style.display = appState.isAdmin ? 'block' : 'none';
   refreshCursor();
 }
 function escHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
@@ -188,6 +236,9 @@ function escHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').
 // INIT
 (function init() {
   try { let u=localStorage.getItem('yama_user'); if(u){let ud=JSON.parse(u);appState.user=ud;appState.isAdmin=(ud.id===DISCORD_CONFIG.ADMIN_ID);} } catch(e) {}
+  Promise.all([fetchSchedule(), fetchClips()]).then(function() {
+    buildScheduleGridFromDB();
+  });
   fetchActiveHunt().then(function() {
     handleOAuthCallback();
     renderNavUser();
@@ -500,6 +551,212 @@ function renderAdminResultsList(){
   refreshCursor();
 }
 
+// ADMIN DASHBOARD
+function switchAdminTab(tab) {
+  currentAdminTab = tab;
+  ['sched','clips','hunt'].forEach(function(t) {
+    let el = document.getElementById('ad-tab-'+t); if (el) el.className = 'ad-tab' + (tab===t ? ' active' : '');
+    let panel = document.getElementById('ad-panel-'+t); if (panel) panel.style.display = tab===t ? 'block' : 'none';
+  });
+  if (tab === 'sched') renderAdminSchedule();
+  if (tab === 'clips') renderAdminClips();
+  if (tab === 'hunt') renderAdminHuntSummary();
+}
+
+function renderAdminSchedule() {
+  let container = document.getElementById('admin-sched-list');
+  if (!container) return;
+  let days = appState.schedule;
+  if (days.length === 0) {
+    container.innerHTML = '<div style="color:var(--text3);padding:1rem;">No schedule data. Run the SQL migration first.</div>';
+    return;
+  }
+  container.innerHTML = '';
+  days.forEach(function(s) {
+    let row = document.createElement('div');
+    row.className = 'ad-sched-row';
+    row.innerHTML = '<div class="ad-sched-day">' + escHtml(s.label) + '</div>'
+      + '<label class="ad-toggle"><input type="checkbox" ' + (s.active ? 'checked' : '') + ' data-day="' + s.day_of_week + '" onchange="adminToggleSchedDay(this)"><span class="ad-toggle-slider"></span></label>'
+      + '<input class="admin-input ad-time-input" type="text" value="' + escHtml(s.time_text || '10:00 AM') + '" data-day="' + s.day_of_week + '" placeholder="10:00 AM" />'
+      + '<input class="admin-input ad-tz-input" type="text" value="' + escHtml(s.timezone || 'ET') + '" data-day="' + s.day_of_week + '" placeholder="ET" style="max-width:80px;" />';
+    container.appendChild(row);
+  });
+}
+
+function adminToggleSchedDay(cb) {
+  let day = parseInt(cb.dataset.day);
+  let s = appState.schedule.find(function(d) { return d.day_of_week === day; });
+  if (s) s.active = cb.checked;
+}
+
+function adminSaveSchedule() {
+  let timeInputs = document.querySelectorAll('#admin-sched-list .ad-time-input');
+  let tzInputs = document.querySelectorAll('#admin-sched-list .ad-tz-input');
+  timeInputs.forEach(function(inp) {
+    let day = parseInt(inp.dataset.day);
+    let s = appState.schedule.find(function(d) { return d.day_of_week === day; });
+    if (s) s.time_text = inp.value.trim() || '10:00 AM';
+  });
+  tzInputs.forEach(function(inp) {
+    let day = parseInt(inp.dataset.day);
+    let s = appState.schedule.find(function(d) { return d.day_of_week === day; });
+    if (s) s.timezone = inp.value.trim() || 'ET';
+  });
+  Promise.all(appState.schedule.map(function(s) {
+    return _supabase.from('schedule').update({
+      active: s.active, time_text: s.time_text, timezone: s.timezone
+    }).eq('id', s.id);
+  })).then(function() {
+    let msg = document.getElementById('sched-save-msg');
+    if (msg) { msg.style.opacity = '1'; setTimeout(function() { msg.style.opacity = '0'; }, 2000); }
+    buildScheduleGridFromDB();
+    showToast('Schedule saved!');
+  }).catch(function(e) {
+    showToast('Error saving schedule: ' + (e.message || e));
+  });
+}
+
+function renderAdminClips() {
+  let container = document.getElementById('admin-clip-list');
+  let empty = document.getElementById('admin-clip-empty');
+  let count = document.getElementById('ad-clip-count');
+  if (!container) return;
+  let clips = appState.clips;
+  if (count) count.textContent = clips.length;
+  if (clips.length === 0) {
+    container.innerHTML = '';
+    if (empty) empty.style.display = 'block';
+    return;
+  }
+  if (empty) empty.style.display = 'none';
+  container.innerHTML = '';
+  clips.forEach(function(c) {
+    let card = document.createElement('div');
+    card.className = 'ad-clip-card';
+    card.innerHTML = '<div class="ad-clip-thumb"><img src="' + escHtml(c.thumbnail_url || c.video_url) + '" alt="" onerror="this.src=\'\';this.style.display=\'none\'"><div class="ad-clip-thumb-overlay"></div></div>'
+      + '<div class="ad-clip-info">'
+      + '<div class="ad-clip-title">' + escHtml(c.title || 'Untitled') + '</div>'
+      + '</div>'
+      + '<div class="ad-clip-actions">'
+      + '<label class="ad-toggle-sm"><input type="checkbox" ' + (c.active ? 'checked' : '') + ' onchange="adminToggleClip(' + c.id + ',this.checked)"><span class="ad-toggle-slider"></span></label>'
+      + '<span style="font-size:.6rem;color:var(--text3);">Active</span>'
+      + '<button class="ad-clip-btn ad-clip-feat' + (c.featured ? ' on' : '') + '" onclick="adminSetFeatured(' + c.id + ')" title="Set as featured">★</button>'
+      + '<button class="ad-clip-btn ad-clip-del" onclick="adminDeleteClip(' + c.id + ')" title="Delete">✕</button>'
+      + '</div>';
+    container.appendChild(card);
+  });
+}
+
+async function adminUploadClip() {
+  let title = document.getElementById('ad-clip-title').value.trim();
+  let videoFile = document.getElementById('ad-clip-video').files[0];
+  let thumbFile = document.getElementById('ad-clip-thumb').files[0];
+  let kickLink = document.getElementById('ad-clip-link').value.trim();
+  if (!videoFile) { showToast('Select a video file.'); return; }
+  let btn = document.getElementById('ad-upload-btn');
+  let prog = document.getElementById('ad-upload-progress');
+  if (btn) btn.disabled = true;
+  if (prog) { prog.style.display = 'block'; prog.textContent = 'Uploading video...'; }
+  try {
+    let videoExt = videoFile.name.split('.').pop();
+    let videoPath = 'videos/' + Date.now() + '_' + Math.random().toString(36).substring(2,8) + '.' + videoExt;
+    let { data: vData, error: vErr } = await _supabase.storage.from('clips').upload(videoPath, videoFile, {
+      cacheControl: '3600', upsert: false
+    });
+    if (vErr) { showToast('Upload failed: ' + vErr.message); throw vErr; }
+    let videoUrl = _supabase.storage.from('clips').getPublicUrl(videoPath).data.publicUrl;
+    let thumbUrl = '';
+    if (thumbFile) {
+      if (prog) prog.textContent = 'Uploading thumbnail...';
+      let thumbExt = thumbFile.name.split('.').pop();
+      let thumbPath = 'thumbs/' + Date.now() + '_' + Math.random().toString(36).substring(2,8) + '.' + thumbExt;
+      let { error: tErr } = await _supabase.storage.from('clips').upload(thumbPath, thumbFile, {
+        cacheControl: '3600', upsert: false
+      });
+      if (!tErr) thumbUrl = _supabase.storage.from('clips').getPublicUrl(thumbPath).data.publicUrl;
+    }
+    if (prog) prog.textContent = 'Saving...';
+    let position = appState.clips.length;
+    let { error } = await _supabase.from('clips').insert({
+      title: title || videoFile.name, video_url: videoUrl,
+      thumbnail_url: thumbUrl, kick_link: kickLink || null,
+      active: true, featured: false, position: position
+    });
+    if (error) { showToast('DB error: ' + error.message); throw error; }
+    document.getElementById('ad-clip-title').value = '';
+    document.getElementById('ad-clip-video').value = '';
+    document.getElementById('ad-clip-thumb').value = '';
+    document.getElementById('ad-clip-link').value = '';
+    document.getElementById('ad-video-name').textContent = '';
+    showToast('Clip uploaded!');
+    await fetchClips();
+    renderAdminClips();
+  } catch (e) {
+    if (prog) prog.textContent = 'Upload failed.';
+  } finally {
+    if (btn) btn.disabled = false;
+    if (prog) setTimeout(function() { prog.style.display = 'none'; }, 2000);
+  }
+}
+
+async function adminToggleClip(id, active) {
+  await _supabase.from('clips').update({ active: active }).eq('id', id);
+  await fetchClips();
+  renderAdminClips();
+  showToast(active ? 'Clip shown on site' : 'Clip hidden');
+}
+
+async function adminSetFeatured(id) {
+  let clip = appState.clips.find(function(c) { return c.id === id; });
+  if (!clip) return;
+  let wasFeatured = clip.featured;
+  if (wasFeatured) {
+    await _supabase.from('clips').update({ featured: false }).eq('id', id);
+  } else {
+    await _supabase.from('clips').update({ featured: false }).neq('id', id);
+    await _supabase.from('clips').update({ featured: true }).eq('id', id);
+  }
+  await fetchClips();
+  renderAdminClips();
+  showToast(wasFeatured ? 'Featured clip removed' : 'Featured clip set!');
+}
+
+async function adminDeleteClip(id) {
+  if (!confirm('Delete this clip?')) return;
+  let clip = appState.clips.find(function(c) { return c.id === id; });
+  await _supabase.from('clips').delete().eq('id', id);
+  if (clip && clip.video_url && clip.video_url.includes('/storage/v1/object/public/clips/')) {
+    let videoPath = clip.video_url.split('/clips/')[1];
+    if (videoPath) _supabase.storage.from('clips').remove([videoPath]).catch(function() {});
+  }
+  if (clip && clip.thumbnail_url && clip.thumbnail_url.includes('/storage/v1/object/public/clips/')) {
+    let thumbPath = clip.thumbnail_url.split('/clips/')[1];
+    if (thumbPath) _supabase.storage.from('clips').remove([thumbPath]).catch(function() {});
+  }
+  await fetchClips();
+  renderAdminClips();
+  showToast('Clip deleted');
+}
+
+function renderAdminHuntSummary() {
+  let container = document.getElementById('ad-hunt-summary');
+  if (!container) return;
+  let hunt = appState.activeHunt;
+  if (hunt) {
+    let stats = calcStats(hunt);
+    container.innerHTML = '<div class="hunt-state-card hunt-state-active" style="margin-bottom:0;">'
+      + '<div class="hunt-state-left"><div class="hunt-state-label">Active Hunt</div><div class="hunt-state-val">Hunt #' + hunt.id + '</div></div>'
+      + '<div><div style="font-size:.85rem;color:var(--neon);">' + fmt(stats.currentBal) + '</div><div style="font-size:.6rem;color:var(--text3);">Current Bal</div></div>'
+      + '<button class="btn btn-outline btn-sm" onclick="showPage(\'hunt\');setTimeout(function(){switchTab(\'admin\')},300);">Manage →</button>'
+      + '</div>';
+  } else {
+    container.innerHTML = '<div class="hunt-state-card hunt-state-inactive" style="margin-bottom:0;">'
+      + '<div class="hunt-state-left"><div class="hunt-state-label">No Active Hunt</div><div class="hunt-state-val" style="color:var(--text3);font-size:1rem;">Ready</div></div>'
+      + '<button class="btn btn-primary btn-sm" onclick="showPage(\'hunt\');setTimeout(function(){switchTab(\'admin\')},300);">Start Hunt →</button>'
+      + '</div>';
+  }
+}
+
 // GUESS PANEL
 function findWinner(hunt,guesses){
   if(!hunt||hunt.endBal==null||!guesses||guesses.length===0)return null;
@@ -797,45 +1054,79 @@ function buildNYStreamTime(nyYear, nyMonth, nyDay) {
   return new Date(targetNYasUTC.getTime() + offsetMs);
 }
 
-(function buildScheduleGrid() {
+function buildScheduleGridFromDB() {
   let now = new Date();
   let nyNow = getNYComponents(now);
   let nyDateStr = nyNow.year + '-' + String(nyNow.month+1).padStart(2,'0') + '-' + String(nyNow.day).padStart(2,'0');
   let todayDayOfWeek = new Date(nyDateStr + 'T12:00:00').getDay();
   let grid = document.getElementById('sched-grid');
-  SCHED_DAYS.forEach(function(s) {
-    let isToday = s.day === todayDayOfWeek;
+  if (!grid) return;
+  grid.innerHTML = '';
+  let days = appState.schedule;
+  if (days.length === 0) {
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--text3);padding:1rem;">No schedule set.</div>';
+    return;
+  }
+  days.forEach(function(s) {
+    let isToday = s.day_of_week === todayDayOfWeek;
+    let isActive = s.active;
     let card = document.createElement('div');
-    card.className = 'sched-card' + (isToday ? ' today' : '') + ' reveal';
-    card.dataset.delay = s.day * 60 + '';
+    card.className = 'sched-card' + (isToday ? ' today' : '') + (isActive ? '' : ' inactive') + ' reveal';
+    card.dataset.delay = s.day_of_week * 60 + '';
     card.innerHTML = '<div class="sched-day">' + s.label + '</div>'
-      + '<div class="sched-time">10 AM ET</div>'
-      + '<div class="sched-tz">Eastern Time</div>'
+      + '<div class="sched-time' + (isActive ? '' : ' sched-time-off') + '">' + (isActive ? s.time_text + ' ' + s.timezone : 'Off') + '</div>'
+      + '<div class="sched-tz">' + (isActive ? 'Eastern Time' : 'No stream') + '</div>'
       + (isToday ? '<div class="sched-today-badge">Today</div>' : '');
     grid.appendChild(card);
   });
-})();
+}
 
 function getNextStream() {
   let now = new Date();
   let nyNow = getNYComponents(now);
   let days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  let scheduleMap = {};
+  appState.schedule.forEach(function(s) { scheduleMap[s.day_of_week] = s; });
   for (let i = 0; i < 8; i++) {
     let candDate = new Date(Date.UTC(nyNow.year, nyNow.month, nyNow.day + i));
     let candNY = getNYComponents(candDate);
-    let streamUTC = buildNYStreamTime(candNY.year, candNY.month, candNY.day);
+    let dayOfWeek = new Date(Date.UTC(candNY.year, candNY.month, candNY.day, 12, 0, 0)).getDay();
+    let daySched = scheduleMap[dayOfWeek];
+    if (!daySched || !daySched.active) continue;
+    let timeParts = (daySched.time_text || '10:00 AM').match(/(\d+):(\d+)\s*(AM|PM)/i);
+    if (!timeParts) continue;
+    let hour = parseInt(timeParts[1]);
+    let min = parseInt(timeParts[2]);
+    let isPM = timeParts[3].toUpperCase() === 'PM';
+    if (isPM && hour !== 12) hour += 12;
+    if (!isPM && hour === 12) hour = 0;
+    let streamUTC = buildNYStreamTimeGeneric(candNY.year, candNY.month, candNY.day, hour, min);
     if (streamUTC > now) {
-      let dateStr = candNY.year + '-' + String(candNY.month+1).padStart(2,'0') + '-' + String(candNY.day).padStart(2,'0');
-      let dayOfWeek = new Date(dateStr + 'T12:00:00').getDay();
-      return { target: streamUTC, label: days[dayOfWeek] + ' 10 AM ET' };
+      return { target: streamUTC, label: days[dayOfWeek] + ' ' + daySched.time_text + ' ' + daySched.timezone };
     }
   }
   return { target: null, label: '' };
 }
 
+function buildNYStreamTimeGeneric(nyYear, nyMonth, nyDay, targetHour, targetMin) {
+  let probeUTC = new Date(Date.UTC(nyYear, nyMonth, nyDay, 17, 0, 0));
+  let probeNY = getNYComponents(probeUTC);
+  let probeNYasUTC = new Date(Date.UTC(probeNY.year, probeNY.month, probeNY.day, probeNY.hour, probeNY.minute, probeNY.second));
+  let offsetMs = probeUTC.getTime() - probeNYasUTC.getTime();
+  let targetNYasUTC = new Date(Date.UTC(nyYear, nyMonth, nyDay, targetHour, targetMin, 0));
+  return new Date(targetNYasUTC.getTime() + offsetMs);
+}
+
 function updateCountdown() {
   let r = getNextStream();
-  if (!r.target) return;
+  if (!r.target) {
+    document.getElementById('cd-d').textContent = '--';
+    document.getElementById('cd-h').textContent = '--';
+    document.getElementById('cd-m').textContent = '--';
+    document.getElementById('cd-s').textContent = '--';
+    document.getElementById('cd-label').innerHTML = 'Next: <span>No upcoming stream</span>';
+    return;
+  }
   let diff = r.target - new Date();
   if (diff <= 0) { setTimeout(updateCountdown, 1000); return; }
   document.getElementById('cd-d').textContent = pad(Math.floor(diff / 86400000));
@@ -893,9 +1184,16 @@ function openClip(f,t,k){let v=document.getElementById('clip-m-video');document.
 function closeClipModal(e){if(e.target===document.getElementById('clip-modal'))closeClipModalDirect();}
 function closeClipModalDirect(){let v=document.getElementById('clip-m-video');document.getElementById('clip-modal').classList.remove('open');v.pause();v.src='';document.body.style.overflow='';}
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeClipModalDirect();closeDscModal();closeArchModal();closeConfirmSignout();closeDeleteSlotModal();closeResetModal();}});
+document.addEventListener('change',function(e){
+  if (e.target && e.target.id === 'ad-clip-video') {
+    let nameEl = document.getElementById('ad-video-name');
+    if (nameEl && e.target.files[0]) nameEl.textContent = e.target.files[0].name;
+  }
+});
 
 // NAV AND PAGES
 function showPage(name){
+  if (name === 'admin' && !appState.isAdmin) { showToast('Access denied.'); return; }
   currentPage=name;
   document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
   document.querySelectorAll('.nav-links a').forEach(function(a){a.classList.remove('active');});
@@ -904,6 +1202,7 @@ function showPage(name){
   let nav=document.getElementById('nav-'+name);if(nav)nav.classList.add('active');
   let mob=document.getElementById('mob-'+name);if(mob)mob.classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
+  if (name === 'admin') { switchAdminTab(currentAdminTab); renderAdminHuntSummary(); }
 }
 
 function showToast(msg){let t=document.getElementById('toast');document.getElementById('toast-msg').textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2600);}
