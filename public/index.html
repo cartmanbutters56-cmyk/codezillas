@@ -295,7 +295,8 @@
   <button class="h-tab active" id="tab-live" onclick="switchTab('live')">Live Hunt</button>
   <button class="h-tab" id="tab-stats" onclick="switchTab('stats')">🏆 Stats &amp; Winners</button>
   <button class="h-tab" id="tab-archive" onclick="switchTab('archive')">Archive</button>
-  <button class="h-tab" id="tab-admin" onclick="switchTab('admin')" style="display:none;">Admin Control</button>
+
+
 </div>
   </div>
   <div class="hunt-main">
@@ -379,65 +380,7 @@
         <div style="text-align:center;padding:3rem;color:var(--text3);font-size:.88rem;">Loading…</div>
       </div>
     </div>
-    <div id="panel-admin" style="display:none;">
-      <div class="admin-panel">
-        <div class="admin-panel-hdr"><div class="admin-panel-title">Admin Control Panel</div><span class="admin-pill">ADMIN</span></div>
-        <div class="admin-body">
-          <div class="hunt-state-card hunt-state-inactive" id="hunt-state-card">
-            <div class="hunt-state-left">
-              <div class="hunt-state-label" id="hunt-state-label">No Active Hunt</div>
-              <div class="hunt-state-val" id="hunt-state-val" style="color:var(--text3);">Ready to Start</div>
-            </div>
-            <div id="hunt-action-area">
-              <div id="start-form-area" style="display:flex;gap:.65rem;align-items:flex-end;flex-wrap:wrap;">
-                <div class="admin-field" style="min-width:160px;"><div class="admin-field-label">Starting Balance ($)</div><input class="admin-input" type="number" id="admin-start-bal" placeholder="e.g. 5000.00" step="0.01"/></div>
-                <div class="admin-field" style="max-width:110px;"><div class="admin-field-label">Hunt ID</div><input class="admin-input" type="number" id="admin-hunt-id" placeholder="Auto" readonly/></div>
-                <button class="hunt-start-btn" onclick="adminStartHunt()">Start Hunt</button>
-              </div>
-              <div id="end-form-area" style="display:none;gap:.65rem;align-items:flex-end;flex-wrap:wrap;">
-                <button class="hunt-end-btn" onclick="adminEndHunt()">End Hunt</button>
-              </div>
-            </div>
-          </div>
-          <div class="admin-section admin-section-slots" id="a-slot-sec" style="display:none;">
-            <div class="admin-section-label asl-slots">Add Slot to Hunt</div>
-            <div class="admin-add-slot-row">
-              <div class="admin-field">
-                <div class="admin-field-label">Slot Name</div>
-                <div class="slot-input-wrap">
-                  <input class="admin-input" type="text" id="admin-slot-name" placeholder="Type to search…" oninput="onSlotInput(this)" autocomplete="off"/>
-                  <div class="autocomplete-list" id="autocomplete-list"></div>
-                </div>
-              </div>
-              <div class="admin-field">
-                <div class="admin-field-label">Provider</div>
-                <input class="admin-input" type="text" id="admin-slot-prov" placeholder="Auto-detected" readonly/>
-              </div>
-              <div class="admin-field admin-field-bet">
-                <div class="admin-field-label">Bet ($)</div>
-                <input class="admin-input" type="number" id="admin-slot-bet" placeholder="5.00" step="0.01"/>
-              </div>
-              <div class="admin-field admin-field-called">
-                <div class="admin-field-label">Called By</div>
-                <input class="admin-input" type="text" id="admin-slot-called-by" placeholder="e.g. John"/>
-              </div>
-              <div class="admin-field admin-field-add">
-                <div class="admin-field-label">&nbsp;</div>
-                <button class="btn btn-primary btn-sm" onclick="adminAddSlot()" style="height:38px;white-space:nowrap;padding:0 20px;">+ Add Slot</button>
-              </div>
-            </div>
-          </div>
-          <div class="admin-section admin-section-results" id="a-res-sec" style="display:none;">
-            <div class="admin-section-label asl-results">Slot Results — Enter Win &amp; Click ✓ to Confirm</div>
-            <div class="admin-results-list" id="admin-res-list"></div>
-          </div>
-          <div class="admin-actions-row" id="admin-actions-row" style="display:none;">
-            <button class="guess-toggle-btn guess-open-btn" id="guess-toggle-btn" onclick="adminToggleGuess()">✓ Guesses Open</button>
-            <button class="reset-data-btn" onclick="openResetModal()">Reset All Data</button>
-          </div>
-        </div>
-      </div>
-    </div>
+
     <div id="panel-archive" style="display:none;">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.1rem;flex-wrap:wrap;gap:.75rem;">
         <div><div style="font-size:.65rem;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--neon);margin-bottom:.25rem;">Hunt History</div><div style="font-family:'Rajdhani',sans-serif;font-size:1.5rem;font-weight:700;text-transform:uppercase;">All Past Hunts</div></div>
@@ -582,10 +525,57 @@
       <div class="ad-card">
         <div class="ad-card-hdr"><div class="ad-card-title">Bonus Hunt Admin</div><span class="admin-pill">CONTROL</span></div>
         <div class="ad-card-body">
-          <p style="font-size:.82rem;color:var(--text3);margin-bottom:1rem;">Manage active hunts, slots, and guesses. This is the same panel available under the Bonus Hunt page.</p>
-          <a href="#" onclick="showPage('hunt');setTimeout(function(){switchTab('admin')},300);return false;" class="btn btn-outline btn-sm">Go to Hunt Admin Panel →</a>
-          <div style="margin-top:1.5rem;border-top:1px solid var(--border);padding-top:1.5rem;">
-            <div id="ad-hunt-summary"></div>
+          <div class="hunt-state-card hunt-state-inactive" id="hunt-state-card">
+            <div class="hunt-state-left">
+              <div class="hunt-state-label" id="hunt-state-label">No Active Hunt</div>
+              <div class="hunt-state-val" id="hunt-state-val" style="color:var(--text3);">Ready to Start</div>
+            </div>
+            <div id="hunt-action-area">
+              <div id="start-form-area" style="display:flex;gap:.65rem;align-items:flex-end;flex-wrap:wrap;">
+                <div class="admin-field" style="min-width:160px;"><div class="admin-field-label">Starting Balance ($)</div><input class="admin-input" type="number" id="admin-start-bal" placeholder="e.g. 5000.00" step="0.01"/></div>
+                <div class="admin-field" style="max-width:110px;"><div class="admin-field-label">Hunt ID</div><input class="admin-input" type="number" id="admin-hunt-id" placeholder="Auto" readonly/></div>
+                <button class="hunt-start-btn" onclick="adminStartHunt()">Start Hunt</button>
+              </div>
+              <div id="end-form-area" style="display:none;gap:.65rem;align-items:flex-end;flex-wrap:wrap;">
+                <button class="hunt-end-btn" onclick="adminEndHunt()">End Hunt</button>
+              </div>
+            </div>
+          </div>
+          <div class="admin-section admin-section-slots" id="a-slot-sec" style="display:none;">
+            <div class="admin-section-label asl-slots">Add Slot to Hunt</div>
+            <div class="admin-add-slot-row">
+              <div class="admin-field">
+                <div class="admin-field-label">Slot Name</div>
+                <div class="slot-input-wrap">
+                  <input class="admin-input" type="text" id="admin-slot-name" placeholder="Type to search…" oninput="onSlotInput(this)" autocomplete="off"/>
+                  <div class="autocomplete-list" id="autocomplete-list"></div>
+                </div>
+              </div>
+              <div class="admin-field">
+                <div class="admin-field-label">Provider</div>
+                <input class="admin-input" type="text" id="admin-slot-prov" placeholder="Auto-detected" readonly/>
+              </div>
+              <div class="admin-field admin-field-bet">
+                <div class="admin-field-label">Bet ($)</div>
+                <input class="admin-input" type="number" id="admin-slot-bet" placeholder="5.00" step="0.01"/>
+              </div>
+              <div class="admin-field admin-field-called">
+                <div class="admin-field-label">Called By</div>
+                <input class="admin-input" type="text" id="admin-slot-called-by" placeholder="e.g. John"/>
+              </div>
+              <div class="admin-field admin-field-add">
+                <div class="admin-field-label">&nbsp;</div>
+                <button class="btn btn-primary btn-sm" onclick="adminAddSlot()" style="height:38px;white-space:nowrap;padding:0 20px;">+ Add Slot</button>
+              </div>
+            </div>
+          </div>
+          <div class="admin-section admin-section-results" id="a-res-sec" style="display:none;">
+            <div class="admin-section-label asl-results">Slot Results — Enter Win &amp; Click ✓ to Confirm</div>
+            <div class="admin-results-list" id="admin-res-list"></div>
+          </div>
+          <div class="admin-actions-row" id="admin-actions-row" style="display:none;">
+            <button class="guess-toggle-btn guess-open-btn" id="guess-toggle-btn" onclick="adminToggleGuess()">✓ Guesses Open</button>
+            <button class="reset-data-btn" onclick="openResetModal()">Reset All Data</button>
           </div>
         </div>
       </div>

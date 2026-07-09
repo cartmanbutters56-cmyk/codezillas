@@ -250,20 +250,14 @@ function escHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').
 })();
 
 // HUNT TABS
-function renderHuntTabs(){
-  let at = document.getElementById('tab-admin');
-  if(at) at.style.display = appState.isAdmin ? 'block' : 'none';
-  if(!appState.isAdmin && (currentHuntTab==='admin')) switchTab('live');
-}
+function renderHuntTabs(){}
 function switchTab(tab){
   currentHuntTab=tab;
-  if(tab==='admin'&&!appState.isAdmin){switchTab('live');return;}
-  ['live','stats','archive','admin'].forEach(function(t){
+  ['live','stats','archive'].forEach(function(t){
     let el=document.getElementById('tab-'+t);if(el)el.className='h-tab'+(tab===t?' active':'');
     let panel=document.getElementById('panel-'+t);if(panel)panel.style.display=tab===t?'block':'none';
   });
   if(tab==='archive')renderArchive();
-  if(tab==='admin')renderAdminPanel();
   if(tab==='stats')renderStatsPanel();
 }
 
@@ -272,7 +266,6 @@ function renderAll(){
   renderGuessPanel();
   renderTop3Live();
   if(currentHuntTab==='archive')renderArchive();
-  if(currentHuntTab==='admin')renderAdminPanel();
   if(currentHuntTab==='stats')renderStatsPanel();
 }
 
@@ -560,7 +553,7 @@ function switchAdminTab(tab) {
   });
   if (tab === 'sched') renderAdminSchedule();
   if (tab === 'clips') renderAdminClips();
-  if (tab === 'hunt') renderAdminHuntSummary();
+  if (tab === 'hunt') renderAdminPanel();
 }
 
 function renderAdminSchedule() {
@@ -738,24 +731,7 @@ async function adminDeleteClip(id) {
   showToast('Clip deleted');
 }
 
-function renderAdminHuntSummary() {
-  let container = document.getElementById('ad-hunt-summary');
-  if (!container) return;
-  let hunt = appState.activeHunt;
-  if (hunt) {
-    let stats = calcStats(hunt);
-    container.innerHTML = '<div class="hunt-state-card hunt-state-active" style="margin-bottom:0;">'
-      + '<div class="hunt-state-left"><div class="hunt-state-label">Active Hunt</div><div class="hunt-state-val">Hunt #' + hunt.id + '</div></div>'
-      + '<div><div style="font-size:.85rem;color:var(--neon);">' + fmt(stats.currentBal) + '</div><div style="font-size:.6rem;color:var(--text3);">Current Bal</div></div>'
-      + '<button class="btn btn-outline btn-sm" onclick="showPage(\'hunt\');setTimeout(function(){switchTab(\'admin\')},300);">Manage →</button>'
-      + '</div>';
-  } else {
-    container.innerHTML = '<div class="hunt-state-card hunt-state-inactive" style="margin-bottom:0;">'
-      + '<div class="hunt-state-left"><div class="hunt-state-label">No Active Hunt</div><div class="hunt-state-val" style="color:var(--text3);font-size:1rem;">Ready</div></div>'
-      + '<button class="btn btn-primary btn-sm" onclick="showPage(\'hunt\');setTimeout(function(){switchTab(\'admin\')},300);">Start Hunt →</button>'
-      + '</div>';
-  }
-}
+
 
 // GUESS PANEL
 function findWinner(hunt,guesses){
@@ -1202,7 +1178,7 @@ function showPage(name){
   let nav=document.getElementById('nav-'+name);if(nav)nav.classList.add('active');
   let mob=document.getElementById('mob-'+name);if(mob)mob.classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
-  if (name === 'admin') { switchAdminTab(currentAdminTab); renderAdminHuntSummary(); }
+  if (name === 'admin') { switchAdminTab(currentAdminTab); }
 }
 
 function showToast(msg){let t=document.getElementById('toast');document.getElementById('toast-msg').textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2600);}
