@@ -126,7 +126,7 @@ nav.nav-hidden{transform:translateY(-100%);}
 nav.nav-hidden{transform:translateY(-100%);}
 .mob-menu{top:68px;transition:top .35s cubic-bezier(.4,0,.2,1);}
 .mob-menu.nav-hidden-mob{top:-200%;}
-/* ══ REDESIGNED SOCIAL STRIP — flip cards ══ */
+/* SOCIAL STRIP - FLIP CARDS */
 .social-strip-v2{
   position:relative;padding:0 2rem;
   border-top:1px solid var(--border);border-bottom:1px solid var(--border);
@@ -239,9 +239,7 @@ nav.nav-hidden{transform:translateY(-100%);}
 .clip-card-ftr{padding:9px 11px;background:var(--card2);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
 .clip-num{font-family:'Rajdhani',sans-serif;font-size:.77rem;font-weight:700;color:var(--text3);letter-spacing:1px}
 .kick-link{font-size:.7rem;font-weight:700;color:var(--neon);text-decoration:none;transition:color .2s}
-/* ══════════════════════════════════════
-   ARCADE SLOT MACHINE — BONUS HUNT
-══════════════════════════════════════ */
+/* ARCADE SLOT MACHINE - BONUS HUNT */
 .hunt-page{
   background:var(--void);
   position:relative;
@@ -258,7 +256,7 @@ nav.nav-hidden{transform:translateY(-100%);}
   mix-blend-mode:multiply;
 }
 
-/* ── HERO ── */
+/* HERO */
 .hunt-hero{
   position:relative;padding:4rem 2rem 3rem;text-align:center;
   overflow:hidden;
@@ -328,7 +326,7 @@ nav.nav-hidden{transform:translateY(-100%);}
 }
 .hunt-coin:nth-child(even){background:radial-gradient(circle at 35% 35%,var(--neon),#004060);}
 
-/* ── TABS ── */
+/* TABS */
 .hunt-tabs{
   display:flex;align-items:center;gap:0;
   padding:0 2rem;max-width:1200px;margin:0 auto;
@@ -351,10 +349,10 @@ nav.nav-hidden{transform:translateY(-100%);}
 }
 .h-tab:hover:not(.active){color:rgba(255,255,255,.5);}
 
-/* ── HUNT MAIN ── */
+/* HUNT MAIN */
 .hunt-main{max-width:1200px;margin:0 auto;padding:2rem 2rem 4rem;position:relative;z-index:3;}
 
-/* ── MACHINE PANEL / STAT CARDS ── */
+/* MACHINE PANEL / STAT CARDS */
 .hunt-header-bar{
   display:grid;grid-template-columns:repeat(6,1fr);gap:.6rem;margin-bottom:1.5rem;
   background:linear-gradient(180deg,#06121e,#030c14);
@@ -386,7 +384,7 @@ nav.nav-hidden{transform:translateY(-100%);}
   color:var(--chrome2);opacity:.6;
 }
 
-/* ── PROGRESS BAR ── */
+/* PROGRESS BAR */
 .h-progress{
   margin-bottom:1.5rem;
   background:#030c14;
@@ -421,7 +419,7 @@ nav.nav-hidden{transform:translateY(-100%);}
   to{background-position:10px 0;}
 }
 
-/* ── LIVE FEED ── */
+/* LIVE FEED */
 .live-feed-wrap{
   margin-bottom:1.5rem;border-radius:12px;overflow:hidden;
   border:3px solid var(--chrome3);
@@ -531,7 +529,7 @@ nav.nav-hidden{transform:translateY(-100%);}
 .ptag-nl{background:rgba(0,204,255,.08);border:1px solid rgba(0,204,255,.2);color:var(--neon);}
 .ptag-ot{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.3);}
 
-/* ── NO HUNT ── */
+/* NO HUNT */
 .no-hunt{
   text-align:center;padding:5rem 2rem;
   border:2px dashed rgba(0,204,255,.2);border-radius:16px;
@@ -545,7 +543,7 @@ nav.nav-hidden{transform:translateY(-100%);}
   white-space:nowrap;
 }
 
-/* ── WINNER BANNER ── */
+/* WINNER BANNER */
 .winner-banner{
   display:flex;align-items:center;gap:12px;
   padding:14px 20px;
@@ -563,10 +561,10 @@ nav.nav-hidden{transform:translateY(-100%);}
   text-shadow:0 0 14px rgba(0,204,255,.7);
 }
 
-/* ── HUNT SPLIT ── */
+/* HUNT SPLIT */
 .hunt-split{display:grid;grid-template-columns:1fr 380px;gap:1.5rem;align-items:start;}
 
-/* ── GUESS PANEL ── */
+/* GUESS PANEL */
 .guess-panel{
   background:#030c14;
   border:3px solid var(--chrome3);border-radius:16px;overflow:hidden;
@@ -686,7 +684,7 @@ nav.nav-hidden{transform:translateY(-100%);}
   border:1px solid rgba(0,204,255,.25);padding:2px 7px;border-radius:3px;
 }
 
-/* ── TOP 3 ── */
+/* TOP 3 */
 .top3-section{
   border-radius:12px;overflow:hidden;
   border:2px solid var(--chrome3);margin-bottom:1.5rem;
@@ -734,7 +732,7 @@ nav.nav-hidden{transform:translateY(-100%);}
   color:rgba(0,204,255,.2);font-size:.75rem;letter-spacing:2px;
 }
 
-/* ── STATS PANEL ── */
+/* STATS PANEL */
 .stats-panel-wrap{max-width:900px;margin:0 auto;}
 .stats-hunt-card{
   background:#030c14;
@@ -840,7 +838,7 @@ nav.nav-hidden{transform:translateY(-100%);}
   color:rgba(255,255,255,.2);padding:.65rem 0;letter-spacing:1px;
 }
 
-/* ── ACTIVITY FEED ── */
+/* ACTIVITY FEED */
 .activity-feed{
   background:#020810;border:2px solid var(--chrome3);
   border-radius:8px;padding:1rem;margin-bottom:1.5rem;
@@ -860,7 +858,7 @@ nav.nav-hidden{transform:translateY(-100%);}
 .activity-icon{font-size:.85rem;flex-shrink:0;}
 .activity-msg strong{color:#fff;}
 
-/* ── ADMIN PANEL ── */
+/* ADMIN PANEL */
 .admin-panel{
   border-radius:12px;overflow:hidden;margin-bottom:1.75rem;
   background:#030c14;border:2px solid var(--chrome3);
@@ -995,7 +993,7 @@ nav.nav-hidden{transform:translateY(-100%);}
 }
 .reset-data-btn:hover{background:rgba(255,51,85,.14);}
 
-/* ── ARCHIVE ── */
+/* ARCHIVE */
 .archive-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1rem;}
 .archive-card{background:rgba(4,32,48,.8);border:1.5px solid rgba(0,204,255,.15);border-radius:20px;padding:1.3rem;transition:all .3s;position:relative;}
 .archive-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--neon),transparent);opacity:.4;}
@@ -1042,7 +1040,7 @@ nav.nav-hidden{transform:translateY(-100%);}
 /* COLOR HELPERS */
 .c-neon{color:var(--neon)}.c-blue{color:var(--blue)}.c-gold{color:var(--neon)}.c-green{color:#39ff14}.c-red{color:#ff3355}.c-purple{color:var(--neon)}.c-cyan{color:var(--neon)}.c-pink{color:var(--neon)}
 
-/* ── RESPONSIVE ── */
+/* RESPONSIVE */
 @media(max-width:960px){.hunt-split{grid-template-columns:1fr}.shc-body{grid-template-columns:1fr}}
 @media(max-width:768px){.archive-grid{grid-template-columns:1fr}.lft-head,.lft-row{grid-template-columns:36px 1fr 80px 80px 90px;}.lft-head-cell:nth-child(3),.lft-row>div:nth-child(3){display:none}}
 @media(max-width:640px){.hunt-header-bar{grid-template-columns:repeat(2,1fr)}.archive-grid{grid-template-columns:1fr}.admin-add-slot-row{flex-direction:column}.admin-result-row{grid-template-columns:1fr auto auto auto auto auto}.lft-head,.lft-row{grid-template-columns:28px 1fr 70px 85px;}.lft-head-cell:nth-child(3),.lft-row>div:nth-child(3),.lft-head-cell:nth-child(4),.lft-row>div:nth-child(4){display:none}}
@@ -1216,7 +1214,7 @@ footer{position:relative;z-index:1;background:var(--deep);border-top:1px solid v
 .reveal-right.visible{opacity:1;transform:translateX(0);}
 .reveal-scale{opacity:0;transform:scale(.92);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1);}
 .reveal-scale.visible{opacity:1;transform:scale(1);}
-/* ══ MOBILE NAV FIX ══ */
+/* MOBILE NAV */
 @media(max-width:768px){
   .nav-inner{
     padding:0 1rem;
@@ -1238,7 +1236,7 @@ footer{position:relative;z-index:1;background:var(--deep);border-top:1px solid v
   }
 }
 
-/* ══ MOBILE SOCIAL STRIP FIX ══ */
+/* MOBILE SOCIAL STRIP */
 @media(max-width:768px){
   .social-strip-v2{
     padding:0 1rem;
@@ -1279,7 +1277,7 @@ footer{position:relative;z-index:1;background:var(--deep);border-top:1px solid v
   }
 }
 
-/* ══ MOBILE STATS & WINNERS FIX ══ */
+/* MOBILE STATS AND WINNERS */
 @media(max-width:768px){
   .stats-panel-wrap{
     padding:0;
@@ -1404,7 +1402,7 @@ footer{position:relative;z-index:1;background:var(--deep);border-top:1px solid v
     grid-template-columns:repeat(2,1fr);
   }
 }
-/* ══ MOBILE LOADING SCREEN FIX ══ */
+/* MOBILE LOADING SCREEN */
 @media(max-width:768px){
   #loading-screen{
     padding:2rem 1.5rem;
